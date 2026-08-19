@@ -1,0 +1,22 @@
+# Dependencias
+node_modules
+
+# Archivos de Next.js
+.next/
+# Archivos de build
+dist/
+build/
+
+# Archivos de configuración
+.env
+.env.*
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de log
+npm-debug.log
+
+# Archivos de pruebas
+coverage/

@@ -1,0 +1,10 @@
+import {Download,FileText,ExternalLink} from "lucide-react";
+export function Documents(){
+ return <section id="documentos" className="container-page py-20">
+  <div className="mb-10 max-w-3xl"><p className="text-sm font-black uppercase tracking-[.18em] text-emerald-600">Centro documental</p><h2 className="mt-2 text-4xl font-black">El Acuerdo, disponible y consultable.</h2><p className="mt-3 text-slate-600">El portal queda preparado para publicar el PDF oficial, su versión web accesible y los futuros instrumentos derivados de la Agenda.</p></div>
+  <div className="grid gap-4 lg:grid-cols-3">
+   <article className="rounded-[30px] border-2 border-emerald-200 bg-emerald-50 p-7 lg:col-span-2"><div className="flex items-start justify-between"><div className="grid h-12 w-12 place-items-center rounded-2xl bg-white text-emerald-600"><FileText/></div><span className="rounded-full bg-white px-3 py-1 text-xs font-black text-emerald-700">Documento base</span></div><h3 className="mt-7 text-2xl font-black">Acuerdo N° 001/2026 · Agenda 50/50</h3><p className="mt-2 text-slate-600">Sucre, 5 de agosto de 2026.</p><div className="mt-6 flex flex-wrap gap-3"><a href="/Acuerdo-001-2026-Agenda-50-50.pdf" className="inline-flex items-center gap-2 rounded-2xl bg-[#0F2942] px-5 py-3 font-bold text-white"><Download size={17}/> Descargar PDF</a><a href="#acuerdo" className="inline-flex items-center gap-2 rounded-2xl border bg-white px-5 py-3 font-bold"><ExternalLink size={17}/> Versión web</a></div></article>
+   <article className="rounded-[30px] border bg-slate-50 p-7"><h3 className="text-xl font-black">Próximos documentos</h3><ul className="mt-5 space-y-3 text-sm text-slate-600"><li>• Proyecto de modificación de la Ley N° 154</li><li>• Propuesta de Ley Especial de Coparticipación</li><li>• Actas de mesas técnicas</li><li>• Convenios y acuerdos fiscales</li></ul></article>
+  </div>
+ </section>
+}
