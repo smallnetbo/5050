@@ -1,169 +1,131 @@
 "use client";
 
-import { useState } from "react";
-import { FileText, Map, Clock, Play, ShieldCheck, CheckCircle2, Building, X } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { FileText, Map, Play, ShieldCheck, CheckCircle2, Building, X, ArrowRight } from "lucide-react";
+import { AnimatedIsologo } from "./AnimatedIsologo";
 
 export function Hero() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const videoUrl = encodeURI(
+    "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4"
+  );
+
+  useEffect(() => {
+    if (videoModalOpen && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [videoModalOpen]);
 
   return (
-    <section id="acuerdo" className="relative overflow-hidden bg-[#1B2533] py-20 lg:py-28 text-white">
-      {/* Background Gold & Green Ambient Glows */}
-      <div className="absolute top-0 right-0 -mt-20 -mr-20 h-96 w-96 rounded-full bg-[#C59B27]/15 blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 -mb-20 -ml-20 h-96 w-96 rounded-full bg-[#2D8A4E]/20 blur-3xl pointer-events-none"></div>
+    <section id="acuerdo" className="relative min-h-[85vh] flex flex-col justify-between bg-[#F9F8F5] dark:bg-[#750A23] text-[#1B2533] dark:text-white transition-colors duration-500 overflow-hidden">
+      {/* Background Subtle Radial Glow & Canvas Texture */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-amber-100/30 via-red-50/20 to-emerald-50/20 dark:from-red-950/40 dark:via-amber-950/30 dark:to-transparent rounded-full blur-3xl pointer-events-none transition-colors duration-500"></div>
 
-      <div className="container-page relative z-10">
-        {/* Top Institutional Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-[#C59B27]/40 bg-[#C59B27]/10 px-4 py-1.5 backdrop-blur-md">
-          <span className="flex h-2.5 w-2.5 rounded-full bg-[#C59B27] animate-pulse"></span>
-          <span className="text-xs font-black uppercase tracking-widest text-amber-200">
-            Acuerdo N° 001/2026 · Sucre, 5 de Agosto de 2026
-          </span>
-        </div>
+      {/* Main Cover Content */}
+      <div className="container-page relative z-10 my-auto py-12 lg:py-20">
+        {/* Central Logo & Brand Typography Block matching the image */}
+        <div className="flex flex-col md:flex-row items-center justify-center gap-6 lg:gap-10 text-center md:text-left">
 
-        <div className="mt-8 grid gap-12 lg:grid-cols-12 lg:items-center">
-          {/* Main Title & Slogan from official poster */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-2">
-              <div className="inline-block rounded-xl bg-gradient-to-r from-[#C59B27] to-[#D4AF37] text-slate-950 font-black text-3xl sm:text-4xl px-4 py-1 tracking-tight shadow-md">
-                50 / 50
-              </div>
-              <h1 className="text-3xl font-black tracking-tight sm:text-4xl lg:text-5xl leading-[1.15] text-white">
-                UNA NUEVA RELACIÓN <br />
-                <span className="text-[#38A169] drop-shadow-xs">
-                  CON MÁS AUTONOMÍA PARA MÁS DESARROLLO
-                </span>
-              </h1>
-              <div className="h-1 w-20 bg-[#C59B27] rounded-full mt-3"></div>
+          {/* Animated Isologo Symbol & Interactive Video Cover Badge */}
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center gap-3 flex-shrink-0 cursor-pointer group"
+            onClick={() => setVideoModalOpen(true)}
+            title="Hacer clic para ver video oficial"
+          >
+            <AnimatedIsologo className="w-56 h-56 sm:w-72 sm:h-72 lg:w-96 lg:h-96 transition-transform duration-500 group-hover:scale-105" />
+            
+            {/* Centered Play Button below the logo */}
+            <div className="flex items-center gap-2 rounded-full bg-[#84131D]/90 dark:bg-[#C9232F]/90 text-white px-5 py-2.5 text-xs font-black shadow-xl backdrop-blur-md group-hover:scale-105 transition-all border border-amber-400/40 mt-1">
+              <Play size={16} className="fill-current text-amber-300 ml-0.5 animate-pulse" />
+              <span>Ver Video Oficial</span>
+            </div>
+          </motion.div>
+
+          {/* Vertical Red Divider Line */}
+          <motion.div
+            initial={{ scaleY: 0, opacity: 0 }}
+            animate={{ scaleY: 1, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2, ease: "easeOut" }}
+            className="hidden md:block h-36 lg:h-52 w-1.5 bg-[#84131D] dark:bg-white rounded-full flex-shrink-0 transition-colors duration-500"
+          ></motion.div>
+
+          {/* Brand Title & Tagline */}
+          <motion.div
+            initial={{ x: -20, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.4, ease: "easeOut" }}
+            className="flex flex-col justify-center max-w-xl font-geometria"
+          >
+            <span className="block font-geometria font-medium tracking-[0.2em] text-[#84131D] dark:text-white text-2xl sm:text-3xl lg:text-[2.6rem] uppercase leading-tight transition-colors duration-500">
+              AGENDA
+            </span>
+
+            {/* 50/50 Brand Logo with barra.svg */}
+            <div className="flex items-center justify-center md:justify-start text-[#84131D] dark:text-white text-6xl sm:text-7xl lg:text-9xl font-geometria font-bold tracking-tighter leading-none my-0.5 transition-colors duration-500">
+              <span className="font-geometria font-bold">50</span>
+              <img
+                src="/assets/barra.svg"
+                alt="|"
+                className="h-[0.72em] w-auto inline-block self-center mx-1 sm:mx-1.5 select-none transition-all duration-500 dark:brightness-0 dark:invert"
+              />
+              <span className="font-geometria font-bold">50</span>
             </div>
 
-            <p className="text-base sm:text-lg leading-relaxed text-slate-300 max-w-2xl font-medium">
-              <strong className="text-amber-200">Más autonomía, Más capacidad de decisión.</strong> Estrategia de Estado para la distribución equitativa de ingresos, la autonomía tributaria, la sostenibilidad fiscal y la desconcentración efectiva del gasto entre el Nivel Central y las Regiones.
+            {/* UNA NUEVA BOLIVIA Tagline */}
+            <p className="font-geometria font-bold tracking-[0.42em] text-[#84131D] dark:text-white text-xs sm:text-sm lg:text-base uppercase pt-0.5 transition-colors duration-500">
+              UNA NUEVA BOLIVIA
             </p>
-
-            {/* Action CTAs */}
-            <div className="pt-2 flex flex-wrap gap-3">
-              <a
-                href="#descargas"
-                className="flex items-center gap-2 rounded-2xl bg-[#2D8A4E] hover:bg-[#247340] text-white font-extrabold px-5 py-3.5 text-sm shadow-lg shadow-emerald-900/30 hover:shadow-emerald-900/40 transition-all transform hover:-translate-y-0.5"
-              >
-                <FileText size={18} />
-                <span>Leer Acuerdo 001/2026</span>
-              </a>
-
-              <a
-                href="#territorio"
-                className="flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-extrabold px-5 py-3.5 text-sm transition-all"
-              >
-                <Map size={18} className="text-[#C59B27]" />
-                <span>Explorar Datos Deptos</span>
-              </a>
-
-              <a
-                href="#ruta"
-                className="flex items-center gap-2 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-extrabold px-5 py-3.5 text-sm transition-all"
-              >
-                <Clock size={18} className="text-amber-300" />
-                <span>Ver Cronograma</span>
-              </a>
-            </div>
-
-            {/* Key Fact Badges */}
-            <div className="pt-4 flex flex-wrap items-center gap-6 text-xs font-bold text-slate-300 border-t border-white/10">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-[#C59B27]" />
-                <span>9 de 9 GAD Adheridos</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck size={16} className="text-[#38A169]" />
-                <span>Meta 2027: Ley Coparticipación</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Building size={16} className="text-amber-300" />
-                <span>Municipios, AIOC & Gran Chaco</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Video / Bento Feature Card */}
-          <div className="lg:col-span-5">
-            <div className="relative rounded-[32px] border border-[#C59B27]/30 bg-white/5 p-6 backdrop-blur-xl shadow-2xl overflow-hidden group">
-              <div className="relative aspect-video rounded-2xl overflow-hidden bg-slate-900 grid place-items-center border border-white/10">
-                {/* Visual Backdrop Video Preview */}
-                <video
-                  src={encodeURI("/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4")}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1B2533] via-transparent to-transparent"></div>
-
-                {/* Play Button Trigger */}
-                <button
-                  onClick={() => setVideoModalOpen(true)}
-                  className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full bg-[#C59B27] text-[#1B2533] shadow-xl hover:bg-amber-400 group-hover:scale-110 transition-transform cursor-pointer font-bold"
-                  aria-label="Reproducir Resumen Audiovisual del Acuerdo"
-                >
-                  <Play size={28} className="fill-current ml-1" />
-                </button>
-
-                <div className="absolute bottom-4 left-4 right-4 z-10 flex justify-between items-end">
-                  <div>
-                    <span className="rounded-md bg-[#2D8A4E] px-2 py-0.5 text-[10px] font-black uppercase text-white">
-                      Video Oficial 50/50
-                    </span>
-                    <h3 className="text-sm font-black text-white mt-1">Fortalecimiento de las Autonomías</h3>
-                  </div>
-                  <span className="text-xs font-bold text-amber-200 bg-[#1B2533]/90 px-2 py-1 rounded-md border border-[#C59B27]/30">
-                    MP4 HD
-                  </span>
-                </div>
-              </div>
-
-              {/* Sub-card highlights */}
-              <div className="mt-5 grid grid-cols-2 gap-3 text-left">
-                <div className="rounded-2xl bg-white/5 p-3.5 border border-white/10">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase">Sede Histórica</div>
-                  <div className="text-xs font-black text-amber-300 mt-0.5">Casa de la Libertad</div>
-                </div>
-                <div className="rounded-2xl bg-white/5 p-3.5 border border-white/10">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase">Plazo Ley 154</div>
-                  <div className="text-xs font-black text-[#38A169] mt-0.5">90 Días Calendario</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         </div>
+
+      </div>
+
+      {/* Official Bolivia Flag Tricolor Stripe at the Bottom (Red - Yellow - Green) */}
+      <div className="relative w-full h-3.5 flex">
+        <div className="w-1/3 h-full bg-[#C9232F]"></div>
+        <div className="w-1/3 h-full bg-[#FACA38]"></div>
+        <div className="w-1/3 h-full bg-[#3BA83E]"></div>
       </div>
 
       {/* Video Modal Player */}
       {videoModalOpen && (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-[#1B2533]/85 backdrop-blur-md p-4 animate-in fade-in">
-          <div className="w-full max-w-4xl rounded-3xl bg-[#1B2533] p-4 border border-[#C59B27]/40 shadow-2xl relative">
+        <div className="fixed inset-0 z-[100] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+          <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-3xl bg-[#1B2533] p-4 border border-[#C59B27]/40 shadow-2xl relative flex flex-col items-center">
             <button
               onClick={() => setVideoModalOpen(false)}
-              className="absolute -top-4 -right-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#C59B27] text-[#1B2533] font-bold shadow-lg hover:bg-amber-400 transition"
+              className="absolute -top-3 -right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#C9232F] text-white font-bold shadow-lg hover:bg-red-700 transition"
+              aria-label="Cerrar video"
             >
               <X size={20} />
             </button>
-            <div className="aspect-video w-full rounded-2xl overflow-hidden bg-black grid place-items-center">
+            <div className="w-full max-h-[75vh] aspect-[9/16] rounded-2xl overflow-hidden bg-black flex items-center justify-center relative shadow-inner">
               <video
-                src={encodeURI("/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4")}
+                ref={videoRef}
+                src={videoUrl}
                 controls
                 autoPlay
+                playsInline
                 className="w-full h-full object-contain"
               ></video>
             </div>
-            <div className="mt-4 flex justify-between items-center px-2">
+            <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 w-full px-2">
               <div>
-                <h3 className="text-lg font-black text-white">La Agenda 50-50 impulsa propuestas para fortalecer las autonomías</h3>
-                <p className="text-xs text-amber-200/80">Construyendo un Estado más eficiente con la participación de municipios y autoridades de todo el país.</p>
+                <h3 className="text-sm sm:text-base font-black text-white leading-tight">
+                  La Agenda 50-50 impulsa propuestas para fortalecer las autonomías
+                </h3>
+                <p className="text-[11px] text-amber-200/80 mt-0.5">
+                  Construyendo un Estado más eficiente con la participación de municipios y autoridades de todo el país.
+                </p>
               </div>
               <button
                 onClick={() => setVideoModalOpen(false)}
-                className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-white hover:bg-white/20"
+                className="rounded-xl bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-white/20 self-end sm:self-auto shrink-0"
               >
                 Cerrar Reproductor
               </button>

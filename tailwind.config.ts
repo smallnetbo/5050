@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: "class",
   content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
@@ -55,6 +56,12 @@ const config: Config = {
           100: "#FAF8F3",
           200: "#F3EFE6",
         },
+      },
+      fontFamily: {
+        geometria: ["Geometria", "sans-serif"],
+        narrow: ["GeometriaNarrow", "sans-serif"],
+        segoe: ["'Segoe UI'", "Tahoma", "Geneva", "Verdana", "sans-serif"],
+        sans: ["'Segoe UI'", "Tahoma", "Geneva", "Verdana", "ui-sans-serif", "system-ui", "sans-serif"],
       },
       boxShadow: {
         soft: "0 18px 55px rgba(27,37,51,.08)",

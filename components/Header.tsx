@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles } from "lucide-react";
+import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon } from "lucide-react";
 import { documentsList, pillars, departmentsData } from "@/lib/agenda-data";
+import { useTheme } from "./ThemeProvider";
+import { AnimatedIsologo } from "./AnimatedIsologo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchOpen, setSearchOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
     { label: "El Acuerdo", href: "#acuerdo" },
@@ -28,45 +31,39 @@ export function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-amber-900/10 bg-[#FAF8F3]/95 backdrop-blur-xl shadow-xs transition-all">
-        {/* Top Mini Institutional Banner */}
-        <div className="bg-[#1B2533] text-white text-[11px] font-bold py-1 px-4 flex justify-between items-center tracking-wide border-b border-[#C59B27]/20">
-          <div className="flex items-center gap-2 container-page">
-            <span className="inline-block w-2 h-2 rounded-full bg-[#C59B27] animate-pulse"></span>
-            <span>MINISTERIO DE ECONOMÍA Y FINANZAS PÚBLICAS · ESTADO PLURINACIONAL DE BOLIVIA</span>
-          </div>
-          <div className="hidden md:flex items-center gap-4 text-amber-200/80 text-xs">
-            <span>Acuerdo N° 001/2026 (Sucre, 5 de Agosto de 2026)</span>
-          </div>
-        </div>
+      <header className="sticky top-0 z-50 border-b border-amber-900/10 dark:border-amber-500/20 bg-[#FAF8F3]/95 dark:bg-[#101620]/95 backdrop-blur-xl shadow-xs transition-colors duration-300">
 
         <div className="container-page flex h-16 items-center justify-between gap-4">
           {/* Logo & Plurinational Badge */}
-          <a href="#" className="flex items-center gap-3 group">
-            <div className="relative flex items-center justify-center h-11 w-11 rounded-2xl bg-gradient-to-br from-[#C59B27] via-[#D4AF37] to-[#A37D1A] text-white font-black text-lg shadow-md shadow-amber-500/20 group-hover:scale-105 transition-transform">
-              50
-              <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-[#2D8A4E]"></span>
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
+            <AnimatedIsologo className="w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0 transition-transform group-hover:scale-105" />
+            <div className="h-7 sm:h-8 w-1 bg-[#84131D] dark:bg-white rounded-full flex-shrink-0 transition-colors"></div>
+            <div className="flex flex-col justify-center font-geometria">
+              <span className="block font-geometria font-medium tracking-[0.18em] text-[#84131D] dark:text-white text-[9px] sm:text-[10px] uppercase leading-none transition-colors">
+                AGENDA
               </span>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-black tracking-tight text-[#1B2533] leading-none text-base">
-                AGENDA <span className="text-[#C59B27] font-extrabold">50/50</span>
-              </span>
-              <span className="text-[10px] font-bold text-[#2D8A4E] tracking-wider uppercase mt-0.5">
-                Pacto Fiscal & Autonómico
+              <div className="flex items-center text-[#84131D] dark:text-white text-base sm:text-lg font-bold tracking-tighter leading-none my-0.5 transition-colors font-geometria">
+                <span className="font-geometria font-bold">50</span>
+                <img
+                  src="/assets/barra.svg"
+                  alt="|"
+                  className="h-[0.72em] w-auto inline-block self-center mx-0.5 select-none transition-all dark:brightness-0 dark:invert"
+                />
+                <span className="font-geometria font-bold">50</span>
+              </div>
+              <span className="block font-geometria font-bold tracking-[0.25em] text-[#84131D] dark:text-white text-[6.5px] sm:text-[7.5px] uppercase leading-none transition-colors">
+                UNA NUEVA BOLIVIA
               </span>
             </div>
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-extrabold text-slate-700">
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-extrabold text-slate-700 dark:text-slate-200">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:text-[#2D8A4E] transition-colors py-1 relative group"
+                className="hover:text-[#2D8A4E] dark:hover:text-[#C59B27] transition-colors py-1 relative group"
               >
                 {link.label}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#C59B27] transition-all duration-300 group-hover:w-full"></span>
@@ -74,16 +71,30 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Action Buttons: Global Search & Mobile Toggle */}
+          {/* Action Buttons: Global Search, Theme Toggle & Mobile Toggle */}
           <div className="flex items-center gap-2">
             <button
               onClick={() => setSearchOpen(true)}
-              className="flex items-center gap-2 rounded-xl border border-amber-900/10 bg-white px-3.5 py-2 text-xs font-semibold text-slate-700 hover:bg-amber-50/50 hover:border-[#C59B27]/40 transition shadow-2xs"
+              className="flex items-center gap-2 rounded-xl border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-amber-50/50 dark:hover:bg-slate-700 transition shadow-2xs"
               aria-label="Buscar en la plataforma"
             >
               <Search size={15} className="text-[#C59B27]" />
               <span className="hidden sm:inline">Buscar...</span>
-              <kbd className="hidden sm:inline-block rounded bg-amber-50 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 border border-amber-200">⌘K</kbd>
+              <kbd className="hidden sm:inline-block rounded bg-amber-50 dark:bg-slate-700 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-slate-600">⌘K</kbd>
+            </button>
+
+            {/* Dark / Light Theme Toggle Button */}
+            <button
+              onClick={toggleTheme}
+              className="flex items-center justify-center p-2.5 rounded-xl border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-amber-300 hover:bg-amber-50/50 dark:hover:bg-slate-700 transition shadow-2xs cursor-pointer"
+              aria-label="Gestionar tema oscuro / claro"
+              title={theme === "dark" ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
+            >
+              {theme === "dark" ? (
+                <Sun size={16} className="text-amber-300" />
+              ) : (
+                <Moon size={16} className="text-slate-700" />
+              )}
             </button>
 
             <a
@@ -96,7 +107,7 @@ export function Header() {
 
             <button
               onClick={() => setOpen(!open)}
-              className="rounded-xl bg-[#1B2533] p-2.5 text-white lg:hidden hover:bg-slate-800 transition"
+              className="rounded-xl bg-[#1B2533] dark:bg-slate-800 p-2.5 text-white lg:hidden hover:bg-slate-800 transition"
               aria-label="Abrir Menú"
             >
               {open ? <X size={20} /> : <Menu size={20} />}

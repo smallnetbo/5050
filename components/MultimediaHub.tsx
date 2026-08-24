@@ -1,17 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Video, Play, FileText, Image as ImageIcon, Volume2, Download, Eye, Sparkles, X } from "lucide-react";
 
 export function MultimediaHub() {
   const [activeMediaTab, setActiveMediaTab] = useState<"videos" | "infografias" | "audio">("videos");
   const [previewInfographic, setPreviewInfographic] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<{ title: string; category: string; duration: string } | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const videoUrl = encodeURI(
+    "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4"
+  );
+
+  useEffect(() => {
+    if (selectedVideo && videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  }, [selectedVideo]);
 
   const videos = [
     {
       title: "¿Qué es la Agenda 50/50 en 1 minuto?",
       duration: "01:15 min",
-      thumbnail: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop",
+      thumbnail: "/assets/multimedia_cover.jpg",
       category: "Explicador Rápido"
     },
     {
@@ -99,7 +111,11 @@ export function MultimediaHub() {
         {activeMediaTab === "videos" && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {videos.map((vid, idx) => (
-              <div key={idx} className="group rounded-3xl border border-white/10 bg-white/5 overflow-hidden hover:border-emerald-400/40 transition">
+              <div
+                key={idx}
+                onClick={() => setSelectedVideo(vid)}
+                className="group rounded-3xl border border-white/10 bg-white/5 overflow-hidden hover:border-emerald-400/40 transition cursor-pointer"
+              >
                 <div className="relative aspect-video bg-slate-800 overflow-hidden">
                   <img src={vid.thumbnail} alt={vid.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-500 opacity-80" />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
@@ -170,6 +186,47 @@ export function MultimediaHub() {
           </div>
         )}
       </div>
+
+      {/* Video Modal Player */}
+      {selectedVideo && (
+        <div className="fixed inset-0 z-[100] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+          <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-3xl bg-[#1B2533] p-4 border border-emerald-500/40 shadow-2xl relative flex flex-col items-center">
+            <button
+              onClick={() => setSelectedVideo(null)}
+              className="absolute -top-3 -right-3 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#C9232F] text-white font-bold shadow-lg hover:bg-red-700 transition"
+              aria-label="Cerrar video"
+            >
+              <X size={20} />
+            </button>
+            <div className="w-full max-h-[75vh] aspect-[9/16] rounded-2xl overflow-hidden bg-black flex items-center justify-center relative shadow-inner">
+              <video
+                ref={videoRef}
+                src={videoUrl}
+                controls
+                autoPlay
+                playsInline
+                className="w-full h-full object-contain"
+              ></video>
+            </div>
+            <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 w-full px-2">
+              <div>
+                <span className="text-[10px] font-black uppercase text-emerald-400 tracking-wider">
+                  {selectedVideo.category} · {selectedVideo.duration}
+                </span>
+                <h3 className="text-sm sm:text-base font-black text-white leading-tight mt-0.5">
+                  {selectedVideo.title}
+                </h3>
+              </div>
+              <button
+                onClick={() => setSelectedVideo(null)}
+                className="rounded-xl bg-white/10 px-3.5 py-1.5 text-xs font-bold text-white hover:bg-white/20 self-end sm:self-auto shrink-0"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Infographic Preview Modal */}
       {previewInfographic && (

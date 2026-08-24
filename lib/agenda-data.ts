@@ -439,7 +439,7 @@ export const newsArticles: NewsArticle[] = [
     department: "Chuquisaca",
     summary: "En la histórica Casa de la Libertad, el Gobierno Nacional y las 9 gobernaciones sellaron el compromiso fiscal 50/50.",
     readTime: "4 min lectura",
-    imageUrl: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?q=80&w=800&auto=format&fit=crop"
+    imageUrl: "/assets/multimedia_cover.jpg"
   },
   {
     id: "NEWS-102",
