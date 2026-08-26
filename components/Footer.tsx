@@ -19,7 +19,7 @@ export function Footer() {
             </div>
 
             <p className="text-xs leading-relaxed text-slate-300 max-w-md font-medium">
-              Plataforma Oficial de Transparencia Activa y Monitoreo del Acuerdo N° 001/2026 (Sucre, 5 de agosto de 2026). Ministerio de Economía y Finanzas Públicas · Gobernaciones, Municipios, AIOC y Gran Chaco.
+              Plataforma de Transparencia Activa y Monitoreo del Acuerdo N° 001/2026 (Sucre, 5 de agosto de 2026). Gobernaciones, Municipios, AIOC y Gran Chaco.
             </p>
 
             <div className="flex items-center gap-2 text-xs font-bold text-[#38A169]">
@@ -44,9 +44,9 @@ export function Footer() {
           <div className="md:col-span-4 space-y-3">
             <h4 className="text-xs font-black uppercase tracking-wider text-amber-200/80">Contacto e Instituciones</h4>
             <div className="text-xs space-y-2 text-slate-300 font-medium">
-              <p><b>Ministerio de Economía y Finanzas Públicas</b></p>
+              <p><b>Entidades</b></p>
               <p>Estado Plurinacional de Bolivia</p>
-              <p className="flex items-center gap-2 text-[#38A169] font-bold"><Mail size={14} /> contacto@economia.gob.bo</p>
+              <p className="flex items-center gap-2 text-[#38A169] font-bold"><Mail size={14} /> correo</p>
               <p className="text-amber-300 font-black text-sm pt-2">#SiempreBolivia</p>
             </div>
           </div>
@@ -54,7 +54,7 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-400">
-          <p>© 2026 Agenda 50/50 · Ministerio de Economía y Finanzas Públicas · Bolivia.</p>
+          <p>© 2026 Agenda 50/50 · Bolivia.</p>
           <div className="flex gap-4">
             <a href="#faq" className="hover:text-amber-200">Preguntas Frecuentes</a>
             <a href="#descargas" className="hover:text-amber-200">Aviso de Privacidad</a>
