@@ -40,8 +40,8 @@ export function Monitor() {
   const centralAmount = totalBudgetBs - subnationalAmount;
 
   const chartData = [
-    { name: "Nivel Central del Estado", value: centralAmount, fill: "#84131D" },
-    { name: "Autonomías Subnacionales (GAD/GAM/AIOC)", value: subnationalAmount, fill: "#2D8A4E" },
+    { name: "Nivel Central del Estado", value: centralAmount, fill: "#dd3146" },
+    { name: "Autonomías Subnacionales (GAD/GAM/AIOC)", value: subnationalAmount, fill: "#3ac167" },
   ];
 
   const departmentDistributionData = [
@@ -142,12 +142,12 @@ export function Monitor() {
           
           {/* Hero-styled Header Block */}
           <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="inline-block rounded-full bg-[#84131D]/10 dark:bg-[#C9232F]/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#84131D] dark:text-amber-300 border border-[#84131D]/20 dark:border-amber-300/30 mb-4">
+            <span className="inline-block rounded-full bg-[#dd3146]/10 dark:bg-[#dd3146]/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#dd3146] dark:text-[#fcc74f] border border-[#dd3146]/20 dark:border-[#fcc74f]/30 mb-4">
               Acuerdo N.º 001/2026 · Reforma autonómica
             </span>
             
             {/* Big 50/50 Brand Logo matching Hero */}
-            <div className="flex items-center justify-center text-[#84131D] dark:text-white text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter my-2 leading-none font-geometria">
+            <div className="flex items-center justify-center text-[#c79d47] dark:text-white text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter my-2 leading-none font-geometria">
               <span className="font-geometria">50</span>
               <img
                 src="/assets/barra.svg"
@@ -157,16 +157,16 @@ export function Monitor() {
               <span className="font-geometria">50</span>
             </div>
 
-            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#84131D] dark:text-white leading-tight mt-3">
-              Una nueva relación <span className="text-[#2D8A4E] dark:text-emerald-400">con más autonomía</span> para más desarrollo
+            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#c79d47] dark:text-white leading-tight mt-3">
+              Una nueva relación <span className="text-[#3ac167] dark:text-emerald-400">con más autonomía</span> para más desarrollo
             </h2>
             <p className="text-sm sm:text-base text-slate-600 dark:text-amber-100/80 font-semibold tracking-wide mt-2">
               Más autonomía. Más capacidad de decisión.
             </p>
           </div>
 
-          {/* SIGNATURE BALANCE BAR COMPONENT */}
-          <div className="rounded-2xl border border-amber-900/10 dark:border-slate-700 bg-[#FAF8F3] dark:bg-slate-800/80 p-6 sm:p-8 mb-10 shadow-xs">
+          {/* SIGNATURE BALANCE BAR COMPONENT (Ocultado a petición) */}
+          <div className="hidden rounded-2xl border border-amber-900/10 dark:border-slate-700 bg-[#FAF8F3] dark:bg-slate-800/80 p-6 sm:p-8 mb-10 shadow-xs">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
               <span className="font-extrabold text-base text-[#1B2533] dark:text-white">
                 La reforma en una imagen
@@ -179,7 +179,7 @@ export function Monitor() {
                   onClick={() => setBalanceMode("before")}
                   className={`rounded-full px-4 py-1.5 text-xs font-extrabold transition-all duration-300 ${
                     balanceMode === "before"
-                      ? "bg-[#84131D] text-white shadow-md"
+                      ? "bg-[#dd3146] text-white shadow-md"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
@@ -190,7 +190,7 @@ export function Monitor() {
                   onClick={() => setBalanceMode("after")}
                   className={`rounded-full px-4 py-1.5 text-xs font-extrabold transition-all duration-300 ${
                     balanceMode === "after"
-                      ? "bg-[#2D8A4E] text-white shadow-md"
+                      ? "bg-[#3ac167] text-white shadow-md"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                   }`}
                 >
@@ -209,13 +209,13 @@ export function Monitor() {
             <div className="flex h-14 w-full rounded-xl overflow-hidden border border-amber-900/10 dark:border-slate-700 shadow-inner p-1 bg-white dark:bg-slate-900 gap-1">
               <div
                 style={{ flexBasis: balanceMode === "before" ? "65%" : "50%" }}
-                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#84131D] rounded-lg transition-all duration-700 ease-out"
+                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#dd3146] rounded-lg transition-all duration-700 ease-out"
               >
                 {balanceMode === "before" ? "65%" : "50%"}
               </div>
               <div
                 style={{ flexBasis: balanceMode === "before" ? "35%" : "50%" }}
-                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#2D8A4E] rounded-lg transition-all duration-700 ease-out"
+                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#3ac167] rounded-lg transition-all duration-700 ease-out"
               >
                 {balanceMode === "before" ? "35%" : "50%"}
               </div>
@@ -235,7 +235,7 @@ export function Monitor() {
                   key={step.num}
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
                     isOpen
-                      ? "border-[#2D8A4E] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
+                      ? "border-[#3ac167] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
                       : "border-amber-900/10 dark:border-slate-700/80 bg-[#FAF8F3] dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800"
                   }`}
                 >
@@ -248,8 +248,8 @@ export function Monitor() {
                       <span
                         className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black transition-colors ${
                           isOpen
-                            ? "bg-[#2D8A4E] text-white"
-                            : "bg-[#84131D]/10 dark:bg-white/10 text-[#84131D] dark:text-amber-300"
+                            ? "bg-[#3ac167] text-white"
+                            : "bg-[#dd3146]/10 dark:bg-white/10 text-[#dd3146] dark:text-[#fcc74f]"
                         }`}
                       >
                         {step.num}
@@ -261,7 +261,7 @@ export function Monitor() {
                     <ChevronDown
                       size={20}
                       className={`text-slate-500 dark:text-slate-400 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-[#2D8A4E] dark:text-emerald-400" : ""
+                        isOpen ? "rotate-180 text-[#3ac167] dark:text-emerald-400" : ""
                       }`}
                     />
                   </button>
@@ -272,14 +272,14 @@ export function Monitor() {
                         {step.desc}
                       </p>
                       
-                      <div className="inline-block text-xs font-black uppercase tracking-wider text-[#C59B27] dark:text-amber-400 mb-3">
+                      <div className="inline-block text-xs font-black uppercase tracking-wider text-[#c79d47] dark:text-amber-400 mb-3">
                         ✦ {step.tag}
                       </div>
 
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold text-slate-800 dark:text-slate-200">
                         {step.items.map((item, idx) => (
                           <li key={idx} className="flex items-center gap-2 rounded-xl bg-amber-500/10 dark:bg-emerald-500/10 px-3 py-2 border border-amber-500/20 dark:border-emerald-500/20">
-                            <span className="h-2 w-2 rounded-full bg-[#2D8A4E] dark:bg-emerald-400"></span>
+                            <span className="h-2 w-2 rounded-full bg-[#3ac167] dark:bg-emerald-400"></span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -293,12 +293,12 @@ export function Monitor() {
 
           {/* CTA Footer Block */}
           <div className="pt-6 border-t border-amber-900/10 dark:border-slate-700 text-center">
-            <p className="font-extrabold text-lg text-[#84131D] dark:text-white mb-4">
+            <p className="font-extrabold text-lg text-[#dd3146] dark:text-white mb-4">
               El desarrollo empieza en las regiones.
             </p>
             <a
               href="#descargas"
-              className="inline-flex items-center gap-2 rounded-full bg-[#2D8A4E] hover:bg-[#247340] text-white px-7 py-3 text-sm font-extrabold shadow-lg hover:shadow-xl transition-all duration-300 group"
+              className="inline-flex items-center gap-2 rounded-full bg-[#3ac167] hover:bg-[#2ea354] text-white px-7 py-3 text-sm font-extrabold shadow-lg hover:shadow-xl transition-all duration-300 group"
             >
               <span>Conoce el Acuerdo de Sucre</span>
               <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
@@ -306,46 +306,8 @@ export function Monitor() {
           </div>
         </div>
 
-        {/* 2. Countdown Banner for Ley 154 */}
-        <div className="mb-12 overflow-hidden rounded-3xl bg-gradient-to-r from-[#84131D] via-[#750A23] to-[#1B2533] p-8 text-white shadow-xl relative border border-amber-500/20">
-          <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-amber-400/10 blur-2xl pointer-events-none"></div>
-
-          <div className="grid gap-6 md:grid-cols-12 items-center">
-            <div className="md:col-span-6 space-y-2">
-              <span className="rounded-md bg-amber-400 text-[#84131D] px-2.5 py-1 text-xs font-black uppercase tracking-wider">
-                Hito Prioritario en Curso
-              </span>
-              <h3 className="text-2xl font-black text-white">Cuenta Regresiva: Anteproyecto de Ley N° 154</h3>
-              <p className="text-sm text-slate-200">
-                La Mesa Técnica Jurídica-Fiscal tiene como mandato entregar la propuesta de reforma del dominio tributario autonómico.
-              </p>
-            </div>
-
-            <div className="md:col-span-6 flex justify-center md:justify-end">
-              <div className="grid grid-cols-4 gap-3 text-center">
-                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-amber-300">{timeLeft.days}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Días</div>
-                </div>
-                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.hours}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Horas</div>
-                </div>
-                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.mins}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Mins</div>
-                </div>
-                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-emerald-300">{timeLeft.secs}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Segs</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* 3. Metro KPI Cards Grid */}
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-16">
+        {/* 2. Metro KPI Cards Grid */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-12">
           {kpiCards.map((kpi, idx) => {
             const IconComponent = kpi.Icon;
             return (
@@ -354,10 +316,10 @@ export function Monitor() {
                 className="group rounded-3xl border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 shadow-xs hover:shadow-md transition-all duration-300 hover:-translate-y-1"
               >
                 <div className="flex items-center justify-between">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-[#2D8A4E] dark:text-emerald-400 group-hover:bg-[#2D8A4E] group-hover:text-white transition-colors">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-emerald-50 dark:bg-emerald-950/50 text-[#3ac167] dark:text-emerald-400 group-hover:bg-[#3ac167] group-hover:text-white transition-colors">
                     <IconComponent size={22} />
                   </div>
-                  <span className="rounded-full bg-amber-50 dark:bg-slate-700 px-3 py-1 text-[11px] font-extrabold text-[#84131D] dark:text-amber-300 uppercase">
+                  <span className="rounded-full bg-amber-50 dark:bg-slate-700 px-3 py-1 text-[11px] font-extrabold text-[#dd3146] dark:text-[#fcc74f] uppercase">
                     Métrica Oficial
                   </span>
                 </div>
@@ -369,11 +331,49 @@ export function Monitor() {
           })}
         </div>
 
-        {/* 4. Interactive Revenue Distribution Simulator Section */}
-        <div className="rounded-[32px] border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm">
+        {/* 3. Countdown Banner for Ley 154 */}
+        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-[#dd3146] via-[#be1c30] to-[#1B2533] p-8 text-white shadow-xl relative border border-[#fcc74f]/20">
+          <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-[#fcc74f]/10 blur-2xl pointer-events-none"></div>
+
+          <div className="grid gap-6 md:grid-cols-12 items-center">
+            <div className="md:col-span-6 space-y-2">
+              <span className="rounded-md bg-[#fcc74f] text-[#dd3146] px-2.5 py-1 text-xs font-black uppercase tracking-wider">
+                Hito Prioritario en Curso
+              </span>
+              <h3 className="text-2xl font-black text-white">Cuenta Regresiva: Anteproyecto de Ley N° 154</h3>
+              <p className="text-sm text-slate-200">
+                La Mesa Técnica Jurídica-Fiscal tiene como mandato entregar la propuesta de reforma del dominio tributario autonómico.
+              </p>
+            </div>
+
+            <div className="md:col-span-6 flex justify-center md:justify-end">
+              <div className="grid grid-cols-4 gap-3 text-center">
+                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
+                  <div className="text-2xl sm:text-3xl font-black text-[#fcc74f]">{timeLeft.days}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Días</div>
+                </div>
+                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
+                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.hours}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Horas</div>
+                </div>
+                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
+                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.mins}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Mins</div>
+                </div>
+                <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
+                  <div className="text-2xl sm:text-3xl font-black text-[#3ac167]">{timeLeft.secs}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Segs</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Interactive Revenue Distribution Simulator Section (Ocultado a petición) */}
+        <div className="hidden rounded-[32px] border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-100 dark:border-slate-700 pb-6 mb-8">
             <div>
-              <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-[#2D8A4E] dark:text-emerald-300 border border-emerald-500/20">
+              <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-[#3ac167] dark:text-emerald-300 border border-emerald-500/20">
                 Herramienta Didáctica Interactiva
               </span>
               <h3 className="text-2xl font-black text-[#1B2533] dark:text-white mt-2">
@@ -385,10 +385,10 @@ export function Monitor() {
             </div>
 
             <div className="flex items-center gap-3 bg-[#FAF8F3] dark:bg-slate-900 p-4 rounded-2xl border border-amber-900/10 dark:border-slate-700">
-              <Sliders className="text-[#2D8A4E] dark:text-emerald-400" size={24} />
+              <Sliders className="text-[#3ac167] dark:text-emerald-400" size={24} />
               <div>
                 <div className="text-xs font-bold text-slate-500 dark:text-slate-400">Porcentaje Subnacional Objetivo</div>
-                <div className="text-xl font-black text-[#84131D] dark:text-amber-300">{subnationalRatio}% / {100 - subnationalRatio}%</div>
+                <div className="text-xl font-black text-[#dd3146] dark:text-[#fcc74f]">{subnationalRatio}% / {100 - subnationalRatio}%</div>
               </div>
             </div>
           </div>
@@ -399,7 +399,7 @@ export function Monitor() {
               <div className="space-y-3">
                 <div className="flex justify-between text-xs font-black text-slate-700 dark:text-slate-300">
                   <span>Actual (~15% Subnacional)</span>
-                  <span className="text-[#2D8A4E] dark:text-emerald-400 font-black text-sm">Objetivo 50%</span>
+                  <span className="text-[#3ac167] dark:text-emerald-400 font-black text-sm">Objetivo 50%</span>
                   <span>70% Subnacional</span>
                 </div>
                 <input
@@ -408,25 +408,25 @@ export function Monitor() {
                   max="60"
                   value={subnationalRatio}
                   onChange={(e) => setSubnationalRatio(Number(e.target.value))}
-                  className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#2D8A4E]"
+                  className="w-full h-3 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#3ac167]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-2xl bg-[#FAF8F3] dark:bg-slate-900 p-4 border border-amber-900/10 dark:border-slate-700">
                   <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase">Nivel Central</div>
-                  <div className="text-2xl font-black text-[#84131D] dark:text-white mt-1">
+                  <div className="text-2xl font-black text-[#dd3146] dark:text-white mt-1">
                     Bs. {centralAmount.toLocaleString()} M
                   </div>
                   <div className="text-xs font-semibold text-slate-500 dark:text-slate-400 mt-0.5">{100 - subnationalRatio}% del total</div>
                 </div>
 
                 <div className="rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 p-4 border border-emerald-200 dark:border-emerald-800">
-                  <div className="text-xs font-bold text-[#2D8A4E] dark:text-emerald-300 uppercase">Subnacional (GAD/GAM/AIOC)</div>
-                  <div className="text-2xl font-black text-[#2D8A4E] dark:text-emerald-400 mt-1">
+                  <div className="text-xs font-bold text-[#3ac167] dark:text-emerald-300 uppercase">Subnacional (GAD/GAM/AIOC)</div>
+                  <div className="text-2xl font-black text-[#3ac167] dark:text-emerald-400 mt-1">
                     Bs. {subnationalAmount.toLocaleString()} M
                   </div>
-                  <div className="text-xs font-semibold text-emerald-600 dark:text-emerald-300 mt-0.5">{subnationalRatio}% del total</div>
+                  <div className="text-xs font-semibold text-[#3ac167] dark:text-emerald-300 mt-0.5">{subnationalRatio}% del total</div>
                 </div>
               </div>
 
@@ -467,7 +467,7 @@ export function Monitor() {
                     <XAxis dataKey="name" tick={{ fontSize: 10 }} />
                     <YAxis tick={{ fontSize: 10 }} />
                     <Tooltip formatter={(val: any) => `Bs. ${val} M`} />
-                    <Bar dataKey="sim5050" fill="#2D8A4E" radius={[4, 4, 0, 0]} name="Simulado 50/50" />
+                    <Bar dataKey="sim5050" fill="#3ac167" radius={[4, 4, 0, 0]} name="Simulado 50/50" />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

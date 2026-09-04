@@ -83,11 +83,11 @@ body {
   margin: 0;
   background: #FAF8F3;
   color: #1B2533;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-raleway), 'Raleway', sans-serif;
 }
 
 ::selection {
-  background: #C59B27;
+  background: #c79d47;
   color: #ffffff;
 }
 
@@ -98,21 +98,28 @@ body {
 
 .map-bg-texture {
   background-color: #FAF8F3;
-  background-image: radial-gradient(#C59B27 0.75px, transparent 0.75px), radial-gradient(#2D8A4E 0.75px, #FAF8F3 0.75px);
+  background-image: radial-gradient(#c79d47 0.75px, transparent 0.75px), radial-gradient(#3ac167 0.75px, #FAF8F3 0.75px);
   background-size: 30px 30px;
   background-position: 0 0, 15px 15px;
   opacity: 0.95;
 }
 
 .gold-gradient-text {
-  background: linear-gradient(135deg, #D4AF37 0%, #C59B27 50%, #A37D1A 100%);
+  background: linear-gradient(135deg, #fcc74f 0%, #c79d47 50%, #825f21 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .green-gradient-text {
-  background: linear-gradient(135deg, #38A169 0%, #2D8A4E 50%, #1C5B32 100%);
+  background: linear-gradient(135deg, #58cf81 0%, #3ac167 50%, #248243 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.red-gradient-text {
+  background: linear-gradient(135deg, #e76777 0%, #dd3146 50%, #971728 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

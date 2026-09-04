@@ -1,0 +1,808 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0"
+    xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/"
+    xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:wp="http://wordpress.org/export/1.2/">
+  <channel>
+    <title>Agenda 50/50 - Pacto Fiscal y Autonómico</title>
+    <link>https://agenda5050.gob.bo</link>
+    <description>Plataforma oficial de transparencia activa, pedagogía ciudadana y monitoreo de la Agenda 50/50</description>
+    <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+    <language>es-BO</language>
+    <wp:wxr_version>1.2</wp:wxr_version>
+    <wp:base_site_url>https://agenda5050.gob.bo</wp:base_site_url>
+    <wp:base_blog_url>https://agenda5050.gob.bo</wp:base_blog_url>
+
+    <wp:author>
+      <wp:author_id>1</wp:author_id>
+      <wp:author_login>admin</wp:author_login>
+      <wp:author_email>contacto@economia.gob.bo</wp:author_email>
+      <wp:author_display_name><![CDATA[Ministerio de Economía]]></wp:author_display_name>
+      <wp:author_first_name><![CDATA[Ministerio]]></wp:author_first_name>
+      <wp:author_last_name><![CDATA[de Economía]]></wp:author_last_name>
+    </wp:author>
+
+    <wp:category><wp:term_id>1</wp:term_id><wp:category_nicename>acuerdo</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Acuerdo]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>2</wp:term_id><wp:category_nicename>pilares</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Pilares]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>3</wp:term_id><wp:category_nicename>monitor</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Monitor]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>4</wp:term_id><wp:category_nicename>ruta</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Ruta]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>5</wp:term_id><wp:category_nicename>territorio</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Territorio]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>6</wp:term_id><wp:category_nicename>multimedia</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Multimedia]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>7</wp:term_id><wp:category_nicename>prensa</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Prensa]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>8</wp:term_id><wp:category_nicename>documentos</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Documentos]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>9</wp:term_id><wp:category_nicename>faq</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[FAQ]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>10</wp:term_id><wp:category_nicename>fiscal</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Fiscal]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>11</wp:term_id><wp:category_nicename>normativo</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Normativo]]></wp:cat_name></wp:category>
+    <wp:category><wp:term_id>12</wp:term_id><wp:category_nicename>institucional</wp:category_nicename><wp:category_parent></wp:category_parent><wp:cat_name><![CDATA[Institucional]]></wp:cat_name></wp:category>
+
+    <item>
+      <title><![CDATA[Inicio - Agenda 50/50]]></title>
+      <link>https://agenda5050.gob.bo/inicio/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=100</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<div style="background:#1B2533; color:#fff; padding:48px 32px; border-radius:24px; margin-bottom:32px;">
+  <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(197,155,39,0.15); border:1px solid rgba(197,155,39,0.4); padding:6px 16px; border-radius:20px; margin-bottom:24px;">
+    <span style="width:10px; height:10px; background:#C59B27; border-radius:50%;"></span>
+    <span style="font-size:11px; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; color:#fcd34d;">Acuerdo N° 001/2026 · Sucre, 5 de Agosto de 2026</span>
+  </div>
+  <h1 style="font-size:42px; font-weight:900; color:#fff; line-height:1.15; margin:0 0 16px 0;">UNA NUEVA RELACIÓN<br><span style="color:#38A169;">CON MÁS AUTONOMÍA PARA MÁS DESARROLLO</span></h1>
+  <div style="width:80px; height:4px; background:#C59B27; border-radius:2px; margin-bottom:16px;"></div>
+  <p style="font-size:18px; color:#cbd5e1; font-weight:500; max-width:700px; margin:0 0 24px 0;"><strong style="color:#fcd34d;">Más autonomía, Más capacidad de decisión.</strong> Estrategia de Estado para la distribución equitativa de ingresos, la autonomía tributaria, la sostenibilidad fiscal y la desconcentración efectiva del gasto entre el Nivel Central y las Regiones.</p>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px;">
+    <a href="/?page_id=107" style="display:inline-flex; align-items:center; gap:8px; background:#2D8A4E; color:#fff; font-weight:800; padding:14px 20px; border-radius:16px; text-decoration:none;">📄 Leer Acuerdo 001/2026</a>
+    <a href="/?page_id=104" style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); color:#fff; font-weight:800; padding:14px 20px; border-radius:16px; text-decoration:none; border:1px solid rgba(255,255,255,0.15);">🗺️ Explorar Datos Deptos</a>
+    <a href="/?page_id=103" style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,0.1); color:#fff; font-weight:800; padding:14px 20px; border-radius:16px; text-decoration:none; border:1px solid rgba(255,255,255,0.15);">⏱️ Ver Cronograma</a>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:24px; font-size:13px; font-weight:700; color:#94a3b8; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
+    <span>✅ 9 de 9 GAD Adheridos</span>
+    <span>🛡️ Meta 2027: Ley Coparticipación</span>
+    <span>🏛️ Municipios, AIOC &amp; Gran Chaco</span>
+  </div>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:24px; border-radius:20px; margin-bottom:32px;">
+  <h3 style="font-size:14px; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; color:#0f172a; margin-bottom:16px;">📹 Video Oficial 50/50</h3>
+  <p style="font-size:14px; color:#475569; margin:0;"><strong>Fortalecimiento de las Autonomías</strong> — Construyendo un Estado más eficiente con la participación de municipios y autoridades de todo el país.</p>
+  <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+    <div style="background:#fff; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:10px; font-weight:700; color:#64748b; text-transform:uppercase;">Sede Histórica</div><div style="font-size:13px; font-weight:900; color:#d97706; margin-top:2px;">Casa de la Libertad</div></div>
+    <div style="background:#fff; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:10px; font-weight:700; color:#64748b; text-transform:uppercase;">Plazo Ley 154</div><div style="font-size:13px; font-weight:900; color:#059669; margin-top:2px;">90 Días Calendario</div></div>
+  </div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Inicio - Agenda 50/50]]></excerpt:encoded>
+      <wp:post_id>100</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[inicio]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>0</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="acuerdo"><![CDATA[Acuerdo]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Monitor 50/50]]></title>
+      <link>https://agenda5050.gob.bo/monitor-5050/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=101</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">Monitor 50/50 &amp; Tablero en Vivo</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">Seguimiento transparente a los hitos del Acuerdo N° 001/2026 de Sucre y simulador pedagógico de recursos fiscales.</p>
+
+<div style="background:linear-gradient(135deg, #0F2942, #1E3A8A); color:#fff; padding:32px; border-radius:24px; margin-bottom:32px;">
+  <h3 style="color:#fbbf24; font-size:12px; font-weight:900; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px;">Hito Prioritario en Curso</h3>
+  <h4 style="font-size:24px; font-weight:900; margin-bottom:8px;">Cuenta Regresiva: Anteproyecto de Ley N° 154</h4>
+  <p style="color:#cbd5e1; font-size:14px; margin-bottom:16px;">La Mesa Técnica Jurídica-Fiscal tiene como mandato entregar la propuesta de reforma del dominio tributario autonómico.</p>
+  <div style="display:flex; gap:12px; flex-wrap:wrap;">
+    <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); padding:16px; border-radius:16px; text-align:center; min-width:70px;"><div style="font-size:28px; font-weight:900; color:#fbbf24;">76</div><div style="font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase;">Días</div></div>
+    <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); padding:16px; border-radius:16px; text-align:center; min-width:70px;"><div style="font-size:28px; font-weight:900;">14</div><div style="font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase;">Horas</div></div>
+    <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); padding:16px; border-radius:16px; text-align:center; min-width:70px;"><div style="font-size:28px; font-weight:900;">32</div><div style="font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase;">Mins</div></div>
+    <div style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.15); padding:16px; border-radius:16px; text-align:center; min-width:70px;"><div style="font-size:28px; font-weight:900; color:#34d399;">45</div><div style="font-size:10px; font-weight:700; color:#94a3b8; text-transform:uppercase;">Segs</div></div>
+  </div>
+</div>
+
+<h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-bottom:20px;">Indicadores Clave</h3>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px; margin-bottom:32px;">
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">9/9 GAD</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Gobernaciones Adheridas</div><p style="font-size:12px; color:#64748b; margin-top:8px;">100% de los Gobiernos Autónomos Departamentales firmaron el Acuerdo de Sucre.</p></div>
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">90 Días</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Plazo Máximo Ley 154</div><p style="font-size:12px; color:#64748b; margin-top:8px;">Plazo límite para la entrega del anteproyecto de modificación del dominio tributario.</p></div>
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">Gestión 2027</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Ley de Coparticipación</div><p style="font-size:12px; color:#64748b; margin-top:8px;">Entrada en vigencia de la nueva distribución fiscal y fórmula equitativa.</p></div>
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">5 Comisiones</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Mesas Técnicas Activas</div><p style="font-size:12px; color:#64748b; margin-top:8px;">Equipos de hacienda, jurídica, tributaria, alivio de deuda y competencias sesionando.</p></div>
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">1 Reporte</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Principio Reporte Único</div><p style="font-size:12px; color:#64748b; margin-top:8px;">Desburocratización y canal único de información fiscal ante el MEFP.</p></div>
+  <div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;"><div style="font-size:28px; font-weight:900; color:#0f172a;">7 Instrumentos</div><div style="font-size:14px; font-weight:800; color:#1e293b; margin-top:4px;">Vías de Implementación</div><p style="font-size:12px; color:#64748b; margin-top:8px;">Proyectos de ley, decretos, convenios intergubernativos y reglamentos.</p></div>
+</div>
+
+<div style="background:#fff; border:1px solid #e2e8f0; padding:32px; border-radius:32px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a; margin-bottom:8px;">Simulador de Distribución de Recursos Fiscales</h3>
+  <p style="font-size:14px; color:#475569; margin-bottom:20px;">Desliza la barra para simular el impacto en la distribución presupuestaria anual entre el Estado Central y las autonomías subnacionales.</p>
+  <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:20px; border-radius:20px; margin-bottom:20px;">
+    <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; color:#475569; margin-bottom:8px;"><span>Actual (~15% Subnacional)</span><span style="color:#10b981;">Objetivo 50%</span><span>70% Subnacional</span></div>
+    <div style="background:#e2e8f0; height:12px; border-radius:6px; overflow:hidden;"><div style="background:#10b981; width:50%; height:100%;"></div></div>
+  </div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:16px; border-radius:16px;"><div style="font-size:12px; font-weight:700; color:#64748b; text-transform:uppercase;">Nivel Central</div><div style="font-size:24px; font-weight:900; color:#0F2942; margin-top:4px;">Bs. 30,000 M</div><div style="font-size:12px; color:#94a3b8; margin-top:4px;">50% del total</div></div>
+    <div style="background:#ecfdf5; border:1px solid #a7f3d0; padding:16px; border-radius:16px;"><div style="font-size:12px; font-weight:700; color:#065f46; text-transform:uppercase;">Subnacional (GAD/GAM/AIOC)</div><div style="font-size:24px; font-weight:900; color:#065f46; margin-top:4px;">Bs. 30,000 M</div><div style="font-size:12px; color:#059669; margin-top:4px;">50% del total</div></div>
+  </div>
+  <div style="background:#fffbeb; border:1px solid #fcd34d; padding:16px; border-radius:16px; font-size:13px; color:#92400e;">
+    💡 <strong>Nota explicativa:</strong> En el pacto fiscal 50/50, por cada 100 Bolivianos recaudados en impuestos nacionales y recursos coparticipables, 50 Bolivianos financian directamente las competencias departamentales, municipales y comunitarias.
+  </div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Monitor 50/50]]></excerpt:encoded>
+      <wp:post_id>101</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[monitor-5050]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>1</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="monitor"><![CDATA[Monitor]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Pilares Temáticos]]></title>
+      <link>https://agenda5050.gob.bo/pilares/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=102</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">Los Pilares Temáticos del Acuerdo</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">El Acuerdo N° 001/2026 prioriza estas materias para fortalecer las autonomías y garantizar la equidad fiscal.</p>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+  
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">⚖️</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Fiscal</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">1. Autonomía tributaria y esfuerzo fiscal</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Fortalecer la capacidad de los GAD para generar y administrar ingresos propios.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Incentivar el esfuerzo fiscal.</li><li>Evaluar reclasificación de base imponible.</li><li>Revisar sobretasas.</li><li>Proyecto de modificación Ley N° 154 en 90 días.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🔓</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Fiscal</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">2. Eliminación de condicionalidad de gasto</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Revisión integral y eliminación progresiva de condicionalidades.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Revisar normas que obligan financiar ítems centrales.</li><li>Derogar condicionalidades de estructuras extinguidas.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">💼</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Institucional</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">3. Autonomía de gestión presupuestaria</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Reservar al central control de agregados fiscales.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Sustituir autorizaciones por información transparente.</li><li>Implementar Principio de Reporte Único.</li><li>Coordinar endeudamiento.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🏛️</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Normativo</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">4. Ley Especial de Coparticipación y Distribución 2027</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Conformar mesa técnica para redacción de Ley Especial.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Adecuar transferencias.</li><li>Revisar legislación recentralizadora.</li><li>Presentar proyecto en gestión 2026.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">📊</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Fiscal</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">5. Criterios de distribución de ingresos</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Superar asimetrías históricas.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Evaluar criterios de compensación.</li><li>Coordinar ecualización fiscal.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">📈</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Fiscal</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">6. Alivio financiero y readecuación de deudas</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Atender sostenibilidad financiera.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Reprogramar obligaciones FNDR.</li><li>Impulsar Programa de Readecuación Financiera.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🏗️</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Institucional</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">7. Alianzas Público-Privadas (APP)</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Marco normativo para inversión privada.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Desarrollar normativa modelo APP.</li><li>Establecer salvaguardas fiscales.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🌐</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Normativo</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">8. Relacionamiento internacional y cooperación</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Ajustar Ley N° 699.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Modificar régimen de aprobación previa.</li><li>Crear ventanilla única.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🛡️</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Normativo</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">9. Protección del régimen autonómico y LMAD</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Evitar recentralización.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Revisar y derogar artículos invasivos.</li><li>Crear mecanismo de alerta temprana.</li>
+  </ul>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:28px; border-radius:24px;">
+  <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+    <div style="background:#0F2942; color:#34d399; width:48px; height:48px; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:20px;">🪙</div>
+    <span style="background:#e2e8f0; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase; color:#475569;">Fiscal</span>
+  </div>
+  <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">10. Fondos de compensación e incentivos</h3>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Creación de fondos especiales.</p>
+  <ul style="font-size:13px; color:#334155; padding-left:20px; margin:0;">
+    <li>Diseñar Fondo de Compensación Autonómica (FCA).</li><li>Vincular incentivos a transparencia.</li>
+  </ul>
+</div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Pilares Temáticos]]></excerpt:encoded>
+      <wp:post_id>102</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[pilares]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>2</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="pilares"><![CDATA[Pilares]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Ruta de Implementación]]></title>
+      <link>https://agenda5050.gob.bo/ruta/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=103</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">De la Firma en Sucre a la Ejecución 2027</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">Sigue el cronograma evolutivo paso a paso hacia la entrada en vigencia del nuevo régimen autonómico.</p>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:20px;">
+  
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #10b981;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#dcfce7; color:#166534; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">Cumplido</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">Enero - Julio 2026</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">01</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Diagnóstico técnico Censo 2024</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Consolidación de base de datos demográficos y financieros.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Ministerio de Economía</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Viceministerio de Autonomías</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Técnicos de 9 GAD</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #10b981;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#dcfce7; color:#166534; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">Cumplido</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">5 de Agosto de 2026</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">02</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Firma del Acuerdo N° 001/2026 en Sucre</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Firma histórica en la Casa de la Libertad.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Presidente del Estado</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">9 Gobernadores</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Representantes Municipalistas</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #f59e0b;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#fef3c7; color:#92400e; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">En proceso</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">En curso (Plazo 90 días)</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">03</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Modificación de la Ley N° 154</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Mesa técnica redactora para ampliación del dominio tributario.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Comisión Jurídica - Fiscal del Consejo</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #f59e0b;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#fef3c7; color:#92400e; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">En proceso</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">Gestión Legislativa 2026</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">04</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Redacción de Ley Especial de Coparticipación</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Diseño de fórmulas de reparto 50/50.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Comisión de Hacienda ALP</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Representantes GAD</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #64748b;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; color:#475569; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">Programado</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">Septiembre - Octubre 2026</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">05</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Encuentros con Municipios, AIOC y Gran Chaco</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Mesas de diálogo territorial.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">FAM-Bolivia</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">CONAIOC</span><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Gobierno Regional del Gran Chaco</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #64748b;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; color:#475569; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">Programado</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">Noviembre 2026</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">06</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Plenario del Consejo Nacional de Autonomías</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Aprobación del paquete normativo.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Consejo Nacional de Autonomías</span></div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px; border-left:4px solid #3b82f6;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#dbeafe; color:#1e40af; padding:4px 12px; border-radius:12px; font-size:11px; font-weight:900; text-transform:uppercase;">Meta</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">1 de Enero de 2027</span>
+  </div>
+  <div style="font-size:48px; font-weight:900; color:#e2e8f0; line-height:1;">07</div>
+  <h3 style="font-size:20px; font-weight:900; color:#0f172a; margin-top:4px;">Aplicación de la Gestión Fiscal 50/50</h3>
+  <p style="font-size:14px; color:#475569; margin-top:8px;">Entrada en vigencia del nuevo régimen.</p>
+  <div style="margin-top:12px; display:flex; flex-wrap:wrap; gap:8px;"><span style="background:#f1f5f9; padding:4px 10px; border-radius:8px; font-size:11px; font-weight:700; color:#475569;">Estado Plurinacional de Bolivia</span></div>
+</div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Ruta de Implementación]]></excerpt:encoded>
+      <wp:post_id>103</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[ruta]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>3</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="ruta"><![CDATA[Ruta]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Dimensión Territorial]]></title>
+      <link>https://agenda5050.gob.bo/territorio/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=104</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">La Agenda se construye desde los 9 Departamentos</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">El Acuerdo contempla articulación con los 9 Gobiernos Autónomos Departamentales, los Gobiernos Municipales, las Autonomías Indígena Originario Campesinas (AIOC) y el Gran Chaco.</p>
+<div style="background:#ecfdf5; border:1px solid #a7f3d0; padding:16px; border-radius:16px; display:flex; align-items:center; gap:12px; margin-bottom:32px;">
+  <span style="font-size:24px;">🛡️</span>
+  <p style="font-size:13px; font-weight:600; color:#065f46; margin:0;"><strong>100% de Adhesión Territorial:</strong> Las 9 Gobernaciones de Bolivia ratificaron el pliego en Sucre el 5 de agosto de 2026.</p>
+</div>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+  
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">La Paz</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Nuestra Señora de La Paz · Gobernador: Santos Quispe</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">18% Depto / 82% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 1.850 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Enfoque en electrificación rural, conectividad industrial del norte e infraestructura de salud.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Carretera Apolo-Ixiamas</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Complejo Agroindustrial Norte</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Saneamiento Cuenca Katari</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Santa Cruz</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Santa Cruz de la Sierra · Gobernador: Mario Aguilera (Interino)</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">14% Depto / 86% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 2.900 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Prioridad en autonomía tributaria ambiental, APP y alivio financiero.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Hub Logístico Viru Viru</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Electrificación Provincia Velasco</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Mantenimiento Red Vial</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Cochabamba</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Cochabamba · Gobernador: Humberto Sánchez</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">16% Depto / 84% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 1.400 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Énfasis en desarrollo tecnológico, agroindustria del Valle Alto y salud.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Ciudadela Científica</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Riego Trópico y Valles</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Hospital Materno Infantil</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Chuquisaca</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Sucre · Gobernador: Damián Condori</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">15% Depto / 85% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 980 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Diversificación económica, agua potable e incentivos turísticos.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Diagonal Jaime Mendoza</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Parque Industrial Sucre</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Desarrollo Turístico Patrimonio</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Tarija</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Tarija · Gobernador: Oscar Montes</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">21% Depto / 79% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 1.150 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Alivio fiscal, reprogramación de fideicomisos e integración Gran Chaco.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Presea de Alivio Deuda FNDR</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Conexión Energética Gran Chaco</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Presa San Jacinto</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Potosí</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Potosí · Gobernador: Marco Antonio Copa</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">19% Depto / 81% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 1.600 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Revisión de regalías mineras y proyectos de valor agregado.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Industrialización de Litio</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Aeropuerto Internacional Potosí</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Hospital de Tercer Nivel</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Oruro</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Oruro · Gobernador: Edson Oczachoque</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">17% Depto / 83% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 890 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Logística biocéanica, captación tributaria aduanera y energía limpia.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Puerto Seco Oruro</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Planta Fotovoltaica Fase II</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Carretera Ancaravi-Turco</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Beni</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Trinidad · Gobernador: Alejandro Unzueta</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">12% Depto / 88% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 1.250 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Infraestructura de integración vial, protección climática y desarrollo ganadero.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Carretera Trinidad-Guayaramerín</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Defensivos de Inundaciones</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Complejo Cárnico de Exportación</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a;">Pando</h3>
+  <p style="font-size:12px; color:#64748b; font-weight:600; margin-bottom:12px;">Capital: Cobija · Gobernador: Regis Richter</p>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px;">
+    <div style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase;">Régimen Fiscal Actual</div><div style="font-size:16px; font-weight:900; color:#0f172a;">11% Depto / 89% Central</div></div>
+    <div style="background:#10b981; color:#fff; padding:12px; border-radius:12px;"><div style="font-size:11px; font-weight:700; text-transform:uppercase;">Impacto Estimado 50/50</div><div style="font-size:18px; font-weight:900;">+ Bs 620 M / año</div></div>
+  </div>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;"><strong>Prioridades:</strong> Atención prioritaria por rezago histórico, economía amazónica sostenible.</p>
+  <div style="display:flex; flex-direction:column; gap:6px;">
+    <span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Puente Binacional Cobija</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Electrificación Solar Amazonía</span><span style="background:#f1f5f9; padding:6px 10px; border-radius:8px; font-size:12px; font-weight:700; color:#334155;">• Industrialización de la Castaña</span>
+  </div>
+</div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Dimensión Territorial]]></excerpt:encoded>
+      <wp:post_id>104</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[territorio]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>4</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="territorio"><![CDATA[Territorio]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Sala de Prensa]]></title>
+      <link>https://agenda5050.gob.bo/prensa/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=105</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">Noticias y Cobertura en Medios</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">Información oficial de las sesiones, conferencias de prensa y comunicados emitidos por la Secretaría Técnica del Consejo.</p>
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+  
+<div style="background:#fff; border:1px solid #e2e8f0; border-radius:24px; overflow:hidden;">
+  <div style="background:#f1f5f9; height:180px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:14px; font-weight:700;">📰 Evento</div>
+  <div style="padding:24px;">
+    <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#64748b; margin-bottom:8px;">
+      <span>📅 5 de Agosto de 2026</span>
+      <span>·</span>
+      <span>⏱️ 4 min lectura</span>
+    </div>
+    <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">Sucre marca el inicio de una nueva era autonómica con la firma del Acuerdo 001/2026</h3>
+    <p style="font-size:13px; color:#475569; margin-bottom:12px;">En la histórica Casa de la Libertad, el Gobierno Nacional y las 9 gobernaciones sellaron el compromiso fiscal 50/50.</p>
+    <span style="font-size:12px; font-weight:800; color:#10b981;">🏷️ Chuquisaca</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; border-radius:24px; overflow:hidden;">
+  <div style="background:#f1f5f9; height:180px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:14px; font-weight:700;">📰 Mesa Técnica</div>
+  <div style="padding:24px;">
+    <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#64748b; margin-bottom:8px;">
+      <span>📅 12 de Agosto de 2026</span>
+      <span>·</span>
+      <span>⏱️ 3 min lectura</span>
+    </div>
+    <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">Instalan la Mesa Técnica para la reforma prioritaria de la Ley N° 154 en La Paz</h3>
+    <p style="font-size:13px; color:#475569; margin-bottom:12px;">Equipos de juristas y economistas revisan los tributos subnacionales.</p>
+    <span style="font-size:12px; font-weight:800; color:#10b981;">🏷️ La Paz</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; border-radius:24px; overflow:hidden;">
+  <div style="background:#f1f5f9; height:180px; display:flex; align-items:center; justify-content:center; color:#94a3b8; font-size:14px; font-weight:700;">📰 Comunicado</div>
+  <div style="padding:24px;">
+    <div style="display:flex; align-items:center; gap:8px; font-size:12px; font-weight:700; color:#64748b; margin-bottom:8px;">
+      <span>📅 15 de Agosto de 2026</span>
+      <span>·</span>
+      <span>⏱️ 5 min lectura</span>
+    </div>
+    <h3 style="font-size:18px; font-weight:900; color:#0f172a; margin-bottom:8px;">Gobernadores evalúan mecanismos de alivio de deuda con el FNDR y banca pública</h3>
+    <p style="font-size:13px; color:#475569; margin-bottom:12px;">Se acuerda la reprogramación de fideicomisos para liberar liquidez.</p>
+    <span style="font-size:12px; font-weight:800; color:#10b981;">🏷️ Tarija</span>
+  </div>
+</div>
+</div>
+
+<div style="background:linear-gradient(135deg, #0F2942, #1E3A8A); color:#fff; padding:32px; border-radius:32px; margin-top:32px; display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between; align-items:center;">
+  <div>
+    <span style="background:#34d399; color:#0F2942; padding:4px 12px; border-radius:6px; font-size:11px; font-weight:900; text-transform:uppercase;">Recursos para Periodistas</span>
+    <h3 style="font-size:22px; font-weight:900; color:#fff; margin-top:8px;">Kit de Prensa Oficial (Press Kit 2026)</h3>
+    <p style="font-size:14px; color:#cbd5e1;">Descarga logotipos oficiales vectoriales, fotografías en alta resolución y comunicados editables.</p>
+  </div>
+  <a href="#" style="display:inline-flex; align-items:center; gap:8px; background:#10b981; color:#fff; font-weight:800; padding:14px 24px; border-radius:16px; text-decoration:none;">📦 Descargar Kit (ZIP 45 MB)</a>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Sala de Prensa]]></excerpt:encoded>
+      <wp:post_id>105</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[prensa]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>5</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="prensa"><![CDATA[Prensa]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Centro Documental]]></title>
+      <link>https://agenda5050.gob.bo/documentos/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=106</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">Centro de Descargas &amp; Normativa</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">Acceso libre y transparente a los acuerdos firmados, borradores de proyectos de ley, actas de la comisión y decretos reglamentarios.</p>
+
+<div style="background:linear-gradient(135deg, #0F2942, #1E3A8A); color:#fff; padding:32px; border-radius:32px; margin-bottom:32px; border:2px solid rgba(16,185,129,0.4);">
+  <div style="display:flex; flex-wrap:wrap; gap:12px; margin-bottom:12px;">
+    <span style="background:#34d399; color:#0F2942; padding:4px 12px; border-radius:6px; font-size:11px; font-weight:900; text-transform:uppercase;">Documento Insignia Oficial</span>
+    <span style="font-size:12px; color:#cbd5e1; font-weight:700;">PDF · 5.8 MB · 14,250 Descargas</span>
+  </div>
+  <h3 style="font-size:24px; font-weight:900; color:#fff; margin-bottom:8px;">Acuerdo N° 001/2026 - Firma Sucre 5 de Agosto</h3>
+  <p style="font-size:14px; color:#cbd5e1; margin-bottom:16px;">Documento oficial completo suscrito por el Presidente y los 9 Gobernadores.</p>
+  <a href="#" style="display:inline-flex; align-items:center; gap:8px; background:#10b981; color:#fff; font-weight:800; padding:12px 20px; border-radius:16px; text-decoration:none;">📥 Descargar PDF Oficial</a>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:16px;">
+  
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:900; text-transform:uppercase; color:#475569;">Proyecto de Ley</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">12/08/2026</span>
+  </div>
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">Anteproyecto de Modificación de la Ley N° 154</h4>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Borrador de ley para ampliar el dominio tributario departamental.</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700; color:#64748b;">
+    <span>2.4 MB</span>
+    <span style="color:#10b981;">⬇️ 8,910 descargas</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:900; text-transform:uppercase; color:#475569;">Presentación</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">01/08/2026</span>
+  </div>
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">Matriz del Diagnóstico Fiscal y Financiero Censo 2024</h4>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Presentación técnica sobre distribución actual de recursos.</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700; color:#64748b;">
+    <span>8.1 MB</span>
+    <span style="color:#10b981;">⬇️ 6,540 descargas</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:900; text-transform:uppercase; color:#475569;">Decreto</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">14/08/2026</span>
+  </div>
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">Reglamento del Principio de Reporte Único Presupuestario</h4>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Lineamientos para simplificación de trámites.</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700; color:#64748b;">
+    <span>1.8 MB</span>
+    <span style="color:#10b981;">⬇️ 4,200 descargas</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:900; text-transform:uppercase; color:#475569;">Acta</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">06/08/2026</span>
+  </div>
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">Acta de la I Sesión Extraordinaria de la Comisión de Hacienda Sucre</h4>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Acta oficial con acuerdos metodológicos.</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700; color:#64748b;">
+    <span>1.1 MB</span>
+    <span style="color:#10b981;">⬇️ 3,100 descargas</span>
+  </div>
+</div>
+<div style="background:#fff; border:1px solid #e2e8f0; padding:24px; border-radius:24px;">
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+    <span style="background:#f1f5f9; padding:4px 12px; border-radius:12px; font-size:10px; font-weight:900; text-transform:uppercase; color:#475569;">Presentación</span>
+    <span style="font-size:12px; font-weight:700; color:#64748b;">10/08/2026</span>
+  </div>
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">Guía Didáctica para el Ciudadano: ¿Qué es la Agenda 50/50?</h4>
+  <p style="font-size:13px; color:#475569; margin-bottom:12px;">Folleto explicativo infográfico.</p>
+  <div style="display:flex; justify-content:space-between; align-items:center; font-size:12px; font-weight:700; color:#64748b;">
+    <span>4.5 MB</span>
+    <span style="color:#10b981;">⬇️ 11,200 descargas</span>
+  </div>
+</div>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Centro Documental]]></excerpt:encoded>
+      <wp:post_id>106</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[documentos]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>6</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="documentos"><![CDATA[Documentos]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[FAQ y Buzón Ciudadano]]></title>
+      <link>https://agenda5050.gob.bo/faq/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=107</guid>
+      <description></description>
+      <content:encoded><![CDATA[
+<h2 style="font-size:36px; font-weight:900; color:#0f172a; margin-bottom:16px;">Preguntas Frecuentes sobre la Agenda 50/50</h2>
+<p style="font-size:16px; color:#475569; font-weight:500; max-width:700px; margin-bottom:32px;">Resolvemos las principales dudas sobre el pacto fiscal, el presupuesto y los derechos de las regiones.</p>
+<div style="max-width:800px;">
+  
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom:12px;">
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">❓ ¿Qué es la Agenda 50/50 y cuál es su objetivo principal?</h4>
+  <p style="font-size:14px; color:#475569; margin:0;">Estrategia de Estado acordada el 5 de agosto de 2026 en Sucre para reestructurar la relación fiscal y competencial entre el Nivel Central y las autonomías. Su objetivo es alcanzar un equilibrio transparente (50/50) en el esfuerzo, los recursos y las competencias.</p>
+  <span style="display:inline-block; margin-top:8px; background:#e2e8f0; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; color:#475569;">General</span>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom:12px;">
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">❓ ¿Cómo afectará la Agenda 50/50 al presupuesto de mi departamento?</h4>
+  <p style="font-size:14px; color:#475569; margin:0;">Permitirá a cada GAD captar más ingresos propios, eliminar gastos obligados del Central y recibir mayor coparticipación desde la gestión 2027.</p>
+  <span style="display:inline-block; margin-top:8px; background:#e2e8f0; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; color:#475569;">Pacto Fiscal</span>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom:12px;">
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">❓ ¿Por qué es crucial modificar la Ley N° 154?</h4>
+  <p style="font-size:14px; color:#475569; margin:0;">La Ley N° 154 limita la capacidad de las gobernaciones para crear impuestos propios. Su reforma otorgará verdadero dominio tributario a las regiones.</p>
+  <span style="display:inline-block; margin-top:8px; background:#e2e8f0; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; color:#475569;">Normativa</span>
+</div>
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:20px; border-radius:16px; margin-bottom:12px;">
+  <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">❓ ¿Qué es el Principio de Reporte Único?</h4>
+  <p style="font-size:14px; color:#475569; margin:0;">Es la simplificación administrativa para reportar datos financieros una sola vez, por un único canal digital y en un solo formato.</p>
+  <span style="display:inline-block; margin-top:8px; background:#e2e8f0; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:700; color:#475569;">Transparencia</span>
+</div>
+</div>
+
+<div style="background:#f8fafc; border:1px solid #e2e8f0; padding:32px; border-radius:24px; margin-top:32px;">
+  <h3 style="font-size:22px; font-weight:900; color:#0f172a; margin-bottom:8px;">📬 Buzón de Propuestas y Aportes</h3>
+  <p style="font-size:14px; color:#475569; margin-bottom:20px;">Envía tus sugerencias o propuestas institucionales para ser evaluadas por las Mesas Técnicas.</p>
+  <form onsubmit="event.preventDefault(); alert('Propuesta enviada (simulación)');">
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+      <input type="text" placeholder="Nombre Completo" required style="padding:12px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px;">
+      <input type="email" placeholder="Correo electrónico" required style="padding:12px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px;">
+    </div>
+    <select style="padding:12px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px; width:100%; margin-bottom:12px;">
+      <option>La Paz</option><option>Santa Cruz</option><option>Cochabamba</option><option>Chuquisaca</option>
+      <option>Tarija</option><option>Potosí</option><option>Oruro</option><option>Beni</option><option>Pando</option>
+    </select>
+    <textarea placeholder="Tu propuesta o consulta" rows="4" required style="padding:12px; border:1px solid #e2e8f0; border-radius:12px; font-size:14px; width:100%; margin-bottom:12px;"></textarea>
+    <button type="submit" style="background:#0F2942; color:#fff; font-weight:800; padding:12px 24px; border-radius:12px; border:none; cursor:pointer;">📨 Enviar Propuesta a la Mesa Técnica</button>
+  </form>
+</div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[FAQ y Buzón Ciudadano]]></excerpt:encoded>
+      <wp:post_id>107</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[faq]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>7</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="faq"><![CDATA[Faq]]></category>
+    </item>
+
+    <item>
+      <title><![CDATA[Metodología 50/50]]></title>
+      <link>https://agenda5050.gob.bo/metodologia/</link>
+      <pubDate>Tue, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <dc:creator><![CDATA[admin]]></dc:creator>
+      <guid isPermaLink="false">https://agenda5050.gob.bo/?page_id=108</guid>
+      <description></description>
+      <content:encoded><![CDATA[<div style="background:#0F2942; color:#fff; padding:48px 32px; border-radius:24px;">
+<h2 style="font-size:36px; font-weight:900; color:#fff; margin-bottom:16px;">¿Cómo llegar al 50/50?</h2>
+<p style="font-size:16px; color:#cbd5e1; font-weight:500; max-width:700px; margin-bottom:32px;">Una metodología común para medir avances. Indicadores objetivos, verificables y comparables para medir progresivamente competencias, sostenibilidad fiscal, gestión institucional y calidad de servicios públicos.</p>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; margin-bottom:32px;">
+  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:24px; border-radius:20px;"><div style="font-size:24px; margin-bottom:12px;">👥</div><div style="font-size:12px; font-weight:900; color:rgba(255,255,255,0.4); margin-bottom:4px;">01</div><div style="font-size:16px; font-weight:900; color:#fff;">Información compartida</div></div>
+  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:24px; border-radius:20px;"><div style="font-size:24px; margin-bottom:12px;">🔀</div><div style="font-size:12px; font-weight:900; color:rgba(255,255,255,0.4); margin-bottom:4px;">02</div><div style="font-size:16px; font-weight:900; color:#fff;">Diagnóstico común</div></div>
+  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:24px; border-radius:20px;"><div style="font-size:24px; margin-bottom:12px;">📈</div><div style="font-size:12px; font-weight:900; color:rgba(255,255,255,0.4); margin-bottom:4px;">03</div><div style="font-size:16px; font-weight:900; color:#fff;">Indicadores comparables</div></div>
+  <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); padding:24px; border-radius:20px;"><div style="font-size:24px; margin-bottom:12px;">✅</div><div style="font-size:12px; font-weight:900; color:rgba(255,255,255,0.4); margin-bottom:4px;">04</div><div style="font-size:16px; font-weight:900; color:#fff;">Seguimiento progresivo</div></div>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:32px;">
+  <div>
+    <h3 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">Principios</h3>
+    <div style="display:flex; flex-wrap:wrap; gap:8px;">
+      <span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Corresponsabilidad Fiscal</span><span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Equidad Territorial</span><span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Autonomía de Gestión</span><span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Transparencia Activa</span><span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Reporte Único Abierto</span><span style="background:rgba(255,255,255,0.1); padding:8px 16px; border-radius:20px; font-size:14px; font-weight:700; color:#fff;">Resultados Verificables</span>
+    </div>
+  </div>
+  <div>
+    <h3 style="font-size:20px; font-weight:900; color:#fff; margin-bottom:16px;">Instrumentos de implementación</h3>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+      <div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">1. Proyectos de Ley de la ALP</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">2. Decretos Supremos de Aplicación</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">3. Convenios Intergubernativos</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">4. Acuerdos Fiscales Departamentales</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">5. Reformas Reglamentarias Locales</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">6. Reglamentos de la Ley N° 154</div><div style="background:rgba(255,255,255,0.1); padding:12px; border-radius:12px; font-size:13px; color:rgba(255,255,255,0.8); font-weight:600;">7. Modelos de Contrato para APP</div>
+    </div>
+  </div>
+</div></div>]]></content:encoded>
+      <excerpt:encoded><![CDATA[Metodología 50/50]]></excerpt:encoded>
+      <wp:post_id>108</wp:post_id>
+      <wp:post_date>2026-08-05 00:00:00</wp:post_date>
+      <wp:post_date_gmt>2026-08-05 00:00:00</wp:post_date_gmt>
+      <wp:comment_status>closed</wp:comment_status>
+      <wp:ping_status>closed</wp:ping_status>
+      <wp:post_name><![CDATA[metodologia]]></wp:post_name>
+      <wp:status>publish</wp:status>
+      <wp:post_parent>0</wp:post_parent>
+      <wp:menu_order>8</wp:menu_order>
+      <wp:post_type>page</wp:post_type>
+      <category domain="category" nicename="acuerdo"><![CDATA[Acuerdo]]></category>
+    </item>
+
+  </channel>
+</rss>

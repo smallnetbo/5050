@@ -14,12 +14,11 @@ export function Header() {
 
   const navLinks = [
     { label: "El Acuerdo", href: "#acuerdo" },
-    { label: "Pilares", href: "#pilares" },
     { label: "Monitor 50/50", href: "#monitor" },
-    { label: "Ruta", href: "#ruta" },
-    { label: "Territorio", href: "#territorio" },
-    { label: "Multimedia", href: "#multimedia" },
     { label: "Prensa", href: "#prensa" },
+    { label: "Pilares", href: "#pilares" },
+    { label: "Ruta", href: "#ruta" },
+    { label: "Multimedia", href: "#multimedia" },
     { label: "Documentos", href: "#descargas" },
     { label: "FAQ", href: "#faq" },
   ];
@@ -36,13 +35,13 @@ export function Header() {
         <div className="container-page flex h-16 items-center justify-between gap-4">
           {/* Logo & Plurinational Badge */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
-            <AnimatedIsologo className="w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0 transition-transform group-hover:scale-105" />
-            <div className="h-7 sm:h-8 w-1 bg-[#84131D] dark:bg-white rounded-full flex-shrink-0 transition-colors"></div>
+            <AnimatedIsologo variant="symbol" className="w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0 transition-transform group-hover:scale-105" />
+            <div className="h-7 sm:h-8 w-1 bg-[#dd3146] dark:bg-[#c79d47] rounded-full flex-shrink-0 transition-colors"></div>
             <div className="flex flex-col justify-center font-geometria">
-              <span className="block font-geometria font-medium tracking-[0.18em] text-[#84131D] dark:text-white text-[9px] sm:text-[10px] uppercase leading-none transition-colors">
+              <span className="block font-geometria font-medium tracking-[0.18em] text-[#c79d47] dark:text-[#fcc74f] text-[9px] sm:text-[10px] uppercase leading-none transition-colors">
                 AGENDA
               </span>
-              <div className="flex items-center text-[#84131D] dark:text-white text-base sm:text-lg font-bold tracking-tighter leading-none my-0.5 transition-colors font-geometria">
+              <div className="flex items-center text-[#c79d47] dark:text-white text-base sm:text-lg font-bold tracking-tighter leading-none my-0.5 transition-colors font-geometria">
                 <span className="font-geometria font-bold">50</span>
                 <img
                   src="/assets/barra.svg"
@@ -51,7 +50,7 @@ export function Header() {
                 />
                 <span className="font-geometria font-bold">50</span>
               </div>
-              <span className="block font-geometria font-bold tracking-[0.25em] text-[#84131D] dark:text-white text-[6.5px] sm:text-[7.5px] uppercase leading-none transition-colors">
+              <span className="block font-geometria font-bold tracking-[0.22em] text-[#c79d47] dark:text-white text-[6.5px] sm:text-[7.5px] uppercase leading-none transition-colors">
                 UNA NUEVA BOLIVIA
               </span>
             </div>
@@ -63,10 +62,10 @@ export function Header() {
               <a
                 key={link.href}
                 href={link.href}
-                className="hover:text-[#2D8A4E] dark:hover:text-[#C59B27] transition-colors py-1 relative group"
+                className="hover:text-[#3ac167] dark:hover:text-[#c79d47] transition-colors py-1 relative group"
               >
                 {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#C59B27] transition-all duration-300 group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c79d47] transition-all duration-300 group-hover:w-full"></span>
               </a>
             ))}
           </nav>
@@ -78,7 +77,7 @@ export function Header() {
               className="flex items-center gap-2 rounded-xl border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-amber-50/50 dark:hover:bg-slate-700 transition shadow-2xs"
               aria-label="Buscar en la plataforma"
             >
-              <Search size={15} className="text-[#C59B27]" />
+              <Search size={15} className="text-[#c79d47]" />
               <span className="hidden sm:inline">Buscar...</span>
               <kbd className="hidden sm:inline-block rounded bg-amber-50 dark:bg-slate-700 px-1.5 py-0.5 text-[10px] font-bold text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-slate-600">⌘K</kbd>
             </button>
@@ -91,7 +90,7 @@ export function Header() {
               title={theme === "dark" ? "Cambiar a Modo Claro" : "Cambiar a Modo Oscuro"}
             >
               {theme === "dark" ? (
-                <Sun size={16} className="text-amber-300" />
+                <Sun size={16} className="text-[#fcc74f]" />
               ) : (
                 <Moon size={16} className="text-slate-700" />
               )}
@@ -99,7 +98,7 @@ export function Header() {
 
             <a
               href="#descargas"
-              className="hidden sm:flex items-center gap-1.5 rounded-xl bg-[#2D8A4E] hover:bg-[#247340] text-white px-3.5 py-2 text-xs font-extrabold transition shadow-sm hover:shadow"
+              className="hidden sm:flex items-center gap-1.5 rounded-xl bg-[#3ac167] hover:bg-[#2ea354] text-white px-3.5 py-2 text-xs font-extrabold transition shadow-sm hover:shadow"
             >
               <Download size={14} />
               <span>Ver Acuerdo</span>
@@ -123,7 +122,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold text-slate-800 hover:bg-slate-100 hover:text-emerald-600 transition"
+                className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold text-slate-800 hover:bg-slate-100 hover:text-[#3ac167] transition"
               >
                 <span>{link.label}</span>
                 <span className="text-slate-400">→</span>
@@ -133,7 +132,7 @@ export function Header() {
               <a
                 href="#descargas"
                 onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-600 text-white py-3 font-extrabold text-sm shadow-md"
+                className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#3ac167] hover:bg-[#2ea354] text-white py-3 font-extrabold text-sm shadow-md"
               >
                 <Download size={16} /> Descargar Acuerdo Sucre 2026 (PDF)
               </a>

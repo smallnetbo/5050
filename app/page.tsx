@@ -3,9 +3,9 @@ import { Hero } from "@/components/Hero";
 import { Monitor } from "@/components/Monitor";
 import { Pillars } from "@/components/Pillars";
 import { Timeline } from "@/components/Timeline";
-import { Territorial } from "@/components/Territorial";
 import { MultimediaHub } from "@/components/MultimediaHub";
 import { PressNews } from "@/components/PressNews";
+import { InteractiveNewsGallery3 } from "@/components/InteractiveNewsGallery3";
 import { DocumentHub } from "@/components/DocumentHub";
 import { CitizenFeedback } from "@/components/CitizenFeedback";
 import { Footer } from "@/components/Footer";
@@ -24,11 +24,11 @@ export default function Home() {
         <main>
           <Hero />
           <Monitor />
+          <PressNews />
+          <InteractiveNewsGallery3 />
           <Pillars />
           <Timeline />
-          <Territorial />
           <MultimediaHub />
-          <PressNews />
           <DocumentHub />
           <CitizenFeedback />
         </main>
