@@ -24,7 +24,6 @@ export default function Home() {
         <main>
           <Hero />
           <Monitor />
-          <PressNews />
           <InteractiveNewsGallery3 />
           <Pillars />
           <Timeline />
