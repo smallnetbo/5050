@@ -26,7 +26,7 @@ export function MultimediaHub() {
 
   useEffect(() => {
     if (selectedVideo && videoRef.current) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     }
   }, [selectedVideo]);
 
@@ -37,7 +37,7 @@ export function MultimediaHub() {
       duration: "Cápsula Informativa",
       thumbnail: "/assets/multimedia_cover.jpg",
       category: "Explicador Oficial",
-      videoUrl: "/assets/Que es el 5050.mp4"
+      videoUrl: "/videos/Agenda5050.mp4"
     },
     {
       title: "¿Qué cambiará? La Agenda 50/50",
@@ -104,31 +104,28 @@ export function MultimediaHub() {
           <div className="flex rounded-2xl bg-white/10 p-1.5 border border-white/10 backdrop-blur-md">
             <button
               onClick={() => setActiveMediaTab("videos")}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${
-                activeMediaTab === "videos"
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${activeMediaTab === "videos"
                   ? "bg-[#3ac167] text-slate-950 shadow-md"
                   : "text-slate-300 hover:text-white"
-              }`}
+                }`}
             >
               <Video size={15} /> Videos ({videos.length})
             </button>
             <button
               onClick={() => setActiveMediaTab("infografias")}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${
-                activeMediaTab === "infografias"
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${activeMediaTab === "infografias"
                   ? "bg-[#3ac167] text-slate-950 shadow-md"
                   : "text-slate-300 hover:text-white"
-              }`}
+                }`}
             >
               <ImageIcon size={15} /> Infografías ({infographics.length})
             </button>
             <button
               onClick={() => setActiveMediaTab("audio")}
-              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${
-                activeMediaTab === "audio"
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all ${activeMediaTab === "audio"
                   ? "bg-[#3ac167] text-slate-950 shadow-md"
                   : "text-slate-300 hover:text-white"
-              }`}
+                }`}
             >
               <Volume2 size={15} /> Podcasts / Audio
             </button>

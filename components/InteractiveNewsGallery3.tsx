@@ -235,10 +235,10 @@ export function InteractiveNewsGallery3() {
         if (processed.length === 0) {
           setLoadError(true);
         } else {
-          // Ajustar automáticamente el mes y año del calendario al primer registro con fecha
-          const firstWithDate = processed.find((art) => art.dateIso);
-          if (firstWithDate && firstWithDate.dateIso) {
-            const [y, m] = firstWithDate.dateIso.split("-").map(Number);
+          // Ajustar automáticamente el mes y año del calendario a la noticia más reciente con fecha
+          const latestWithDate = [...processed].sort((a, b) => b.timestamp - a.timestamp).find((art) => art.dateIso);
+          if (latestWithDate && latestWithDate.dateIso) {
+            const [y, m] = latestWithDate.dateIso.split("-").map(Number);
             if (y && m) {
               setCalendarYear(y);
               setCalendarMonth(m - 1);
@@ -336,17 +336,21 @@ export function InteractiveNewsGallery3() {
 
   useEffect(() => {
     const el = scrollRef.current;
-    setCurrentIndex(0);
-    if (!el) return;
-    el.scrollTo({ left: 0, behavior: "auto" });
-    setCanScrollLeft(false);
-    requestAnimationFrame(() => setCanScrollRight(el.scrollWidth > el.clientWidth + 4));
+    if (!el || displayArticles.length === 0) return;
+    const targetIdx = displayArticles.length - 1;
+    setCurrentIndex(targetIdx);
+    requestAnimationFrame(() => {
+      el.scrollTo({ left: targetIdx * STEP, behavior: "auto" });
+      setCanScrollLeft(el.scrollLeft > 4);
+      setCanScrollRight(el.scrollWidth > el.clientWidth + el.scrollLeft + 4);
+    });
   }, [displayArticles]);
 
   useEffect(() => {
     const onResize = () => {
       const el = scrollRef.current;
       if (!el) return;
+      setCanScrollLeft(el.scrollLeft > 4);
       setCanScrollRight(el.scrollWidth > el.clientWidth + el.scrollLeft + 4);
     };
     window.addEventListener("resize", onResize);
