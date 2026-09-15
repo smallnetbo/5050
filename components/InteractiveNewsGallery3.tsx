@@ -101,10 +101,12 @@ function TimelineCard({
   article,
   isActive,
   onSelect,
+  hasDraggedRef,
 }: {
   article: ChronoArticle;
   isActive: boolean;
   onSelect: () => void;
+  hasDraggedRef: React.RefObject<boolean>;
 }) {
   return (
     <div className="flex shrink-0 flex-col snap-start select-none" style={{ width: CARD_WIDTH }}>
@@ -112,18 +114,30 @@ function TimelineCard({
       <div className="mb-3 flex items-center">
         <div className="h-px flex-1 bg-slate-300 dark:bg-slate-800" />
         <span
-          className={`mx-1.5 h-2.5 w-2.5 shrink-0 rounded-full ring-4 ring-slate-100 dark:ring-[#070B12] transition-colors ${isActive ? "bg-amber-400" : "bg-emerald-500"
-            }`}
+          className={`mx-1.5 h-2.5 w-2.5 shrink-0 rounded-full ring-4 ring-slate-100 dark:ring-[#070B12] transition-colors ${
+            isActive ? "bg-amber-400" : "bg-emerald-500"
+          }`}
         />
         <div className="h-px flex-1 bg-slate-300 dark:bg-slate-800" />
       </div>
 
-      <button
-        onClick={onSelect}
-        className={`group flex flex-1 flex-col overflow-hidden rounded-2xl border text-left transition-all duration-200 cursor-pointer ${isActive
-          ? "border-amber-400/90 dark:border-amber-400/70 shadow-lg shadow-amber-500/10 bg-white dark:bg-slate-900/60 -translate-y-1 ring-1 ring-amber-400/40"
-          : "bg-white dark:bg-slate-900/60 border-slate-200/90 dark:border-slate-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/50 hover:-translate-y-0.5 shadow-sm dark:shadow-none"
-          }`}
+      <a
+        href={article.url}
+        target={article.url && article.url.startsWith("http") ? "_blank" : "_self"}
+        rel="noopener noreferrer"
+        onClick={(e) => {
+          if (hasDraggedRef.current) {
+            e.preventDefault();
+            return;
+          }
+          onSelect();
+        }}
+        title={article.summary || article.title}
+        className={`group relative flex flex-1 flex-col overflow-hidden rounded-2xl border text-left transition-all duration-200 cursor-pointer ${
+          isActive
+            ? "border-amber-400/90 dark:border-amber-400/70 shadow-lg shadow-amber-500/10 bg-white dark:bg-slate-900/60 -translate-y-1 ring-1 ring-amber-400/40"
+            : "bg-white dark:bg-slate-900/60 border-slate-200/90 dark:border-slate-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/50 hover:-translate-y-0.5 shadow-sm dark:shadow-none"
+        }`}
       >
         <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-200 dark:bg-slate-800">
           <CardThumb
@@ -138,15 +152,34 @@ function TimelineCard({
           <span className="absolute right-2.5 top-2.5 rounded-lg bg-slate-950/85 backdrop-blur-sm px-2 py-1 text-[10px] font-bold text-amber-300">
             {article.department || "Nacional"}
           </span>
+
+          {/* Indicador sutil de enlace directo al pasar el cursor */}
+          <span className="absolute bottom-2.5 right-2.5 rounded-lg bg-emerald-500 text-slate-950 px-2 py-1 text-[10px] font-extrabold opacity-0 group-hover:opacity-100 transition-all duration-200 flex items-center gap-1 shadow-md transform translate-y-1 group-hover:translate-y-0">
+            <span>Abrir noticia</span>
+            <ExternalLink size={11} />
+          </span>
         </div>
 
-        <div className="flex flex-1 flex-col gap-2 p-4">
-          <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">{article.source || "Prensa"}</span>
+        <div className="flex flex-1 flex-col gap-2 p-4 relative">
+          <div className="flex items-center justify-between">
+            <span className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">{article.source || "Prensa"}</span>
+            <ExternalLink size={12} className="text-slate-400 group-hover:text-emerald-500 transition-colors opacity-0 group-hover:opacity-100" />
+          </div>
+
           <h3 className="text-sm font-bold leading-snug text-slate-900 dark:text-white line-clamp-3 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             {article.title}
           </h3>
+
+          {/* Resumen sutil integrado en la tarjeta */}
+          {article.summary && (
+            <div className="mt-1 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+              <p className="text-[11px] font-medium leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">
+                {article.summary}
+              </p>
+            </div>
+          )}
         </div>
-      </button>
+      </a>
     </div>
   );
 }
@@ -170,7 +203,6 @@ export function InteractiveNewsGallery3() {
 
   const [isAscending, setIsAscending] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedArticle, setSelectedArticle] = useState<ChronoArticle | null>(null);
   const [loadError, setLoadError] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(false);
@@ -179,6 +211,7 @@ export function InteractiveNewsGallery3() {
   const isCardsDraggingRef = useRef(false);
   const startCardsXRef = useRef(0);
   const startCardsScrollLeftRef = useRef(0);
+  const hasDraggedRef = useRef(false);
   const [isCardsDragging, setIsCardsDragging] = useState(false);
 
   // Mouse Drag State for Bottom Dates Timeline Track
@@ -413,6 +446,7 @@ export function InteractiveNewsGallery3() {
     const el = scrollRef.current;
     if (!el) return;
     isCardsDraggingRef.current = true;
+    hasDraggedRef.current = false;
     setIsCardsDragging(true);
     startCardsXRef.current = e.pageX - el.offsetLeft;
     startCardsScrollLeftRef.current = el.scrollLeft;
@@ -435,6 +469,9 @@ export function InteractiveNewsGallery3() {
     if (!el) return;
     const x = e.pageX - el.offsetLeft;
     const walk = (x - startCardsXRef.current) * 1.5;
+    if (Math.abs(walk) > 5) {
+      hasDraggedRef.current = true;
+    }
     el.scrollLeft = startCardsScrollLeftRef.current - walk;
   };
 
@@ -484,23 +521,12 @@ export function InteractiveNewsGallery3() {
       handleJumpToStep(currentIndex - 1);
     } else if ((e.key === "Enter" || e.key === " ") && displayArticles[currentIndex]) {
       e.preventDefault();
-      setSelectedArticle(displayArticles[currentIndex]);
+      const art = displayArticles[currentIndex];
+      if (art?.url) {
+        window.open(art.url, art.url.startsWith("http") ? "_blank" : "_self", "noopener,noreferrer");
+      }
     }
   };
-
-  useEffect(() => {
-    if (!selectedArticle) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedArticle(null);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [selectedArticle]);
 
   const activeArticle = displayArticles[currentIndex];
   const progressPct = displayArticles.length > 1 ? (currentIndex / (displayArticles.length - 1)) * 100 : 0;
@@ -939,9 +965,9 @@ export function InteractiveNewsGallery3() {
                       article={art}
                       isActive={idx === currentIndex}
                       onSelect={() => {
-                        setSelectedArticle(art);
                         setCurrentIndex(idx);
                       }}
+                      hasDraggedRef={hasDraggedRef}
                     />
                   ))}
                 </div>
@@ -1030,78 +1056,6 @@ export function InteractiveNewsGallery3() {
           )}
         </div>
       </div>
-
-      {/* Modal de la noticia seleccionada */}
-      {selectedArticle && (
-        <div
-          className="fixed inset-0 z-[100] grid place-items-center bg-slate-900/50 dark:bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
-          onClick={() => setSelectedArticle(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="noticia-titulo"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-6 shadow-2xl text-slate-900 dark:text-white relative"
-          >
-            <button
-              onClick={() => setSelectedArticle(null)}
-              className="absolute top-4 right-4 z-30 rounded-full bg-slate-950/80 hover:bg-slate-950 text-white border border-white/20 p-2 shadow-lg backdrop-blur-md transition-all hover:scale-110 cursor-pointer"
-              aria-label="Cerrar modal"
-              title="Cerrar"
-            >
-              <X size={18} />
-            </button>
-
-            {selectedArticle.imageUrl && (
-              <div className="relative aspect-video w-full rounded-2xl overflow-hidden mb-4 bg-slate-100 dark:bg-slate-800">
-                <img
-                  src={selectedArticle.imageUrl}
-                  alt={selectedArticle.title}
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = "none";
-                  }}
-                />
-                <span className="absolute top-3 left-3 rounded-full bg-slate-950/90 backdrop-blur-md px-3 py-1 text-[10px] font-black text-[#3ac167] border border-white/10">
-                  {selectedArticle.source}
-                </span>
-              </div>
-            )}
-
-            <div className="flex items-center gap-3 text-xs font-bold text-slate-500 dark:text-slate-400 mb-2">
-              <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400">
-                <Tag size={13} /> {selectedArticle.department}
-              </span>
-              <span className="flex items-center gap-1">
-                <Calendar size={13} /> {selectedArticle.formattedDateStr}
-              </span>
-            </div>
-
-            <h3 id="noticia-titulo" className="text-xl font-black leading-snug text-slate-900 dark:text-white mb-3">
-              {selectedArticle.title}
-            </h3>
-
-            {selectedArticle.summary && (
-              <p className="text-sm text-slate-600 dark:text-slate-300 font-medium leading-relaxed mb-6">{selectedArticle.summary}</p>
-            )}
-
-            <div className="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Fuente: {selectedArticle.source}</span>
-
-              <a
-                href={selectedArticle.url}
-                target={selectedArticle.url.startsWith("http") ? "_blank" : "_self"}
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-xl bg-[#3ac167] hover:bg-[#2ea354] text-slate-950 font-black px-4 py-2.5 text-xs transition shadow-md"
-              >
-                <span>Leer cobertura periodística</span>
-                <ExternalLink size={14} />
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }
