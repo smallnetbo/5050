@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon } from "lucide-react";
 import { documentsList, pillars, departmentsData } from "@/lib/agenda-data";
 import { useTheme } from "./ThemeProvider";
-import { AnimatedIsologo } from "./AnimatedIsologo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -33,27 +32,13 @@ export function Header() {
       <header className="sticky top-0 z-50 border-b border-amber-900/10 dark:border-amber-500/20 bg-[#FAF8F3]/95 dark:bg-[#101620]/95 backdrop-blur-xl shadow-xs transition-colors duration-300">
 
         <div className="container-page flex h-16 items-center justify-between gap-4">
-          {/* Logo & Plurinational Badge */}
-          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group flex-shrink-0">
-            <AnimatedIsologo variant="symbol" className="w-9 h-9 sm:w-10 sm:h-10 flex-shrink-0 transition-transform group-hover:scale-105" />
-            <div className="h-7 sm:h-8 w-1 bg-[#dd3146] dark:bg-[#c79d47] rounded-full flex-shrink-0 transition-colors"></div>
-            <div className="flex flex-col justify-center font-geometria">
-              <span className="block font-geometria font-medium tracking-[0.18em] text-[#c79d47] dark:text-[#fcc74f] text-[9px] sm:text-[10px] uppercase leading-none transition-colors">
-                AGENDA
-              </span>
-              <div className="flex items-center text-[#c79d47] dark:text-white text-base sm:text-lg font-bold tracking-tighter leading-none my-0.5 transition-colors font-geometria">
-                <span className="font-geometria font-bold">50</span>
-                <img
-                  src="/assets/barra.svg"
-                  alt="|"
-                  className="h-[0.72em] w-auto inline-block self-center mx-0.5 select-none transition-all dark:brightness-0 dark:invert"
-                />
-                <span className="font-geometria font-bold">50</span>
-              </div>
-              <span className="block font-geometria font-bold tracking-[0.22em] text-[#c79d47] dark:text-white text-[6.5px] sm:text-[7.5px] uppercase leading-none transition-colors">
-                UNA NUEVA BOLIVIA
-              </span>
-            </div>
+          {/* Logo */}
+          <a href="#" className="flex items-center group flex-shrink-0">
+            <img
+              src="/assets/isologo.svg"
+              alt="Agenda 50/50"
+              className="h-10 sm:h-12 w-auto transition-transform group-hover:scale-105"
+            />
           </a>
 
           {/* Desktop Navigation Links */}

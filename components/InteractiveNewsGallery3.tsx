@@ -534,7 +534,7 @@ export function InteractiveNewsGallery3() {
 
   return (
     <section
-      id="galeria-noticias"
+      id="prensa"
       className="relative bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white py-16 border-t border-b border-slate-200 dark:border-slate-800 overflow-hidden transition-colors duration-300"
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[550px] bg-gradient-to-br from-emerald-500/10 via-amber-500/10 dark:via-amber-500/5 to-transparent blur-[140px] rounded-full pointer-events-none" />
