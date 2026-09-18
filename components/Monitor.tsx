@@ -1,16 +1,10 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Scale, FileClock, Target, Landmark, BarChart3, Wallet, Sliders, ChevronDown, CheckCircle2, ArrowRight } from "lucide-react";
+import { Scale, FileClock, Target, Landmark, BarChart3, Wallet, Sliders } from "lucide-react";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend, BarChart, Bar, XAxis, YAxis } from "recharts";
 
 export function Monitor() {
-  // Balance State: "before" (65/35) vs "after" (50/50)
-  const [balanceMode, setBalanceMode] = useState<"before" | "after">("after");
-
-  // Accordion Step State (default step 1 open)
-  const [openStep, setOpenStep] = useState<number | null>(1);
-
   // Live Countdown Calculation for 90 Days from Aug 5, 2026 -> Nov 3, 2026
   const targetDate = new Date("2026-11-03T23:59:59").getTime();
   const [timeLeft, setTimeLeft] = useState({ days: 76, hours: 14, mins: 32, secs: 45 });
@@ -51,47 +45,6 @@ export function Monitor() {
     { name: "Chuquisaca", actual: 520, sim5050: Math.round(520 * (subnationalRatio / 15)) },
     { name: "Tarija", actual: 780, sim5050: Math.round(780 * (subnationalRatio / 21)) },
     { name: "Potosí", actual: 850, sim5050: Math.round(850 * (subnationalRatio / 19)) },
-  ];
-
-  const stepsData = [
-    {
-      num: 1,
-      title: "¿Qué es el 50/50?",
-      desc: "Una reforma para fortalecer las autonomías: que los recursos, competencias y responsabilidades estén mejor equilibrados entre el Gobierno nacional y las regiones.",
-      tag: "Más autonomía para impulsar el desarrollo",
-      items: ["Recursos", "Competencias", "Decisión"],
-    },
-    {
-      num: 2,
-      title: "¿Qué cambiará?",
-      desc: "La Agenda 50/50 plantea una reforma para fortalecer a gobernaciones y municipios.",
-      tag: "Un Estado más cercano, eficiente y coordinado",
-      items: [
-        "Mejor distribución de recursos",
-        "Mayor capacidad para generar recursos",
-        "Alivio financiero para fortalecer la gestión",
-        "Revisar normas y competencias que limitan a las autonomías",
-      ],
-    },
-    {
-      num: 3,
-      title: "¿Cómo se hará?",
-      desc: "El 50/50 será un proceso gradual, técnico y consensuado con las regiones.",
-      tag: "Construcción conjunta y responsable",
-      items: ["Mesas técnicas", "Nueva normativa", "Indicadores verificables", "Implementación progresiva"],
-    },
-    {
-      num: 4,
-      title: "¿Qué busca?",
-      desc: "Regiones más fuertes. Mejores servicios para la población.",
-      tag: "El desarrollo empieza en las regiones",
-      items: [
-        "Mayor capacidad para invertir",
-        "Más proyectos y mejores servicios",
-        "Finanzas regionales transparentes y sostenibles",
-        "Mayor coordinación y desarrollo",
-      ],
-    },
   ];
 
   const kpiCards = [
@@ -137,176 +90,20 @@ export function Monitor() {
     <section id="monitor" className="bg-[#F9F8F5] dark:bg-[#101620] py-16 sm:py-24 border-y border-amber-900/10 dark:border-amber-500/20 text-[#1B2533] dark:text-white transition-colors duration-500">
       <div className="container-page max-w-5xl">
         
-        {/* INTERACTIVE 50/50 REFORMA COMPONENT WITH HERO PALETTE & FONTS */}
-        <div className="rounded-3xl border border-amber-900/10 dark:border-white/10 bg-white/80 dark:bg-[#1B2533]/80 backdrop-blur-xl p-6 sm:p-12 shadow-xl mb-16 transition-colors duration-500">
-          
-          {/* Hero-styled Header Block */}
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="inline-block rounded-full bg-[#dd3146]/10 dark:bg-[#dd3146]/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#dd3146] dark:text-[#fcc74f] border border-[#dd3146]/20 dark:border-[#fcc74f]/30 mb-4">
-              Acuerdo N.º 001/2026 · Reforma autonómica
-            </span>
-            
-            {/* Big 50/50 Brand Logo matching Hero */}
-            <div className="flex items-center justify-center text-[#c79d47] dark:text-white text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter my-2 leading-none font-geometria">
-              <span className="font-geometria">50</span>
-              <img
-                src="/assets/barra.svg"
-                alt="|"
-                className="h-[0.72em] w-auto inline-block self-center mx-1 select-none dark:brightness-0 dark:invert"
-              />
-              <span className="font-geometria">50</span>
-            </div>
-
-            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#c79d47] dark:text-white leading-tight mt-3">
-              Una nueva relación <span className="text-[#3ac167] dark:text-emerald-400">con más autonomía</span> para más desarrollo
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-amber-100/80 font-semibold tracking-wide mt-2">
-              Más autonomía. Más capacidad de decisión.
-            </p>
-          </div>
-
-          {/* SIGNATURE BALANCE BAR COMPONENT (Ocultado a petición) */}
-          <div className="hidden rounded-2xl border border-amber-900/10 dark:border-slate-700 bg-[#FAF8F3] dark:bg-slate-800/80 p-6 sm:p-8 mb-10 shadow-xs">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
-              <span className="font-extrabold text-base text-[#1B2533] dark:text-white">
-                La reforma en una imagen
-              </span>
-              
-              {/* Toggle Switch */}
-              <div className="inline-flex rounded-full bg-white dark:bg-slate-900 p-1 border border-amber-900/10 dark:border-slate-700 shadow-inner">
-                <button
-                  type="button"
-                  onClick={() => setBalanceMode("before")}
-                  className={`rounded-full px-4 py-1.5 text-xs font-extrabold transition-all duration-300 ${
-                    balanceMode === "before"
-                      ? "bg-[#dd3146] text-white shadow-md"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  Situación actual (65/35)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBalanceMode("after")}
-                  className={`rounded-full px-4 py-1.5 text-xs font-extrabold transition-all duration-300 ${
-                    balanceMode === "after"
-                      ? "bg-[#3ac167] text-white shadow-md"
-                      : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
-                  }`}
-                >
-                  Agenda 50/50
-                </button>
-              </div>
-            </div>
-
-            {/* Labels */}
-            <div className="flex justify-between text-xs font-black uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
-              <span>Gobierno nacional</span>
-              <span>Regiones y municipios</span>
-            </div>
-
-            {/* Animated Split Bar */}
-            <div className="flex h-14 w-full rounded-xl overflow-hidden border border-amber-900/10 dark:border-slate-700 shadow-inner p-1 bg-white dark:bg-slate-900 gap-1">
-              <div
-                style={{ flexBasis: balanceMode === "before" ? "65%" : "50%" }}
-                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#dd3146] rounded-lg transition-all duration-700 ease-out"
-              >
-                {balanceMode === "before" ? "65%" : "50%"}
-              </div>
-              <div
-                style={{ flexBasis: balanceMode === "before" ? "35%" : "50%" }}
-                className="flex items-center justify-center font-segoe font-bold text-lg text-white bg-[#3ac167] rounded-lg transition-all duration-700 ease-out"
-              >
-                {balanceMode === "before" ? "35%" : "50%"}
-              </div>
-            </div>
-
-            <p className="mt-3 text-xs text-center text-slate-500 dark:text-slate-400 font-medium">
-              Representación conceptual del objetivo de equilibrio entre recursos, competencias y decisión.
-            </p>
-          </div>
-
-          {/* ACCORDION STEPS (1, 2, 3, 4) */}
-          <div className="space-y-3 mb-10">
-            {stepsData.map((step) => {
-              const isOpen = openStep === step.num;
-              return (
-                <div
-                  key={step.num}
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen
-                      ? "border-[#3ac167] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
-                      : "border-amber-900/10 dark:border-slate-700/80 bg-[#FAF8F3] dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800"
-                  }`}
-                >
-                  <button
-                    type="button"
-                    onClick={() => setOpenStep(isOpen ? null : step.num)}
-                    className="w-full flex items-center justify-between p-4 sm:p-5 text-left transition-colors"
-                  >
-                    <div className="flex items-center gap-3.5">
-                      <span
-                        className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black transition-colors ${
-                          isOpen
-                            ? "bg-[#3ac167] text-white"
-                            : "bg-[#dd3146]/10 dark:bg-white/10 text-[#dd3146] dark:text-[#fcc74f]"
-                        }`}
-                      >
-                        {step.num}
-                      </span>
-                      <span className="font-extrabold text-base sm:text-lg text-[#1B2533] dark:text-white">
-                        {step.title}
-                      </span>
-                    </div>
-                    <ChevronDown
-                      size={20}
-                      className={`text-slate-500 dark:text-slate-400 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-[#3ac167] dark:text-emerald-400" : ""
-                      }`}
-                    />
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-5 pb-5 pt-1 border-t border-slate-100 dark:border-slate-700/50">
-                      <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium mb-3">
-                        {step.desc}
-                      </p>
-                      
-                      <div className="inline-block text-xs font-black uppercase tracking-wider text-[#c79d47] dark:text-amber-400 mb-3">
-                        ✦ {step.tag}
-                      </div>
-
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-bold text-slate-800 dark:text-slate-200">
-                        {step.items.map((item, idx) => (
-                          <li key={idx} className="flex items-center gap-2 rounded-xl bg-amber-500/10 dark:bg-emerald-500/10 px-3 py-2 border border-amber-500/20 dark:border-emerald-500/20">
-                            <span className="h-2 w-2 rounded-full bg-[#3ac167] dark:bg-emerald-400"></span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-
-          {/* CTA Footer Block */}
-          <div className="pt-6 border-t border-amber-900/10 dark:border-slate-700 text-center">
-            <p className="font-extrabold text-lg text-[#dd3146] dark:text-white mb-4">
-              El desarrollo empieza en las regiones.
-            </p>
-            <a
-              href="#descargas"
-              className="inline-flex items-center gap-2 rounded-full bg-[#3ac167] hover:bg-[#2ea354] text-white px-7 py-3 text-sm font-extrabold shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              <span>Conoce el Acuerdo de Sucre</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
+        {/* Section Header */}
+        <div className="mb-12 max-w-3xl">
+          <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-emerald-800 dark:text-emerald-400">
+            Monitoreo en Tiempo Real
+          </span>
+          <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+            Indicadores & Simulación Fiscal
+          </h2>
+          <p className="mt-2 text-base text-slate-600 dark:text-slate-300 font-medium">
+            Seguimiento técnico del avance de los compromisos del Acuerdo N° 001/2026 y simulador de coparticipación.
+          </p>
         </div>
 
-        {/* 2. Metro KPI Cards Grid */}
+        {/* 1. Metro KPI Cards Grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-12">
           {kpiCards.map((kpi, idx) => {
             const IconComponent = kpi.Icon;
@@ -331,8 +128,8 @@ export function Monitor() {
           })}
         </div>
 
-        {/* 3. Countdown Banner for Ley 154 */}
-        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-[#dd3146] via-[#be1c30] to-[#1B2533] p-8 text-white shadow-xl relative border border-[#fcc74f]/20">
+        {/* 2. Countdown Banner for Ley 154 */}
+        <div className="overflow-hidden rounded-3xl bg-gradient-to-r from-[#dd3146] via-[#be1c30] to-[#1B2533] p-8 text-white shadow-xl relative border border-[#fcc74f]/20 mb-16">
           <div className="absolute top-0 right-0 -mt-10 -mr-10 h-64 w-64 rounded-full bg-[#fcc74f]/10 blur-2xl pointer-events-none"></div>
 
           <div className="grid gap-6 md:grid-cols-12 items-center">
@@ -353,48 +150,45 @@ export function Monitor() {
                   <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Días</div>
                 </div>
                 <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.hours}</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#fcc74f]">{timeLeft.hours}</div>
                   <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Horas</div>
                 </div>
                 <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-white">{timeLeft.mins}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Mins</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#fcc74f]">{timeLeft.mins}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Min</div>
                 </div>
                 <div className="rounded-2xl bg-white/10 p-3.5 border border-white/15 backdrop-blur-md min-w-[70px]">
-                  <div className="text-2xl sm:text-3xl font-black text-[#3ac167]">{timeLeft.secs}</div>
-                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Segs</div>
+                  <div className="text-2xl sm:text-3xl font-black text-[#fcc74f]">{timeLeft.secs}</div>
+                  <div className="text-[10px] font-bold text-slate-200 uppercase mt-0.5">Seg</div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* 4. Interactive Revenue Distribution Simulator Section (Ocultado a petición) */}
-        <div className="hidden rounded-[32px] border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 p-8 shadow-sm">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 border-b border-slate-100 dark:border-slate-700 pb-6 mb-8">
+        {/* 3. SIMULADOR DE COPARTICIPACIÓN 50/50 */}
+        <div className="rounded-3xl border border-amber-900/10 dark:border-slate-700 bg-white dark:bg-slate-800 p-6 sm:p-10 shadow-lg">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 pb-6 border-b border-amber-900/10 dark:border-slate-700">
             <div>
-              <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-[#3ac167] dark:text-emerald-300 border border-emerald-500/20">
-                Herramienta Didáctica Interactiva
+              <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-[#3ac167] dark:text-emerald-400">
+                Simulador Interactivo de Coparticipación
               </span>
               <h3 className="text-2xl font-black text-[#1B2533] dark:text-white mt-2">
-                Simulador de Distribución de Recursos Fiscales
+                Efecto de la Redistribución Fiscal
               </h3>
-              <p className="text-sm text-slate-600 dark:text-slate-300 mt-1 max-w-xl">
-                Desliza la barra para simular el impacto en la distribución presupuestaria anual entre el Estado Central y las autonomías subnacionales.
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold mt-1">
+                Ajuste la barra para simular el impacto en los ingresos subnacionales y departamentales.
               </p>
             </div>
-
-            <div className="flex items-center gap-3 bg-[#FAF8F3] dark:bg-slate-900 p-4 rounded-2xl border border-amber-900/10 dark:border-slate-700">
-              <Sliders className="text-[#3ac167] dark:text-emerald-400" size={24} />
-              <div>
-                <div className="text-xs font-bold text-slate-500 dark:text-slate-400">Porcentaje Subnacional Objetivo</div>
-                <div className="text-xl font-black text-[#dd3146] dark:text-[#fcc74f]">{subnationalRatio}% / {100 - subnationalRatio}%</div>
-              </div>
+            <div className="flex items-center gap-2 rounded-2xl bg-[#FAF8F3] dark:bg-slate-900 px-4 py-2 border border-amber-900/10 dark:border-slate-700 shrink-0">
+              <Sliders size={18} className="text-[#3ac167]" />
+              <span className="text-xs font-extrabold text-slate-700 dark:text-slate-300">
+                Porcentaje Subnacional: <strong className="text-[#3ac167]">{subnationalRatio}%</strong>
+              </span>
             </div>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-12 items-center">
-            {/* Slider Control Column */}
             <div className="lg:col-span-5 space-y-6">
               <div className="space-y-3">
                 <div className="flex justify-between text-xs font-black text-slate-700 dark:text-slate-300">
@@ -429,24 +223,19 @@ export function Monitor() {
                   <div className="text-xs font-semibold text-[#3ac167] dark:text-emerald-300 mt-0.5">{subnationalRatio}% del total</div>
                 </div>
               </div>
-
-              <div className="rounded-2xl bg-amber-50 dark:bg-amber-950/40 p-4 border border-amber-200 dark:border-amber-800/60 text-xs font-medium text-amber-900 dark:text-amber-200 leading-relaxed">
-                💡 <b>Nota explicativa:</b> En el pacto fiscal 50/50, por cada 100 Bolivianos recaudados en impuestos nacionales y recursos coparticipables, 50 Bolivianos financian directamente las competencias departamentales, municipales y comunitarias.
-              </div>
             </div>
 
-            {/* Recharts Pie & Bar Visualization Column */}
-            <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2 items-center">
+            <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
               <div className="h-64 w-full flex flex-col items-center justify-center bg-[#FAF8F3] dark:bg-slate-900 rounded-2xl p-4 border border-amber-900/10 dark:border-slate-700">
-                <h4 className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase mb-2">Proporción Simulada</h4>
+                <h4 className="text-xs font-black text-slate-700 dark:text-slate-300 uppercase mb-2">Distribución Simulación (%)</h4>
                 <ResponsiveContainer width="100%" height="85%">
                   <PieChart>
                     <Pie
                       data={chartData}
                       cx="50%"
                       cy="50%"
-                      innerRadius={50}
-                      outerRadius={80}
+                      innerRadius={45}
+                      outerRadius={65}
                       paddingAngle={5}
                       dataKey="value"
                     >

@@ -81,7 +81,7 @@ export async function getAgenda5050News(
   department: string = "Todos"
 ): Promise<NewsResponse> {
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 4000); // 4s timeout
+  const timeoutId = setTimeout(() => controller.abort(), 10000); // 10s timeout ampliado para estabilizar conexión inicial
 
   try {
     const params = new URLSearchParams();
@@ -91,13 +91,23 @@ export async function getAgenda5050News(
       params.set("department", department);
     }
 
-    const res = await fetch(`${NEWS_API_ENDPOINT}?${params.toString()}`, {
-      headers: {
-        "X-Internal-Token": API_TOKEN,
-        Accept: "application/json",
-      },
+    // En el navegador usamos el proxy interno /api/news para evitar problemas de CORS, mixtos y timeouts
+    const fetchUrl =
+      typeof window !== "undefined"
+        ? `/api/news?${params.toString()}`
+        : `${NEWS_API_ENDPOINT}?${params.toString()}`;
+
+    const headers: Record<string, string> = {
+      Accept: "application/json",
+    };
+    if (typeof window === "undefined") {
+      headers["X-Internal-Token"] = API_TOKEN;
+    }
+
+    const res = await fetch(fetchUrl, {
+      headers,
       next: {
-        revalidate: 300, // Revalidación ISR cada 5 minutos
+        revalidate: 180, // Revalidación ISR cada 3 minutos
       },
       signal: controller.signal,
     });
@@ -110,11 +120,12 @@ export async function getAgenda5050News(
 
     const data = await res.json();
 
-    if (!data || !data.ok || !Array.isArray(data.articles)) {
+    if (!data || (!data.ok && !Array.isArray(data.articles))) {
       throw new Error("Formato de respuesta inválido");
     }
 
-    const sanitizedArticles = data.articles.map(sanitizeArticleUrl);
+    const articlesArray = Array.isArray(data.articles) ? data.articles : [];
+    const sanitizedArticles = articlesArray.map(sanitizeArticleUrl);
 
     return {
       ok: true,
@@ -124,7 +135,7 @@ export async function getAgenda5050News(
       total: Number(data.total) || sanitizedArticles.length,
       totalPages: Number(data.totalPages) || 1,
       hasMore: Boolean(data.hasMore),
-      isFallback: false,
+      isFallback: Boolean(data.isFallback),
     };
   } catch (error: any) {
     clearTimeout(timeoutId);
@@ -161,30 +172,33 @@ export async function getAgenda5050News(
 
 /**
  * Obtiene TODAS las noticias de la base de datos (desde la primera página hasta la última)
- * mediante peticiones en paralelo para garantizar la carga completa del histórico.
+ * mediante peticiones en lotes para no saturar la conexión ni causar timeouts en la carga inicial.
  */
 export async function getAllAgenda5050News(department: string = "Todos"): Promise<AgendaNewsArticle[]> {
   try {
     const firstRes = await getAgenda5050News(1, 30, department);
-    if (!firstRes.ok || !firstRes.articles || firstRes.articles.length === 0) {
+    if (!firstRes.articles || firstRes.articles.length === 0) {
       return (firstRes.articles || []).map(sanitizeArticleUrl);
     }
 
     const totalPages = Math.min(firstRes.totalPages || 1, 20); // Límite de seguridad
     let allArticles: AgendaNewsArticle[] = [...firstRes.articles];
 
+    // Carga por lotes secuenciales de 3 páginas en paralelo para evitar sobrecargar el endpoint
     if (totalPages > 1) {
-      const pageRequests = [];
-      for (let p = 2; p <= totalPages; p++) {
-        pageRequests.push(getAgenda5050News(p, 30, department));
-      }
-
-      const responses = await Promise.all(pageRequests);
-      responses.forEach((res) => {
-        if (res && res.articles && Array.isArray(res.articles)) {
-          allArticles.push(...res.articles);
+      const BATCH_SIZE = 3;
+      for (let p = 2; p <= totalPages; p += BATCH_SIZE) {
+        const batchPromises = [];
+        for (let b = p; b < p + BATCH_SIZE && b <= totalPages; b++) {
+          batchPromises.push(getAgenda5050News(b, 30, department));
         }
-      });
+        const responses = await Promise.all(batchPromises);
+        responses.forEach((res) => {
+          if (res && res.articles && Array.isArray(res.articles)) {
+            allArticles.push(...res.articles);
+          }
+        });
+      }
     }
 
     // Eliminar posibles duplicados por ID y sanitizar URLs

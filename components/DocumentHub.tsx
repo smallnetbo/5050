@@ -2,9 +2,14 @@
 
 import { useState } from "react";
 import { FileText, Download, Search, Eye, Sparkles, CheckCircle2, ShieldCheck, X, BookOpen, ExternalLink } from "lucide-react";
-import { documentsList, DocumentItem } from "@/lib/agenda-data";
+import { documentsList as defaultDocuments, DocumentItem } from "@/lib/agenda-data";
 
-export function DocumentHub() {
+interface DocumentHubProps {
+  documents?: DocumentItem[];
+}
+
+export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
+  const documentsList = propDocuments && propDocuments.length > 0 ? propDocuments : defaultDocuments;
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [docSearchQuery, setDocSearchQuery] = useState("");
   const [readingModalOpen, setReadingModalOpen] = useState(false);
@@ -12,6 +17,7 @@ export function DocumentHub() {
   const categories = ["Todos", "Acuerdo", "Proyecto de Ley", "Decreto", "Presentación", "Acta"];
 
   const filteredDocs = documentsList.filter((doc) => {
+
     const matchesCategory = selectedCategory === "Todos" || doc.category === selectedCategory;
     const matchesQuery = doc.title.toLowerCase().includes(docSearchQuery.toLowerCase()) || doc.description.toLowerCase().includes(docSearchQuery.toLowerCase());
     return matchesCategory && matchesQuery;

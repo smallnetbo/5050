@@ -201,7 +201,7 @@ export function InteractiveNewsGallery3() {
   const [calendarMonth, setCalendarMonth] = useState(7); // default Agosto
   const [calendarYear, setCalendarYear] = useState(2026); // default 2026
 
-  const [isAscending, setIsAscending] = useState(true);
+  const [isAscending, setIsAscending] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loadError, setLoadError] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -370,14 +370,17 @@ export function InteractiveNewsGallery3() {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el || displayArticles.length === 0) return;
-    const targetIdx = displayArticles.length - 1;
+    const targetIdx = isAscending ? displayArticles.length - 1 : 0;
     setCurrentIndex(targetIdx);
-    requestAnimationFrame(() => {
-      el.scrollTo({ left: targetIdx * STEP, behavior: "auto" });
-      setCanScrollLeft(el.scrollLeft > 4);
-      setCanScrollRight(el.scrollWidth > el.clientWidth + el.scrollLeft + 4);
-    });
-  }, [displayArticles]);
+    const timer = setTimeout(() => {
+      if (el) {
+        el.scrollTo({ left: targetIdx * STEP, behavior: "auto" });
+        setCanScrollLeft(el.scrollLeft > 4);
+        setCanScrollRight(el.scrollWidth > el.clientWidth + el.scrollLeft + 4);
+      }
+    }, 50);
+    return () => clearTimeout(timer);
+  }, [displayArticles, isAscending]);
 
   useEffect(() => {
     const onResize = () => {

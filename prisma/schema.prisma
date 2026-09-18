@@ -1,0 +1,128 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// 1. Configuración General (Hero, Header, Footer, Hero Badge)
+model SiteConfig {
+  id               String   @id @default("global")
+  heroTitle        String   @default("Hacia una distribución justa 50/50")
+  heroSubtitle     String   @default("Transformando la descentralización tributaria en Bolivia.")
+  heroCtaText      String   @default("Explorar Agenda")
+  heroCtaLink      String   @default("#pilares")
+  badgeText        String   @default("Acuerdo N° 001/2026 de Sucre")
+  acuerdoDateText  String   @default("5 de Agosto de 2026")
+  updatedAt        DateTime @updatedAt
+}
+
+// 2. Pilares de Autonomía (Pillars)
+model Pillar {
+  id          Int      @id @default(autoincrement())
+  order       Int      @default(0)
+  title       String
+  category    String   // "Fiscal" | "Competencial" | "Institucional" | "Normativo"
+  iconName    String
+  summary     String
+  actions     String   // Almacenado como JSON array string: ["accion 1", "accion 2"]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 3. Hitos de la Agenda (Timeline)
+model Milestone {
+  id           Int      @id @default(autoincrement())
+  order        Int      @default(0)
+  title        String
+  dateText     String
+  status       String   // "Cumplido" | "En proceso" | "Programado" | "Meta"
+  detail       String
+  documents    String?  // JSON string: [{"name": "Doc.pdf", "size": "3.2MB"}]
+  participants String?  // JSON string: ["MEFP", "9 GAD"]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// 4. Datos por Departamento (Monitor)
+model DepartmentData {
+  id                 String   @id // "LP", "SC", "CB", etc.
+  name               String
+  capital            String
+  governor           String
+  adhered            Boolean  @default(true)
+  adhesionDate       String
+  currentFiscalRatio String
+  target5050Impact   String
+  keyProjects        String   // JSON string: ["Proyecto 1", "Proyecto 2"]
+  mesasCount         Int      @default(0)
+  regionalNotes      String
+  pathD              String
+  updatedAt          DateTime @updatedAt
+}
+
+// 5. Repositorio Documental (DocumentHub)
+model DocumentItem {
+  id             String   @id @default(cuid())
+  title          String
+  category       String   // "Acuerdo" | "Proyecto de Ley" | "Decreto" | "Presentación" | "Acta"
+  department     String?
+  date           String
+  fileUrl        String?  // Ruta en /uploads/... o URL
+  fileSize       String
+  description    String
+  downloadsCount Int      @default(0)
+  featured       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// 6. Hub Multimedia (MultimediaHub - Audios/Podcasts/Videos)
+model MediaItem {
+  id          String   @id @default(cuid())
+  title       String
+  type        String   // "video" | "podcast" | "infografia"
+  mediaUrl    String   // URL externa de YouTube/Vimeo o archivo subido
+  coverUrl    String?  // Portada/Thumbnail
+  duration    String?
+  date        String
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 7. Preguntas Frecuentes (FAQ)
+model FAQItem {
+  id        Int      @id @default(autoincrement())
+  order     Int      @default(0)
+  category  String   // "General" | "Pacto Fiscal" | "Normativa" | "Transparencia"
+  question  String
+  answer    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 8. Usuarios Administradores (Auth Session)
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String   // Hash bcrypt/argon2
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// 9. Conceptos / Acordeón 50/50 (Monitor)
+model ConceptStep {
+  id        Int      @id @default(autoincrement())
+  num       Int      @unique
+  title     String
+  desc      String
+  tag       String
+  items     String   // JSON string: ["Recursos", "Competencias", "Decisión"]
+  updatedAt DateTime @updatedAt
+}
+

@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import { CheckCircle2, CircleDashed, Clock3, Calendar, FileText, Users, ChevronRight, Download } from "lucide-react";
-import { milestones } from "@/lib/agenda-data";
+import { milestones as defaultMilestones, Milestone } from "@/lib/agenda-data";
 
-export function Timeline() {
-  const [activeStep, setActiveStep] = useState(1);
-  const currentMilestone = milestones[activeStep];
+interface TimelineProps {
+  milestones?: Milestone[];
+}
+
+export function Timeline({ milestones: propMilestones }: TimelineProps) {
+  const milestonesList = propMilestones && propMilestones.length > 0 ? propMilestones : defaultMilestones;
+  const [activeStep, setActiveStep] = useState(0);
+  const currentMilestone = milestonesList[activeStep] || milestonesList[0];
+
 
   return (
     <section id="ruta" className="bg-slate-50 py-20 border-t border-slate-200">
@@ -27,8 +33,9 @@ export function Timeline() {
         <div className="grid gap-8 lg:grid-cols-12 items-start">
           {/* Stepper Steps List */}
           <div className="lg:col-span-5 space-y-3">
-            {milestones.map((m, idx) => {
+            {milestonesList.map((m, idx) => {
               const isActive = idx === activeStep;
+
               const isCompleted = m.status === "Cumplido";
               const inProgress = m.status === "En proceso";
 

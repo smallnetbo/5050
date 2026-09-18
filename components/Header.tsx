@@ -13,6 +13,7 @@ export function Header() {
 
   const navLinks = [
     { label: "El Acuerdo", href: "#acuerdo" },
+    { label: "Conceptos", href: "#conceptos" },
     { label: "Monitor 50/50", href: "#monitor" },
     { label: "Prensa", href: "#prensa" },
     { label: "Pilares", href: "#pilares" },
@@ -21,6 +22,7 @@ export function Header() {
     { label: "Documentos", href: "#descargas" },
     { label: "FAQ", href: "#faq" },
   ];
+
 
   // Search auto-complete items
   const filteredPillars = pillars.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));

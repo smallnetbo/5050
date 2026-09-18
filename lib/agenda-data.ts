@@ -61,6 +61,57 @@ export interface FAQItem {
   category: "General" | "Pacto Fiscal" | "Normativa" | "Transparencia";
 }
 
+export interface ConceptStep {
+  id?: number;
+  num: number;
+  title: string;
+  desc: string;
+  tag: string;
+  items: string[];
+}
+
+export const conceptStepsList: ConceptStep[] = [
+  {
+    num: 1,
+    title: "¿Qué es el 50/50?",
+    desc: "Una reforma para fortalecer las autonomías: que los recursos, competencias y responsabilidades estén mejor equilibrados entre el Gobierno nacional y las regiones.",
+    tag: "Más autonomía para impulsar el desarrollo",
+    items: ["Recursos", "Competencias", "Decisión"],
+  },
+  {
+    num: 2,
+    title: "¿Qué cambiará?",
+    desc: "La Agenda 50/50 plantea una reforma para fortalecer a gobernaciones y municipios.",
+    tag: "Un Estado más cercano, eficiente y coordinado",
+    items: [
+      "Mejor distribución de recursos",
+      "Mayor capacidad para generar recursos",
+      "Alivio financiero para fortalecer la gestión",
+      "Revisar normas y competencias que limitan a las autonomías",
+    ],
+  },
+  {
+    num: 3,
+    title: "¿Cómo se hará?",
+    desc: "El 50/50 será un proceso gradual, técnico y consensuado con las regiones.",
+    tag: "Construcción conjunta y responsable",
+    items: ["Mesas técnicas", "Nueva normativa", "Indicadores verificables", "Implementación progresiva"],
+  },
+  {
+    num: 4,
+    title: "¿Qué busca?",
+    desc: "Regiones más fuertes. Mejores servicios para la población.",
+    tag: "El desarrollo empieza en las regiones",
+    items: [
+      "Mayor capacidad para invertir",
+      "Más proyectos y mejores servicios",
+      "Finanzas regionales transparentes y sostenibles",
+      "Mayor coordinación y desarrollo",
+    ],
+  },
+];
+
+
 export const pillars: Pillar[] = [
   {
     id: 1,
