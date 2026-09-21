@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { verifyAdminSession } from "@/lib/auth";
+import { syncDatabaseToAgendaData } from "@/lib/sync-seeds";
 
 export interface ConceptStepInput {
   id?: number;
@@ -20,10 +21,11 @@ export async function upsertConceptStepAction(data: ConceptStepInput) {
   }
 
   try {
-    const itemsJson = JSON.stringify(data.items.filter((i) => i.trim() !== ""));
+    const conceptNum = Number(data.num);
+    const itemsJson = JSON.stringify((data.items || []).filter((i) => i && i.trim() !== ""));
 
     await prisma.conceptStep.upsert({
-      where: { num: data.num },
+      where: { num: conceptNum },
       update: {
         title: data.title,
         desc: data.desc,
@@ -31,7 +33,7 @@ export async function upsertConceptStepAction(data: ConceptStepInput) {
         items: itemsJson,
       },
       create: {
-        num: data.num,
+        num: conceptNum,
         title: data.title,
         desc: data.desc,
         tag: data.tag,
@@ -39,13 +41,19 @@ export async function upsertConceptStepAction(data: ConceptStepInput) {
       },
     });
 
+    try {
+      await syncDatabaseToAgendaData();
+    } catch (syncErr) {
+      console.warn("Advertencia al sincronizar archivo agenda-data.ts:", syncErr);
+    }
+
     revalidatePath("/");
     revalidatePath("/admin/concepts");
 
     return { success: true, message: "Concepto guardado y revalidado con éxito." };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error guardando concepto:", error);
-    return { success: false, error: "Error al guardar en la base de datos." };
+    return { success: false, error: error?.message || "Error al guardar en la base de datos." };
   }
 }
 

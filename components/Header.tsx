@@ -12,7 +12,7 @@ export function Header() {
   const { theme, toggleTheme } = useTheme();
 
   const navLinks = [
-    { label: "El Acuerdo", href: "#acuerdo" },
+    { label: "Inicio", href: "#acuerdo" },
     { label: "Conceptos", href: "#conceptos" },
     { label: "Monitor 50/50", href: "#monitor" },
     { label: "Prensa", href: "#prensa" },

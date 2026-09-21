@@ -13,15 +13,19 @@ import {
   LogOut,
   Globe,
   ShieldCheck,
+  Video,
+  User,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/multimedia", label: "Centro Multimedia", icon: Video },
   { href: "/admin/concepts", label: "Conceptos 50/50", icon: HelpCircle },
   { href: "/admin/timeline", label: "Hitos / Timeline", icon: Clock },
   { href: "/admin/documents", label: "DocumentHub (PDFs)", icon: FileText },
   { href: "/admin/pillars", label: "Pilares Autonómicos", icon: Sliders },
   { href: "/admin/departments", label: "Monitor Regional", icon: Map },
+  { href: "/admin/profile", label: "Perfil & Seguridad", icon: User },
 ];
 
 
@@ -102,16 +106,25 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#101620] px-8 flex items-center justify-between">
+        <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#101620] px-6 sm:px-8 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2">
             <ShieldCheck className="text-emerald-500" size={20} />
-            <span className="text-xs font-extrabold text-slate-600 dark:text-slate-300">
+            <span className="text-xs font-extrabold text-slate-600 dark:text-slate-300 hidden sm:inline">
               Sesión Administrador Activa
             </span>
           </div>
 
-          <div className="text-xs font-bold text-slate-400">
-            Acuerdo Sucre N° 001/2026
+          <div className="flex items-center gap-4">
+            <Link
+              href="/admin/profile"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
+            >
+              <User size={15} className="text-emerald-500" />
+              <span>Mi Perfil & Seguridad</span>
+            </Link>
+            <div className="text-xs font-bold text-slate-400 hidden md:block border-l border-slate-200 dark:border-slate-800 pl-4">
+              Acuerdo Sucre N° 001/2026
+            </div>
           </div>
         </header>
 

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Video, Play, X, Tv, ExternalLink, Users, Newspaper } from "lucide-react";
+import { MediaItem as MediaItemType } from "@/lib/agenda-data";
 
 interface VideoItem {
   title: string;
@@ -22,7 +23,11 @@ interface WebinarItem {
   description: string;
 }
 
-export function MultimediaHub() {
+interface Props {
+  mediaItems?: MediaItemType[];
+}
+
+export function MultimediaHub({ mediaItems }: Props) {
   const [activeMediaTab, setActiveMediaTab] = useState<"videos" | "webinars" | "reuniones" | "medios">("videos");
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const [selectedWebinar, setSelectedWebinar] = useState<WebinarItem | null>(null);
@@ -34,112 +39,158 @@ export function MultimediaHub() {
     }
   }, [selectedVideo]);
 
-  // Lista de videos con los recursos oficiales en /public/assets y /public/videos
-  const videos: VideoItem[] = [
-    {
-      title: "¿Qué es el 50/50?",
-      duration: "Cápsula Informativa",
-      thumbnail: "/assets/video_que_es_5050_cover.jpg",
-      category: "Explicador Oficial",
-      videoUrl: "/videos/Agenda5050.mp4"
-    },
-    {
-      title: "¿Qué cambiará? La Agenda 50/50",
-      duration: "Reforma Autonómica",
-      thumbnail: "/assets/video_que_cambiara_cover.jpg",
-      category: "Propuesta de Estado",
-      videoUrl: "/assets/¿Qué_cambiará__La_Agenda_.mp4"
-    },
-    {
-      title: "La Agenda 50-50 impulsa propuestas para fortalecer las autonomías",
-      duration: "Spot Institucional",
-      thumbnail: "/assets/video_propuestas_autonomias_cover.jpg",
-      category: "Participación Nacional",
-      videoUrl: "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4"
-    }
-  ];
+  // Listas de datos dinámicas con fallback a listas por defecto
+  const videos: VideoItem[] = mediaItems && mediaItems.length > 0
+    ? mediaItems
+        .filter((item) => item.type === "videos")
+        .map((item) => ({
+          title: item.title,
+          duration: item.duration || "Cápsula Informativa",
+          thumbnail: item.coverUrl || "/assets/video_que_es_5050_cover.jpg",
+          category: item.category || "Explicador Oficial",
+          videoUrl: item.mediaUrl || "",
+        }))
+    : [
+        {
+          title: "¿Qué es la Agenda 50/50?",
+          duration: "Cápsula Informativa",
+          thumbnail: "/assets/video_que_es_5050_cover.jpg",
+          category: "Explicador Oficial",
+          videoUrl: "/videos/Agenda5050.mp4"
+        },
+        {
+          title: "¿Qué cambiará? La Agenda 50/50",
+          duration: "Reforma Autonómica",
+          thumbnail: "/assets/video_que_cambiara_cover.jpg",
+          category: "Propuesta de Estado",
+          videoUrl: "/assets/¿Qué_cambiará__La_Agenda_.mp4"
+        },
+        {
+          title: "La Agenda 50-50 impulsa propuestas para fortalecer las autonomías",
+          duration: "Spot Institucional",
+          thumbnail: "/assets/video_propuestas_autonomias_cover.jpg",
+          category: "Participación Nacional",
+          videoUrl: "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4"
+        }
+      ];
 
-  // Lista de webinars y transmisiones
-  const webinars: WebinarItem[] = [
-    {
-      title: "Diálogos al Café: Análisis y Debate sobre la Agenda 50/50",
-      category: "Diálogo & Debate",
-      date: "Transmisión en Vivo",
-      url: "https://www.facebook.com/dialogosalcafe/videos/4414139728840664/?rdid=5ef4aKa3wd2s7eMY#",
-      embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdialogosalcafe%2Fvideos%2F4414139728840664%2F&show_text=false",
-      platform: "Facebook Live",
-      thumbnail: "/assets/webinar_dialogos_cafe_cover.jpg",
-      description: "Espacio de diálogo y análisis sobre el desarrollo regional, desburocratización y propuestas de la Agenda 50/50."
-    }
-  ];
+  const webinars: WebinarItem[] = mediaItems && mediaItems.length > 0
+    ? mediaItems
+        .filter((item) => item.type === "webinars")
+        .map((item) => ({
+          title: item.title,
+          category: item.category || "Diálogo & Debate",
+          date: item.date || "Transmisión en Vivo",
+          url: item.url || "#",
+          embedUrl: item.embedUrl || "",
+          platform: item.platform || "Facebook Live",
+          thumbnail: item.coverUrl || "/assets/webinar_dialogos_cafe_cover.jpg",
+          description: item.description || "",
+        }))
+    : [
+        {
+          title: "Diálogos al Café: Análisis y Debate sobre la Agenda 50/50",
+          category: "Diálogo & Debate",
+          date: "Transmisión en Vivo",
+          url: "https://www.facebook.com/dialogosalcafe/videos/4414139728840664/?rdid=5ef4aKa3wd2s7eMY#",
+          embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdialogosalcafe%2Fvideos%2F4414139728840664%2F&show_text=false",
+          platform: "Facebook Live",
+          thumbnail: "/assets/webinar_dialogos_cafe_cover.jpg",
+          description: "Espacio de diálogo y análisis sobre el desarrollo regional, desburocratización y propuestas de la Agenda 50/50."
+        }
+      ];
 
-  // Lista de reuniones y encuentros oficiales
-  const reuniones: WebinarItem[] = [
-    {
-      title: "Reunión e Informe Oficial - Cobertura BTV Canal Oficial",
-      category: "Gobiernos Autónomos",
-      date: "Cobertura BTV",
-      url: "https://www.facebook.com/BTVCanalOficial/videos/2801286836919000/",
-      embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBTVCanalOficial%2Fvideos%2F2801286836919000%2F&show_text=false",
-      platform: "Facebook Live / BTV",
-      thumbnail: "/assets/reunion_btv_cover.jpg",
-      description: "Reunión informativa y cobertura especial sobre los avances de la Agenda 50/50 transmitida por Bolivia TV."
-    }
-  ];
+  const reuniones: WebinarItem[] = mediaItems && mediaItems.length > 0
+    ? mediaItems
+        .filter((item) => item.type === "reuniones")
+        .map((item) => ({
+          title: item.title,
+          category: item.category || "Gobiernos Autónomos",
+          date: item.date || "Cobertura BTV",
+          url: item.url || "#",
+          embedUrl: item.embedUrl || "",
+          platform: item.platform || "Facebook Live / BTV",
+          thumbnail: item.coverUrl || "/assets/reunion_btv_cover.jpg",
+          description: item.description || "",
+        }))
+    : [
+        {
+          title: "Reunión e Informe Oficial - Cobertura BTV Canal Oficial",
+          category: "Gobiernos Autónomos",
+          date: "Cobertura BTV",
+          url: "https://www.facebook.com/BTVCanalOficial/videos/2801286836919000/",
+          embedUrl: "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBTVCanalOficial%2Fvideos%2F2801286836919000%2F&show_text=false",
+          platform: "Facebook Live / BTV",
+          thumbnail: "/assets/reunion_btv_cover.jpg",
+          description: "Reunión informativa y cobertura especial sobre los avances de la Agenda 50/50 transmitida por Bolivia TV."
+        }
+      ];
 
-  // Cobertura en Medios
-  const medios: WebinarItem[] = [
-    {
-      title: "¿Cómo se repartirán los recursos? Chuquisaca tiene su propuesta del 50/50",
-      category: "Propuesta Departamental",
-      date: "El Deber / Cobertura TV",
-      url: "https://www.dailymotion.com/video/xausur2",
-      embedUrl: "https://www.dailymotion.com/embed/video/xausur2",
-      platform: "Dailymotion / El Deber",
-      thumbnail: "/assets/cobertura_chuquisaca_5050.jpg",
-      description: "Exposición de la propuesta de Chuquisaca para la redistribución tributaria 50/50 entre Gobierno central, municipios y gobernaciones."
-    },
-    {
-      title: "Gobierno y la Federación de Asociaciones Municipales se reunirán por la política 50-50",
-      category: "Reunión FAM & Gobierno",
-      date: "Bolivia TV (BTV)",
-      url: "https://www.dailymotion.com/video/xb14bsu",
-      embedUrl: "https://www.dailymotion.com/embed/video/xb14bsu",
-      platform: "Dailymotion / BTV",
-      thumbnail: "/assets/cobertura_fam_gobierno_5050.jpg",
-      description: "Reunión de coordinación entre el Gobierno Central y la FAM Bolivia en el marco de la política 50-50 y acuerdos regionales."
-    },
-    {
-      title: "'JP' Velasco: \"Será la obra más importante de los últimos 50 años\"",
-      category: "Infraestructura & Gestión",
-      date: "El Deber Noticias",
-      url: "https://www.dailymotion.com/video/xb3eo9y",
-      embedUrl: "https://www.dailymotion.com/embed/video/xb3eo9y",
-      platform: "Dailymotion / El Deber",
-      thumbnail: "/assets/cobertura_jp_velasco.jpg",
-      description: "Declaraciones del Gobernador de Santa Cruz sobre proyectos clave y coordinación entre Gobernación, Gobierno Nacional y municipios."
-    },
-    {
-      title: "Alcaldes Impulsan el 50/50 - Reportaje Especial",
-      category: "Reportaje de Prensa",
-      date: "Cobertura Digital",
-      url: "https://www.dailymotion.com/video/xawlv6e",
-      embedUrl: "https://www.dailymotion.com/embed/video/xawlv6e",
-      platform: "Dailymotion",
-      thumbnail: "/assets/cobertura_medios_5050.jpg",
-      description: "Reportaje y cobertura televisiva sobre la iniciativa de los alcaldes para impulsar la propuesta de la Agenda 50/50."
-    },
-    {
-      title: "Santa Cruz propone nuevo Pacto Fiscal para las regiones",
-      category: "Pacto Fiscal",
-      date: "Cobertura de Medios",
-      url: "https://www.dailymotion.com/video/x9ifgnk",
-      embedUrl: "https://www.dailymotion.com/embed/video/x9ifgnk",
-      platform: "Dailymotion",
-      thumbnail: "/assets/cobertura_scz_pacto_fiscal.jpg",
-      description: "Propuestas y debate sobre el nuevo modelo de distribución fiscal e incentivo al desarrollo autonómico."
-    }
-  ];
+  const medios: WebinarItem[] = mediaItems && mediaItems.length > 0
+    ? mediaItems
+        .filter((item) => item.type === "medios")
+        .map((item) => ({
+          title: item.title,
+          category: item.category || "Propuesta Departamental",
+          date: item.date || "Cobertura Digital",
+          url: item.url || "#",
+          embedUrl: item.embedUrl || "",
+          platform: item.platform || "Dailymotion",
+          thumbnail: item.coverUrl || "/assets/cobertura_medios_5050.jpg",
+          description: item.description || "",
+        }))
+    : [
+        {
+          title: "¿Cómo se repartirán los recursos? Chuquisaca tiene su propuesta del 50/50",
+          category: "Propuesta Departamental",
+          date: "El Deber / Cobertura TV",
+          url: "https://www.dailymotion.com/video/xausur2",
+          embedUrl: "https://www.dailymotion.com/embed/video/xausur2",
+          platform: "Dailymotion / El Deber",
+          thumbnail: "/assets/cobertura_chuquisaca_5050.jpg",
+          description: "Exposición de la propuesta de Chuquisaca para la redistribución tributaria 50/50 entre Gobierno central, municipios y gobernaciones."
+        },
+        {
+          title: "Gobierno y la Federación de Asociaciones Municipales se reunirán por la política 50-50",
+          category: "Reunión FAM & Gobierno",
+          date: "Bolivia TV (BTV)",
+          url: "https://www.dailymotion.com/video/xb14bsu",
+          embedUrl: "https://www.dailymotion.com/embed/video/xb14bsu",
+          platform: "Dailymotion / BTV",
+          thumbnail: "/assets/cobertura_fam_gobierno_5050.jpg",
+          description: "Reunión de coordinación entre el Gobierno Central y la FAM Bolivia en el marco de la política 50-50 y acuerdos regionales."
+        },
+        {
+          title: "'JP' Velasco: \"Será la obra más importante de los últimos 50 años\"",
+          category: "Infraestructura & Gestión",
+          date: "El Deber Noticias",
+          url: "https://www.dailymotion.com/video/xb3eo9y",
+          embedUrl: "https://www.dailymotion.com/embed/video/xb3eo9y",
+          platform: "Dailymotion / El Deber",
+          thumbnail: "/assets/cobertura_jp_velasco.jpg",
+          description: "Declaraciones del Gobernador de Santa Cruz sobre proyectos clave y coordinación entre Gobernación, Gobierno Nacional y municipios."
+        },
+        {
+          title: "Alcaldes Impulsan el 50/50 - Reportaje Especial",
+          category: "Reportaje de Prensa",
+          date: "Cobertura Digital",
+          url: "https://www.dailymotion.com/video/xawlv6e",
+          embedUrl: "https://www.dailymotion.com/embed/video/xawlv6e",
+          platform: "Dailymotion",
+          thumbnail: "/assets/cobertura_medios_5050.jpg",
+          description: "Reportaje y cobertura televisiva sobre la iniciativa de los alcaldes para impulsar la propuesta de la Agenda 50/50."
+        },
+        {
+          title: "Santa Cruz propone nuevo Pacto Fiscal para las regiones",
+          category: "Pacto Fiscal",
+          date: "Cobertura de Medios",
+          url: "https://www.dailymotion.com/video/x9ifgnk",
+          embedUrl: "https://www.dailymotion.com/embed/video/x9ifgnk",
+          platform: "Dailymotion",
+          thumbnail: "/assets/cobertura_scz_pacto_fiscal.jpg",
+          description: "Propuestas y debate sobre el nuevo modelo de distribución fiscal e incentivo al desarrollo autonómico."
+        }
+      ];
 
   return (
     <section id="multimedia" className="bg-slate-50 dark:bg-[#101620] py-20 text-slate-900 dark:text-white transition-colors duration-300 border-t border-slate-200 dark:border-white/5">

@@ -12,7 +12,8 @@ import { CitizenFeedback } from "@/components/CitizenFeedback";
 import { Footer } from "@/components/Footer";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-export const revalidate = 3600; // 1 hora de fallback ISR
+export const revalidate = 0;
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Agenda 50/50 (Acuerdo Sucre 2026)",
@@ -34,9 +35,9 @@ export default async function Home() {
           {/* MÓDULO EXCLUIDO: Se mantiene 100% independiente y sin modificaciones */}
           <InteractiveNewsGallery3 />
 
-          <Pillars />
+          <Pillars pillars={landingData.pillars} />
           <Timeline milestones={landingData.milestones} />
-          <MultimediaHub />
+          <MultimediaHub mediaItems={landingData.mediaItems} />
           <DocumentHub documents={landingData.documents} />
           <CitizenFeedback />
         </main>

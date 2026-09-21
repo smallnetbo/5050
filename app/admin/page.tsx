@@ -1,15 +1,16 @@
 import Link from "next/link";
 import { getLandingData } from "@/lib/data-service";
-import { Clock, FileText, Sliders, Map, Sparkles, ArrowRight } from "lucide-react";
+import { Clock, FileText, Sliders, Map, Sparkles, ArrowRight, Video } from "lucide-react";
 
 export default async function AdminDashboardPage() {
   const data = await getLandingData();
 
   const stats = [
+    { title: "Recursos Multimedia", count: data.mediaItems.length, href: "/admin/multimedia", icon: Video, color: "bg-rose-500" },
     { title: "Hitos Registrados", count: data.milestones.length, href: "/admin/timeline", icon: Clock, color: "bg-blue-500" },
     { title: "Documentos Abiertos", count: data.documents.length, href: "/admin/documents", icon: FileText, color: "bg-emerald-500" },
     { title: "Pilares Autonómicos", count: data.pillars.length, href: "/admin/pillars", icon: Sliders, color: "bg-purple-500" },
-    { title: "Departamentos Monitoreados", count: data.departments.length, href: "/admin/departments", icon: Map, color: "bg-amber-500" },
+    { title: "Departamentos", count: data.departments.length, href: "/admin/departments", icon: Map, color: "bg-amber-500" },
   ];
 
   return (
@@ -27,7 +28,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
         {stats.map((s) => {
           const Icon = s.icon;
           return (

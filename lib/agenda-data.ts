@@ -38,6 +38,7 @@ export interface DocumentItem {
   category: "Acuerdo" | "Proyecto de Ley" | "Decreto" | "Presentación" | "Acta";
   department?: string;
   date: string;
+  fileUrl?: string;
   fileSize: string;
   description: string;
   downloadsCount: number;
@@ -72,160 +73,178 @@ export interface ConceptStep {
 
 export const conceptStepsList: ConceptStep[] = [
   {
-    num: 1,
-    title: "¿Qué es el 50/50?",
-    desc: "Una reforma para fortalecer las autonomías: que los recursos, competencias y responsabilidades estén mejor equilibrados entre el Gobierno nacional y las regiones.",
-    tag: "Más autonomía para impulsar el desarrollo",
-    items: ["Recursos", "Competencias", "Decisión"],
+    "id": 1,
+    "num": 1,
+    "title": "¿Qué es la Agenda 50/50?",
+    "desc": "La Agenda 50/50 es una reforma estructural del Estado orientada a distribuir responsabilidades con reglas claras y profundizar las autonomías con equidad y eficiencia, con el objetivo de mejorar las condiciones de vida de las bolivianas y los bolivianos",
+    "tag": "Un Estado más ordenado, equitativo, eficiente y corresponsable",
+    "items": [
+      "Decisión",
+      "Competencias",
+      "Recursos",
+      "Equidad y Eficiencia"
+    ]
   },
   {
-    num: 2,
-    title: "¿Qué cambiará?",
-    desc: "La Agenda 50/50 plantea una reforma para fortalecer a gobernaciones y municipios.",
-    tag: "Un Estado más cercano, eficiente y coordinado",
-    items: [
-      "Mejor distribución de recursos",
-      "Mayor capacidad para generar recursos",
-      "Alivio financiero para fortalecer la gestión",
-      "Revisar normas y competencias que limitan a las autonomías",
-    ],
+    "id": 2,
+    "num": 2,
+    "title": "¿Qué cambiará?",
+    "desc": "La Agenda 50/50 plantea una reforma estructural para ordenar el Estado y fortalecer los gobiernos autónomos departamentales, regional, municipales e indígena originario campesinos",
+    "tag": "Más autonomía para impulsar el desarrollo",
+    "items": [
+      "Revisar las normas que limitan las autonomías",
+      "Mejor y progresiva distribución de recursos",
+      "Alivio financiero para fortalecer la gestión subnacional",
+      "Mayor capacidad para generar recursos"
+    ]
   },
   {
-    num: 3,
-    title: "¿Cómo se hará?",
-    desc: "El 50/50 será un proceso gradual, técnico y consensuado con las regiones.",
-    tag: "Construcción conjunta y responsable",
-    items: ["Mesas técnicas", "Nueva normativa", "Indicadores verificables", "Implementación progresiva"],
+    "id": 3,
+    "num": 3,
+    "title": "¿Cómo se hará?",
+    "desc": "La Agenda 50/50 se co-construirá a través de un amplio proceso técnico-político, de generación de diagnósticos y coordinación intergubernativa que permita alcanzar consensos",
+    "tag": "Co-construcción y Corresponsabilidad",
+    "items": [
+      "Instancias técnicas nacional y subnacional",
+      "Elaboración de diagnósticos sectoriales y territoriales",
+      "Resultados verificables",
+      "Implementación progresiva"
+    ]
   },
   {
-    num: 4,
-    title: "¿Qué busca?",
-    desc: "Regiones más fuertes. Mejores servicios para la población.",
-    tag: "El desarrollo empieza en las regiones",
-    items: [
-      "Mayor capacidad para invertir",
-      "Más proyectos y mejores servicios",
+    "id": 4,
+    "num": 4,
+    "title": "¿Qué busca?",
+    "desc": "A través del fortalecimiento y profundización de las autonomías, la Agenda 50/50 busca mejorar las condiciones de vida de las bolivianas y bolivianos",
+    "tag": "El desarrollo empieza en las regiones",
+    "items": [
+      "Mejorar la calidad del gasto",
+      "Promover desarrollo económico",
       "Finanzas regionales transparentes y sostenibles",
-      "Mayor coordinación y desarrollo",
-    ],
-  },
+      "Fortalecer la gestión pública subnacional"
+    ]
+  }
 ];
 
 
 export const pillars: Pillar[] = [
   {
-    id: 1,
-    title: "Autonomía tributaria y esfuerzo fiscal",
-    category: "Fiscal",
-    iconName: "Scale",
-    summary: "Fortalecer la capacidad de los GAD para generar y administrar ingresos propios mediante ampliación de dominio tributario.",
-    actions: [
-      "Incentivar el esfuerzo fiscal y la eficiencia recaudatoria departamental.",
-      "Evaluar la reclasificación de al menos una base imponible atribuida hoy al nivel central.",
-      "Revisar sobretasas e impuesto departamental a la afectación del medio ambiente.",
-      "Proyecto de modificación de la Ley N° 154 en un plazo máximo de 90 días."
+    "id": 11,
+    "title": "Alivio Fiscal",
+    "category": "Fiscal",
+    "iconName": "Scale",
+    "summary": "Las partes reconocen la necesidad de atender de manera prioritaria la situación financiera que atraviesan los Gobiernos Autónomos Departamentales. En ese marco, acuerdan establecer un cronograma de trabajo conjunto para evaluar e implementar medidas de alivio\nfinanciero, incluyendo mecanismos de reprogramación o diferimiento de obligaciones financieras, asi como otras acciones orientadas al saneamiento y la sostenibilidad fiscal de las gobernaciones, en el marco de la Agenda 50/50 y el Programa de Readecuación Financiera",
+    "actions": []
+  },
+  {
+    "id": 1,
+    "title": "Autonomía tributaria, esfuerzo fiscal y fortalecimiento de los ingresos propios",
+    "category": "Fiscal",
+    "iconName": "Scale",
+    "summary": "Fortalecer la autonomía fiscal de los Gobiernos Autónomos Departamentales mediante mecanismos que amplien su capacidad de generar y administrar ingresos propios, promoviendo el esfuerzo fiscal, la eficiencia recaudatoria y la sostenibilidad de las finanzas públicas.",
+    "actions": [
+      "Evaluar mecanismos que incentiven el esfuerzo fiscal y la eficiencia recaudatoria de los Gobiemos Autónomos Departamentales, fortaleciendo la generación de ingresos propios y promoviendo una mayor corresponsabilidad fiscal entre los distintos niveles de gobiermo.",
+      "Evaluar mecanismos para ampliar el dominio tributario departamental, mediante la reclasificación de al menos una base imponible hoy atribuida al nivel central.",
+      "Evaluar alternativas para ampliar las potestades tributarias departamentales, incluyendo la creación de nuevos tributos dentro del marco de la Constitución Politica del Estado",
+      "Analizar mecanismos para la aplicación de sobretasas, definiendo su alcance, límites, destino y compatibilidad con el sistema tributario nacional.",
+      "Evaluar mecanismos para habilitar el ejercicio efectivo del impuesto departamental a la afectación del medio ambiente, revisando las exclusiones sectoriales que hoy limitan su aplicación",
+      "Iniciar el proceso de modificación de la Ley No 154 de Clasificación y Definición de Impuestos y de Regulación para la Creación y/o Modificación de Impuestos de Dominio de los Gobiernos Autónomos, en el marco de promover la generación de mayores recursos departamentales. El proyecto de Ley deberá ser elaborado en un plazo máximo de 90 dias."
     ]
   },
   {
-    id: 2,
-    title: "Eliminación de condicionalidad de gasto",
-    category: "Fiscal",
-    iconName: "LockOpen",
-    summary: "Revisión integral y eliminación progresiva de condicionalidades que cargan gasto delegado al presupuesto departamental.",
-    actions: [
-      "Revisar integralmente las normas nacionales que obligan a financiar ítems centrales.",
-      "Derogar progresivamente condicionalidades de gasto destinadas a estructuras extinguidas o del nivel central."
+    "id": 2,
+    "title": "Condicionalidad de gasto",
+    "category": "Fiscal",
+    "iconName": "LockOpen",
+    "summary": "La autonomia consiste, entre otros aspectos, en decidir en qué gastar: Una parte considerable hoy se decide por normativa nacional.\n",
+    "actions": [
+      "Revisar integralmente el conjunto de normas nacionales que condicionan el destino del gasto de los GAD",
+      "Derogar progresivamente y de manera coordinada las condicionalidades de gasto que financie obligaciones propias del nivel central o que coresponda a estructuras institucionales extinguidas"
     ]
   },
   {
-    id: 3,
-    title: "Autonomía de gestión presupuestaria",
-    category: "Institucional",
-    iconName: "Briefcase",
-    summary: "Reservar al nivel central únicamente el control de agregados fiscales, otorgando plena libertad en la composición presupuestaria.",
-    actions: [
-      "Sustituir autorizaciones previas por obligaciones de información transparente.",
-      "Implementar el Principio de Reporte Único (un solo canal, una sola vez, un solo formato).",
-      "Coordinar niveles de endeudamiento y agilizar operaciones financieras."
+    "id": 3,
+    "title": "Autonomía de gestión presupuestaria",
+    "category": "Institucional",
+    "iconName": "Briefcase",
+    "summary": "Ampliar la autonomía en la gestión presupuestaria al máximo posible",
+    "actions": [
+      "Analizar mecanismos para que la relación presupuestaria entre el nivel central del Estado y los Gobiernos Autónomos Departamentales se justifique únicamente en razones de seguridad fiscal nacional, entendidas como la sostenibilidad de la deuda pública y la consistencia de los agregados fiscales",
+      "Reservar al nivel central el control sobre los agregados fiscales y a los Gobiernos Autónomos Departamentales la decisión sobre la composición de su presupuesto",
+      "Coordinar con el Nivel Central los niveles de endeudamiento de los gobiernos autónomos departamentales",
+      "Sustituir las autorizaciones previas del nivel central sobre decisiones presupuestarias departamentales por obligaciones de información, preservando integramente el acceso del nivel central a los datos que requiere para el seguimiento fiscal y el cumplimiento de compromisos internacionales",
+      "Racionalizar las obligaciones de reporte, eliminando duplicaciones entre entidades del nivel central, bajo el principio de reporte único: una sola vez, un solo canal, un solo formato."
     ]
   },
   {
-    id: 4,
-    title: "Ley Especial de Coparticipación y Distribución 2027",
-    category: "Normativo",
-    iconName: "Landmark",
-    summary: "Conformar mesa técnica para la redacción de la Ley Especial que regirá la distribución equitativa de recursos desde 2027.",
-    actions: [
-      "Adecuar transferencias fiscales con criterios de sostenibilidad y equidad territorial.",
-      "Revisar legislación que absorbió o restringió competencias constitucionales.",
-      "Presentar el proyecto de Ley Especial durante la gestión legislativa 2026."
+    "id": 4,
+    "title": "Competencias y financiamiento intergubernamental",
+    "category": "Normativo",
+    "iconName": "Landmark",
+    "summary": "Equilibrar las transferencias fiscales con el odenamiento competencial y las capacidades\ninstitucionales.",
+    "actions": [
+      "Revisar la legislación nacional que haya modificado, absorbido, restringido o condicionado el ejercicio de competencias reconocidas constitucionalmente a los GAD.",
+      "Identificar competencias que puedan ser fortalecidas, reasignadas o ejercidas mediante mecanismos de coordinación, concurrencia o delegación, con el propósito de mejorar el ejercicio competencial",
+      "Evaluar mecanismos para adecuar las transferencias fiscales intergubernamentales al marco competencial previsto en la Constitución Politica del Estado, considerando criterios de sostenibilidad fiscal, equidad teritorial y corresponsabilidad",
+      "Las partes acuerdan conformar una mesa técnica especializada para elaborar la propuesta de Ley Especial de Coparticipación y Distribución de Recursos Fiscales, con el propósito de alcanzar los consensos necesarios para su presentación durante la presente gestión legislativa y viabilizar su aplicación a partir de la gestión fiscal 2027, en el marco de la implementación progresiva de la Agenda 50/50."
     ]
   },
   {
-    id: 5,
-    title: "Criterios de distribución de ingresos",
-    category: "Fiscal",
-    iconName: "PieChart",
-    summary: "Superar asimetrías históricas entre departamentos reconociendo el aporte al desempeño económico y población.",
-    actions: [
-      "Evaluar criterios de compensación y estímulo a la producción regional.",
-      "Coordinar mecanismos de ecualización fiscal para departamentos con menor base imponible."
+    "id": 5,
+    "title": "Criterios de distribución de ingresos fiscales",
+    "category": "Fiscal",
+    "iconName": "PieChart",
+    "summary": "Revisar criterios de distribución fiscal que han generado asimetrias entre departamentos",
+    "actions": [
+      "Evaluar la inclusión de criterios de distribución de ingresos fiscales a los GAD que premien la eficiencia, contribución al desempeño económico departamental y otros factores",
+      "Evaluar de manera coordinada con los Gobiernos Autónomos Departamentales los criterios de distribución de ingresos fiscales en función de generar dinamismo económico y equidad entre departamentos."
     ]
   },
   {
-    id: 6,
-    title: "Alivio financiero y readecuación de deudas",
-    category: "Fiscal",
-    iconName: "TrendingUp",
-    summary: "Atender prioritariamente la sostenibilidad financiera mediante reprogramación de deudas y saneamiento fiscal.",
-    actions: [
-      "Establecer cronograma de reprogramación o diferimiento de obligaciones con el FNDR y banca.",
-      "Impulsar el Programa de Readecuación Financiera Departamental."
+    "id": 6,
+    "title": "Protección del régimen autonómico",
+    "category": "Fiscal",
+    "iconName": "TrendingUp",
+    "summary": "Medidas para prevenir la vulneración al régimen competencial autonómico en el futuro",
+    "actions": [
+      "ldentificar y promover los ajustes normativos constitucionales necesarios para garantizar el pleno respeto al régimen autonómico previsto en la Constitución y desarrollado por la jurisprudencia constitucional.",
+      "ldentificación y corrección progresiva de las afectaciones al régimen competencial."
     ]
   },
   {
-    id: 7,
-    title: "Alianzas Público-Privadas (APP)",
-    category: "Institucional",
-    iconName: "Building2",
-    summary: "Marco normativo nacional e intergubernativo para acelerar inversión privada en infraestructura y servicios departamentales.",
-    actions: [
-      "Desarrollar normativa modelo para licitación y contratación de proyectos APP.",
-      "Establecer salvaguardas de responsabilidad fiscal ante controversias o arbitrajes."
+    "id": 7,
+    "title": "Alianzas público-privadas",
+    "category": "Institucional",
+    "iconName": "Building2",
+    "summary": "Lograr una mayor fluidez de los acuerdos y ejecucion de proyectos de desarrollo entre el sector privado y público",
+    "actions": [
+      "Desarrollar una propuesta de normativa nacional que viabilice las alianzas público-privadas desde los GAD",
+      "Mantener la responsabilidad fiscal ante medidas de arbitraje."
     ]
   },
   {
-    id: 8,
-    title: "Relacionamiento internacional y cooperación",
-    category: "Normativo",
-    iconName: "Globe",
-    summary: "Ajustar la Ley N° 699 para permitir a los GAD gestionar directamente fondos y cooperación internacional no reembolsable.",
-    actions: [
-      "Modificar el régimen de aprobación previa para convenios de cooperación técnica.",
-      "Crear ventanilla única de registro de cooperación internacional descentralizada."
-    ]
+    "id": 8,
+    "title": "Financiamiento Externo",
+    "category": "Normativo",
+    "iconName": "Globe",
+    "summary": "Modificar la Ley No. 699 de Relacionamiento Internacional y normativa conexa a efectos de aumentar la capacidad legislativa de los Gobiernos Autónomos Departamentales en la materia compartida de relaciones internacionales.\n",
+    "actions": []
   },
   {
-    id: 9,
-    title: "Protección del régimen autonómico y LMAD",
-    category: "Normativo",
-    iconName: "ShieldCheck",
-    summary: "Modificar la Ley Marco de Autonomías para evitar recentralización y blindar las competencias autonómicas.",
-    actions: [
-      "Revisar y derogar artículos recentralizadores en la Ley N° 031.",
-      "Crear mecanismo de alerta temprana ante proyectos de ley invasivos."
-    ]
+    "id": 9,
+    "title": "Fondos de Compensación",
+    "category": "Normativo",
+    "iconName": "ShieldCheck",
+    "summary": "Analizar y evaluar la creación de fondos de compensación para fortalecer la sostenibilidad financiera de los Gobiernos Autónomos Departamentales",
+    "actions": []
   },
   {
-    id: 10,
-    title: "Fondos de compensación e incentivos",
-    category: "Fiscal",
-    iconName: "Coins",
-    summary: "Creación de fondos especiales para resguardar el equilibrio fiscal de las regiones con fragilidad financiera.",
-    actions: [
-      "Diseñar el Fondo de Compensación Autonómica (FCA).",
-      "Vincular incentivos a metas de transparencia y reducción de burocracia."
-    ]
+    "id": 10,
+    "title": "Transferencia de Instituciones",
+    "category": "Fiscal",
+    "iconName": "Coins",
+    "summary": "Iniciar, identificar y evaluar la factibilidad de la transferencia progresiva de instituciones públicas susceptibles de administración departamental, en el marco del fortalecimiento de las autonomias departamentales\n",
+    "actions": []
   }
 ];
 
@@ -423,61 +442,15 @@ export const departmentsData: DepartmentData[] = [
 
 export const documentsList: DocumentItem[] = [
   {
-    id: "DOC-001",
-    title: "Acuerdo N° 001/2026 - Firma Sucre 5 de Agosto",
-    category: "Acuerdo",
-    date: "05/08/2026",
-    fileSize: "5.8 MB",
-    description: "Documento oficial completo suscrito por el Presidente del Estado Plurinacional y los 9 Gobernadores Departamentales.",
-    downloadsCount: 14250,
-    featured: true
-  },
-  {
-    id: "DOC-002",
-    title: "Anteproyecto de Modificación de la Ley N° 154 (Clasificación Tributaria)",
-    category: "Proyecto de Ley",
-    date: "12/08/2026",
-    fileSize: "2.4 MB",
-    description: "Borrador de ley elaborado por la Mesa Técnica para ampliar el dominio tributario departamental.",
-    downloadsCount: 8910,
-    featured: true
-  },
-  {
-    id: "DOC-003",
-    title: "Matriz del Diagnóstico Fiscal y Financiero Censo 2024",
-    category: "Presentación",
-    date: "01/08/2026",
-    fileSize: "8.1 MB",
-    description: "Presentación técnica detallada sobre la distribución actual de recursos y proyecciones del pacto 50/50.",
-    downloadsCount: 6540
-  },
-  {
-    id: "DOC-004",
-    title: "Reglamento del Principio de Reporte Único Presupuestario",
-    category: "Decreto",
-    date: "14/08/2026",
-    fileSize: "1.8 MB",
-    description: "Lineamientos para la simplificación de trámites y eliminación de reportes redundantes hacia el MEFP.",
-    downloadsCount: 4200
-  },
-  {
-    id: "DOC-005",
-    title: "Acta de la I Sesión Extraordinaria de la Comisión de Hacienda Sucre",
-    category: "Acta",
-    date: "06/08/2026",
-    fileSize: "1.1 MB",
-    description: "Acta oficial con los acuerdos metodológicos para la Ley Especial de Coparticipación 2027.",
-    downloadsCount: 3100
-  },
-  {
-    id: "DOC-006",
-    title: "Guía Didáctica para el Ciudadano: ¿Qué es la Agenda 50/50?",
-    category: "Presentación",
-    date: "10/08/2026",
-    fileSize: "4.5 MB",
-    description: "Folleto explicativo en formato infográfico para la pedagogía urbana y rural sobre la autonomía fiscal.",
-    downloadsCount: 11200,
-    featured: true
+    "id": "doc-1",
+    "title": "Acuerdo N° 001/2026 - Firma de Sucre (5 de Agosto de 2026)",
+    "category": "Acuerdo",
+    "date": "05/08/2026",
+    "fileSize": "1.44 MB",
+    "fileUrl": "/Acuerdo-001-2026-Agenda-50-50.pdf",
+    "description": "Acuerdo firmado en Sucre plantea una ruta técnica para avanzar en autonomía fiscal, alivio financiero, distribución de recursos, competencias y fortalecimiento de los gobiernos departamentales.",
+    "downloadsCount": 1420,
+    "featured": true
   }
 ];
 
@@ -555,3 +528,134 @@ export const principles = [
   "Reporte Único Abierto",
   "Resultados Verificables"
 ];
+
+export interface MediaItem {
+  id: string;
+  title: string;
+  type: "videos" | "webinars" | "reuniones" | "medios";
+  category?: string;
+  mediaUrl?: string;
+  embedUrl?: string;
+  url?: string;
+  platform?: string;
+  coverUrl?: string;
+  duration?: string;
+  date?: string;
+  description?: string;
+  order?: number;
+}
+
+export const mediaItemsList: MediaItem[] = [
+  {
+    "id": "v-1",
+    "title": "¿Qué es la Agenda 50/50?",
+    "type": "videos",
+    "category": "Explicador Oficial",
+    "mediaUrl": "/videos/Agenda5050.mp4",
+    "coverUrl": "/assets/video_que_es_5050_cover.jpg",
+    "duration": "Cápsula Informativa",
+    "order": 1
+  },
+  {
+    "id": "w-1",
+    "title": "Diálogos al Café: Análisis y Debate sobre la Agenda 50/50",
+    "type": "webinars",
+    "category": "Diálogo & Debate",
+    "embedUrl": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdialogosalcafe%2Fvideos%2F4414139728840664%2F&show_text=false",
+    "url": "https://www.facebook.com/dialogosalcafe/videos/4414139728840664/?rdid=5ef4aKa3wd2s7eMY#",
+    "platform": "Facebook Live",
+    "coverUrl": "/assets/webinar_dialogos_cafe_cover.jpg",
+    "date": "Transmisión en Vivo",
+    "description": "Espacio de diálogo y análisis sobre el desarrollo regional, desburocratización y propuestas de la Agenda 50/50.",
+    "order": 1
+  },
+  {
+    "id": "r-1",
+    "title": "Reunión e Informe Oficial - Cobertura BTV Canal Oficial",
+    "type": "reuniones",
+    "category": "Gobiernos Autónomos",
+    "embedUrl": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FBTVCanalOficial%2Fvideos%2F2801286836919000%2F&show_text=false",
+    "url": "https://www.facebook.com/BTVCanalOficial/videos/2801286836919000/",
+    "platform": "Facebook Live / BTV",
+    "coverUrl": "/assets/reunion_btv_cover.jpg",
+    "date": "Cobertura BTV",
+    "description": "Reunión informativa y cobertura especial sobre los avances de la Agenda 50/50 transmitida por Bolivia TV.",
+    "order": 1
+  },
+  {
+    "id": "m-1",
+    "title": "¿Cómo se repartirán los recursos? Chuquisaca tiene su propuesta del 50/50",
+    "type": "medios",
+    "category": "Propuesta Departamental",
+    "embedUrl": "https://www.dailymotion.com/embed/video/xausur2",
+    "url": "https://www.dailymotion.com/video/xausur2",
+    "platform": "Dailymotion / El Deber",
+    "coverUrl": "/assets/cobertura_chuquisaca_5050.jpg",
+    "date": "El Deber / Cobertura TV",
+    "description": "Exposición de la propuesta de Chuquisaca para la redistribución tributaria 50/50 entre Gobierno central, municipios y gobernaciones.",
+    "order": 1
+  },
+  {
+    "id": "m-2",
+    "title": "Gobierno y la Federación de Asociaciones Municipales se reunirán por la política 50-50",
+    "type": "medios",
+    "category": "Reunión FAM & Gobierno",
+    "embedUrl": "https://www.dailymotion.com/embed/video/xb14bsu",
+    "url": "https://www.dailymotion.com/video/xb14bsu",
+    "platform": "Dailymotion / BTV",
+    "coverUrl": "/assets/cobertura_fam_gobierno_5050.jpg",
+    "date": "Bolivia TV (BTV)",
+    "description": "Reunión de coordinación entre el Gobierno Central y la FAM Bolivia en el marco de la política 50-50 y acuerdos regionales.",
+    "order": 2
+  },
+  {
+    "id": "v-3",
+    "title": "La Agenda 50-50 impulsa propuestas para fortalecer las autonomías",
+    "type": "videos",
+    "category": "Participación Nacional",
+    "mediaUrl": "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4",
+    "coverUrl": "/assets/video_propuestas_autonomias_cover.jpg",
+    "duration": "Spot Institucional",
+    "order": 3
+  },
+  {
+    "id": "m-3",
+    "title": "'JP' Velasco: \"Será la obra más importante de los últimos 50 años\"",
+    "type": "medios",
+    "category": "Infraestructura & Gestión",
+    "embedUrl": "https://www.dailymotion.com/embed/video/xb3eo9y",
+    "url": "https://www.dailymotion.com/video/xb3eo9y",
+    "platform": "Dailymotion / El Deber",
+    "coverUrl": "/assets/cobertura_jp_velasco.jpg",
+    "date": "El Deber Noticias",
+    "description": "Declaraciones del Gobernador de Santa Cruz sobre proyectos clave y coordinación entre Gobernación, Gobierno Nacional y municipios.",
+    "order": 3
+  },
+  {
+    "id": "m-4",
+    "title": "Alcaldes Impulsan el 50/50 - Reportaje Especial",
+    "type": "medios",
+    "category": "Reportaje de Prensa",
+    "embedUrl": "https://www.dailymotion.com/embed/video/xawlv6e",
+    "url": "https://www.dailymotion.com/video/xawlv6e",
+    "platform": "Dailymotion",
+    "coverUrl": "/assets/cobertura_medios_5050.jpg",
+    "date": "Cobertura Digital",
+    "description": "Reportaje y cobertura televisiva sobre la iniciativa de los alcaldes para impulsar la propuesta de la Agenda 50/50.",
+    "order": 4
+  },
+  {
+    "id": "m-5",
+    "title": "Santa Cruz propone nuevo Pacto Fiscal para las regiones",
+    "type": "medios",
+    "category": "Pacto Fiscal",
+    "embedUrl": "https://www.dailymotion.com/embed/video/x9ifgnk",
+    "url": "https://www.dailymotion.com/video/x9ifgnk",
+    "platform": "Dailymotion",
+    "coverUrl": "/assets/cobertura_scz_pacto_fiscal.jpg",
+    "date": "Cobertura de Medios",
+    "description": "Propuestas y debate sobre el nuevo modelo de distribución fiscal e incentivo al desarrollo autonómico.",
+    "order": 5
+  }
+];
+

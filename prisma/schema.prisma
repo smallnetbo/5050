@@ -79,38 +79,46 @@ model DocumentItem {
   updatedAt      DateTime @updatedAt
 }
 
-// 6. Hub Multimedia (MultimediaHub - Audios/Podcasts/Videos)
+// 6. Hub Multimedia (MultimediaHub - Audios/Podcasts/Videos/Webinars/Reuniones/Medios)
 model MediaItem {
   id          String   @id @default(cuid())
   title       String
-  type        String   // "video" | "podcast" | "infografia"
-  mediaUrl    String   // URL externa de YouTube/Vimeo o archivo subido
-  coverUrl    String?  // Portada/Thumbnail
-  duration    String?
-  date        String
-  description String
+  type        String   // "audios" | "videos" | "medios" | "reuniones" | "webinars"
+  category    String?
+  mediaUrl    String?  // Archivo mp3/mp4 subido o url externa
+  embedUrl    String?  // URL de YouTube/Spotify/Soundcloud para iframe
+  url         String?  // Link a fuente original
+  platform    String?  // "Spotify" | "YouTube" | "SoundCloud" | "TikTok" | "Prensa"
+  coverUrl    String?  // Thumbnail o imagen de portada
+  duration    String?  // Ej. "45 min" o "03:15"
+  date        String?
+  description String?
+  order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
 
-// 7. Preguntas Frecuentes (FAQ)
+// 7. Administradores del Sistema / Seguridad CMS
+model AdminUser {
+  id               String    @id @default(cuid())
+  email            String    @unique
+  name             String    @default("Administrador Agenda 50/50")
+  passwordHash     String
+  role             String    @default("admin")
+  resetToken       String?
+  resetTokenExpiry DateTime?
+  lastLoginAt      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+// 8. Preguntas Frecuentes (FAQ)
 model FAQItem {
   id        Int      @id @default(autoincrement())
   order     Int      @default(0)
   category  String   // "General" | "Pacto Fiscal" | "Normativa" | "Transparencia"
   question  String
   answer    String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-// 8. Usuarios Administradores (Auth Session)
-model AdminUser {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  name      String
-  password  String   // Hash bcrypt/argon2
-  role      String   @default("admin")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

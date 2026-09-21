@@ -5,11 +5,13 @@ import {
   departmentsData as defaultDepartments,
   documentsList as defaultDocuments,
   conceptStepsList as defaultConceptSteps,
+  mediaItemsList as defaultMediaItems,
   Pillar,
   Milestone,
   DepartmentData,
   DocumentItem,
   ConceptStep,
+  MediaItem,
 } from "@/lib/agenda-data";
 
 export interface SiteConfigData {
@@ -23,12 +25,13 @@ export interface SiteConfigData {
 
 export async function getLandingData() {
   try {
-    const [dbPillars, dbMilestones, dbDepartments, dbDocuments, dbConcepts, dbConfig] = await Promise.all([
+    const [dbPillars, dbMilestones, dbDepartments, dbDocuments, dbConcepts, dbMediaItems, dbConfig] = await Promise.all([
       prisma.pillar.findMany({ orderBy: { order: "asc" } }),
       prisma.milestone.findMany({ orderBy: { order: "asc" } }),
       prisma.departmentData.findMany(),
       prisma.documentItem.findMany({ orderBy: { createdAt: "desc" } }),
       prisma.conceptStep.findMany({ orderBy: { num: "asc" } }),
+      prisma.mediaItem.findMany({ orderBy: { order: "asc" } }),
       prisma.siteConfig.findUnique({ where: { id: "global" } }),
     ]);
 
@@ -97,6 +100,24 @@ export async function getLandingData() {
         }))
       : defaultConceptSteps;
 
+    const mappedMediaItems: MediaItem[] = dbMediaItems.length > 0
+      ? dbMediaItems.map((m: any) => ({
+          id: m.id,
+          title: m.title,
+          type: m.type as any,
+          category: m.category || undefined,
+          mediaUrl: m.mediaUrl || undefined,
+          embedUrl: m.embedUrl || undefined,
+          url: m.url || undefined,
+          platform: m.platform || undefined,
+          coverUrl: m.coverUrl || undefined,
+          duration: m.duration || undefined,
+          date: m.date || undefined,
+          description: m.description || undefined,
+          order: m.order,
+        }))
+      : defaultMediaItems;
+
     const siteConfig: SiteConfigData = dbConfig
       ? {
           heroTitle: dbConfig.heroTitle,
@@ -121,6 +142,7 @@ export async function getLandingData() {
       departments: mappedDepartments,
       documents: mappedDocuments,
       conceptSteps: mappedConcepts,
+      mediaItems: mappedMediaItems,
       siteConfig,
     };
   } catch (error) {
@@ -131,6 +153,7 @@ export async function getLandingData() {
       departments: defaultDepartments,
       documents: defaultDocuments,
       conceptSteps: defaultConceptSteps,
+      mediaItems: defaultMediaItems,
       siteConfig: {
         heroTitle: "Hacia una distribución justa 50/50",
         heroSubtitle: "Transformando la descentralización tributaria en Bolivia mediante el Acuerdo N° 001/2026 de Sucre.",

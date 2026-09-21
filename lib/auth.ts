@@ -39,6 +39,22 @@ export async function verifyAdminSession(): Promise<boolean> {
   }
 }
 
+export async function getAdminSessionEmail(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(COOKIE_NAME)?.value;
+    if (!token) return null;
+
+    const { payload } = await jwtVerify(token, JWT_SECRET);
+    if (payload.role === "admin" && typeof payload.email === "string") {
+      return payload.email;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
 export async function destroyAdminSession() {
   const cookieStore = await cookies();
   cookieStore.delete(COOKIE_NAME);

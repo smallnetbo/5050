@@ -2,17 +2,22 @@
 
 import { useState } from "react";
 import { ArrowRight, X, Scale, LockOpen, Briefcase, Landmark, PieChart, TrendingUp, Building2, Globe, ShieldCheck, Coins, CheckCircle2, ChevronRight } from "lucide-react";
-import { pillars, Pillar } from "@/lib/agenda-data";
+import { pillars as defaultPillars, Pillar } from "@/lib/agenda-data";
 
-export function Pillars() {
+interface PillarsProps {
+  pillars?: Pillar[];
+}
+
+export function Pillars({ pillars: propPillars }: PillarsProps = {}) {
+  const pillarsList = propPillars && propPillars.length > 0 ? propPillars : defaultPillars;
   const [selectedPillar, setSelectedPillar] = useState<Pillar | null>(null);
   const [activeTab, setActiveTab] = useState<string>("Todos");
 
   const categories = ["Todos", "Fiscal", "Competencial", "Institucional", "Normativo"];
 
   const filteredPillars = activeTab === "Todos"
-    ? pillars
-    : pillars.filter((p) => p.category === activeTab);
+    ? pillarsList
+    : pillarsList.filter((p) => p.category === activeTab);
 
   const getPillarIcon = (name: string) => {
     switch (name) {
@@ -66,41 +71,44 @@ export function Pillars() {
 
         {/* Bento Grid Mosaico */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPillars.map((p) => (
-            <button
-              key={p.id}
-              onClick={() => setSelectedPillar(p)}
-              className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-slate-50/70 p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:bg-white hover:shadow-xl"
-            >
-              <div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#0F2942] text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-xs">
-                      {getPillarIcon(p.iconName)}
+          {filteredPillars.map((p) => {
+            const sequentialNumber = pillarsList.findIndex((item) => item.id === p.id) + 1;
+            return (
+              <button
+                key={p.id}
+                onClick={() => setSelectedPillar(p)}
+                className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/90 bg-slate-50/70 p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:bg-white hover:shadow-xl"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-12 w-12 place-items-center rounded-2xl bg-[#0F2942] text-emerald-400 group-hover:bg-emerald-600 group-hover:text-white transition-colors shadow-xs">
+                        {getPillarIcon(p.iconName)}
+                      </div>
+                      <span className="rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-black uppercase text-slate-700">
+                        {p.category}
+                      </span>
                     </div>
-                    <span className="rounded-full bg-slate-200/70 px-3 py-1 text-[11px] font-black uppercase text-slate-700">
-                      {p.category}
+                    <span className="text-xs font-black text-slate-400 group-hover:text-emerald-600 transition-colors">
+                      Eje #{String(sequentialNumber).padStart(2, "0")}
                     </span>
                   </div>
-                  <span className="text-xs font-black text-slate-400 group-hover:text-emerald-600 transition-colors">
-                    Eje #{String(p.id).padStart(2, "0")}
-                  </span>
+
+                  <h3 className="mt-6 text-xl font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-snug">
+                    {p.title}
+                  </h3>
+                  <p className="mt-3 text-xs leading-relaxed text-slate-600 font-medium line-clamp-3">
+                    {p.summary}
+                  </p>
                 </div>
 
-                <h3 className="mt-6 text-xl font-black text-slate-900 group-hover:text-emerald-600 transition-colors leading-snug">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-xs leading-relaxed text-slate-600 font-medium line-clamp-3">
-                  {p.summary}
-                </p>
-              </div>
-
-              <div className="mt-8 flex items-center gap-2 text-xs font-extrabold text-emerald-600 group-hover:translate-x-1 transition-transform">
-                <span>Ver acciones acordadas ({p.actions.length})</span>
-                <ArrowRight size={16} />
-              </div>
-            </button>
-          ))}
+                <div className="mt-8 flex items-center gap-2 text-xs font-extrabold text-emerald-600 group-hover:translate-x-1 transition-transform">
+                  <span>Ver acciones acordadas ({p.actions.length})</span>
+                  <ArrowRight size={16} />
+                </div>
+              </button>
+            );
+          })}
         </div>
 
         {/* Pillar Detail Modal */}
@@ -117,7 +125,7 @@ export function Pillars() {
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="rounded-md bg-emerald-100 px-2.5 py-1 text-xs font-black uppercase text-emerald-800">
-                      Pilar N° {selectedPillar.id} · {selectedPillar.category}
+                      Pilar N° {pillarsList.findIndex((item) => item.id === selectedPillar.id) + 1} · {selectedPillar.category}
                     </span>
                   </div>
                   <h3 className="mt-3 text-2xl sm:text-3xl font-black text-slate-900 leading-tight">

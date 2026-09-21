@@ -19,9 +19,9 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
           {/* Hero-styled Header Block */}
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="inline-block rounded-full bg-[#dd3146]/10 dark:bg-[#dd3146]/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#dd3146] dark:text-[#fcc74f] border border-[#dd3146]/20 dark:border-[#fcc74f]/30 mb-4">
-              Acuerdo N.º 001/2026 · Reforma autonómica
+              Qué es la Agenda 50|50
             </span>
-            
+
             {/* Big 50/50 Brand Logo matching Hero */}
             <div className="flex items-center justify-center text-[#c79d47] dark:text-white text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter my-2 leading-none font-geometria">
               <span className="font-geometria">50</span>
@@ -48,11 +48,10 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
               return (
                 <div
                   key={step.num}
-                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
-                    isOpen
+                  className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
                       ? "border-[#3ac167] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
                       : "border-amber-900/10 dark:border-slate-700/80 bg-[#FAF8F3] dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800"
-                  }`}
+                    }`}
                 >
                   <button
                     type="button"
@@ -61,11 +60,10 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
                   >
                     <div className="flex items-center gap-3.5">
                       <span
-                        className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black transition-colors ${
-                          isOpen
+                        className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black transition-colors ${isOpen
                             ? "bg-[#3ac167] text-white"
                             : "bg-[#dd3146]/10 dark:bg-white/10 text-[#dd3146] dark:text-[#fcc74f]"
-                        }`}
+                          }`}
                       >
                         {step.num}
                       </span>
@@ -75,9 +73,8 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
                     </div>
                     <ChevronDown
                       size={20}
-                      className={`text-slate-500 dark:text-slate-400 transition-transform duration-300 ${
-                        isOpen ? "rotate-180 text-[#3ac167] dark:text-emerald-400" : ""
-                      }`}
+                      className={`text-slate-500 dark:text-slate-400 transition-transform duration-300 ${isOpen ? "rotate-180 text-[#3ac167] dark:text-emerald-400" : ""
+                        }`}
                     />
                   </button>
 
@@ -86,7 +83,7 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
                       <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium mb-3">
                         {step.desc}
                       </p>
-                      
+
                       <div className="inline-block text-xs font-black uppercase tracking-wider text-[#c79d47] dark:text-amber-400 mb-3">
                         ✦ {step.tag}
                       </div>
