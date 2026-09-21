@@ -1,28 +1,61 @@
 "use client";
 
-import { useState } from "react";
-import { HelpCircle, ChevronDown, ChevronUp, Send, CheckCircle2, MessageSquare, ShieldCheck } from "lucide-react";
+import { useEffect, useState, useTransition } from "react";
+import { HelpCircle, ChevronDown, ChevronUp, Send, CheckCircle2, MessageSquare, Loader2, ShieldAlert } from "lucide-react";
 import { faqList } from "@/lib/agenda-data";
+import { submitCitizenProposalAction, getFeedbackSettingsAction } from "@/lib/actions/proposals.actions";
 
 export function CitizenFeedback() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [isPending, startTransition] = useTransition();
+
+  const [settings, setSettings] = useState({
+    feedbackTitle: "Buzón de Propuestas y Aportes",
+    feedbackSubtitle: "Envía tus sugerencias o propuestas institucionales para ser evaluadas por las Mesas Técnicas.",
+    feedbackEmail: "propuestas@agenda5050.gob.bo",
+  });
+
   const [proposalSent, setProposalSent] = useState(false);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     department: "La Paz",
     organization: "",
-    proposal: ""
+    proposal: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (formData.name && formData.proposal) {
-      setProposalSent(true);
-      setTimeout(() => {
-        setFormData({ name: "", email: "", department: "La Paz", organization: "", proposal: "" });
-      }, 3000);
+  useEffect(() => {
+    async function loadSettings() {
+      const res = await getFeedbackSettingsAction();
+      if (res.success && res.settings) {
+        setSettings({
+          feedbackTitle: res.settings.feedbackTitle || "Buzón de Propuestas y Aportes",
+          feedbackSubtitle: res.settings.feedbackSubtitle || "Envía tus sugerencias o propuestas institucionales para ser evaluadas por las Mesas Técnicas.",
+          feedbackEmail: res.settings.feedbackEmail || "propuestas@agenda5050.gob.bo",
+        });
+      }
     }
+    loadSettings();
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setErrorMsg(null);
+    const form = new FormData(e.currentTarget);
+
+    startTransition(async () => {
+      const res = await submitCitizenProposalAction(form);
+      if (res.success) {
+        setProposalSent(true);
+        setSuccessMsg(res.message || "¡Propuesta registrada con éxito!");
+        setFormData({ name: "", email: "", department: "La Paz", organization: "", proposal: "" });
+      } else {
+        setErrorMsg(res.error || "No se pudo enviar la propuesta. Revisa tus datos.");
+      }
+    });
   };
 
   return (
@@ -79,18 +112,35 @@ export function CitizenFeedback() {
               <div className="flex items-center gap-2 text-xs font-black uppercase text-emerald-600 mb-2">
                 <MessageSquare size={16} /> Co-construcción Ciudadana
               </div>
-              <h3 className="text-2xl font-black text-slate-900">Buzón de Propuestas y Aportes</h3>
+              <h3 className="text-2xl font-black text-slate-900">{settings.feedbackTitle}</h3>
               <p className="text-xs text-slate-600 font-medium mt-1 mb-6">
-                Envía tus sugerencias o propuestas institucionales para ser evaluadas por las Mesas Técnicas.
+                {settings.feedbackSubtitle}
               </p>
 
+              {errorMsg && (
+                <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-bold flex items-center gap-2">
+                  <ShieldAlert size={16} className="shrink-0" />
+                  <span>{errorMsg}</span>
+                </div>
+              )}
+
               {proposalSent ? (
-                <div className="rounded-2xl bg-emerald-500 text-white p-6 text-center space-y-2 animate-in fade-in">
+                <div className="rounded-2xl bg-emerald-500 text-white p-6 text-center space-y-3 animate-in fade-in">
                   <CheckCircle2 size={40} className="mx-auto" />
                   <h4 className="text-lg font-black">¡Propuesta Recibida Exitosamente!</h4>
-                  <p className="text-xs text-emerald-100 font-medium">
-                    Tu aporte ha sido derivado a la Secretaría Técnica del Consejo Nacional de Autonomías.
+                  <p className="text-xs text-emerald-100 font-medium leading-relaxed">
+                    {successMsg || "Tu propuesta ha sido guardada en el Buzón de Co-construcción y notificada a las Mesas Técnicas."}
                   </p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setProposalSent(false);
+                      setSuccessMsg(null);
+                    }}
+                    className="mt-2 inline-block px-4 py-2 rounded-xl bg-white text-[#0F2942] font-black text-xs hover:bg-slate-100 transition"
+                  >
+                    Enviar otra propuesta
+                  </button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -98,6 +148,7 @@ export function CitizenFeedback() {
                     <label className="block text-xs font-bold text-slate-700 mb-1">Nombre Completo</label>
                     <input
                       type="text"
+                      name="name"
                       required
                       placeholder="Ej. María Flores"
                       value={formData.name}
@@ -111,6 +162,7 @@ export function CitizenFeedback() {
                       <label className="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
                       <input
                         type="email"
+                        name="email"
                         required
                         placeholder="correo@ejemplo.bo"
                         value={formData.email}
@@ -121,6 +173,7 @@ export function CitizenFeedback() {
                     <div>
                       <label className="block text-xs font-bold text-slate-700 mb-1">Departamento</label>
                       <select
+                        name="department"
                         value={formData.department}
                         onChange={(e) => setFormData({ ...formData, department: e.target.value })}
                         className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
@@ -139,8 +192,21 @@ export function CitizenFeedback() {
                   </div>
 
                   <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1">Organización / Entidad (Opcional)</label>
+                    <input
+                      type="text"
+                      name="organization"
+                      placeholder="Ej. Universidad, Asociación..."
+                      value={formData.organization}
+                      onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+                      className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                    />
+                  </div>
+
+                  <div>
                     <label className="block text-xs font-bold text-slate-700 mb-1">Propuesta / Observación</label>
                     <textarea
+                      name="proposal"
                       rows={4}
                       required
                       placeholder="Escribe aquí tus sugerencias sobre tributación, servicios o competencias..."
@@ -152,9 +218,16 @@ export function CitizenFeedback() {
 
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#0F2942] hover:bg-slate-800 text-white py-3.5 text-xs font-black transition shadow-md"
+                    disabled={isPending}
+                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#0F2942] hover:bg-slate-800 text-white py-3.5 text-xs font-black transition shadow-md disabled:opacity-50"
                   >
-                    <Send size={16} /> Enviar Propuesta a la Mesa Técnica
+                    {isPending ? (
+                      <Loader2 size={16} className="animate-spin" />
+                    ) : (
+                      <>
+                        <Send size={16} /> Enviar Propuesta a la Mesa Técnica
+                      </>
+                    )}
                   </button>
                 </form>
               )}

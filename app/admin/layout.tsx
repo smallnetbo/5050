@@ -15,10 +15,12 @@ import {
   ShieldCheck,
   Video,
   User,
+  MessageSquare,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/proposals", label: "Co-construcción (Propuestas)", icon: MessageSquare },
   { href: "/admin/multimedia", label: "Centro Multimedia", icon: Video },
   { href: "/admin/concepts", label: "Conceptos 50/50", icon: HelpCircle },
   { href: "/admin/timeline", label: "Hitos / Timeline", icon: Clock },
