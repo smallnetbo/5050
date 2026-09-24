@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { logoutAction } from "@/lib/actions/auth.actions";
 import {
@@ -52,13 +53,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="w-full md:w-64 bg-[#0F2942] text-white p-6 shrink-0 flex flex-col justify-between border-r border-slate-800">
         <div className="space-y-8">
           {/* Logo / Header */}
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-emerald-400 font-black">
-              50/50
+          <div className="flex flex-col gap-3">
+            <div className="w-full bg-emerald-500/10 border border-emerald-400/30 rounded-2xl p-4 flex items-center justify-center">
+              <Image
+                src="/assets/isologo.svg"
+                alt="Isologo Agenda 50/50"
+                width={442}
+                height={195}
+                className="w-full h-auto object-contain"
+                priority
+              />
             </div>
-            <div>
+            <div className="text-center">
               <h2 className="text-base font-black leading-tight">Panel CMS</h2>
-              <p className="text-[10px] text-slate-400 font-bold">Agenda 50/50</p>
+              <p className="text-xs text-slate-400 font-bold">Agenda 50/50</p>
             </div>
           </div>
 

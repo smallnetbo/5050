@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   loginAction,
   requestPasswordResetAction,
@@ -111,7 +112,16 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-md bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[32px] p-6 sm:p-8 shadow-2xl border border-white/20 relative z-10">
         
         {/* Header Badge & Title */}
-        <div className="text-center space-y-2 mb-6">
+        <div className="text-center space-y-2 mb-6 flex flex-col items-center">
+          <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-400/30 flex items-center justify-center p-2 mb-1">
+            <Image
+              src="/assets/isologo.svg"
+              alt="Isologo Agenda 50/50"
+              width={40}
+              height={40}
+              className="w-full h-full object-contain"
+            />
+          </div>
           <span className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-[10px] font-black tracking-wider uppercase px-3 py-1 border border-emerald-500/20">
             <ShieldCheck size={13} />
             Panel de Administración

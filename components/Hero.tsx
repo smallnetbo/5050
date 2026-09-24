@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FileText, Map, Play, ShieldCheck, CheckCircle2, Building, X, ArrowRight } from "lucide-react";
+import { FileText, Map, ShieldCheck, CheckCircle2, Building, X, ArrowRight } from "lucide-react";
 import { AnimatedIsologo } from "./AnimatedIsologo";
 
 export function Hero() {
@@ -20,12 +20,12 @@ export function Hero() {
   }, [videoModalOpen]);
 
   return (
-    <section id="acuerdo" className="relative min-h-[85vh] flex flex-col justify-between bg-[#FAF8F5] dark:bg-[#101620] text-[#1B2533] dark:text-white transition-colors duration-500 overflow-hidden">
+    <section id="acuerdo" className="relative h-[calc(100vh-4rem)] flex flex-col justify-between bg-[#FAF8F5] dark:bg-[#101620] text-[#1B2533] dark:text-white transition-colors duration-500 overflow-hidden">
       {/* Background Subtle Radial Glow & Canvas Texture */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-[#c79d47]/20 via-[#dd3146]/10 to-[#3ac167]/10 dark:from-[#dd3146]/15 dark:via-[#c79d47]/15 dark:to-transparent rounded-full blur-3xl pointer-events-none transition-colors duration-500"></div>
 
       {/* Main Cover Content */}
-      <div className="container-page relative z-10 my-auto py-12 lg:py-20 flex flex-col items-center justify-center">
+      <div className="container-page relative z-10 flex-1 my-auto py-6 sm:py-8 flex flex-col items-center justify-center">
         {/* Animated Isologo: Full emblem + official typography in one cohesive graphic */}
         <motion.div
           initial={{ scale: 0.92, opacity: 0 }}
@@ -39,22 +39,11 @@ export function Hero() {
             variant="full"
             className="w-full h-auto transition-transform duration-500 group-hover:scale-[1.02]"
           />
-
-          {/* Interactive Play Video Badge below the new isologo */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.4, ease: "easeOut" }}
-            className="mt-6 sm:mt-8 flex items-center gap-2.5 rounded-full bg-[#dd3146] hover:bg-[#c4263a] text-white px-6 py-3 text-xs sm:text-sm font-black shadow-xl backdrop-blur-md hover:scale-105 transition-all border border-[#fcc74f]/50 cursor-pointer"
-          >
-            <Play size={18} className="fill-current text-[#fcc74f] ml-0.5 animate-pulse" />
-            <span>Ver Video Oficial</span>
-          </motion.div>
         </motion.div>
       </div>
 
       {/* Official Bolivia Flag Tricolor Stripe at the Bottom (Red - Yellow - Green) */}
-      <div className="relative w-full h-3.5 flex shadow-sm">
+      <div className="relative w-full h-3.5 flex shadow-sm shrink-0">
         <div className="w-1/3 h-full bg-[#dd3146]"></div>
         <div className="w-1/3 h-full bg-[#fcc74f]"></div>
         <div className="w-1/3 h-full bg-[#3ac167]"></div>

@@ -59,19 +59,19 @@ export function CitizenFeedback() {
   };
 
   return (
-    <section id="faq" className="bg-white py-20 border-t border-slate-200">
+    <section id="faq" className="bg-white dark:bg-[#101620] py-20 border-t border-slate-200 dark:border-slate-800/80 transition-colors duration-300">
       <div className="container-page">
         <div className="grid gap-12 lg:grid-cols-12 items-start">
           {/* Left Column: Interactive FAQ Accordion */}
           <div className="lg:col-span-7 space-y-6">
             <div>
-              <span className="rounded-md bg-emerald-100 px-2.5 py-1 text-xs font-black uppercase text-emerald-800">
+              <span className="inline-block rounded-lg bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-500/30 px-3 py-1.5 text-xs font-black uppercase text-emerald-800 dark:text-emerald-400 tracking-wide">
                 Pedagogía & Transparencia Ciudadana
               </span>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
+              <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
                 Preguntas Frecuentes sobre la Agenda 50/50
               </h2>
-              <p className="mt-2 text-base text-slate-600 font-medium">
+              <p className="mt-2 text-base text-slate-600 dark:text-slate-300 font-medium">
                 Resolvemos las principales dudas sobre el pacto fiscal, el presupuesto y los derechos de las regiones.
               </p>
             </div>
@@ -82,21 +82,21 @@ export function CitizenFeedback() {
                 return (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-slate-200 bg-slate-50 overflow-hidden transition"
+                    className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#151D2A] overflow-hidden transition-all duration-200 hover:border-emerald-500/30"
                   >
                     <button
                       onClick={() => setOpenFaq(isOpen ? null : idx)}
-                      className="w-full flex justify-between items-center p-5 text-left font-black text-slate-900 text-base"
+                      className="w-full flex justify-between items-center p-5 text-left font-black text-slate-900 dark:text-white text-base hover:bg-slate-100/50 dark:hover:bg-slate-800/40 transition-colors"
                     >
                       <span className="flex items-center gap-3">
-                        <HelpCircle className="text-emerald-600 shrink-0" size={20} />
+                        <HelpCircle className="text-emerald-600 dark:text-emerald-400 shrink-0" size={20} />
                         {faq.question}
                       </span>
-                      {isOpen ? <ChevronUp className="text-slate-400 shrink-0" size={20} /> : <ChevronDown className="text-slate-400 shrink-0" size={20} />}
+                      {isOpen ? <ChevronUp className="text-slate-400 dark:text-slate-500 shrink-0" size={20} /> : <ChevronDown className="text-slate-400 dark:text-slate-500 shrink-0" size={20} />}
                     </button>
 
                     {isOpen && (
-                      <div className="px-5 pb-5 pt-0 text-sm leading-relaxed text-slate-600 font-medium border-t border-slate-200/60 mt-1">
+                      <div className="px-5 pb-5 pt-0 text-sm leading-relaxed text-slate-600 dark:text-slate-300 font-medium border-t border-slate-200/60 dark:border-slate-800 mt-1">
                         <p className="pt-3">{faq.answer}</p>
                       </div>
                     )}
@@ -108,27 +108,27 @@ export function CitizenFeedback() {
 
           {/* Right Column: Proposal Submission Form */}
           <div className="lg:col-span-5">
-            <div className="rounded-[34px] border border-slate-200 bg-slate-50 p-8 shadow-sm">
-              <div className="flex items-center gap-2 text-xs font-black uppercase text-emerald-600 mb-2">
+            <div className="rounded-[34px] border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#151D2A] p-6 sm:p-8 shadow-sm transition-all duration-300">
+              <div className="flex items-center gap-2 text-xs font-black uppercase text-emerald-600 dark:text-emerald-400 mb-2">
                 <MessageSquare size={16} /> Co-construcción Ciudadana
               </div>
-              <h3 className="text-2xl font-black text-slate-900">{settings.feedbackTitle}</h3>
-              <p className="text-xs text-slate-600 font-medium mt-1 mb-6">
+              <h3 className="text-2xl font-black text-slate-900 dark:text-white">{settings.feedbackTitle}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 font-medium mt-1 mb-6">
                 {settings.feedbackSubtitle}
               </p>
 
               {errorMsg && (
-                <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 text-xs font-bold flex items-center gap-2">
+                <div className="mb-4 p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-950/60 border border-rose-200 dark:border-rose-800 text-rose-600 dark:text-rose-400 text-xs font-bold flex items-center gap-2">
                   <ShieldAlert size={16} className="shrink-0" />
                   <span>{errorMsg}</span>
                 </div>
               )}
 
               {proposalSent ? (
-                <div className="rounded-2xl bg-emerald-500 text-white p-6 text-center space-y-3 animate-in fade-in">
+                <div className="rounded-2xl bg-emerald-500 dark:bg-emerald-600 text-white p-6 text-center space-y-3 shadow-lg animate-in fade-in">
                   <CheckCircle2 size={40} className="mx-auto" />
                   <h4 className="text-lg font-black">¡Propuesta Recibida Exitosamente!</h4>
-                  <p className="text-xs text-emerald-100 font-medium leading-relaxed">
+                  <p className="text-xs text-emerald-100 dark:text-emerald-50 font-medium leading-relaxed">
                     {successMsg || "Tu propuesta ha sido guardada en el Buzón de Co-construcción y notificada a las Mesas Técnicas."}
                   </p>
                   <button
@@ -145,7 +145,7 @@ export function CitizenFeedback() {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Nombre Completo</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nombre Completo</label>
                     <input
                       type="text"
                       name="name"
@@ -153,13 +153,13 @@ export function CitizenFeedback() {
                       placeholder="Ej. María Flores"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 p-3 text-xs font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Correo Electrónico</label>
                       <input
                         type="email"
                         name="email"
@@ -167,16 +167,16 @@ export function CitizenFeedback() {
                         placeholder="correo@ejemplo.bo"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 p-3 text-xs font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-bold text-slate-700 mb-1">Departamento</label>
+                      <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Departamento</label>
                       <select
                         name="department"
                         value={formData.department}
                         onChange={(e) => setFormData({ ...formData, department: e.target.value })}
-                        className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                        className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 p-3 text-xs font-semibold text-slate-900 dark:text-white focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                       >
                         <option value="La Paz">La Paz</option>
                         <option value="Santa Cruz">Santa Cruz</option>
@@ -192,19 +192,19 @@ export function CitizenFeedback() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Organización / Entidad (Opcional)</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Organización / Entidad (Opcional)</label>
                     <input
                       type="text"
                       name="organization"
                       placeholder="Ej. Universidad, Asociación..."
                       value={formData.organization}
                       onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 p-3 text-xs font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Propuesta / Observación</label>
+                    <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Propuesta / Observación</label>
                     <textarea
                       name="proposal"
                       rows={4}
@@ -212,14 +212,14 @@ export function CitizenFeedback() {
                       placeholder="Escribe aquí tus sugerencias sobre tributación, servicios o competencias..."
                       value={formData.proposal}
                       onChange={(e) => setFormData({ ...formData, proposal: e.target.value })}
-                      className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs font-semibold focus:border-emerald-500 focus:outline-none"
+                      className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/90 p-3 text-xs font-semibold text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-emerald-500 dark:focus:border-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                     ></textarea>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isPending}
-                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#0F2942] hover:bg-slate-800 text-white py-3.5 text-xs font-black transition shadow-md disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 rounded-2xl bg-[#0F2942] hover:bg-slate-800 dark:bg-emerald-500 dark:hover:bg-emerald-400 text-white dark:text-[#0F2942] py-3.5 text-xs font-black transition shadow-md disabled:opacity-50"
                   >
                     {isPending ? (
                       <Loader2 size={16} className="animate-spin" />
