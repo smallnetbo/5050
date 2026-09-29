@@ -17,29 +17,6 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
       <div className="container-page">
         <div className="rounded-[36px] border border-amber-900/10 dark:border-slate-800 bg-white dark:bg-[#151D2A] p-6 sm:p-10 shadow-sm">
           {/* Hero-styled Header Block */}
-          <div className="text-center max-w-2xl mx-auto mb-10">
-            <span className="inline-block rounded-full bg-[#dd3146]/10 dark:bg-[#dd3146]/20 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-[#dd3146] dark:text-[#fcc74f] border border-[#dd3146]/20 dark:border-[#fcc74f]/30 mb-4">
-              Qué es la Agenda 50|50
-            </span>
-
-            {/* Big 50/50 Brand Logo matching Hero */}
-            <div className="flex items-center justify-center text-[#c79d47] dark:text-white text-6xl sm:text-7xl lg:text-8xl font-bold tracking-tighter my-2 leading-none font-geometria">
-              <span className="font-geometria">50</span>
-              <img
-                src="/assets/barra.svg"
-                alt="|"
-                className="h-[0.72em] w-auto inline-block self-center mx-1 select-none dark:brightness-0 dark:invert"
-              />
-              <span className="font-geometria">50</span>
-            </div>
-
-            <h2 className="font-extrabold text-2xl sm:text-3xl lg:text-4xl text-[#c79d47] dark:text-white leading-tight mt-3">
-              Una nueva relación <span className="text-[#3ac167] dark:text-emerald-400">con más autonomía</span> para más desarrollo
-            </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-amber-100/80 font-semibold tracking-wide mt-2">
-              Más autonomía. Más capacidad de decisión.
-            </p>
-          </div>
 
           {/* ACCORDION STEPS (1, 2, 3, 4) */}
           <div className="space-y-3 mb-10">
@@ -49,8 +26,8 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
                 <div
                   key={step.num}
                   className={`rounded-2xl border transition-all duration-300 overflow-hidden ${isOpen
-                      ? "border-[#3ac167] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
-                      : "border-amber-900/10 dark:border-slate-700/80 bg-[#FAF8F3] dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800"
+                    ? "border-[#3ac167] dark:border-emerald-500 bg-white dark:bg-slate-800 shadow-md"
+                    : "border-amber-900/10 dark:border-slate-700/80 bg-[#FAF8F3] dark:bg-slate-800/40 hover:bg-white dark:hover:bg-slate-800"
                     }`}
                 >
                   <button
@@ -61,8 +38,8 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
                     <div className="flex items-center gap-3.5">
                       <span
                         className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-black transition-colors ${isOpen
-                            ? "bg-[#3ac167] text-white"
-                            : "bg-[#dd3146]/10 dark:bg-white/10 text-[#dd3146] dark:text-[#fcc74f]"
+                          ? "bg-[#3ac167] text-white"
+                          : "bg-[#dd3146]/10 dark:bg-white/10 text-[#dd3146] dark:text-[#fcc74f]"
                           }`}
                       >
                         {step.num}

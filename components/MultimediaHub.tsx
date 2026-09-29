@@ -71,6 +71,13 @@ export function MultimediaHub({ mediaItems }: Props) {
           thumbnail: "/assets/video_propuestas_autonomias_cover.jpg",
           category: "Participación Nacional",
           videoUrl: "/videos/La Agenda 50-50 impulsa propuestas para fortalecer las autonomías y construir un Estado más eficiente, con la participación de municipios y autoridades de todo el país.mp4"
+        },
+        {
+          title: "Firma de acuerdo 50/50",
+          duration: "Acto Oficial",
+          thumbnail: "/assets/video_firma_acuerdo_5050_cover.jpg",
+          category: "Cobertura Especial",
+          videoUrl: "/videos/Firma de acuerdo 5050.mp4"
         }
       ];
 

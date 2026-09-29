@@ -60,6 +60,16 @@ export async function syncDatabaseToAgendaData() {
       featured: d.featured,
     }));
 
+    const formattedMilestones = dbMilestones.map((m) => ({
+      id: m.id,
+      title: m.title,
+      date: m.dateText,
+      status: m.status,
+      detail: m.detail,
+      documents: m.documents ? JSON.parse(m.documents) : undefined,
+      participants: m.participants ? JSON.parse(m.participants) : undefined,
+    }));
+
     const filePath = join(process.cwd(), "lib", "agenda-data.ts");
     let content = await readFile(filePath, "utf-8");
 
@@ -74,6 +84,11 @@ export async function syncDatabaseToAgendaData() {
     const pillarsCode =
       "export const pillars: Pillar[] = " + JSON.stringify(formattedPillars, null, 2) + ";";
     content = content.replace(/export const pillars: Pillar\[\] = \[[\s\S]*?\n\];/, pillarsCode);
+
+    // Reemplazar milestones
+    const milestonesCode =
+      "export const milestones: Milestone[] = " + JSON.stringify(formattedMilestones, null, 2) + ";";
+    content = content.replace(/export const milestones: Milestone\[\] = \[[\s\S]*?\n\];/, milestonesCode);
 
     // Reemplazar mediaItemsList
     const mediaCode =
@@ -90,3 +105,4 @@ export async function syncDatabaseToAgendaData() {
     console.error("Error sincronizando DB a agenda-data.ts:", error);
   }
 }
+

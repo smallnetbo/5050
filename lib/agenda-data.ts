@@ -76,7 +76,7 @@ export const conceptStepsList: ConceptStep[] = [
     "id": 1,
     "num": 1,
     "title": "¿Qué es la Agenda 50/50?",
-    "desc": "La Agenda 50/50 es una reforma estructural del Estado orientada a distribuir responsabilidades con reglas claras y profundizar las autonomías con equidad y eficiencia, con el objetivo de mejorar las condiciones de vida de las bolivianas y los bolivianos",
+    "desc": "Es un proceso de co-construcción colectiva, donde las Entidades Territoriales Autónomas, el Órgano Ejecutivo Nacional, las instituciones privadas y la sociedad civil son actores centrales, cuyo objetivo estratégico es la reforma estructural del Estado para alcanzar autonomias reales, efectivas y eficientes, equilibrando responsabilidades con recursos y considerando capacidades institucionales diferenciadas.",
     "tag": "Un Estado más ordenado, equitativo, eficiente y corresponsable",
     "items": [
       "Decisión",
@@ -89,7 +89,7 @@ export const conceptStepsList: ConceptStep[] = [
     "id": 2,
     "num": 2,
     "title": "¿Qué cambiará?",
-    "desc": "La Agenda 50/50 plantea una reforma estructural para ordenar el Estado y fortalecer los gobiernos autónomos departamentales, regional, municipales e indígena originario campesinos",
+    "desc": "Después de más 15 años de un proceso autonómico inconcluso, la Agenda 50/50 plantea una reforma estructural para ordenar el Estado y fortalecer los gobiernos autónomos departamentales, regional, municipales e indígena originario campesinos",
     "tag": "Más autonomía para impulsar el desarrollo",
     "items": [
       "Revisar las normas que limitan las autonomías",
@@ -102,7 +102,7 @@ export const conceptStepsList: ConceptStep[] = [
     "id": 3,
     "num": 3,
     "title": "¿Cómo se hará?",
-    "desc": "La Agenda 50/50 se co-construirá a través de un amplio proceso técnico-político, de generación de diagnósticos y coordinación intergubernativa que permita alcanzar consensos",
+    "desc": "La Agenda 50/50 se co-construirá a través de una ruta metodológica que comprende: coordinación técnica, diagnóstico compartido, co-construcción de consensos, ejecución y seguimiento, sobre principios de reglas claras, coresponsabilidad fiscal, coordinación intergubernativa, calidad del gasto y resultados verificables y progresivos",
     "tag": "Co-construcción y Corresponsabilidad",
     "items": [
       "Instancias técnicas nacional y subnacional",
@@ -115,7 +115,7 @@ export const conceptStepsList: ConceptStep[] = [
     "id": 4,
     "num": 4,
     "title": "¿Qué busca?",
-    "desc": "A través del fortalecimiento y profundización de las autonomías, la Agenda 50/50 busca mejorar las condiciones de vida de las bolivianas y bolivianos",
+    "desc": "La Agenda 50/50 busca la reforma estructural del Estado para alcanzar autonomias reales, efectivas y eficientes, con gestión territorial fortalecida y responsabilidades compartidas que mejoren la calidad de vida de la población, y que fomenten la generación de riqueza",
     "tag": "El desarrollo empieza en las regiones",
     "items": [
       "Mejorar la calidad del gasto",
@@ -128,14 +128,6 @@ export const conceptStepsList: ConceptStep[] = [
 
 
 export const pillars: Pillar[] = [
-  {
-    "id": 11,
-    "title": "Alivio Fiscal",
-    "category": "Fiscal",
-    "iconName": "Scale",
-    "summary": "Las partes reconocen la necesidad de atender de manera prioritaria la situación financiera que atraviesan los Gobiernos Autónomos Departamentales. En ese marco, acuerdan establecer un cronograma de trabajo conjunto para evaluar e implementar medidas de alivio\nfinanciero, incluyendo mecanismos de reprogramación o diferimiento de obligaciones financieras, asi como otras acciones orientadas al saneamiento y la sostenibilidad fiscal de las gobernaciones, en el marco de la Agenda 50/50 y el Programa de Readecuación Financiera",
-    "actions": []
-  },
   {
     "id": 1,
     "title": "Autonomía tributaria, esfuerzo fiscal y fortalecimiento de los ingresos propios",
@@ -245,69 +237,117 @@ export const pillars: Pillar[] = [
     "iconName": "Coins",
     "summary": "Iniciar, identificar y evaluar la factibilidad de la transferencia progresiva de instituciones públicas susceptibles de administración departamental, en el marco del fortalecimiento de las autonomias departamentales\n",
     "actions": []
+  },
+  {
+    "id": 11,
+    "title": "Alivio Fiscal",
+    "category": "Fiscal",
+    "iconName": "Scale",
+    "summary": "Las partes reconocen la necesidad de atender de manera prioritaria la situación financiera que atraviesan los Gobiernos Autónomos Departamentales. En ese marco, acuerdan establecer un cronograma de trabajo conjunto para evaluar e implementar medidas de alivio\nfinanciero, incluyendo mecanismos de reprogramación o diferimiento de obligaciones financieras, asi como otras acciones orientadas al saneamiento y la sostenibilidad fiscal de las gobernaciones, en el marco de la Agenda 50/50 y el Programa de Readecuación Financiera",
+    "actions": []
   }
 ];
 
 export const milestones: Milestone[] = [
   {
-    id: 1,
-    title: "Diagnóstico técnico Censo 2024",
-    date: "Enero - Julio 2026",
-    status: "Cumplido",
-    detail: "Consolidación de la base de datos demográficos y financieros departamentales compartidos entre el MEFP y los 9 GAD.",
-    documents: [{ name: "Informe_Diagnostico_Fiscal_2026.pdf", size: "3.2 MB" }],
-    participants: ["Ministerio de Economía", "Viceministerio de Autonomías", "Técnicos de 9 GAD"]
+    "id": 1,
+    "title": "Diagnóstico técnico Censo 2024",
+    "date": "Enero - Julio 2026",
+    "status": "Cumplido",
+    "detail": "Consolidación de la base de datos demográficos y financieros departamentales compartidos entre el MEFP y los 9 GAD.",
+    "participants": [
+      "Ministerio de Economía",
+      "Viceministerio de Autonomías",
+      "Técnicos de 9 GAD"
+    ]
   },
   {
-    id: 2,
-    title: "Firma del Acuerdo N° 001/2026 en Sucre",
-    date: "5 de Agosto de 2026",
-    status: "Cumplido",
-    detail: "Firma histórica en la Casa de la Libertad entre el Gobierno Nacional y los 9 Gobernadores Departamentales.",
-    documents: [{ name: "Acuerdo_Oficial_001_2026_Sucre.pdf", size: "5.8 MB" }],
-    participants: ["Presidente del Estado", "9 Gobernadores Departamentales", "Representantes Municipalistas"]
+    "id": 2,
+    "title": "Firma del Acuerdo N° 001/2026 en Sucre",
+    "date": "5 de Agosto de 2026",
+    "status": "Cumplido",
+    "detail": "Firma histórica en la Casa de la Libertad entre el Gobierno Nacional y los 9 Gobernadores Departamentales.",
+    "participants": [
+      "Presidente del Estado",
+      "9 Gobernadores Departamentales",
+      "Representantes Municipalistas"
+    ]
   },
   {
-    id: 3,
-    title: "Modificación de la Ley N° 154 (Dominio Tributario)",
-    date: "En curso (Plazo 90 días)",
-    status: "En proceso",
-    detail: "Mesa técnica redactora para la ampliación del catálogo tributario autonómico y revisión de gravámenes.",
-    documents: [{ name: "Borrador_Anteproyecto_Ley154.pdf", size: "1.4 MB" }],
-    participants: ["Comisión Jurídica - Fiscal del Consejo"]
+    "id": 3,
+    "title": "Modificación de la Ley N° 154 (Dominio Tributario)",
+    "date": "En curso (Plazo 90 días)",
+    "status": "En proceso",
+    "detail": "Mesa técnica redactora para la ampliación del catálogo tributario autonómico y revisión de gravámenes.",
+    "documents": [
+      {
+        "name": "Borrador_Anteproyecto_Ley154.pdf",
+        "size": "1.4 MB"
+      }
+    ],
+    "participants": [
+      "Comisión Jurídica - Fiscal del Consejo"
+    ]
   },
   {
-    id: 4,
-    title: "Redacción de Ley Especial de Coparticipación",
-    date: "Gestión Legislativa 2026",
-    status: "En proceso",
-    detail: "Diseño de las fórmulas de reparto del pacto 50/50 y criterios de ecualización para la ley que regirá desde 2027.",
-    documents: [{ name: "Matriz_Criterios_Distribucion.pdf", size: "2.1 MB" }],
-    participants: ["Comisión de Hacienda de la ALP", "Representantes GAD"]
+    "id": 4,
+    "title": "Redacción de Ley Especial de Coparticipación",
+    "date": "Gestión Legislativa 2026",
+    "status": "En proceso",
+    "detail": "Diseño de las fórmulas de reparto del pacto 50/50 y criterios de ecualización para la ley que regirá desde 2027.",
+    "documents": [
+      {
+        "name": "Matriz_Criterios_Distribucion.pdf",
+        "size": "2.1 MB"
+      }
+    ],
+    "participants": [
+      "Comisión de Hacienda de la ALP",
+      "Representantes GAD"
+    ]
   },
   {
-    id: 5,
-    title: "Encuentros con Municipios, AIOC y Gran Chaco",
-    date: "Septiembre - Octubre 2026",
-    status: "Programado",
-    detail: "Mesas de diálogo territorial descentralizadas con la FAM-Bolivia, autonomías indígenas y la Región Autónoma del Gran Chaco.",
-    participants: ["FAM-Bolivia", "CONAIOC", "Gobierno Regional del Gran Chaco"]
+    "id": 5,
+    "title": "Encuentros con Municipios",
+    "date": "Septiembre - Octubre 2026",
+    "status": "Cumplido",
+    "detail": "La Paz, 27 de agosto de 2026 (ABI). – Acompañado de ministros y viceministros, el presidente del Estado, Rodrigo Paz, y la Federación de Asociaciones de Municipios (FAM) de Bolivia iniciaron este jueves la reunión en la ciudad de La Paz para tratar una agenda de seis puntos, en la que se prioriza la propuesta gubernamental del 50/50.\n\n“Me siento bendecido de estar con ustedes para poder realmente transformar este Estado. Debe ser la primera vez en la historia de Bolivia que un presidente quiere acabar con el Estado centralista y eso creo que nos suma en el mismo esfuerzo”, expresó el mandatario al inaugurar el encuentro.\n\nEl jefe de Estado exhortó a los alcaldes a acabar con el Estado centralista de “forma ordenada y consistente para no tener retornos, ni coletazos”, sino que se vaya conformando y consolidando el proceso.\n\n“Yo agradecido por este encuentro, no solo como uno más de ustedes en su momento, he sido concejal, he sido alcalde y me siento parte de la familia con la cual tendremos que llevar adelante las grandes transformaciones”, remarcó.\n\nResaltó que en la reunión uno de los temas a tratar es el 50/50, una propuesta del Gobierno nacional que “no es el final, es el principio de lo que realmente se quiere construir para el futuro de la patria”.\n\nEn tanto, el presidente de la FAM-Bolivia, Johnny Torres, indicó que con los representantes ediles analizaron el miércoles una agenda a tratar en el encuentro de esta jornada con las autoridades del Gobierno nacional.\n\n“Hemos estado ayer (miércoles) reunidos todo el día analizando los temas de la agenda. Nosotros tenemos una agenda de seis puntos que la hemos propuesto al Gobierno, primero el 50/50 el cual nosotros esperamos”, puntualizó.\n\nSubrayó que en esta agenda se pide que el 50/50 se consolide en lo posible en el Presupuesto 2027.\n\n“Si se viabiliza el 50/50 como estamos proponiendo, el Gobierno podría disponer del IDH (Impuesto Directo a los Hidrocarburos) para recursos con gobernaciones y otros y por lo tanto los municipios podríamos tener coparticipación, recursos propios y probablemente recursos de crédito”, comentó.\n\nEn la reunión también están presentes los ministros de la Presidencia, Fernando Aramayo; y de Economía y Finanzas Públicas, Christian Morales, además de viceministros de diferentes carteras de Estado.",
+    "participants": [
+      "FAM-Bolivia"
+    ]
   },
   {
-    id: 6,
-    title: "Plenario del Consejo Nacional de Autonomías",
-    date: "Noviembre 2026",
-    status: "Programado",
-    detail: "Aprobación del paquete normativo consolidado y presentación formal ante la Asamblea Legislativa Plurinacional.",
-    participants: ["Consejo Nacional de Autonomías"]
+    "id": 8,
+    "title": "Reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras",
+    "date": "12 de Septiembre",
+    "status": "Cumplido",
+    "detail": "Avanzamos en la co-construcción de la Agenda 50/50.\nDesde el Servicio Estatal de Autonomías, acompañamos la reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras - Bolivia para estructurar la hoja de ruta de la Agenda 50/50. \nEl encuentro contó con la participación de los equipos técnicos de todos los Gobiernos Autónomos Indígena Originario Campesinos (GAIOC). Durante las mesas de trabajo, se analizaron aspectos críticos desde la tramitación burocrática para el acceso a la autonomía, hasta los cuellos de botella administrativos que limitan una gestión pública territorial plenamente eficiente.\nLa sistematización de estos desafíos técnicos permitirá estructurar soluciones viables dentro de la Agenda 50/50. Valoramos la visión de los GAIOC para transformar estas dificultades administrativas en propuestas concretas para las autonomías",
+    "participants": [
+      "CONAIOC",
+      "Viceministerio de Autonomías"
+    ]
   },
   {
-    id: 7,
-    title: "Aplicación de la Gestión Fiscal 50/50",
-    date: "1 de Enero de 2027",
-    status: "Meta",
-    detail: "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
-    participants: ["Estado Plurinacional de Bolivia"]
+    "id": 6,
+    "title": "Plenario del Consejo Nacional de Autonomías",
+    "date": "Noviembre 2026",
+    "status": "Programado",
+    "detail": "Aprobación del paquete normativo consolidado y presentación formal ante la Asamblea Legislativa Plurinacional.",
+    "documents": [],
+    "participants": [
+      "Consejo Nacional de Autonomías"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Aplicación de la Gestión Fiscal 50/50",
+    "date": "1 de Enero de 2027",
+    "status": "Meta",
+    "detail": "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
+    "documents": [],
+    "participants": [
+      "Estado Plurinacional de Bolivia"
+    ]
   }
 ];
 
@@ -642,6 +682,16 @@ export const mediaItemsList: MediaItem[] = [
     "coverUrl": "/assets/cobertura_medios_5050.jpg",
     "date": "Cobertura Digital",
     "description": "Reportaje y cobertura televisiva sobre la iniciativa de los alcaldes para impulsar la propuesta de la Agenda 50/50.",
+    "order": 4
+  },
+  {
+    "id": "v-4",
+    "title": "Firma de acuerdo 50/50",
+    "type": "videos",
+    "category": "Cobertura Especial",
+    "mediaUrl": "/videos/Firma de acuerdo 5050.mp4",
+    "coverUrl": "/assets/video_firma_acuerdo_5050_cover.jpg",
+    "duration": "Acto Oficial",
     "order": 4
   },
   {
