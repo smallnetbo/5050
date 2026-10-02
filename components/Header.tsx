@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon } from "lucide-react";
+import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon, Mail } from "lucide-react";
 import { documentsList, pillars, departmentsData } from "@/lib/agenda-data";
 import { useTheme } from "./ThemeProvider";
 
@@ -20,7 +20,7 @@ export function Header() {
     { label: "Ruta", href: "#ruta" },
     { label: "Multimedia", href: "#multimedia" },
     { label: "Documentos", href: "#descargas" },
-    { label: "FAQ", href: "#faq" },
+    { label: "Co-construcción Ciudadana", href: "#co-construccion", isMail: true },
   ];
 
 
@@ -45,16 +45,32 @@ export function Header() {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-5 text-xs font-extrabold text-slate-700 dark:text-slate-200">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="hover:text-[#3ac167] dark:hover:text-[#c79d47] transition-colors py-1 relative group"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c79d47] transition-all duration-300 group-hover:w-full"></span>
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              if (link.isMail) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    aria-label="Co-construcción Ciudadana (Buzón de Propuestas)"
+                    title="Buzón de Co-construcción Ciudadana"
+                    className="p-1.5 text-slate-700 dark:text-slate-200 hover:text-[#3ac167] dark:hover:text-[#c79d47] hover:bg-emerald-50 dark:hover:bg-slate-800 rounded-lg transition-colors flex items-center justify-center group relative border border-transparent hover:border-emerald-200/50 dark:hover:border-slate-700"
+                  >
+                    <Mail size={18} className="transition-transform group-hover:scale-110 text-emerald-600 dark:text-emerald-400" />
+                    <span className="sr-only">Co-construcción Ciudadana</span>
+                  </a>
+                );
+              }
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="hover:text-[#3ac167] dark:hover:text-[#c79d47] transition-colors py-1 relative group"
+                >
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#c79d47] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              );
+            })}
           </nav>
 
           {/* Action Buttons: Global Search, Theme Toggle & Mobile Toggle */}
@@ -111,7 +127,18 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-between rounded-xl px-4 py-3 text-sm font-bold text-slate-800 hover:bg-slate-100 hover:text-[#3ac167] transition"
               >
-                <span>{link.label}</span>
+                <span className="flex items-center gap-2.5">
+                  {link.isMail ? (
+                    <>
+                      <span className="p-1.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400">
+                        <Mail size={16} />
+                      </span>
+                      <span>Co-construcción Ciudadana</span>
+                    </>
+                  ) : (
+                    <span>{link.label}</span>
+                  )}
+                </span>
                 <span className="text-slate-400">→</span>
               </a>
             ))}

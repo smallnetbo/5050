@@ -39,7 +39,7 @@ export function Footer() {
               <li><a href="#ruta" className="hover:text-[#c79d47] transition">Ruta</a></li>
               <li><a href="#multimedia" className="hover:text-[#c79d47] transition">Multimedia</a></li>
               <li><a href="#descargas" className="hover:text-[#c79d47] transition">Documentos</a></li>
-              <li><a href="#faq" className="hover:text-[#c79d47] transition">FAQ</a></li>
+              <li><a href="#co-construccion" className="hover:text-[#c79d47] transition flex items-center gap-1.5"><Mail size={12} className="text-emerald-400" /> Co-construcción</a></li>
             </ul>
           </div>
 
@@ -59,7 +59,7 @@ export function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-bold text-slate-400">
           <p>© 2026 Agenda 50/50 · Bolivia.</p>
           <div className="flex gap-4">
-            <a href="#faq" className="hover:text-amber-200">Preguntas Frecuentes</a>
+            <a href="#co-construccion" className="hover:text-amber-200">Co-construcción Ciudadana</a>
             <a href="#descargas" className="hover:text-amber-200">Aviso de Privacidad</a>
           </div>
         </div>

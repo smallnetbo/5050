@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { DocumentItem } from "@/lib/agenda-data";
 import { upsertDocumentAction } from "@/lib/actions/documents.actions";
-import { X, Upload, FileText, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { uploadFileWithProgress, formatBytes } from "@/lib/client-upload";
+import { X, Upload, FileText, Loader2, CheckCircle2, AlertCircle, Trash2 } from "lucide-react";
 
 interface Props {
   document?: DocumentItem | null;
@@ -14,6 +15,11 @@ interface Props {
 export function DocumentModalForm({ document, onClose, onSaved }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Estados de progreso de subida
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadPhase, setUploadPhase] = useState("Guardando...");
+  const [uploadBytes, setUploadBytes] = useState<{ loaded: number; total: number } | null>(null);
 
   const [title, setTitle] = useState(document?.title || "");
   const [category, setCategory] = useState(document?.category || "Acuerdo");
@@ -29,8 +35,26 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setUploadProgress(0);
+    setUploadBytes(null);
 
     try {
+      let finalFileUrl = fileUrl;
+      let calculatedSize = fileSize;
+
+      if (pdfFile && pdfFile.size > 0) {
+        setUploadPhase(`Subiendo documento PDF (${formatBytes(pdfFile.size)})...`);
+        calculatedSize = formatBytes(pdfFile.size);
+        finalFileUrl = await uploadFileWithProgress(pdfFile, "documents", (p) => {
+          setUploadProgress(p.percent);
+          setUploadBytes({ loaded: p.loaded, total: p.total });
+          setUploadPhase(`Subiendo documento (${p.percent}%)...`);
+        });
+      }
+
+      setUploadPhase("Finalizando registro...");
+      setUploadProgress(100);
+
       const formData = new FormData();
       if (document?.id) formData.append("id", document.id);
       formData.append("title", title);
@@ -39,10 +63,8 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
       formData.append("department", department);
       formData.append("description", description);
       formData.append("featured", featured ? "true" : "false");
-      formData.append("existingFileUrl", fileUrl);
-      formData.append("existingFileSize", fileSize);
-
-      if (pdfFile) formData.append("file", pdfFile);
+      formData.append("existingFileUrl", finalFileUrl);
+      formData.append("existingFileSize", calculatedSize);
 
       const res = await upsertDocumentAction(formData);
 
@@ -52,6 +74,7 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
         setError(res.error || "Error al guardar el documento.");
       }
     } catch (err: any) {
+      console.error("Error en DocumentModalForm handleSubmit:", err);
       setError(err.message || "Error inesperado al procesar el formulario.");
     } finally {
       setLoading(false);
@@ -185,8 +208,9 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
                 <input
                   type="file"
                   accept=".pdf,.doc,.docx,.ppt,.pptx"
+                  disabled={loading}
                   onChange={(e) => setPdfFile(e.target.files?.[0] || null)}
-                  className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-500/10 file:text-emerald-500 hover:file:bg-emerald-500/20"
+                  className="w-full text-xs text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-500/10 file:text-emerald-500 hover:file:bg-emerald-500/20 disabled:opacity-50"
                 />
               </div>
 
@@ -196,13 +220,43 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
                 </label>
                 <input
                   type="text"
+                  disabled={loading}
                   value={fileUrl}
                   onChange={(e) => setFileUrl(e.target.value)}
                   placeholder="/Acuerdo-001-2026-Agenda-50-50.pdf"
-                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs disabled:opacity-50"
                 />
               </div>
             </div>
+
+            {/* Vista previa del documento seleccionado */}
+            {pdfFile && (
+              <div className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-950/30 flex items-center justify-between">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <FileText size={16} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                      {pdfFile.name}
+                    </p>
+                    <p className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                      Tamaño: {formatBytes(pdfFile.size)} · Listo para transferir
+                    </p>
+                  </div>
+                </div>
+                {!loading && (
+                  <button
+                    type="button"
+                    onClick={() => setPdfFile(null)}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition shrink-0"
+                    title="Quitar archivo"
+                  >
+                    <Trash2 size={15} />
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Checkbox Documento Insignia Destacado */}
@@ -210,32 +264,86 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
             <input
               type="checkbox"
               id="featured-check"
+              disabled={loading}
               checked={featured}
               onChange={(e) => setFeatured(e.target.checked)}
-              className="rounded text-emerald-500 focus:ring-emerald-500 h-4 w-4 accent-emerald-500"
+              className="rounded text-emerald-500 focus:ring-emerald-500 h-4 w-4 accent-emerald-500 disabled:opacity-50"
             />
             <label htmlFor="featured-check" className="text-xs font-extrabold text-slate-900 dark:text-white cursor-pointer select-none">
               Marcar como Documento Insignia Destacado (Banner Principal)
             </label>
           </div>
 
+          {/* INDICADOR DE CARGA / PROGRESO ACTIVO */}
+          {loading && (
+            <div className="p-4 rounded-2xl border border-emerald-500/40 bg-emerald-50/80 dark:bg-emerald-950/40 shadow-sm space-y-3 animate-in fade-in duration-200">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <Loader2 size={18} className="animate-spin" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-black text-slate-900 dark:text-white">
+                      {uploadPhase}
+                    </p>
+                    <p className="text-[11px] font-semibold text-slate-500 dark:text-slate-400">
+                      {uploadBytes && uploadBytes.total > 0
+                        ? `${formatBytes(uploadBytes.loaded)} transferidos de ${formatBytes(uploadBytes.total)}`
+                        : "Procesando documento en el servidor..."}
+                    </p>
+                  </div>
+                </div>
+                {uploadProgress > 0 && (
+                  <span className="text-base font-black text-emerald-600 dark:text-emerald-400 bg-white dark:bg-slate-900 px-3 py-1 rounded-xl border border-emerald-500/20 shadow-xs">
+                    {uploadProgress}%
+                  </span>
+                )}
+              </div>
+
+              {/* Barra de Progreso Dinámica */}
+              <div className="w-full bg-slate-200 dark:bg-slate-800 h-2.5 rounded-full overflow-hidden shadow-inner">
+                <div
+                  className="bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-400 h-full rounded-full transition-all duration-300 ease-out shadow-sm"
+                  style={{ width: `${Math.max(uploadProgress, 5)}%` }}
+                />
+              </div>
+
+              <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
+                <span className="flex items-center gap-1.5 font-medium text-amber-700 dark:text-amber-400">
+                  <AlertCircle size={13} /> Por favor, no cierre esta ventana mientras se completa la subida.
+                </span>
+                {uploadProgress === 100 && (
+                  <span className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 font-bold">
+                    <CheckCircle2 size={13} /> Procesado
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Actions */}
           <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-end gap-3">
             <button
               type="button"
+              disabled={loading}
               onClick={onClose}
-              className="px-5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition"
+              className="px-5 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition disabled:opacity-40 disabled:cursor-not-allowed"
             >
               Cancelar
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-[#0F2942] font-black text-xs transition shadow-md disabled:opacity-50"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-600 text-[#0F2942] font-black text-xs transition shadow-md disabled:opacity-60 cursor-pointer"
             >
               {loading ? (
                 <>
-                  <Loader2 size={16} className="animate-spin" /> Subiendo...
+                  <Loader2 size={16} className="animate-spin" />
+                  <span>
+                    {uploadProgress > 0 && uploadProgress < 100
+                      ? `Subiendo (${uploadProgress}%)...`
+                      : "Guardando..."}
+                  </span>
                 </>
               ) : (
                 <>

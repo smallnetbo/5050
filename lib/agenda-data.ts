@@ -587,6 +587,24 @@ export interface MediaItem {
 
 export const mediaItemsList: MediaItem[] = [
   {
+    "id": "cmur5o8w10000od50ghe1s37j",
+    "title": "Primer resultado concreto del proceso de co-construcción de la Agenda 5050",
+    "type": "videos",
+    "mediaUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957195205.mp4",
+    "coverUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957196267.jpg",
+    "description": "La Agenda 50/50 muestra resultados\r\nEl presidente Rodrigo Paz Pereira promulgó la Ley N° 1771, que materializa el Acuerdo 001 firmado con los nueve gobernadores de Bolivia.\r\nCon esta norma, el nivel central del Estado asume el financiamiento del régimen penitenciario, el bono de vacunación y otras obligaciones que hasta ahora recaían en los gobiernos departamentales. Además, se rompe la condicionalidad vigente desde 2005 y se liberan más de 200 millones de bolivianos para que los gobiernos autónomos departamentales decidan sobre sus propios recursos.\r\nEs un resultado concreto del proceso de co-construcción de la Agenda 50/50",
+    "order": 0
+  },
+  {
+    "id": "cmur6b5h7000043p7tqz6k9z0",
+    "title": "Portales para conocer y acompañar la Agenda 5050",
+    "type": "videos",
+    "mediaUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441.mp4",
+    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958264452.jpg",
+    "description": "¡La información sobre el proceso autonómico está al alcance de todas y todos!   Conoce los avances, acuerdos y el Centro de Datos Autonómicos construidos de manera conjunta para transparentar la gestión.   \r\n🔗 Explora toda la información disponible en:\r\n▪️ Portal Agenda 50/50: agenda50-50.sea.gob.bo\r\n▪️ Centro de Datos Autonómicos (CEDIA): cedia.sea.gob.bo\r\n▪️ Presupuesto Abierto: abierto.economiayfinanzas.gob.bo   \r\nMás información, más datos y mayor acceso para conocer y acompañar el proceso autonómico.",
+    "order": 0
+  },
+  {
     "id": "v-1",
     "title": "¿Qué es la Agenda 50/50?",
     "type": "videos",

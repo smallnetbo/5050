@@ -53,10 +53,14 @@ export async function loginAction(formData: FormData) {
       return { success: false, error: "Credenciales de acceso incorrectas." };
     }
 
-    await prisma.adminUser.update({
-      where: { id: user.id },
-      data: { lastLoginAt: new Date() },
-    });
+    try {
+      await prisma.adminUser.update({
+        where: { id: user.id },
+        data: { lastLoginAt: new Date() },
+      });
+    } catch (updateErr) {
+      console.warn("Advertencia: No se pudo actualizar lastLoginAt:", updateErr);
+    }
 
     await createAdminSession(user.email);
 
