@@ -466,34 +466,84 @@ Una vez ejecutado el comando de semillas (`npm run db:seed`), se genera el usuar
 
 ## 🛠️ Mantenimiento, Respaldos y Actualizaciones
 
-### Cómo Aplicar Actualizaciones de Código (Git Pull)
-Cuando existan cambios en el repositorio oficial:
+### Consideraciones Críticas para el Servidor de Producción
+
+> 📄 **Instructivo Oficial en PDF para el Administrador / DevOps:**
+> Para entregar al administrador del servidor de producción, se ha generado un instructivo técnico en PDF listo para imprimir o enviar:
+> - Archivo en el repositorio: [`INSTRUCTIVO_DESPLIEGUE_PRODUCCION.pdf`](./INSTRUCTIVO_DESPLIEGUE_PRODUCCION.pdf)
+> - Descarga pública (tras desplegar): `https://tu-dominio.com/INSTRUCTIVO_DESPLIEGUE_PRODUCCION.pdf`
+>
+> Cubre la configuración del servidor web Nginx, permisos de SQLite y carpetas de subida, y el comando paso a paso de despliegue.
+
+Para garantizar que el portal funcione óptimamente en producción, especialmente al subir archivos pesados (videos de hasta 500 MB y documentos PDF) y evitar bloqueos de base de datos:
+
+#### 1. Configuración de Subida de Archivos Pesados en el Servidor Web (Nginx / Apache)
+Next.js y el proxy inverso deben permitir transferencias de gran tamaño.
+* **En Nginx** (`/etc/nginx/nginx.conf` o el archivo de host virtual del sitio):
+  ```nginx
+  # Permitir cuerpos de solicitud de hasta 500 MB
+  client_max_body_size 500m;
+
+  # Timeouts prolongados para subidas prolongadas de video
+  proxy_read_timeout 300s;
+  proxy_send_timeout 300s;
+  client_body_timeout 300s;
+  ```
+* **En Next.js (`next.config.mjs`)**: Ya configurado en el repositorio con `bodySizeLimit: '500mb'` en `serverActions` y `middlewareClientMaxBodySize: '500mb'`.
+
+#### 2. Permisos del Sistema Operativo (Usuario `www` o `node`)
+El proceso de Node.js corre habitualmente bajo el usuario `www:www` (o `node`):
+* **Base de datos SQLite (`prisma/`):** El directorio y el archivo `dev.db` requieren permisos de escritura obligatorios. Si son propiedad de `root`, se generará el error `attempt to write a readonly database`:
+  ```bash
+  chown -R www:www prisma
+  chmod 775 prisma
+  chmod 664 prisma/dev.db
+  ```
+* **Directorio de Subidas (`public/uploads/`):**
+  ```bash
+  mkdir -p public/uploads/multimedia public/uploads/documents
+  chown -R www:www public/uploads
+  chmod -R 775 public/uploads
+  ```
+
+---
+
+### Paso a Paso para Desplegar Actualizaciones en Producción
+
+Cuando se reciban actualizaciones desde el repositorio:
 
 ```bash
-cd /var/www/agenda5050
+cd /ruta-del-proyecto/5050
 
-# 1. Traer los últimos cambios
-git pull origin main
+# 1. Respaldo preventivo de la base de datos de producción
+cp prisma/dev.db prisma/dev.db.backup_$(date +%Y%m%d_%H%M%S)
 
-# 2. Instalar posibles nuevas dependencias
+# 2. Descargar los últimos cambios
+git pull origin main # o develop
+
+# 3. Instalar nuevas dependencias (si las hubiera)
 npm install
 
-# 3. Aplicar migraciones o cambios en el esquema de BD si los hubiera
-npm run db:push
+# 4. Asegurar propiedad y permisos para el usuario del servidor web (www)
+chown -R www:www .
+chmod 775 prisma public/uploads
+chmod 664 prisma/dev.db
 
-# 4. Recompilar Next.js
+# 5. Recompilar Next.js para producción
 npm run build
 
-# 5. Recargar la aplicación sin caída de servicio
-pm2 reload agenda-5050
+# 6. Reiniciar el servicio
+# En aaPanel: Reiniciar el proyecto desde "Node project" -> Restart
+# O con PM2:
+pm2 reload 5050 # o pm2 restart 5050
 ```
 
-### Respaldos de la Base de Datos y Archivos
+### Respaldos Periódicos de Datos y Archivos
 Toda la información dinámica se almacena en dos ubicaciones:
-1. `prisma/dev.db` (Base de datos SQLite: usuarios, propuestas, hitos, configuración, multimedia).
-2. `public/uploads/` (Archivos PDF y recursos subidos).
+1. `prisma/dev.db` (Base de datos SQLite: usuarios, propuestas, hitos, multimedia, configuración).
+2. `public/uploads/` (Archivos PDF y videos MP4 subidos).
 
-Script rápido para crear un backup comprimido diario:
+Script rápido para crear un backup comprimido:
 ```bash
 tar -czvf /backup/agenda5050_backup_$(date +%F).tar.gz prisma/dev.db public/uploads .env.local
 ```
@@ -502,21 +552,26 @@ tar -czvf /backup/agenda5050_backup_$(date +%F).tar.gz prisma/dev.db public/uplo
 
 ## ❓ Resolución de Problemas Frecuentes
 
-1. **Error: `Port 3010 is already in use`**:
-   - Verificar qué proceso está ocupando el puerto: `lsof -i :3010` o `netstat -tulnp | grep 3010`.
-   - Detener el proceso previo o cambiar el puerto en `package.json` (`-p 3010`) y en la configuración de Nginx.
+1. **Error: `Body exceeded 1 MB limit` al subir videos o archivos**:
+   - Causa: Next.js restringe por defecto el tamaño de las Server Actions a 1 MB.
+   - Solución: Asegurarse de que el archivo `next.config.mjs` esté presente con `serverActions: { bodySizeLimit: '500mb' }` y recompilar (`npm run build`).
 
-2. **Error al subir archivos en el CMS (`Permission denied`)**:
+2. **Error: `SqliteError: attempt to write a readonly database` al iniciar sesión**:
+   - Causa: El directorio `prisma/` o el archivo `dev.db` tienen como propietario a `root` en vez del usuario del servidor web (`www`).
+   - Solución: Ejecutar `chown -R www:www prisma && chmod 775 prisma && chmod 664 prisma/dev.db`.
+
+3. **Error: `Port 3010 is already in use`**:
+   - Verificar qué proceso está ocupando el puerto: `lsof -i :3010` o `netstat -tulnp | grep 3010`.
+   - Detener el proceso previo o cambiar el puerto en `package.json` (`-p 3010`) y en Nginx.
+
+4. **Error al subir archivos en el CMS (`Permission denied`)**:
    - Asegurarse de que el usuario que ejecuta Node tenga permisos sobre `public/uploads`:
      ```bash
-     chmod -R 775 public/uploads
+     chmod -R 775 public/uploads && chown -R www:www public/uploads
      ```
 
-3. **La base de datos SQLite dice `database is locked`**:
-   - Ocurre si múltiples procesos acceden simultáneamente en modo de escritura sin liberar la conexión. Asegurarse de que la aplicación solo se ejecute con 1 instancia en PM2 (`instances: 1`), ya que SQLite maneja concurrencia de lectura pero requiere bloqueo exclusivo por escritura.
-
-4. **El feed de noticias muestra el mensaje de respaldo**:
-   - Si la API externa no está disponible, el sistema cambia automáticamente al modo fallback local sin romper la interfaz del usuario. Para revisar la conexión con la API externa, verifique el token y las URLs en el `.env.local`.
+5. **La base de datos SQLite dice `database is locked`**:
+   - Asegurarse de que la aplicación solo se ejecute con 1 instancia en PM2 (`instances: 1`), ya que SQLite maneja concurrencia de lectura pero requiere bloqueo exclusivo por escritura.
 
 ---
 
