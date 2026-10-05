@@ -13,14 +13,14 @@ export function Header() {
 
   const navLinks = [
     { label: "Inicio", href: "#acuerdo" },
-    { label: "Conceptos", href: "#conceptos" },
+    { label: "Acuerdos", href: "#acuerdos" },
+    { label: "Compromisos", href: "#compromisos" },
+    { label: "Estado & Ruta", href: "#linea-tiempo" },
+    { label: "Documentos", href: "#documentos" },
     { label: "Monitor 50/50", href: "#monitor" },
     { label: "Prensa", href: "#prensa" },
-    { label: "Pilares", href: "#pilares" },
-    { label: "Ruta", href: "#ruta" },
     { label: "Multimedia", href: "#multimedia" },
-    { label: "Documentos", href: "#descargas" },
-    { label: "Co-construcción Ciudadana", href: "#co-construccion", isMail: true },
+    { label: "Co-construcción", href: "#co-construccion", isMail: true },
   ];
 
 

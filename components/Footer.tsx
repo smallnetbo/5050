@@ -32,13 +32,13 @@ export function Footer() {
             <h4 className="text-xs font-black uppercase tracking-wider text-amber-200/80">Navegación del Portal</h4>
             <ul className="space-y-2 text-xs font-bold text-slate-300">
               <li><a href="#acuerdo" className="hover:text-[#c79d47] transition">Inicio</a></li>
-              <li><a href="#conceptos" className="hover:text-[#c79d47] transition">Conceptos</a></li>
+              <li><a href="#acuerdos" className="hover:text-[#c79d47] transition">Acuerdos 001 y 002</a></li>
+              <li><a href="#compromisos" className="hover:text-[#c79d47] transition">Compromisos por Nivel</a></li>
+              <li><a href="#linea-tiempo" className="hover:text-[#c79d47] transition">Estado & Línea de Tiempo</a></li>
+              <li><a href="#documentos" className="hover:text-[#c79d47] transition">Información y Documentos</a></li>
               <li><a href="#monitor" className="hover:text-[#c79d47] transition">Monitor 50/50</a></li>
               <li><a href="#prensa" className="hover:text-[#c79d47] transition">Prensa</a></li>
-              <li><a href="#pilares" className="hover:text-[#c79d47] transition">Pilares</a></li>
-              <li><a href="#ruta" className="hover:text-[#c79d47] transition">Ruta</a></li>
               <li><a href="#multimedia" className="hover:text-[#c79d47] transition">Multimedia</a></li>
-              <li><a href="#descargas" className="hover:text-[#c79d47] transition">Documentos</a></li>
               <li><a href="#co-construccion" className="hover:text-[#c79d47] transition flex items-center gap-1.5"><Mail size={12} className="text-emerald-400" /> Co-construcción</a></li>
             </ul>
           </div>
