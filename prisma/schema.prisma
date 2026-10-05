@@ -157,4 +157,58 @@ model CitizenProposal {
   updatedAt    DateTime @updatedAt
 }
 
+// 11. Configuración de Monitoreo & Cuenta Regresiva (Monitor.tsx)
+model MonitorConfig {
+  id                    String   @id @default("global")
+  sectionBadge          String   @default("Monitoreo en Tiempo Real")
+  sectionTitle          String   @default("Indicadores & Plazos")
+  sectionSubtitle       String   @default("Seguimiento técnico del avance de los compromisos del Acuerdo N° 001/2026.")
+  showCountdown         Boolean  @default(true)
+  countdownBadge        String   @default("Hito Prioritario en Curso")
+  countdownTitle        String   @default("Cuenta Regresiva: Proyecto de Ley modificación Ley 154")
+  countdownDescription  String   @default("Texto de Proyecto de Ley que permita a los departamentos crear o modificar sus propios impuestos y ampliar su dominio tributario.")
+  countdownResponsible  String?  @default("MEFP + 9 GAD")
+  countdownTargetDate   String   @default("2026-11-03T23:59:59")
+  updatedAt             DateTime @updatedAt
+}
+
+// 12. Indicadores & Plazos de Monitoreo (Monitor.tsx)
+model MonitorMetric {
+  id          Int      @id @default(autoincrement())
+  order       Int      @default(0)
+  title       String   // Nombre del Contador / Hito
+  value       String   // Días restantes o texto destacado
+  description String   // Qué debe entregar / Detalle
+  responsible String?  @default("") // Quién debe cumplir
+  deliverable String?  @default("") // Qué debe entregar
+  deadlineDate String? @default("") // Fecha límite (ej. 2026-10-14)
+  badge       String   @default("Métrica Oficial")
+  category    String?  @default("General")
+  iconName    String   @default("Clock")
+  colorScheme String   @default("emerald") // "emerald" | "amber" | "red" | "blue"
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// 13. Compromisos por Nivel (LevelCommitments.tsx)
+model LevelCommitment {
+  id           String   @id @default(cuid())
+  levelId      String   // "nce" | "gad" | "gam" | "conjunto"
+  levelName    String   // "Presidente / Gobierno Nacional (NCE)", etc.
+  commitment   String   // Nombre del compromiso
+  deliverable  String   // ¿Qué debe entregar realmente?
+  responsible  String   // Quién
+  status       String   // Estado / Plazo (ej: "14/10/2026", "Sin plazo", "Cumplido")
+  deadlineDate String?  // Formato YYYY-MM-DD
+  category     String?  @default("General")
+  order        Int      @default(0)
+  active       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+
+
+
 

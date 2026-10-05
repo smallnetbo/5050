@@ -3,7 +3,7 @@ import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Concepts } from "@/components/Concepts";
 import { Monitor } from "@/components/Monitor";
-import { Pillars } from "@/components/Pillars";
+import { LevelCommitments } from "@/components/LevelCommitments";
 import { Timeline } from "@/components/Timeline";
 import { MultimediaHub } from "@/components/MultimediaHub";
 import { InteractiveNewsGallery3 } from "@/components/InteractiveNewsGallery3";
@@ -30,12 +30,12 @@ export default async function Home() {
         <main>
           <Hero />
           <Concepts conceptSteps={landingData.conceptSteps} />
-          <Monitor />
+          <Monitor config={landingData.monitorConfig} metrics={landingData.monitorMetrics} />
+          <LevelCommitments commitments={landingData.commitments} />
           
           {/* MÓDULO EXCLUIDO: Se mantiene 100% independiente y sin modificaciones */}
           <InteractiveNewsGallery3 />
 
-          <Pillars pillars={landingData.pillars} />
           <Timeline milestones={landingData.milestones} />
           <MultimediaHub mediaItems={landingData.mediaItems} />
           <DocumentHub documents={landingData.documents} />

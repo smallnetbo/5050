@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { getLandingData } from "@/lib/data-service";
-import { Clock, FileText, Sliders, Map, Sparkles, ArrowRight, Video } from "lucide-react";
+import { Clock, FileText, Sliders, Map, Sparkles, ArrowRight, Video, Activity, ClipboardList } from "lucide-react";
 
 export default async function AdminDashboardPage() {
   const data = await getLandingData();
 
   const stats = [
+    { title: "Indicadores Monitor", count: data.monitorMetrics.length, href: "/admin/monitor", icon: Activity, color: "bg-emerald-600" },
+    { title: "Compromisos x Nivel", count: (data.commitments || []).length, href: "/admin/commitments", icon: ClipboardList, color: "bg-indigo-600" },
     { title: "Recursos Multimedia", count: data.mediaItems.length, href: "/admin/multimedia", icon: Video, color: "bg-rose-500" },
     { title: "Hitos Registrados", count: data.milestones.length, href: "/admin/timeline", icon: Clock, color: "bg-blue-500" },
     { title: "Documentos Abiertos", count: data.documents.length, href: "/admin/documents", icon: FileText, color: "bg-emerald-500" },
@@ -28,7 +30,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Metrics Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
         {stats.map((s) => {
           const Icon = s.icon;
           return (

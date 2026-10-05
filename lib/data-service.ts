@@ -6,13 +6,19 @@ import {
   documentsList as defaultDocuments,
   conceptStepsList as defaultConceptSteps,
   mediaItemsList as defaultMediaItems,
+  defaultMonitorConfig,
+  defaultMonitorMetrics,
   Pillar,
   Milestone,
   DepartmentData,
   DocumentItem,
   ConceptStep,
   MediaItem,
+  MonitorConfig,
+  MonitorMetric,
 } from "@/lib/agenda-data";
+
+import { commitmentsData, CommitmentItem } from "@/lib/commitments-data";
 
 export interface SiteConfigData {
   heroTitle: string;
@@ -25,7 +31,18 @@ export interface SiteConfigData {
 
 export async function getLandingData() {
   try {
-    const [dbPillars, dbMilestones, dbDepartments, dbDocuments, dbConcepts, dbMediaItems, dbConfig] = await Promise.all([
+    const [
+      dbPillars,
+      dbMilestones,
+      dbDepartments,
+      dbDocuments,
+      dbConcepts,
+      dbMediaItems,
+      dbConfig,
+      dbMonitorConfig,
+      dbMonitorMetrics,
+      dbCommitments,
+    ] = await Promise.all([
       prisma.pillar.findMany({ orderBy: { order: "asc" } }),
       prisma.milestone.findMany({ orderBy: { order: "asc" } }),
       prisma.departmentData.findMany(),
@@ -33,6 +50,9 @@ export async function getLandingData() {
       prisma.conceptStep.findMany({ orderBy: { num: "asc" } }),
       prisma.mediaItem.findMany({ orderBy: { order: "asc" } }),
       prisma.siteConfig.findUnique({ where: { id: "global" } }),
+      (prisma as any).monitorConfig.findUnique({ where: { id: "global" } }),
+      (prisma as any).monitorMetric.findMany({ orderBy: { order: "asc" } }),
+      (prisma as any).levelCommitment.findMany({ orderBy: { order: "asc" } }),
     ]);
 
     const mappedPillars: Pillar[] = dbPillars.length > 0
@@ -136,6 +156,52 @@ export async function getLandingData() {
           acuerdoDateText: "5 de Agosto de 2026",
         };
 
+    const monitorConfig: MonitorConfig = dbMonitorConfig
+      ? {
+          sectionBadge: dbMonitorConfig.sectionBadge,
+          sectionTitle: dbMonitorConfig.sectionTitle,
+          sectionSubtitle: dbMonitorConfig.sectionSubtitle,
+          showCountdown: dbMonitorConfig.showCountdown,
+          countdownBadge: dbMonitorConfig.countdownBadge,
+          countdownTitle: dbMonitorConfig.countdownTitle,
+          countdownDescription: dbMonitorConfig.countdownDescription,
+          countdownResponsible: dbMonitorConfig.countdownResponsible || "MEFP + 9 GAD",
+          countdownTargetDate: dbMonitorConfig.countdownTargetDate,
+        }
+      : defaultMonitorConfig;
+
+    const monitorMetrics: MonitorMetric[] = dbMonitorMetrics.length > 0
+      ? dbMonitorMetrics.map((m: any) => ({
+          id: m.id,
+          order: m.order,
+          title: m.title,
+          value: m.value,
+          description: m.description,
+          responsible: m.responsible || "",
+          deliverable: m.deliverable || m.description || "",
+          deadlineDate: m.deadlineDate || "",
+          badge: m.badge,
+          category: m.category || undefined,
+          iconName: m.iconName,
+          colorScheme: m.colorScheme,
+          active: m.active,
+        }))
+      : defaultMonitorMetrics;
+
+    const mappedCommitments: CommitmentItem[] = dbCommitments && dbCommitments.length > 0
+      ? dbCommitments.map((c: any) => ({
+          id: c.id,
+          levelId: c.levelId as any,
+          levelName: c.levelName,
+          commitment: c.commitment,
+          deliverable: c.deliverable,
+          responsible: c.responsible,
+          status: c.status,
+          deadlineDate: c.deadlineDate || undefined,
+          category: c.category || undefined,
+        }))
+      : commitmentsData;
+
     return {
       pillars: mappedPillars,
       milestones: mappedMilestones,
@@ -144,6 +210,9 @@ export async function getLandingData() {
       conceptSteps: mappedConcepts,
       mediaItems: mappedMediaItems,
       siteConfig,
+      monitorConfig,
+      monitorMetrics,
+      commitments: mappedCommitments,
     };
   } catch (error) {
     console.warn("DB offline o sin inicializar. Usando datos estáticos por defecto.");
@@ -154,6 +223,9 @@ export async function getLandingData() {
       documents: defaultDocuments,
       conceptSteps: defaultConceptSteps,
       mediaItems: defaultMediaItems,
+      monitorConfig: defaultMonitorConfig,
+      monitorMetrics: defaultMonitorMetrics,
+      commitments: commitmentsData,
       siteConfig: {
         heroTitle: "Hacia una distribución justa 50/50",
         heroSubtitle: "Transformando la descentralización tributaria en Bolivia mediante el Acuerdo N° 001/2026 de Sucre.",
@@ -165,4 +237,5 @@ export async function getLandingData() {
     };
   }
 }
+
 

@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon, Mail } from "lucide-react";
-import { documentsList, pillars, departmentsData } from "@/lib/agenda-data";
+import { documentsList, departmentsData } from "@/lib/agenda-data";
+import { commitmentsData } from "@/lib/commitments-data";
 import { useTheme } from "./ThemeProvider";
 
 export function Header() {
@@ -15,8 +16,8 @@ export function Header() {
     { label: "Inicio", href: "#acuerdo" },
     { label: "Conceptos", href: "#conceptos" },
     { label: "Monitor 50/50", href: "#monitor" },
+    { label: "Compromisos", href: "#compromisos" },
     { label: "Prensa", href: "#prensa" },
-    { label: "Pilares", href: "#pilares" },
     { label: "Ruta", href: "#ruta" },
     { label: "Multimedia", href: "#multimedia" },
     { label: "Documentos", href: "#descargas" },
@@ -25,7 +26,11 @@ export function Header() {
 
 
   // Search auto-complete items
-  const filteredPillars = pillars.filter(p => p.title.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredCommitments = commitmentsData.filter(c =>
+    c.commitment.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.deliverable.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    c.responsible.toLowerCase().includes(searchQuery.toLowerCase())
+  ).slice(0, 5);
   const filteredDocs = documentsList.filter(d => d.title.toLowerCase().includes(searchQuery.toLowerCase()));
   const filteredDeps = departmentsData.filter(dep => dep.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -188,22 +193,25 @@ export function Header() {
                 </div>
               ) : (
                 <>
-                  {/* Filtered Pillars */}
-                  {filteredPillars.length > 0 && (
+                  {/* Filtered Commitments */}
+                  {filteredCommitments.length > 0 && (
                     <div>
-                      <h4 className="text-xs font-black uppercase text-emerald-600 tracking-wider mb-2 flex items-center gap-1.5">
-                        <BarChart3 size={14} /> Pilares Temáticos ({filteredPillars.length})
+                      <h4 className="text-xs font-black uppercase text-indigo-600 tracking-wider mb-2 flex items-center gap-1.5">
+                        <BarChart3 size={14} /> Compromisos por Nivel ({filteredCommitments.length})
                       </h4>
                       <div className="space-y-1.5">
-                        {filteredPillars.map((p) => (
+                        {filteredCommitments.map((c) => (
                           <a
-                            key={p.id}
-                            href="#pilares"
+                            key={c.id}
+                            href="#compromisos"
                             onClick={() => setSearchOpen(false)}
-                            className="block rounded-xl border border-slate-100 bg-slate-50 p-3 hover:bg-emerald-50 hover:border-emerald-200 transition"
+                            className="block rounded-xl border border-slate-100 bg-slate-50 p-3 hover:bg-indigo-50 hover:border-indigo-200 transition"
                           >
-                            <div className="text-xs font-black text-slate-900">{p.title}</div>
-                            <div className="text-xs text-slate-500 line-clamp-1 mt-0.5">{p.summary}</div>
+                            <div className="flex items-center justify-between text-xs font-black text-slate-900">
+                              <span>{c.levelName}</span>
+                              <span className="text-[10px] text-slate-400 font-bold">{c.responsible}</span>
+                            </div>
+                            <div className="text-xs text-slate-600 line-clamp-1 mt-0.5">{c.commitment}</div>
                           </a>
                         ))}
                       </div>
@@ -257,7 +265,7 @@ export function Header() {
                     </div>
                   )}
 
-                  {filteredPillars.length === 0 && filteredDocs.length === 0 && filteredDeps.length === 0 && (
+                  {filteredCommitments.length === 0 && filteredDocs.length === 0 && filteredDeps.length === 0 && (
                     <div className="text-center py-6 text-slate-500 text-xs">
                       No se encontraron resultados para "<span className="font-bold text-slate-700">{searchQuery}</span>".
                     </div>

@@ -1,3 +1,31 @@
+export interface MonitorConfig {
+  sectionBadge: string;
+  sectionTitle: string;
+  sectionSubtitle: string;
+  showCountdown: boolean;
+  countdownBadge: string;
+  countdownTitle: string;
+  countdownDescription: string;
+  countdownResponsible?: string;
+  countdownTargetDate: string;
+}
+
+export interface MonitorMetric {
+  id: number;
+  order: number;
+  title: string;          // Contador
+  value: string;          // Días restantes o texto destacado
+  description: string;    // Detalle
+  responsible?: string;   // Quién debe cumplir
+  deliverable?: string;   // Qué debe entregar
+  deadlineDate?: string;  // Fecha límite (formato YYYY-MM-DD o DD/MM/YYYY)
+  badge: string;
+  category?: string;
+  iconName: string;
+  colorScheme: string; // "emerald" | "amber" | "red" | "blue"
+  active: boolean;
+}
+
 export interface Pillar {
   id: number;
   title: string;
@@ -35,7 +63,7 @@ export interface DepartmentData {
 export interface DocumentItem {
   id: string;
   title: string;
-  category: "Acuerdo" | "Proyecto de Ley" | "Decreto" | "Presentación" | "Acta";
+  category: "Acuerdo" | "Acta" | "Presentación" | "Anexo" | "Proyecto de Ley" | "Decreto" | string;
   department?: string;
   date: string;
   fileUrl?: string;
@@ -786,4 +814,51 @@ export const mediaItemsList: MediaItem[] = [
     "order": 5
   }
 ];
+
+export const defaultMonitorConfig: MonitorConfig = {
+  sectionBadge: "Monitoreo en Tiempo Real",
+  sectionTitle: "Indicadores & Plazos",
+  sectionSubtitle: "Seguimiento técnico del avance de los compromisos del Acuerdo N° 001/2026.",
+  showCountdown: true,
+  countdownBadge: "Hito Prioritario en Curso",
+  countdownTitle: "Cuenta Regresiva: Proyecto de Ley modificación Ley 154",
+  countdownDescription: "Texto de Proyecto de Ley que permita a los departamentos crear o modificar sus propios impuestos y ampliar su dominio tributario.",
+  countdownResponsible: "MEFP + 9 GAD",
+  countdownTargetDate: "2026-11-03T23:59:59",
+};
+
+export const defaultMonitorMetrics: MonitorMetric[] = [
+  {
+    id: 1,
+    order: 1,
+    title: "Respuesta técnica FPIEEH",
+    value: "12 Días",
+    description: "Informe que diga si es viable: (a) suspender el 12% del FPIEEH a los GAM en 2027, (b) devolver lo retenido en 2025, (c) aplicarlo progresivamente en los siguientes años",
+    responsible: "Min. Hidrocarburos + MEFP",
+    deliverable: "Informe que diga si es viable: (a) suspender el 12% del FPIEEH a los GAM en 2027, (b) devolver lo retenido en 2025, (c) aplicarlo progresivamente en los siguientes años",
+    deadlineDate: "2026-10-14",
+    badge: "Próximo Vencimiento",
+    category: "FPIEEH",
+    iconName: "Clock",
+    colorScheme: "amber",
+    active: true,
+  },
+  {
+    id: 2,
+    order: 2,
+    title: "Proyecto de Ley modificación Ley 154",
+    value: "32 Días",
+    description: "Texto de Proyecto de Ley que permita a los departamentos crear o modificar sus propios impuestos y ampliar su dominio tributario",
+    responsible: "MEFP + 9 GAD",
+    deliverable: "Texto de Proyecto de Ley que permita a los departamentos crear o modificar sus propios impuestos y ampliar su dominio tributario",
+    deadlineDate: "2026-11-03",
+    badge: "Hito Prioritario",
+    category: "Tributario",
+    iconName: "Scale",
+    colorScheme: "red",
+    active: true,
+  },
+];
+
+
 

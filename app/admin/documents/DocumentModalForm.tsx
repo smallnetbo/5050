@@ -143,10 +143,11 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
                 className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               >
                 <option value="Acuerdo">Acuerdo</option>
+                <option value="Acta">Acta</option>
+                <option value="Presentación">Presentación</option>
+                <option value="Anexo">Anexo</option>
                 <option value="Proyecto de Ley">Proyecto de Ley</option>
                 <option value="Decreto">Decreto</option>
-                <option value="Presentación">Presentación</option>
-                <option value="Acta">Acta</option>
               </select>
             </div>
 

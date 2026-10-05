@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { Send, CheckCircle2, MessageSquare, Loader2, ShieldAlert, Mail, Users, FileCheck2, ArrowRight, Scale, Layers } from "lucide-react";
+import { Send, CheckCircle2, MessageSquare, Loader2, ShieldAlert, Mail, FileCheck2, ArrowRight } from "lucide-react";
 import { submitCitizenProposalAction, getFeedbackSettingsAction } from "@/lib/actions/proposals.actions";
 
 export function CitizenFeedback() {
@@ -77,44 +77,6 @@ export function CitizenFeedback() {
               </p>
             </div>
 
-            {/* Conceptual pillars of Co-construcción */}
-            <div className="space-y-3 pt-1">
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-[#151D2A]/70 transition-all duration-200 hover:border-emerald-500/30">
-                <div className="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                  <Users size={18} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-black text-slate-900 dark:text-white">Diálogo Plural y Actores Centrales</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                    Articulación horizontal y activa entre gobiernos autónomos departamentales, regionales, municipales, GAIOC y la sociedad civil para concertar soluciones consensuadas.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-[#151D2A]/70 transition-all duration-200 hover:border-emerald-500/30">
-                <div className="w-9 h-9 rounded-xl bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-400 flex items-center justify-center shrink-0">
-                  <Scale size={18} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-black text-slate-900 dark:text-white">Equilibrio entre Recursos y Competencias</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                    Superación de más de 15 años de proceso autonómico inconcluso, armonizando facultades y atribuciones con fuentes reales de recaudación y un pacto fiscal equitativo (50/50).
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3.5 p-4 rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-[#151D2A]/70 transition-all duration-200 hover:border-emerald-500/30">
-                <div className="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                  <Layers size={18} />
-                </div>
-                <div>
-                  <h4 className="text-sm font-black text-slate-900 dark:text-white">Ruta Metodológica y Corresponsabilidad</h4>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 font-medium mt-0.5 leading-relaxed">
-                    Se articula mediante coordinación técnica intergubernativa, diagnóstico compartido, calidad del gasto público y resultados progresivos y verificables.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Proposal Submission Form */}

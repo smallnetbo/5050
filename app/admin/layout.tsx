@@ -17,10 +17,14 @@ import {
   Video,
   User,
   MessageSquare,
+  Activity,
+  ClipboardList,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/monitor", label: "Monitor & Indicadores", icon: Activity },
+  { href: "/admin/commitments", label: "Compromisos x Nivel", icon: ClipboardList },
   { href: "/admin/proposals", label: "Co-construcción (Propuestas)", icon: MessageSquare },
   { href: "/admin/multimedia", label: "Centro Multimedia", icon: Video },
   { href: "/admin/concepts", label: "Conceptos 50/50", icon: HelpCircle },

@@ -35,7 +35,7 @@ export function Footer() {
               <li><a href="#conceptos" className="hover:text-[#c79d47] transition">Conceptos</a></li>
               <li><a href="#monitor" className="hover:text-[#c79d47] transition">Monitor 50/50</a></li>
               <li><a href="#prensa" className="hover:text-[#c79d47] transition">Prensa</a></li>
-              <li><a href="#pilares" className="hover:text-[#c79d47] transition">Pilares</a></li>
+              <li><a href="#compromisos" className="hover:text-[#c79d47] transition">Compromisos</a></li>
               <li><a href="#ruta" className="hover:text-[#c79d47] transition">Ruta</a></li>
               <li><a href="#multimedia" className="hover:text-[#c79d47] transition">Multimedia</a></li>
               <li><a href="#descargas" className="hover:text-[#c79d47] transition">Documentos</a></li>
