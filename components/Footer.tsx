@@ -18,7 +18,7 @@ export function Footer() {
             </a>
 
             <p className="text-xs leading-relaxed text-slate-300 max-w-md font-medium">
-              Plataforma de Transparencia Activa y Monitoreo del Acuerdo N° 001/2026 (Sucre, 5 de agosto de 2026). Gobernaciones, Municipios, AIOC y Gran Chaco.
+              Plataforma de Transparencia Activa, Seguimiento y Monitoreo de los Acuerdos de la Agenda 50/50. Gobernaciones, Municipios, AIOC y Gran Chaco.
             </p>
 
             <div className="flex items-center gap-2 text-xs font-bold text-[#3ac167]">

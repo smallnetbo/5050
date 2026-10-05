@@ -248,6 +248,55 @@ export const pillars: Pillar[] = [
   }
 ];
 
+export const pillarsAcuerdo002: Pillar[] = [
+  {
+    id: 101,
+    title: "Libertades y eficiencia autonómica",
+    category: "Institucional",
+    iconName: "Briefcase",
+    summary: "Fortalecer las condiciones operativas para que los GAM ejerzan efectivamente sus competencias, tomen decisiones de gestión oportunas y presten servicios públicos eficientes y orientados a resultados.",
+    actions: [
+      "Priorización del sector salud",
+      "Competencias y cargas financieras",
+      "Servicios públicos e impacto urbano",
+      "Gestión metropolitana y conurbación",
+      "Simplificación y reporte único",
+      "Transparencia, gestión de datos y rendición de cuentas",
+      "Simplificación de la gestión pública"
+    ]
+  },
+  {
+    id: 102,
+    title: "Reformas normativas",
+    category: "Normativo",
+    iconName: "Scale",
+    summary: "Identificar e impulsar las adecuaciones normativas necesarias para profundizar la autonomía municipal, eliminar restricciones al gasto y estructurar un marco jurídico predecible para el desarrollo local.",
+    actions: [
+      "Revisión de normativa restrictiva",
+      "Cartas orgánicas",
+      "Dominio tributario adaptativo",
+      "Relacionamiento internacional y cooperación",
+      "Inversión y alianzas público-privadas (APP)",
+      "Gestión laboral municipal"
+    ]
+  },
+  {
+    id: 103,
+    title: "Acuerdos fiscales y financiamiento",
+    category: "Fiscal",
+    iconName: "Coins",
+    summary: "Estructurar una relación equilibrada entre las necesidades socioeconómicas del municipio y la capacidad de respuesta institucional del GAM con los recursos disponibles.",
+    actions: [
+      "Análisis de fuentes",
+      "Distribución fiscal equitativa",
+      "Financiamiento innovador modular",
+      "Gestión presupuestaria eficiente",
+      "Alivio y readecuación financiera diferenciada",
+      "FPIEEH (Ley N° 767)"
+    ]
+  }
+];
+
 export const milestones: Milestone[] = [
   {
     "id": 1,
@@ -490,6 +539,17 @@ export const documentsList: DocumentItem[] = [
     "fileUrl": "/Acuerdo-001-2026-Agenda-50-50.pdf",
     "description": "Acuerdo firmado en Sucre plantea una ruta técnica para avanzar en autonomía fiscal, alivio financiero, distribución de recursos, competencias y fortalecimiento de los gobiernos departamentales.",
     "downloadsCount": 1420,
+    "featured": true
+  },
+  {
+    "id": "doc-2",
+    "title": "Acuerdo N° 002/2026 - GAM de Capitales y El Alto",
+    "category": "Acuerdo",
+    "date": "2026",
+    "fileSize": "11.7 MB",
+    "fileUrl": "/Acuerdo-002-2026-Agenda-50-50.pdf",
+    "description": "Acuerdo técnico suscrito entre el Gobierno Nacional y los Gobiernos Autónomos Municipales de Ciudades Capitales y El Alto en torno a libertades autonómicas, reformas normativas y acuerdos fiscales.",
+    "downloadsCount": 860,
     "featured": true
   }
 ];
