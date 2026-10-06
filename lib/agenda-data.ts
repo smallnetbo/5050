@@ -39,11 +39,14 @@ export interface Milestone {
   id: number;
   title: string;
   date: string;
-  status: "Cumplido" | "En proceso" | "Programado" | "Meta";
+  status: "Cumplido" | "En proceso" | "Pendiente" | "Programado" | "Meta";
   detail: string;
-  documents?: { name: string; size: string }[];
+  image?: string;
+  summary?: string;
+  documents?: { name: string; size: string; url?: string }[];
   participants?: string[];
 }
+
 
 export interface DepartmentData {
   id: string;
@@ -332,6 +335,7 @@ export const milestones: Milestone[] = [
     "date": "Enero - Julio 2026",
     "status": "Cumplido",
     "detail": "Consolidación de la base de datos demográficos y financieros departamentales compartidos entre el MEFP y los 9 GAD.",
+    "image": "/uploads/timeline/rodrigo-paz-en-conferencia-de-prensa-en-santa-cruz-1791316426945.webp",
     "participants": [
       "Ministerio de Economía",
       "Viceministerio de Autonomías",
@@ -344,6 +348,7 @@ export const milestones: Milestone[] = [
     "date": "5 de Agosto de 2026",
     "status": "Cumplido",
     "detail": "Firma histórica en la Casa de la Libertad entre el Gobierno Nacional y los 9 Gobernadores Departamentales.",
+    "image": "/assets/video_firma_acuerdo_5050_cover.jpg",
     "participants": [
       "Presidente del Estado",
       "9 Gobernadores Departamentales",
@@ -389,6 +394,7 @@ export const milestones: Milestone[] = [
     "date": "Septiembre - Octubre 2026",
     "status": "Cumplido",
     "detail": "La Paz, 27 de agosto de 2026 (ABI). – Acompañado de ministros y viceministros, el presidente del Estado, Rodrigo Paz, y la Federación de Asociaciones de Municipios (FAM) de Bolivia iniciaron este jueves la reunión en la ciudad de La Paz para tratar una agenda de seis puntos, en la que se prioriza la propuesta gubernamental del 50/50.\n\n“Me siento bendecido de estar con ustedes para poder realmente transformar este Estado. Debe ser la primera vez en la historia de Bolivia que un presidente quiere acabar con el Estado centralista y eso creo que nos suma en el mismo esfuerzo”, expresó el mandatario al inaugurar el encuentro.\n\nEl jefe de Estado exhortó a los alcaldes a acabar con el Estado centralista de “forma ordenada y consistente para no tener retornos, ni coletazos”, sino que se vaya conformando y consolidando el proceso.\n\n“Yo agradecido por este encuentro, no solo como uno más de ustedes en su momento, he sido concejal, he sido alcalde y me siento parte de la familia con la cual tendremos que llevar adelante las grandes transformaciones”, remarcó.\n\nResaltó que en la reunión uno de los temas a tratar es el 50/50, una propuesta del Gobierno nacional que “no es el final, es el principio de lo que realmente se quiere construir para el futuro de la patria”.\n\nEn tanto, el presidente de la FAM-Bolivia, Johnny Torres, indicó que con los representantes ediles analizaron el miércoles una agenda a tratar en el encuentro de esta jornada con las autoridades del Gobierno nacional.\n\n“Hemos estado ayer (miércoles) reunidos todo el día analizando los temas de la agenda. Nosotros tenemos una agenda de seis puntos que la hemos propuesto al Gobierno, primero el 50/50 el cual nosotros esperamos”, puntualizó.\n\nSubrayó que en esta agenda se pide que el 50/50 se consolide en lo posible en el Presupuesto 2027.\n\n“Si se viabiliza el 50/50 como estamos proponiendo, el Gobierno podría disponer del IDH (Impuesto Directo a los Hidrocarburos) para recursos con gobernaciones y otros y por lo tanto los municipios podríamos tener coparticipación, recursos propios y probablemente recursos de crédito”, comentó.\n\nEn la reunión también están presentes los ministros de la Presidencia, Fernando Aramayo; y de Economía y Finanzas Públicas, Christian Morales, además de viceministros de diferentes carteras de Estado.",
+    "image": "/uploads/timeline/presidente-paz-resalta-reuni-n-con-alcaldes-1791317367709.jpg",
     "participants": [
       "FAM-Bolivia"
     ]
@@ -399,9 +405,11 @@ export const milestones: Milestone[] = [
     "date": "12 de Septiembre",
     "status": "Cumplido",
     "detail": "Avanzamos en la co-construcción de la Agenda 50/50.\nDesde el Servicio Estatal de Autonomías, acompañamos la reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras - Bolivia para estructurar la hoja de ruta de la Agenda 50/50. \nEl encuentro contó con la participación de los equipos técnicos de todos los Gobiernos Autónomos Indígena Originario Campesinos (GAIOC). Durante las mesas de trabajo, se analizaron aspectos críticos desde la tramitación burocrática para el acceso a la autonomía, hasta los cuellos de botella administrativos que limitan una gestión pública territorial plenamente eficiente.\nLa sistematización de estos desafíos técnicos permitirá estructurar soluciones viables dentro de la Agenda 50/50. Valoramos la visión de los GAIOC para transformar estas dificultades administrativas en propuestas concretas para las autonomías",
+    "image": "/uploads/timeline/reuni-n-t-cnica-conaioc---viceministerio-de-autonom-as-y-tierras-1791317777001.jpg",
     "participants": [
       "CONAIOC",
-      "Viceministerio de Autonomías"
+      "Viceministerio de Autonomías",
+      "SEA"
     ]
   },
   {
@@ -410,7 +418,6 @@ export const milestones: Milestone[] = [
     "date": "Noviembre 2026",
     "status": "Programado",
     "detail": "Aprobación del paquete normativo consolidado y presentación formal ante la Asamblea Legislativa Plurinacional.",
-    "documents": [],
     "participants": [
       "Consejo Nacional de Autonomías"
     ]
@@ -421,7 +428,6 @@ export const milestones: Milestone[] = [
     "date": "1 de Enero de 2027",
     "status": "Meta",
     "detail": "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
-    "documents": [],
     "participants": [
       "Estado Plurinacional de Bolivia"
     ]
@@ -559,25 +565,25 @@ export const departmentsData: DepartmentData[] = [
 
 export const documentsList: DocumentItem[] = [
   {
-    "id": "doc-1",
-    "title": "Acuerdo N° 001/2026 - Firma de Sucre (5 de Agosto de 2026)",
-    "category": "Acuerdo",
-    "date": "05/08/2026",
-    "fileSize": "1.44 MB",
-    "fileUrl": "/Acuerdo-001-2026-Agenda-50-50.pdf",
-    "description": "Acuerdo firmado en Sucre plantea una ruta técnica para avanzar en autonomía fiscal, alivio financiero, distribución de recursos, competencias y fortalecimiento de los gobiernos departamentales.",
-    "downloadsCount": 1420,
-    "featured": true
-  },
-  {
     "id": "doc-2",
     "title": "Acuerdo N° 002/2026 - GAM de Capitales y El Alto",
     "category": "Acuerdo",
     "date": "2026",
     "fileSize": "11.7 MB",
     "fileUrl": "/Acuerdo-002-2026-Agenda-50-50.pdf",
-    "description": "Acuerdo técnico suscrito entre el Gobierno Nacional y los Gobiernos Autónomos Municipales de Ciudades Capitales y El Alto en torno a libertades autonómicas, reformas normativas y acuerdos fiscales.",
+    "description": "Acuerdo técnico suscrito entre el Gobierno Nacional y los Gobiernos Autónomos Municipales de Ciudades Capitales y El Alto en torno a libertades autonómicas, reformas normativas y sostenibilidad fiscal municipal.",
     "downloadsCount": 860,
+    "featured": true
+  },
+  {
+    "id": "doc-1",
+    "title": "Acuerdo N° 001/2026 - Firma de Sucre (5 de Agosto de 2026)",
+    "category": "Acuerdo",
+    "date": "05/08/2026",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/Acuerdo-001-2026-Agenda-50-50.pdf",
+    "description": "Acuerdo firmado en Sucre que establece la ruta técnica para avanzar en autonomía fiscal, alivio financiero, distribución equitativa de recursos y competencias para los 9 Gobiernos Autónomos Departamentales.",
+    "downloadsCount": 1420,
     "featured": true
   }
 ];

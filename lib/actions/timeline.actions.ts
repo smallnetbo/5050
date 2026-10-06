@@ -15,8 +15,9 @@ export interface MilestoneInput {
   id?: number;
   title: string;
   dateText: string;
-  status: "Cumplido" | "En proceso" | "Programado" | "Meta";
+  status: "Cumplido" | "En proceso" | "Pendiente" | "Programado" | "Meta";
   detail: string;
+  image?: string | null;
   order?: number;
   documents?: MilestoneDocument[];
   participants?: string[];
@@ -45,6 +46,7 @@ export async function upsertMilestoneAction(data: MilestoneInput) {
           dateText: data.dateText.trim(),
           status: data.status,
           detail: data.detail.trim(),
+          image: data.image !== undefined ? (data.image ? data.image.trim() : null) : undefined,
           order: data.order ?? 0,
           documents: documentsJson,
           participants: participantsJson,
@@ -63,6 +65,7 @@ export async function upsertMilestoneAction(data: MilestoneInput) {
           dateText: data.dateText.trim(),
           status: data.status,
           detail: data.detail.trim(),
+          image: data.image ? data.image.trim() : null,
           order: newOrder,
           documents: documentsJson,
           participants: participantsJson,
@@ -144,6 +147,7 @@ export async function seedMilestonesAction() {
           dateText: m.date,
           status: m.status,
           detail: m.detail,
+          image: m.image || null,
           order: index + 1,
           documents: m.documents ? JSON.stringify(m.documents) : null,
           participants: m.participants ? JSON.stringify(m.participants) : null,

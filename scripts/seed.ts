@@ -44,13 +44,14 @@ async function main() {
     const m = milestones[i];
     await prisma.milestone.upsert({
       where: { id: m.id },
-      update: {}, // Mantener intacto si existe
+      update: { image: m.image || null },
       create: {
         id: m.id,
         title: m.title,
         dateText: m.date,
         status: m.status,
         detail: m.detail,
+        image: m.image || null,
         documents: JSON.stringify(m.documents || []),
         participants: JSON.stringify(m.participants || []),
         order: i,

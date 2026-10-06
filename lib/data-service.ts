@@ -73,6 +73,8 @@ export async function getLandingData() {
           date: m.dateText,
           status: m.status as any,
           detail: m.detail,
+          image: m.image || undefined,
+          summary: m.summary || undefined,
           documents: m.documents ? JSON.parse(m.documents) : undefined,
           participants: m.participants ? JSON.parse(m.participants) : undefined,
         }))

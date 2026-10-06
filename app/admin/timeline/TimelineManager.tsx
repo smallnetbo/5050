@@ -25,6 +25,7 @@ import {
   Users,
   Layers,
   Sparkles,
+  Image as ImageIcon,
 } from "lucide-react";
 
 interface TimelineManagerProps {
@@ -208,56 +209,76 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
                   key={m.id}
                   className="bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800/80 p-5 sm:p-6 rounded-3xl shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-5 transition hover:border-slate-300 dark:hover:border-slate-700"
                 >
-                  {/* Left info */}
-                  <div className="space-y-2.5 flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60">
-                        Hito #{index + 1} (ID: {m.id})
-                      </span>
-
-                      <span
-                        className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
-                          isCompleted
-                            ? "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400"
-                            : inProgress
-                            ? "bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-400"
-                            : isMeta
-                            ? "bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300"
-                            : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-                        }`}
-                      >
-                        {m.status}
-                      </span>
-
-                      <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 flex items-center gap-1">
-                        <Calendar size={12} className="text-emerald-500" />
-                        {m.date}
-                      </span>
+                  {/* Left info with Image Thumbnail */}
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-4 flex-1 min-w-0">
+                    {/* Circle Image Preview */}
+                    <div className="shrink-0 flex items-center justify-center">
+                      {m.image ? (
+                        <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full overflow-hidden border-2 border-emerald-400 dark:border-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.35)] ring-2 ring-emerald-500/20 bg-slate-900 shrink-0">
+                          <img
+                            src={m.image}
+                            alt={m.title}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-full border-2 border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 flex flex-col items-center justify-center text-slate-400 shrink-0">
+                          <ImageIcon size={18} />
+                          <span className="text-[9px] font-bold mt-0.5">Sin img</span>
+                        </div>
+                      )}
                     </div>
 
-                    <h3 className="font-black text-slate-900 dark:text-white text-base sm:text-lg">
-                      {m.title}
-                    </h3>
+                    <div className="space-y-2 flex-1 min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-xs font-black text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60">
+                          Hito #{index + 1} (ID: {m.id})
+                        </span>
 
-                    <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
-                      {m.detail}
-                    </p>
+                        <span
+                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                            isCompleted
+                              ? "bg-emerald-100 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-400"
+                              : inProgress
+                              ? "bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-400"
+                              : isMeta
+                              ? "bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300"
+                              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+                          }`}
+                        >
+                          {m.status}
+                        </span>
 
-                    {/* Participants & Docs summary if any */}
-                    <div className="flex flex-wrap items-center gap-4 pt-1 text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                      {m.participants && m.participants.length > 0 && (
-                        <div className="flex items-center gap-1.5">
-                          <Users size={13} className="text-emerald-500" />
-                          <span>{m.participants.length} Actores: {m.participants.join(", ")}</span>
-                        </div>
-                      )}
+                        <span className="text-xs font-extrabold text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                          <Calendar size={12} className="text-emerald-500" />
+                          {m.date}
+                        </span>
+                      </div>
 
-                      {m.documents && m.documents.length > 0 && (
-                        <div className="flex items-center gap-1.5">
-                          <FileText size={13} className="text-blue-500" />
-                          <span>{m.documents.length} Archivo(s) PDF adjunto(s)</span>
-                        </div>
-                      )}
+                      <h3 className="font-black text-slate-900 dark:text-white text-base sm:text-lg">
+                        {m.title}
+                      </h3>
+
+                      <p className="text-xs text-slate-600 dark:text-slate-300 font-medium leading-relaxed">
+                        {m.detail}
+                      </p>
+
+                      {/* Participants & Docs summary if any */}
+                      <div className="flex flex-wrap items-center gap-4 pt-1 text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                        {m.participants && m.participants.length > 0 && (
+                          <div className="flex items-center gap-1.5">
+                            <Users size={13} className="text-emerald-500" />
+                            <span>{m.participants.length} Actores: {m.participants.join(", ")}</span>
+                          </div>
+                        )}
+
+                        {m.documents && m.documents.length > 0 && (
+                          <div className="flex items-center gap-1.5">
+                            <FileText size={13} className="text-blue-500" />
+                            <span>{m.documents.length} Archivo(s) PDF adjunto(s)</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
 
@@ -291,8 +312,9 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
                           id: m.id,
                           title: m.title,
                           dateText: m.date,
-                          status: m.status,
+                          status: m.status as any,
                           detail: m.detail,
+                          image: m.image,
                           participants: m.participants,
                           documents: m.documents,
                         });

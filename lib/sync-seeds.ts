@@ -66,6 +66,7 @@ export async function syncDatabaseToAgendaData() {
       date: m.dateText,
       status: m.status,
       detail: m.detail,
+      image: m.image || undefined,
       documents: m.documents ? JSON.parse(m.documents) : undefined,
       participants: m.participants ? JSON.parse(m.participants) : undefined,
     }));

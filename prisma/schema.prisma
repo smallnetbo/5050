@@ -49,6 +49,7 @@ model Milestone {
   dateText     String
   status       String   // "Cumplido" | "En proceso" | "Programado" | "Meta"
   detail       String
+  image        String?
   documents    String?  // JSON string: [{"name": "Doc.pdf", "size": "3.2MB"}]
   participants String?  // JSON string: ["MEFP", "9 GAD"]
   createdAt    DateTime @default(now())

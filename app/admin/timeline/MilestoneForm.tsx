@@ -19,7 +19,10 @@ import {
   Users,
   Calendar,
   Tag,
+  Upload,
+  Image as ImageIcon,
 } from "lucide-react";
+import { uploadFileWithProgress } from "@/lib/client-upload";
 
 interface MilestoneFormProps {
   initialData?: MilestoneInput | null;
@@ -32,10 +35,15 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
 
   const [title, setTitle] = useState(initialData?.title || "");
   const [dateText, setDateText] = useState(initialData?.dateText || "");
-  const [status, setStatus] = useState<"Cumplido" | "En proceso" | "Programado" | "Meta">(
+  const [status, setStatus] = useState<"Cumplido" | "En proceso" | "Pendiente" | "Programado" | "Meta">(
     initialData?.status || "En proceso"
   );
   const [detail, setDetail] = useState(initialData?.detail || "");
+  const [image, setImage] = useState(initialData?.image || "");
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState(initialData?.image || "");
+  const [uploadProgress, setUploadProgress] = useState<number | null>(null);
+
   const [participants, setParticipants] = useState<string[]>(initialData?.participants || []);
   const [newParticipant, setNewParticipant] = useState("");
 
@@ -86,12 +94,29 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
     }
 
     startTransition(async () => {
+      let finalImage = image.trim();
+
+      if (imageFile) {
+        try {
+          setUploadProgress(0);
+          finalImage = await uploadFileWithProgress(imageFile, "timeline", (p) => {
+            setUploadProgress(p.percent);
+          });
+          setUploadProgress(100);
+        } catch (uploadErr: any) {
+          setToast({ type: "error", message: uploadErr.message || "Error al subir la imagen." });
+          setUploadProgress(null);
+          return;
+        }
+      }
+
       const res = await upsertMilestoneAction({
         id: initialData?.id,
         title,
         dateText,
         status,
         detail,
+        image: finalImage || null,
         order: initialData?.order,
         participants,
         documents,
@@ -207,6 +232,7 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
             >
               <option value="Cumplido">Cumplido (Verde)</option>
               <option value="En proceso">En proceso (Naranja)</option>
+              <option value="Pendiente">Pendiente (Gris)</option>
               <option value="Programado">Programado (Gris/Azul)</option>
               <option value="Meta">Meta (Especial 2027)</option>
             </select>
@@ -225,6 +251,99 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
             className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500 transition"
             required
           />
+        </div>
+      </div>
+
+      {/* Image Input Section (Para círculos de la timeline y tarjeta) */}
+      <div className="pt-2 border-t border-slate-100 dark:border-slate-800 space-y-3">
+        <label className="text-xs font-black uppercase text-slate-500 dark:text-slate-400 tracking-wider flex items-center justify-between">
+          <span className="flex items-center gap-1.5">
+            <ImageIcon size={14} className="text-emerald-500" />
+            <span>Imagen del Hito (Círculo de la línea de tiempo y modal)</span>
+          </span>
+          <span className="text-[10px] font-bold text-slate-400">Opcional</span>
+        </label>
+
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+          {/* Circular preview matching the screenshot circles */}
+          <div className="relative shrink-0 flex flex-col items-center gap-1">
+            <div className="w-20 h-20 rounded-full border-2 border-emerald-400 dark:border-emerald-400 shadow-[0_0_16px_rgba(16,185,129,0.45)] ring-4 ring-emerald-500/20 overflow-hidden bg-slate-900 flex items-center justify-center relative group">
+              {imagePreview ? (
+                <img
+                  src={imagePreview}
+                  alt="Vista previa circular"
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div className="text-center p-2 text-slate-400">
+                  <ImageIcon size={22} className="mx-auto text-emerald-400 opacity-70" />
+                  <span className="text-[9px] font-bold block mt-0.5">Sin img</span>
+                </div>
+              )}
+            </div>
+            <span className="text-[10px] font-bold text-slate-400">Vista en círculo</span>
+
+            {imagePreview && (
+              <button
+                type="button"
+                onClick={() => {
+                  setImage("");
+                  setImageFile(null);
+                  setImagePreview("");
+                }}
+                className="absolute top-0 right-0 p-1 bg-rose-500 hover:bg-rose-600 text-white rounded-full shadow transition"
+                title="Quitar imagen"
+              >
+                <X size={12} />
+              </button>
+            )}
+          </div>
+
+          {/* Upload button and URL field */}
+          <div className="flex-1 space-y-2 w-full">
+            <div className="flex flex-col sm:flex-row gap-2">
+              <label className="flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60 text-xs font-black cursor-pointer transition shrink-0">
+                <Upload size={14} />
+                <span>Subir archivo...</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      setImageFile(file);
+                      setImagePreview(URL.createObjectURL(file));
+                    }
+                  }}
+                  className="hidden"
+                />
+              </label>
+
+              <input
+                type="text"
+                value={image}
+                onChange={(e) => {
+                  setImage(e.target.value);
+                  setImagePreview(e.target.value);
+                  if (imageFile) setImageFile(null);
+                }}
+                placeholder="O ingresa ruta/URL (Ej: /assets/video_firma_acuerdo_5050_cover.jpg)"
+                className="flex-1 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/80 px-4 py-2.5 text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
+              />
+            </div>
+
+            {imageFile && (
+              <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1">
+                <span>Archivo seleccionado: {imageFile.name}</span>
+                {uploadProgress !== null && (
+                  <span className="text-slate-400">({uploadProgress}%)</span>
+                )}
+              </div>
+            )}
+            <p className="text-[11px] text-slate-400">
+              Esta imagen se mostrará dentro del círculo de la línea de tiempo y en la cabecera de la tarjeta popup.
+            </p>
+          </div>
         </div>
       </div>
 
