@@ -252,130 +252,185 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
         </div>
 
         {/* Interactive Table View (Desktop) */}
-        <div className="hidden lg:block overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
-          <div className="overflow-x-auto">
+        <div className="hidden lg:flex lg:flex-col overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs">
+          {/* Scrollable table container */}
+          <div className="max-h-[580px] overflow-y-auto overflow-x-auto custom-scrollbar">
             <table className="w-full text-left border-collapse">
-              <thead>
-                <tr className="border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/60 text-[11px] font-black uppercase text-slate-500 dark:text-slate-400">
-                  <th className="py-4 px-5 w-44">Compromiso</th>
-                  <th className="py-4 px-5">¿Qué debe entregar realmente?</th>
-                  <th className="py-4 px-5 w-48">Quién</th>
-                  <th className="py-4 px-5 text-center w-36">Estado</th>
+              <thead className="sticky top-0 z-20 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
+                <tr className="text-[11px] font-black uppercase text-slate-500 dark:text-slate-400">
+                  <th className="py-4 px-5 w-52 bg-slate-50/95 dark:bg-slate-800/95">Compromiso</th>
+                  <th className="py-4 px-5 bg-slate-50/95 dark:bg-slate-800/95">¿Qué debe entregar realmente?</th>
+                  <th className="py-4 px-5 w-48 bg-slate-50/95 dark:bg-slate-800/95">Quién</th>
+                  <th className="py-4 px-5 text-center w-36 bg-slate-50/95 dark:bg-slate-800/95">Estado</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 text-xs">
-                {filteredItems.map((item) => {
-                  const lvlBadge = getLevelBadge(item.levelId);
+                {filteredItems.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="py-16 text-center text-slate-500 dark:text-slate-400">
+                      <div className="flex flex-col items-center justify-center gap-2">
+                        <AlertCircle className="w-8 h-8 text-slate-400 stroke-1" />
+                        <p className="font-bold text-sm text-slate-700 dark:text-slate-300">No se encontraron compromisos</p>
+                        <p className="text-xs text-slate-400">Prueba cambiando el nivel seleccionado o el criterio de búsqueda</p>
+                      </div>
+                    </td>
+                  </tr>
+                ) : (
+                  filteredItems.map((item) => {
+                    const lvlBadge = getLevelBadge(item.levelId);
 
-                  return (
-                    <tr
-                      key={item.id}
-                      onClick={() => setSelectedItem(item)}
-                      className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
-                    >
-                      {/* 1. Compromiso */}
-                      <td className="py-4 px-5 align-top">
-                        <div className="font-black text-slate-900 dark:text-white text-sm">
-                          {item.commitment}
-                        </div>
-                        <div className="flex flex-wrap items-center gap-1.5 mt-1">
-                          {selectedLevel === "all" && (
-                            <span
-                              className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border ${lvlBadge.cls}`}
-                            >
-                              {lvlBadge.label}
-                            </span>
-                          )}
-                          {item.category && (
-                            <span className="text-[10px] font-bold text-slate-400">
-                              • {item.category}
-                            </span>
-                          )}
-                        </div>
-                      </td>
+                    return (
+                      <tr
+                        key={item.id}
+                        onClick={() => setSelectedItem(item)}
+                        className="hover:bg-slate-50/80 dark:hover:bg-slate-800/40 cursor-pointer transition-colors"
+                      >
+                        {/* 1. Compromiso */}
+                        <td className="py-4 px-5 align-top">
+                          <div className="font-black text-slate-900 dark:text-white text-sm">
+                            {item.commitment}
+                          </div>
+                          <div className="flex flex-wrap items-center gap-1.5 mt-1">
+                            {selectedLevel === "all" && (
+                              <span
+                                className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border ${lvlBadge.cls}`}
+                              >
+                                {lvlBadge.label}
+                              </span>
+                            )}
+                            {item.category && (
+                              <span className="text-[10px] font-bold text-slate-400">
+                                • {item.category}
+                              </span>
+                            )}
+                          </div>
+                        </td>
 
-                      {/* 2. ¿Qué debe entregar realmente? */}
-                      <td className="py-4 px-5 align-top">
-                        <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-                          {item.deliverable}
-                        </p>
-                      </td>
+                        {/* 2. ¿Qué debe entregar realmente? */}
+                        <td className="py-4 px-5 align-top">
+                          <p className="text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
+                            {item.deliverable}
+                          </p>
+                        </td>
 
-                      {/* 3. Quién */}
-                      <td className="py-4 px-5 align-top">
-                        <span className="font-extrabold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded-lg inline-block">
-                          {item.responsible}
-                        </span>
-                      </td>
+                        {/* 3. Quién */}
+                        <td className="py-4 px-5 align-top">
+                          <span className="font-extrabold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800/80 px-2.5 py-1 rounded-lg inline-block">
+                            {item.responsible}
+                          </span>
+                        </td>
 
-                      {/* 4. Estado */}
-                      <td className="py-4 px-5 align-top text-center whitespace-nowrap">
-                        {getStatusBadge(item.status)}
-                      </td>
-                    </tr>
-                  );
-                })}
+                        {/* 4. Estado */}
+                        <td className="py-4 px-5 align-top text-center whitespace-nowrap">
+                          {getStatusBadge(item.status)}
+                        </td>
+                      </tr>
+                    );
+                  })
+                )}
               </tbody>
             </table>
+          </div>
+
+          {/* Pie informativo de la tabla */}
+          <div className="px-5 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 select-none">
+            <span className="font-medium">
+              Mostrando <strong className="font-black text-slate-700 dark:text-slate-200">{filteredItems.length}</strong> de <strong className="font-black text-slate-700 dark:text-slate-200">{itemsList.length}</strong> compromisos
+            </span>
+            <span className="text-[11px] font-semibold flex items-center gap-1.5 text-slate-400 dark:text-slate-500">
+              <ArrowUpDown size={12} />
+              Scroll interno activo
+            </span>
           </div>
         </div>
 
         {/* Mobile / Tablet Cards View */}
-        <div className="lg:hidden space-y-3">
-          {filteredItems.map((item) => {
-            const lvlBadge = getLevelBadge(item.levelId);
+        <div className="lg:hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs overflow-hidden">
+          {/* Encabezado fijo para vista móvil */}
+          <div className="sticky top-0 z-10 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-md px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+            <span className="text-[11px] font-black uppercase text-slate-500 dark:text-slate-400 tracking-wider">
+              Compromisos Registrados
+            </span>
+            <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
+              {filteredItems.length} {filteredItems.length === 1 ? "compromiso" : "compromisos"}
+            </span>
+          </div>
 
-            return (
-              <article
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 shadow-xs space-y-3 cursor-pointer hover:border-emerald-500/40 transition"
-              >
-                <div className="flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800 pb-3">
-                  <div>
-                    <div className="flex items-center gap-2 mb-1">
-                      <span
-                        className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border ${lvlBadge.cls}`}
-                      >
-                        {lvlBadge.label}
-                      </span>
-                      {item.category && (
-                        <span className="text-[10px] font-bold text-slate-400">
-                          {item.category}
-                        </span>
-                      )}
+          {/* Contenedor con scroll interno */}
+          <div className="max-h-[560px] overflow-y-auto p-4 space-y-3 custom-scrollbar">
+            {filteredItems.length === 0 ? (
+              <div className="py-12 text-center text-slate-500 dark:text-slate-400 flex flex-col items-center justify-center gap-2">
+                <AlertCircle className="w-8 h-8 text-slate-400 stroke-1" />
+                <p className="font-bold text-sm text-slate-700 dark:text-slate-300">No se encontraron compromisos</p>
+                <p className="text-xs text-slate-400">Prueba cambiando el nivel seleccionado o el criterio de búsqueda</p>
+              </div>
+            ) : (
+              filteredItems.map((item) => {
+                const lvlBadge = getLevelBadge(item.levelId);
+
+                return (
+                  <article
+                    key={item.id}
+                    onClick={() => setSelectedItem(item)}
+                    className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60 p-4 shadow-xs space-y-3 cursor-pointer hover:border-emerald-500/40 hover:bg-slate-50/50 dark:hover:bg-slate-800 transition"
+                  >
+                    <div className="flex items-start justify-between gap-3 border-b border-slate-100 dark:border-slate-800/80 pb-2.5">
+                      <div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <span
+                            className={`text-[9px] font-black uppercase px-2 py-0.5 rounded-full border ${lvlBadge.cls}`}
+                          >
+                            {lvlBadge.label}
+                          </span>
+                          {item.category && (
+                            <span className="text-[10px] font-bold text-slate-400">
+                              {item.category}
+                            </span>
+                          )}
+                        </div>
+                        <h3 className="font-black text-slate-900 dark:text-white text-sm">
+                          {item.commitment}
+                        </h3>
+                      </div>
+                      <div className="shrink-0">{getStatusBadge(item.status)}</div>
                     </div>
-                    <h3 className="font-black text-slate-900 dark:text-white text-base">
-                      {item.commitment}
-                    </h3>
-                  </div>
-                  <div>{getStatusBadge(item.status)}</div>
-                </div>
 
-                <div>
-                  <span className="text-[10px] font-black uppercase text-slate-400 block">
-                    ¿Qué debe entregar realmente?
-                  </span>
-                  <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium mt-0.5">
-                    {item.deliverable}
-                  </p>
-                </div>
+                    <div>
+                      <span className="text-[10px] font-black uppercase text-slate-400 block">
+                        ¿Qué debe entregar realmente?
+                      </span>
+                      <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-medium mt-0.5">
+                        {item.deliverable}
+                      </p>
+                    </div>
 
-                <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-                  <span className="text-slate-400 font-bold">Quién:</span>
-                  <span className="font-extrabold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
-                    {item.responsible}
-                  </span>
-                </div>
-              </article>
-            );
-          })}
+                    <div className="pt-2 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
+                      <span className="text-slate-400 font-bold">Quién:</span>
+                      <span className="font-extrabold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
+                        {item.responsible}
+                      </span>
+                    </div>
+                  </article>
+                );
+              })
+            )}
+          </div>
+
+          {/* Pie informativo para vista móvil */}
+          <div className="px-4 py-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50/70 dark:bg-slate-800/50 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 select-none">
+            <span>
+              Mostrando <strong>{filteredItems.length}</strong> de <strong>{itemsList.length}</strong>
+            </span>
+            <span className="text-[11px] flex items-center gap-1 text-slate-400">
+              <ArrowUpDown size={11} /> Scroll interno
+            </span>
+          </div>
         </div>
 
         {/* Modal Detalle de Compromiso */}
         {selectedItem && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-5 shadow-2xl relative">
+            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
               <button
                 onClick={() => setSelectedItem(null)}
                 className="absolute top-5 right-5 p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition"

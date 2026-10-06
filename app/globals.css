@@ -129,3 +129,48 @@ body {
   width: min(1180px, calc(100% - 32px));
   margin: auto;
 }
+
+/* Scrollbar personalizado acorde al tema (Emerald & Slate) */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(58, 193, 103, 0.45) rgba(241, 245, 249, 0.6);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.6);
+  border-radius: 9999px;
+  margin: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(88, 207, 129, 0.65) 0%, rgba(58, 193, 103, 0.85) 100%);
+  border-radius: 9999px;
+  transition: all 0.2s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #58cf81 0%, #3ac167 100%);
+  box-shadow: 0 0 8px rgba(58, 193, 103, 0.4);
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: rgba(58, 193, 103, 0.5) rgba(15, 23, 42, 0.4);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(58, 193, 103, 0.5) 0%, rgba(36, 130, 67, 0.75) 100%);
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #58cf81 0%, #3ac167 100%);
+  box-shadow: 0 0 10px rgba(58, 193, 103, 0.4);
+}
