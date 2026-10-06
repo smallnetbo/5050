@@ -74,6 +74,7 @@ export async function getLandingData() {
           status: m.status as any,
           detail: m.detail,
           image: m.image || undefined,
+          order: m.order,
           summary: m.summary || undefined,
           documents: m.documents ? JSON.parse(m.documents) : undefined,
           participants: m.participants ? JSON.parse(m.participants) : undefined,

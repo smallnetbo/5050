@@ -47,7 +47,7 @@ export async function upsertMilestoneAction(data: MilestoneInput) {
           status: data.status,
           detail: data.detail.trim(),
           image: data.image !== undefined ? (data.image ? data.image.trim() : null) : undefined,
-          order: data.order ?? 0,
+          ...(data.order !== undefined && data.order !== null ? { order: data.order } : {}),
           documents: documentsJson,
           participants: participantsJson,
         },

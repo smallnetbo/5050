@@ -135,7 +135,17 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
           <button
             onClick={() => {
               setEditingMilestone(null);
-              setShowCreateForm(!showCreateForm);
+              const nextState = !showCreateForm;
+              setShowCreateForm(nextState);
+              if (nextState) {
+                setTimeout(() => {
+                  const input = document.getElementById("milestone-title-input") as HTMLInputElement | null;
+                  if (input) {
+                    input.focus();
+                    input.scrollIntoView({ behavior: "smooth", block: "center" });
+                  }
+                }, 60);
+              }
             }}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-black shadow-sm transition ${
               showCreateForm
@@ -159,6 +169,7 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
       {(showCreateForm || editingMilestone) && (
         <div className="animate-in fade-in zoom-in-95 duration-200">
           <MilestoneForm
+            key={editingMilestone?.id ? `edit-${editingMilestone.id}` : "new"}
             initialData={editingMilestone}
             onSuccess={() => {
               setShowCreateForm(false);
@@ -315,9 +326,17 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
                           status: m.status as any,
                           detail: m.detail,
                           image: m.image,
+                          order: m.order ?? index + 1,
                           participants: m.participants,
                           documents: m.documents,
                         });
+                        setTimeout(() => {
+                          const input = document.getElementById("milestone-title-input") as HTMLInputElement | null;
+                          if (input) {
+                            input.focus();
+                            input.scrollIntoView({ behavior: "smooth", block: "center" });
+                          }
+                        }, 60);
                       }}
                       className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/60 dark:hover:bg-emerald-900/60 text-emerald-700 dark:text-emerald-300 font-extrabold text-xs border border-emerald-200 dark:border-emerald-800/60 transition"
                     >

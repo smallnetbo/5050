@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef, useEffect } from "react";
 import {
   upsertMilestoneAction,
   deleteMilestoneAction,
@@ -33,6 +33,8 @@ interface MilestoneFormProps {
 export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFormProps) {
   const [isPending, startTransition] = useTransition();
 
+  const titleInputRef = useRef<HTMLInputElement>(null);
+
   const [title, setTitle] = useState(initialData?.title || "");
   const [dateText, setDateText] = useState(initialData?.dateText || "");
   const [status, setStatus] = useState<"Cumplido" | "En proceso" | "Pendiente" | "Programado" | "Meta">(
@@ -54,6 +56,30 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
   const [docSize, setDocSize] = useState("");
 
   const [toast, setToast] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  // Mover el foco al cuadro de texto de Título del Hito al montar o al cambiar de hito en edición
+  useEffect(() => {
+    setTitle(initialData?.title || "");
+    setDateText(initialData?.dateText || "");
+    setStatus(initialData?.status || "En proceso");
+    setDetail(initialData?.detail || "");
+    setImage(initialData?.image || "");
+    setImageFile(null);
+    setImagePreview(initialData?.image || "");
+    setUploadProgress(null);
+    setParticipants(initialData?.participants || []);
+    setDocuments(initialData?.documents || []);
+    setToast(null);
+
+    const timer = setTimeout(() => {
+      if (titleInputRef.current) {
+        titleInputRef.current.focus();
+        titleInputRef.current.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }, 60);
+
+    return () => clearTimeout(timer);
+  }, [initialData]);
 
   // Participant tag handlers
   const handleAddParticipant = () => {
@@ -194,6 +220,8 @@ export function MilestoneForm({ initialData, onSuccess, onCancel }: MilestoneFor
             Título del Hito *
           </label>
           <input
+            ref={titleInputRef}
+            id="milestone-title-input"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
