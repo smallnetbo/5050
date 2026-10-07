@@ -105,6 +105,7 @@ export async function getLandingData() {
           category: doc.category as any,
           department: doc.department || undefined,
           date: doc.date,
+          fileUrl: doc.fileUrl || undefined,
           fileSize: doc.fileSize,
           description: doc.description,
           downloadsCount: doc.downloadsCount,

@@ -578,8 +578,8 @@ export const documentsList: DocumentItem[] = [
     "title": "Acuerdo N° 002/2026 - GAM de Capitales y El Alto",
     "category": "Acuerdo",
     "date": "2026",
-    "fileSize": "11.7 MB",
-    "fileUrl": "/Acuerdo-002-2026-Agenda-50-50.pdf",
+    "fileSize": "600.4 KB",
+    "fileUrl": "/uploads/documents/acuerdo-n-002-2026-agenda-50-50-1791410091154.pdf",
     "description": "Acuerdo técnico suscrito entre el Gobierno Nacional y los Gobiernos Autónomos Municipales de Ciudades Capitales y El Alto en torno a libertades autonómicas, reformas normativas y sostenibilidad fiscal municipal.",
     "downloadsCount": 860,
     "featured": true

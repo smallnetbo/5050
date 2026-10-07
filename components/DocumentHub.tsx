@@ -42,6 +42,7 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
     { id: "Presentación", label: "Presentaciones" },
     { id: "Anexo", label: "Anexos" },
     { id: "Proyecto de Ley", label: "Proyectos de Ley" },
+    { id: "Decreto", label: "Decretos" },
   ];
 
   // Filtro dinámico por búsqueda y categoría
@@ -73,7 +74,7 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
     if (cat.includes("acta")) return ClipboardList;
     if (cat.includes("presenta")) return Presentation;
     if (cat.includes("anexo")) return Paperclip;
-    if (cat.includes("ley")) return Scale;
+    if (cat.includes("ley") || cat.includes("decreto")) return Scale;
     return FileText;
   };
 
@@ -92,7 +93,7 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
     if (cat.includes("anexo")) {
       return "bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border-amber-300/40";
     }
-    if (cat.includes("ley")) {
+    if (cat.includes("ley") || cat.includes("decreto")) {
       return "bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300 border-rose-300/40";
     }
     return "bg-slate-100 text-slate-800 dark:bg-slate-800 dark:text-slate-300 border-slate-300/40";

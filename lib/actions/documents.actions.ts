@@ -20,7 +20,13 @@ export async function upsertDocumentAction(formData: FormData) {
     const featured = formData.get("featured") === "true";
     const file = formData.get("file") as File | null;
 
-    let fileUrl = (formData.get("existingFileUrl") as string) || undefined;
+    const hasExistingFileUrl = formData.has("existingFileUrl");
+    let fileUrl: string | null | undefined = undefined;
+    if (hasExistingFileUrl) {
+      const rawVal = formData.get("existingFileUrl") as string;
+      fileUrl = rawVal && rawVal.trim().length > 0 ? rawVal.trim() : null;
+    }
+
     let fileSize = (formData.get("existingFileSize") as string) || "1.0 MB";
 
     if (file && file.size > 0) {
@@ -38,7 +44,7 @@ export async function upsertDocumentAction(formData: FormData) {
           department,
           description,
           featured,
-          fileUrl,
+          ...(fileUrl !== undefined ? { fileUrl } : {}),
           fileSize,
         },
       });
@@ -51,7 +57,7 @@ export async function upsertDocumentAction(formData: FormData) {
           department,
           description,
           featured,
-          fileUrl,
+          fileUrl: fileUrl || null,
           fileSize,
         },
       });

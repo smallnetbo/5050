@@ -230,7 +230,44 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
               </div>
             </div>
 
-            {/* Vista previa del documento seleccionado */}
+            {/* Vista previa de archivo existente si no se seleccionó uno nuevo */}
+            {fileUrl && !pdfFile && (
+              <div className="p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800/80 flex items-center justify-between">
+                <div className="flex items-center gap-2.5 min-w-0">
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                    <FileText size={16} />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                      Archivo actual vinculado
+                    </p>
+                    <a
+                      href={fileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 hover:underline truncate block"
+                    >
+                      {fileUrl} ({fileSize})
+                    </a>
+                  </div>
+                </div>
+                {!loading && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFileUrl("");
+                      setFileSize("1.0 MB");
+                    }}
+                    className="p-1.5 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition shrink-0"
+                    title="Desvincular archivo existente"
+                  >
+                    <Trash2 size={15} />
+                  </button>
+                )}
+              </div>
+            )}
+
+            {/* Vista previa del documento seleccionado para subir */}
             {pdfFile && (
               <div className="p-3 rounded-xl border border-emerald-500/30 bg-emerald-500/10 dark:bg-emerald-950/30 flex items-center justify-between">
                 <div className="flex items-center gap-2.5 min-w-0">
