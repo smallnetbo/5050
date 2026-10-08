@@ -574,6 +574,17 @@ export const departmentsData: DepartmentData[] = [
 
 export const documentsList: DocumentItem[] = [
   {
+    "id": "cmuzjj5mu0000dpvbiyb6hjhh",
+    "title": "ACTA DE REUNIÓN INFORMATIVA, EVALUACIÓN Y DETERMINACIÓN DE LA FAM-BOLIVIA, LAS AMDEs y GOBIERNO NACIONAL - MESA TÉCNICA sobre el Acuerdo 50/50",
+    "category": "Acta",
+    "date": "23/09/2026",
+    "fileSize": "1.5 MB",
+    "fileUrl": "/uploads/documents/acta---reunio-n-sam-gob-23-09-26-1791464202091.pdf",
+    "description": "El acta de la reunión del 23 de septiembre de 2026 entre la FAM-Bolivia y el Gobierno Nacional detalla acuerdos clave para aliviar la situación financiera de los municipios, incluyendo la reprogramación de deudas mediante el D.S. 5686 y la solicitud de condonación de multas con las Cajas de Salud. Asimismo, se establece el compromiso de gestionar la suspensión del débito y posterior devolución del 12% del fondo FPIEEH a partir de 2027, junto con la ratificación de avanzar hacia una distribución equitativa de recursos estructurales bajo la Agenda 50/50. Finalmente, frente al incremento del precio de los hidrocarburos (D.S. 5716), el Gobierno acordó implementar medidas de mitigación que incluyen la asignación de presupuestos adicionales, fideicomisos de operaciones, 100 millones de dólares para obras de inversión municipal y programas de protección social, mientras que los municipios se comprometieron a controlar los precios de la canasta familiar para evitar la especulación.",
+    "downloadsCount": 0,
+    "featured": false
+  },
+  {
     "id": "doc-2",
     "title": "Acuerdo N° 002/2026 - GAM de Capitales y El Alto",
     "category": "Acuerdo",
