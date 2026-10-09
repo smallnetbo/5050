@@ -9,7 +9,11 @@ interface VideoItem {
   duration: string;
   thumbnail: string;
   category: string;
-  videoUrl: string;
+  videoUrl?: string;
+  embedUrl?: string;
+  url?: string;
+  platform?: string;
+  description?: string;
 }
 
 interface WebinarItem {
@@ -27,6 +31,12 @@ interface Props {
   mediaItems?: MediaItemType[];
 }
 
+function extractYouTubeId(url?: string): string | null {
+  if (!url) return null;
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+  return match ? match[1] : null;
+}
+
 export function MultimediaHub({ mediaItems }: Props) {
   const [activeMediaTab, setActiveMediaTab] = useState<"videos" | "webinars" | "reuniones" | "medios">("videos");
   const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
@@ -34,7 +44,7 @@ export function MultimediaHub({ mediaItems }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (selectedVideo && videoRef.current) {
+    if (selectedVideo && !selectedVideo.embedUrl && videoRef.current) {
       videoRef.current.play().catch(() => { });
     }
   }, [selectedVideo]);
@@ -43,13 +53,23 @@ export function MultimediaHub({ mediaItems }: Props) {
   const videos: VideoItem[] = mediaItems && mediaItems.length > 0
     ? mediaItems
         .filter((item) => item.type === "videos")
-        .map((item) => ({
-          title: item.title,
-          duration: item.duration || "Cápsula Informativa",
-          thumbnail: item.coverUrl || "/assets/video_que_es_5050_cover.jpg",
-          category: item.category || "Explicador Oficial",
-          videoUrl: item.mediaUrl || "",
-        }))
+        .map((item) => {
+          const ytId = extractYouTubeId(item.embedUrl || item.url || item.mediaUrl);
+          const computedEmbedUrl = item.embedUrl || (ytId ? `https://www.youtube.com/embed/${ytId}` : undefined);
+          const computedThumbnail = item.coverUrl || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : "/assets/video_que_es_5050_cover.jpg");
+
+          return {
+            title: item.title,
+            duration: item.duration || (ytId ? "YouTube Short" : "Cápsula Informativa"),
+            thumbnail: computedThumbnail,
+            category: item.category || (ytId ? "Comunicación Digital" : "Explicador Oficial"),
+            videoUrl: item.mediaUrl || "",
+            embedUrl: computedEmbedUrl,
+            url: item.url || (ytId ? `https://www.youtube.com/shorts/${ytId}` : undefined),
+            platform: item.platform || (ytId ? "YouTube" : undefined),
+            description: item.description,
+          };
+        })
     : [
         {
           title: "¿Qué es la Agenda 50/50?",
@@ -278,17 +298,52 @@ export function MultimediaHub({ mediaItems }: Props) {
                       <Play size={22} className="fill-current ml-1" />
                     </div>
                   </div>
+                  {vid.platform && (
+                    <span className="absolute top-3 left-3 rounded-lg bg-red-600/90 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-white border border-red-400/30 flex items-center gap-1 shadow-sm">
+                      {vid.platform}
+                    </span>
+                  )}
                   <span className="absolute bottom-3 right-3 rounded-lg bg-black/70 backdrop-blur-md px-2.5 py-0.5 text-[11px] font-bold text-white border border-white/10">
                     {vid.duration}
                   </span>
                 </div>
-                <div className="p-5">
-                  <span className="text-[10px] font-black uppercase text-emerald-600 dark:text-[#3ac167] tracking-wider">
-                    {vid.category}
-                  </span>
-                  <h3 className="mt-1 font-extrabold text-slate-900 dark:text-white text-base leading-snug group-hover:text-emerald-600 dark:group-hover:text-[#fcc74f] transition-colors">
-                    {vid.title}
-                  </h3>
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <span className="text-[10px] font-black uppercase text-emerald-600 dark:text-[#3ac167] tracking-wider">
+                      {vid.category}
+                    </span>
+                    <h3 className="mt-1 font-extrabold text-slate-900 dark:text-white text-base leading-snug group-hover:text-emerald-600 dark:group-hover:text-[#fcc74f] transition-colors">
+                      {vid.title}
+                    </h3>
+                    {vid.description && (
+                      <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 font-medium line-clamp-2">
+                        {vid.description}
+                      </p>
+                    )}
+                  </div>
+                  {vid.url && (
+                    <div className="mt-4 pt-3 border-t border-slate-100 dark:border-white/10 flex items-center justify-between gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedVideo(vid);
+                        }}
+                        className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-[#3ac167] hover:text-emerald-700 dark:hover:text-emerald-300 transition"
+                      >
+                        <Play size={14} className="fill-current" /> Reproducir
+                      </button>
+                      <a
+                        href={vid.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center gap-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/20 px-3 py-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 transition"
+                      >
+                        <ExternalLink size={13} /> {vid.platform || "Ver enlace"}
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -516,17 +571,28 @@ export function MultimediaHub({ mediaItems }: Props) {
             </button>
 
             <div className="w-full max-h-[75vh] aspect-video rounded-2xl overflow-hidden bg-black flex items-center justify-center relative shadow-inner">
-              <video
-                ref={videoRef}
-                src={encodeURI(selectedVideo.videoUrl)}
-                controls
-                autoPlay
-                playsInline
-                className="w-full h-full object-contain"
-              ></video>
+              {selectedVideo.embedUrl ? (
+                <iframe
+                  src={selectedVideo.embedUrl}
+                  width="100%"
+                  height="100%"
+                  className="w-full h-full border-0"
+                  allowFullScreen={true}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                ></iframe>
+              ) : (
+                <video
+                  ref={videoRef}
+                  src={encodeURI(selectedVideo.videoUrl || "")}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain"
+                ></video>
+              )}
             </div>
 
-            <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 w-full px-2">
+            <div className="mt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 w-full px-2">
               <div>
                 <span className="text-[10px] font-black uppercase text-[#3ac167] tracking-wider">
                   {selectedVideo.category} · {selectedVideo.duration}
@@ -535,12 +601,24 @@ export function MultimediaHub({ mediaItems }: Props) {
                   {selectedVideo.title}
                 </h3>
               </div>
-              <button
-                onClick={() => setSelectedVideo(null)}
-                className="rounded-xl bg-white/10 px-4 py-2 text-xs font-bold text-white hover:bg-white/20 self-end sm:self-auto shrink-0 transition"
-              >
-                Cerrar Reproductor
-              </button>
+              <div className="flex items-center gap-2 self-end sm:self-auto shrink-0">
+                {selectedVideo.url && (
+                  <a
+                    href={selectedVideo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 rounded-xl bg-red-600 hover:bg-red-700 px-3.5 py-2 text-xs font-bold text-white transition shadow-md"
+                  >
+                    <ExternalLink size={14} /> Abrir en {selectedVideo.platform || "YouTube"}
+                  </a>
+                )}
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="rounded-xl bg-white/10 px-3.5 py-2 text-xs font-bold text-white hover:bg-white/20 transition"
+                >
+                  Cerrar
+                </button>
+              </div>
             </div>
           </div>
         </div>

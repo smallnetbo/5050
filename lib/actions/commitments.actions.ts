@@ -7,7 +7,7 @@ import { commitmentsData } from "@/lib/commitments-data";
 
 export interface CommitmentInput {
   id?: string;
-  levelId: "nce" | "gad" | "gam" | "conjunto";
+  levelId: "nce" | "gad" | "gam" | "conjunto" | string;
   levelName?: string;
   commitment: string;
   deliverable: string;

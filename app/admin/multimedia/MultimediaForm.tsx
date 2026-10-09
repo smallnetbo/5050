@@ -52,6 +52,35 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [coverFile, setCoverFile] = useState<File | null>(null);
 
+  const extractYouTubeId = (input: string) => {
+    if (!input) return null;
+    const match = input.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=|shorts\/))([\w-]{11})/);
+    return match ? match[1] : null;
+  };
+
+  const handleUrlChange = (newUrl: string) => {
+    setUrl(newUrl);
+    const ytId = extractYouTubeId(newUrl);
+    if (ytId) {
+      if (!embedUrl || embedUrl.includes("youtube.com")) setEmbedUrl(`https://www.youtube.com/embed/${ytId}`);
+      if (!coverUrl) setCoverUrl(`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`);
+      if (!platform) setPlatform("YouTube");
+      if (!duration && type === "videos") {
+        setDuration(newUrl.includes("/shorts/") ? "YouTube Short" : "YouTube");
+      }
+    }
+  };
+
+  const handleEmbedUrlChange = (newEmbed: string) => {
+    setEmbedUrl(newEmbed);
+    const ytId = extractYouTubeId(newEmbed);
+    if (ytId) {
+      if (!coverUrl) setCoverUrl(`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`);
+      if (!platform) setPlatform("YouTube");
+      if (!duration && type === "videos") setDuration("YouTube");
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -62,6 +91,17 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
     try {
       let finalMediaUrl = mediaUrl;
       let finalCoverUrl = coverUrl;
+      let finalEmbedUrl = embedUrl;
+      let finalPlatform = platform;
+
+      const ytId = extractYouTubeId(finalEmbedUrl || url || finalMediaUrl);
+      if (ytId) {
+        if (!finalEmbedUrl) finalEmbedUrl = `https://www.youtube.com/embed/${ytId}`;
+        if (!finalCoverUrl && (!coverFile || coverFile.size === 0)) {
+          finalCoverUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        }
+        if (!finalPlatform) finalPlatform = "YouTube";
+      }
 
       // 1. Subida con indicador de progreso real del archivo de video
       if (videoFile && videoFile.size > 0) {
@@ -93,11 +133,11 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
       formData.append("type", type);
       formData.append("category", category);
       formData.append("date", date);
-      formData.append("platform", platform);
+      formData.append("platform", finalPlatform);
       formData.append("duration", duration);
       formData.append("description", description);
       formData.append("mediaUrl", finalMediaUrl);
-      formData.append("embedUrl", embedUrl);
+      formData.append("embedUrl", finalEmbedUrl);
       formData.append("url", url);
       formData.append("coverUrl", finalCoverUrl);
       formData.append("order", order.toString());
@@ -338,32 +378,35 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
                 <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
-                  URL Embed (iframe src)
+                  URL Embed (iframe src / YouTube embed)
                 </label>
                 <input
                   type="text"
                   disabled={loading}
                   value={embedUrl}
-                  onChange={(e) => setEmbedUrl(e.target.value)}
-                  placeholder="https://www.facebook.com/plugins/video.php?..."
+                  onChange={(e) => handleEmbedUrlChange(e.target.value)}
+                  placeholder="https://www.youtube.com/embed/... o https://facebook.com/..."
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs disabled:opacity-50"
                 />
               </div>
 
               <div>
                 <label className="block text-[11px] font-bold text-slate-600 dark:text-slate-400 mb-1">
-                  Enlace Web Externo
+                  Enlace Web Externo (YouTube / Shorts / Redes)
                 </label>
                 <input
                   type="text"
                   disabled={loading}
                   value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="https://facebook.com/videos/..."
+                  onChange={(e) => handleUrlChange(e.target.value)}
+                  placeholder="https://www.youtube.com/shorts/IjaFB-aPOVw"
                   className="w-full px-3 py-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs disabled:opacity-50"
                 />
               </div>
             </div>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+              💡 Soporta enlaces directos a <b>YouTube Shorts</b> y videos normales. Se autocompleta la miniatura, el reproductor embed y la plataforma.
+            </p>
           </div>
 
           {/* Portada / Thumbnail */}

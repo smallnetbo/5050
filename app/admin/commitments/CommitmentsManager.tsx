@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import { CommitmentItem, commitmentLevels } from "@/lib/commitments-data";
+import { CommitmentItem, CommitmentLevel, commitmentLevels } from "@/lib/commitments-data";
 import {
   CommitmentInput,
   upsertCommitmentAction,
@@ -11,6 +11,7 @@ import {
   seedCommitmentsAction,
 } from "@/lib/actions/commitments.actions";
 import { CommitmentModal } from "./CommitmentModal";
+import { CommitmentLevelsModal, LEVEL_ICONS_MAP } from "./CommitmentLevelsModal";
 import {
   Landmark,
   Building2,
@@ -31,31 +32,39 @@ import {
   Clock,
   Sparkles,
   FolderOpen,
+  SlidersHorizontal,
 } from "lucide-react";
 
 interface CommitmentsManagerProps {
   initialCommitments: CommitmentItem[];
+  initialLevels?: CommitmentLevel[];
 }
 
-const iconMap: Record<string, React.ElementType> = {
-  Landmark,
-  Building2,
-  Building,
-  Layers,
-};
+const iconMap: Record<string, React.ElementType> = LEVEL_ICONS_MAP;
 
-export function CommitmentsManager({ initialCommitments }: CommitmentsManagerProps) {
+
+export function CommitmentsManager({ initialCommitments, initialLevels }: CommitmentsManagerProps) {
   const [commitments, setCommitments] = useState<CommitmentItem[]>(initialCommitments);
+  const [levels, setLevels] = useState<CommitmentLevel[]>(
+    initialLevels && initialLevels.length > 0 ? initialLevels : commitmentLevels
+  );
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLevelsModalOpen, setIsLevelsModalOpen] = useState(false);
   const [editingCommitment, setEditingCommitment] = useState<CommitmentInput | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
     setCommitments(initialCommitments);
   }, [initialCommitments]);
+
+  useEffect(() => {
+    if (initialLevels && initialLevels.length > 0) {
+      setLevels(initialLevels);
+    }
+  }, [initialLevels]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -250,6 +259,16 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             type="button"
+            onClick={() => setIsLevelsModalOpen(true)}
+            className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-black transition shadow-2xs"
+            title="Administrar los niveles de gobierno (Crear, Editar, Eliminar, Reordenar)"
+          >
+            <SlidersHorizontal size={15} className="text-indigo-600 dark:text-indigo-400" />
+            <span>Gestionar Niveles ({levels.length})</span>
+          </button>
+
+          <button
+            type="button"
             onClick={handleRestoreDefaults}
             className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-bold transition"
             title="Restaurar los 63 compromisos oficiales del Acuerdo Sucre"
@@ -269,11 +288,11 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
         </div>
       </div>
 
-      {/* Level Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+      {/* Level Tabs (Navegación Interactiva por Nivel con CRUD) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-2.5">
         <button
           onClick={() => setSelectedLevel("all")}
-          className={`p-3.5 rounded-2xl border text-left transition-all ${
+          className={`p-3.5 rounded-2xl border text-left transition-all flex flex-col justify-between min-h-[80px] ${
             selectedLevel === "all"
               ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black"
               : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-50"
@@ -283,10 +302,10 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
             <span>Todos</span>
             <span>{commitments.length}</span>
           </div>
-          <div className="mt-1 text-xs font-black truncate">Todos los Niveles</div>
+          <div className="mt-1.5 text-xs font-black leading-snug">Todos los Niveles</div>
         </button>
 
-        {commitmentLevels.map((lvl) => {
+        {levels.filter((lvl) => lvl.active !== false).map((lvl) => {
           const Icon = iconMap[lvl.iconName] || Landmark;
           const isSelected = selectedLevel === lvl.id;
           const lvlCount = commitments.filter((c) => c.levelId === lvl.id).length;
@@ -295,7 +314,7 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
             <button
               key={lvl.id}
               onClick={() => setSelectedLevel(lvl.id)}
-              className={`p-3.5 rounded-2xl border text-left transition-all ${
+              className={`p-3.5 rounded-2xl border text-left transition-all group relative flex flex-col justify-between min-h-[80px] ${
                 isSelected
                   ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black"
                   : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-50"
@@ -303,15 +322,43 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
             >
               <div className="flex items-center justify-between text-[10px] uppercase font-bold opacity-75">
                 <span className="truncate max-w-[70px]">{lvl.badge}</span>
-                <span>{lvlCount}</span>
+                <div className="flex items-center gap-1">
+                  <span>{lvlCount}</span>
+                  <span
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setIsLevelsModalOpen(true);
+                    }}
+                    className="opacity-0 group-hover:opacity-100 p-0.5 rounded hover:bg-black/10 dark:hover:bg-white/10 transition cursor-pointer"
+                    title={`Editar nivel "${lvl.shortName}"`}
+                  >
+                    <Edit2 size={10} />
+                  </span>
+                </div>
               </div>
-              <div className="mt-1 flex items-center gap-1 text-xs font-black truncate">
-                <Icon size={13} className="shrink-0" />
-                <span className="truncate">{lvl.shortName}</span>
+              <div className="mt-1.5 flex items-start gap-1.5 text-xs font-black leading-snug">
+                <Icon size={13} className="shrink-0 mt-0.5" />
+                <span className="line-clamp-2 leading-tight break-words">{lvl.shortName}</span>
               </div>
             </button>
           );
         })}
+
+        {/* Quick Button to Open Levels CRUD directly from tabs */}
+        <button
+          type="button"
+          onClick={() => setIsLevelsModalOpen(true)}
+          className="p-3.5 rounded-2xl border border-dashed border-indigo-300 dark:border-indigo-800/80 bg-indigo-50/40 dark:bg-indigo-950/20 hover:bg-indigo-100/60 dark:hover:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300 flex flex-col items-center justify-center gap-1 text-center transition group cursor-pointer"
+          title="Administrar Niveles de Gobierno (Crear, Editar, Eliminar, Reordenar)"
+        >
+          <div className="flex items-center gap-1.5 text-xs font-black">
+            <SlidersHorizontal size={13} className="group-hover:rotate-45 transition duration-200" />
+            <span>Gestionar</span>
+          </div>
+          <span className="text-[10px] text-indigo-500/80 font-bold uppercase tracking-wider">
+            Niveles ({levels.length})
+          </span>
+        </button>
       </div>
 
       {/* Search & Filter Bar */}
@@ -466,13 +513,25 @@ export function CommitmentsManager({ initialCommitments }: CommitmentsManagerPro
         </div>
       )}
 
-      {/* Modal Crear / Editar */}
+      {/* Modal Crear / Editar Compromiso */}
       <CommitmentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveCommitment}
         initialData={editingCommitment}
         defaultLevelId={selectedLevel !== "all" ? (selectedLevel as any) : "nce"}
+        levels={levels}
+      />
+
+      {/* Modal CRUD Niveles de Gobierno */}
+      <CommitmentLevelsModal
+        isOpen={isLevelsModalOpen}
+        onClose={() => setIsLevelsModalOpen(false)}
+        levels={levels}
+        commitments={commitments}
+        onLevelsUpdated={() => {
+          window.location.reload();
+        }}
       />
     </div>
   );

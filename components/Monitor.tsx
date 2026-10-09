@@ -208,7 +208,7 @@ export function Monitor({
                   Matriz de Compromisos
                 </span>
                 <h3 className="text-xl font-black text-slate-900 dark:text-white mt-0.5">
-                  Plazos & Entregables de las Mesas Técnicas
+                  Plazos y Entregables de las Mesas Técnicas
                 </h3>
               </div>
               <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
@@ -277,11 +277,10 @@ export function Monitor({
                           <td className="py-4 px-6 align-top text-center">
                             <div className="inline-flex flex-col items-center">
                               <span
-                                className={`text-base font-black px-3 py-1 rounded-xl whitespace-nowrap ${
-                                  isUrgent
+                                className={`text-base font-black px-3 py-1 rounded-xl whitespace-nowrap ${isUrgent
                                     ? "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20"
                                     : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20"
-                                }`}
+                                  }`}
                               >
                                 {daysCount}
                               </span>
@@ -323,11 +322,10 @@ export function Monitor({
                           Días Restantes
                         </span>
                         <span
-                          className={`inline-block font-black text-sm px-2.5 py-0.5 rounded-lg ${
-                            isUrgent
+                          className={`inline-block font-black text-sm px-2.5 py-0.5 rounded-lg ${isUrgent
                               ? "bg-amber-500/10 text-amber-700 dark:text-amber-400"
                               : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                          }`}
+                            }`}
                         >
                           {daysCount} Días
                         </span>

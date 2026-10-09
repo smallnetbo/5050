@@ -31,14 +31,13 @@ export default async function Home() {
           <Hero />
           <Concepts conceptSteps={landingData.conceptSteps} />
           <Monitor config={landingData.monitorConfig} metrics={landingData.monitorMetrics} />
-          <LevelCommitments commitments={landingData.commitments} />
-          
+          <DocumentHub documents={landingData.documents} />
+          <LevelCommitments commitments={landingData.commitments} levels={landingData.commitmentLevels} />
+          <Timeline milestones={landingData.milestones} />
+          <MultimediaHub mediaItems={landingData.mediaItems} />
           {/* MÓDULO EXCLUIDO: Se mantiene 100% independiente y sin modificaciones */}
           <InteractiveNewsGallery3 />
 
-          <Timeline milestones={landingData.milestones} />
-          <MultimediaHub mediaItems={landingData.mediaItems} />
-          <DocumentHub documents={landingData.documents} />
           <CitizenFeedback />
         </main>
         <Footer />

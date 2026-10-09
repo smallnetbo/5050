@@ -18,7 +18,7 @@ import {
   MonitorMetric,
 } from "@/lib/agenda-data";
 
-import { commitmentsData, CommitmentItem } from "@/lib/commitments-data";
+import { commitmentsData, CommitmentItem, commitmentLevels as defaultCommitmentLevels, CommitmentLevel } from "@/lib/commitments-data";
 
 export interface SiteConfigData {
   heroTitle: string;
@@ -42,6 +42,7 @@ export async function getLandingData() {
       dbMonitorConfig,
       dbMonitorMetrics,
       dbCommitments,
+      dbCommitmentLevels,
     ] = await Promise.all([
       prisma.pillar.findMany({ orderBy: { order: "asc" } }),
       prisma.milestone.findMany({ orderBy: { order: "asc" } }),
@@ -53,6 +54,7 @@ export async function getLandingData() {
       (prisma as any).monitorConfig.findUnique({ where: { id: "global" } }),
       (prisma as any).monitorMetric.findMany({ orderBy: { order: "asc" } }),
       (prisma as any).levelCommitment.findMany({ orderBy: { order: "asc" } }),
+      (prisma as any).commitmentLevel.findMany({ orderBy: { order: "asc" } }),
     ]);
 
     const mappedPillars: Pillar[] = dbPillars.length > 0
@@ -206,6 +208,21 @@ export async function getLandingData() {
         }))
       : commitmentsData;
 
+    const mappedLevels: CommitmentLevel[] = dbCommitmentLevels && dbCommitmentLevels.length > 0
+      ? dbCommitmentLevels.map((l: any) => ({
+          id: l.id,
+          name: l.name,
+          shortName: l.shortName,
+          badge: l.badge,
+          description: l.description,
+          iconName: l.iconName,
+          colorScheme: l.colorScheme,
+          order: l.order,
+          active: l.active,
+          count: mappedCommitments.filter((c) => c.levelId === l.id).length,
+        }))
+      : defaultCommitmentLevels;
+
     return {
       pillars: mappedPillars,
       milestones: mappedMilestones,
@@ -217,6 +234,7 @@ export async function getLandingData() {
       monitorConfig,
       monitorMetrics,
       commitments: mappedCommitments,
+      commitmentLevels: mappedLevels,
     };
   } catch (error) {
     console.warn("DB offline o sin inicializar. Usando datos estáticos por defecto.");
@@ -230,6 +248,7 @@ export async function getLandingData() {
       monitorConfig: defaultMonitorConfig,
       monitorMetrics: defaultMonitorMetrics,
       commitments: commitmentsData,
+      commitmentLevels: defaultCommitmentLevels,
       siteConfig: {
         heroTitle: "Hacia una distribución justa 50/50",
         heroSubtitle: "Transformando la descentralización tributaria en Bolivia mediante el Acuerdo N° 001/2026 de Sucre.",

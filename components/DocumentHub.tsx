@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
   FileText,
   Download,
@@ -24,26 +24,59 @@ import {
 } from "lucide-react";
 import { documentsList as defaultDocuments, DocumentItem } from "@/lib/agenda-data";
 
-interface DocumentHubProps {
-  documents?: DocumentItem[];
+export interface DocumentCategory {
+  id: string;
+  label: string;
+  isSystem?: boolean;
 }
 
-export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
+export const DEFAULT_DOCUMENT_CATEGORIES: DocumentCategory[] = [
+  { id: "all", label: "Todos los Documentos", isSystem: true },
+  { id: "Acuerdo", label: "Acuerdos" },
+  { id: "Acta", label: "Actas" },
+  { id: "Presentación", label: "Presentaciones" },
+  { id: "Anexo", label: "Anexos" },
+  { id: "Proyecto de Ley", label: "Proyectos de Ley" },
+  { id: "Decreto", label: "Decretos" },
+];
+
+const LOCAL_STORAGE_KEY = "agenda5050_document_categories";
+
+interface DocumentHubProps {
+  documents?: DocumentItem[];
+  initialCategories?: DocumentCategory[];
+}
+
+export function DocumentHub({
+  documents: propDocuments,
+  initialCategories,
+}: DocumentHubProps) {
   const documentsList = propDocuments && propDocuments.length > 0 ? propDocuments : defaultDocuments;
   const [docSearchQuery, setDocSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [readingDoc, setReadingDoc] = useState<DocumentItem | null>(null);
 
-  // Lista de categorías normalizadas para filtros
-  const categoriesList = [
-    { id: "all", label: "Todos los Documentos" },
-    { id: "Acuerdo", label: "Acuerdos" },
-    { id: "Acta", label: "Actas" },
-    { id: "Presentación", label: "Presentaciones" },
-    { id: "Anexo", label: "Anexos" },
-    { id: "Proyecto de Ley", label: "Proyectos de Ley" },
-    { id: "Decreto", label: "Decretos" },
-  ];
+  // Lista de categorías dinámica (sincronizada con el panel de administración)
+  const [categoriesList, setCategoriesList] = useState<DocumentCategory[]>(
+    initialCategories && initialCategories.length > 0 ? initialCategories : DEFAULT_DOCUMENT_CATEGORIES
+  );
+
+  // Cargar categorías configuradas desde el panel de administración vía localStorage
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setCategoriesList(parsed);
+          }
+        }
+      } catch (err) {
+        console.error("Error al cargar categorías en DocumentHub:", err);
+      }
+    }
+  }, []);
 
   // Filtro dinámico por búsqueda y categoría
   const filteredDocs = useMemo(() => {
@@ -53,18 +86,27 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
         doc.description.toLowerCase().includes(docSearchQuery.toLowerCase()) ||
         (doc.department && doc.department.toLowerCase().includes(docSearchQuery.toLowerCase()));
 
+      const currentCatObj = categoriesList.find((c) => c.id === selectedCategory);
       const matchesCat =
         selectedCategory === "all" ||
-        doc.category.toLowerCase().includes(selectedCategory.toLowerCase());
+        doc.category.toLowerCase().includes(selectedCategory.toLowerCase()) ||
+        (currentCatObj && doc.category.toLowerCase().includes(currentCatObj.label.toLowerCase()));
 
       return matchesSearch && matchesCat;
     });
-  }, [documentsList, docSearchQuery, selectedCategory]);
+  }, [documentsList, docSearchQuery, selectedCategory, categoriesList]);
 
   // Conteo de documentos por categoría
   const getCategoryCount = (catId: string) => {
     if (catId === "all") return documentsList.length;
-    return documentsList.filter((d) => d.category.toLowerCase().includes(catId.toLowerCase())).length;
+    const catObj = categoriesList.find((c) => c.id === catId);
+    return documentsList.filter((d) => {
+      const docCat = (d.category || "").toLowerCase();
+      return (
+        docCat.includes(catId.toLowerCase()) ||
+        (catObj && docCat.includes(catObj.label.toLowerCase()))
+      );
+    }).length;
   };
 
   // Helper para asignar icono según categoría
@@ -109,10 +151,10 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-2xl">
             <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-emerald-800 dark:text-emerald-400">
-              Repositorio Documental Oficial
+              Centro de descargas
             </span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-              Centro de Descargas
+              Repositorio Documental Oficial
             </h2>
             <p className="mt-2 text-base text-slate-600 dark:text-slate-300 font-medium">
               Acceso abierto, directo e íntegro a los acuerdos oficiales suscritos, actas de mesas técnicas, presentaciones, anexos y anteproyectos normativos del proceso autonómico 50/50.
@@ -142,19 +184,17 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black whitespace-nowrap transition-all ${
-                  isSelected
+                className={`flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black whitespace-nowrap transition-all ${isSelected
                     ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md scale-[1.02]"
                     : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800"
-                }`}
+                  }`}
               >
                 <span>{cat.label}</span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${
-                    isSelected
+                  className={`text-[10px] px-1.5 py-0.5 rounded-full font-bold ${isSelected
                       ? "bg-white/20 dark:bg-slate-900/20 text-white dark:text-slate-900"
                       : "bg-slate-100 dark:bg-slate-800 text-slate-500"
-                  }`}
+                    }`}
                 >
                   {count}
                 </span>
@@ -197,11 +237,10 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
               return (
                 <article
                   key={doc.id}
-                  className={`group rounded-3xl border transition-all duration-200 bg-white dark:bg-slate-900 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-emerald-500/40 flex flex-col md:flex-row md:items-center justify-between gap-5 ${
-                    doc.featured
+                  className={`group rounded-3xl border transition-all duration-200 bg-white dark:bg-slate-900 p-5 sm:p-6 shadow-xs hover:shadow-md hover:border-emerald-500/40 flex flex-col md:flex-row md:items-center justify-between gap-5 ${doc.featured
                       ? "border-emerald-500/30 dark:border-emerald-500/30 ring-1 ring-emerald-500/10"
                       : "border-slate-200/90 dark:border-slate-800"
-                  }`}
+                    }`}
                 >
                   {/* Left Column: Icon & Document Details */}
                   <div className="flex items-start gap-4 flex-1">
@@ -334,6 +373,7 @@ export function DocumentHub({ documents: propDocuments }: DocumentHubProps) {
           </div>
         </div>
       )}
+
     </section>
   );
 }

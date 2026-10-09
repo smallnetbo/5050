@@ -5,6 +5,7 @@ import {
   commitmentLevels,
   commitmentsData,
   CommitmentItem,
+  CommitmentLevel,
 } from "@/lib/commitments-data";
 import {
   Landmark,
@@ -24,6 +25,15 @@ import {
   Info,
   X,
   ExternalLink,
+  Scale,
+  Shield,
+  ShieldCheck,
+  Users,
+  Globe,
+  BookOpen,
+  GraduationCap,
+  Briefcase,
+  Award,
 } from "lucide-react";
 
 const iconMap: Record<string, React.ElementType> = {
@@ -31,14 +41,30 @@ const iconMap: Record<string, React.ElementType> = {
   Building2,
   Building,
   Layers,
+  Scale,
+  Shield,
+  ShieldCheck,
+  Users,
+  Globe,
+  BookOpen,
+  GraduationCap,
+  Briefcase,
+  Award,
 };
 
 interface LevelCommitmentsProps {
   commitments?: CommitmentItem[];
+  levels?: CommitmentLevel[];
 }
 
-export function LevelCommitments({ commitments: propCommitments }: LevelCommitmentsProps = {}) {
+export function LevelCommitments({
+  commitments: propCommitments,
+  levels: propLevels,
+}: LevelCommitmentsProps = {}) {
   const itemsList = propCommitments && propCommitments.length > 0 ? propCommitments : commitmentsData;
+  const levelsList = useMemo(() => {
+    return propLevels && propLevels.length > 0 ? propLevels : commitmentLevels;
+  }, [propLevels]);
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState<string>("all");
@@ -115,29 +141,28 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
 
   // Helper para badge de nivel
   const getLevelBadge = (levelId: string) => {
-    switch (levelId) {
-      case "nce":
-        return {
-          label: "Nivel Central",
-          cls: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-300/30",
-        };
-      case "gad":
-        return {
-          label: "Gobernaciones",
-          cls: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-300/30",
-        };
-      case "gam":
-        return {
-          label: "Municipios",
-          cls: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-300/30",
-        };
-      case "conjunto":
-      default:
-        return {
-          label: "Conjunto",
-          cls: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-300/30",
-        };
+    const found = levelsList.find((l) => l.id === levelId);
+    if (found) {
+      const colorScheme = found.colorScheme || "blue";
+      const colorMap: Record<string, string> = {
+        blue: "bg-blue-500/10 text-blue-700 dark:text-blue-300 border-blue-300/30",
+        emerald: "bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border-emerald-300/30",
+        amber: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-300/30",
+        purple: "bg-purple-500/10 text-purple-700 dark:text-purple-300 border-purple-300/30",
+        indigo: "bg-indigo-500/10 text-indigo-700 dark:text-indigo-300 border-indigo-300/30",
+        rose: "bg-rose-500/10 text-rose-700 dark:text-rose-300 border-rose-300/30",
+        teal: "bg-teal-500/10 text-teal-700 dark:text-teal-300 border-teal-300/30",
+        cyan: "bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border-cyan-300/30",
+      };
+      return {
+        label: found.shortName || found.name,
+        cls: colorMap[colorScheme] || "bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-300/30",
+      };
     }
+    return {
+      label: levelId.toUpperCase(),
+      cls: "bg-slate-500/10 text-slate-700 dark:text-slate-300 border-slate-300/30",
+    };
   };
 
   return (
@@ -150,13 +175,13 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="max-w-3xl">
             <span className="rounded-md bg-emerald-100 dark:bg-emerald-950/60 px-2.5 py-1 text-xs font-black uppercase text-emerald-800 dark:text-emerald-400">
-              Matriz de Responsabilidades & Entregables
+              Matriz de Compromisos
             </span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
               Compromisos por Nivel
             </h2>
             <p className="mt-2 text-base text-slate-600 dark:text-slate-300 font-medium">
-              Tabla interactiva que detalla quién remite cada entregable, con responsabilidades técnicas, plazos y alcances normativos acordados entre el Nivel Central, las Gobernaciones y los Municipios.
+              Tabla interactiva que detalla los compromisos asumidos entre el Nivel Central y las Entidades Territoriales Autónomas, la entidad responsable y estado de avance.
             </p>
           </div>
 
@@ -168,14 +193,13 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
         </div>
 
         {/* Level Tabs (Navegación Interactiva por Nivel) */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
           <button
             onClick={() => setSelectedLevel("all")}
-            className={`p-4 rounded-2xl border text-left transition-all ${
-              selectedLevel === "all"
-                ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black scale-[1.01]"
-                : "bg-slate-50 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
-            }`}
+            className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between min-h-[88px] ${selectedLevel === "all"
+              ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black scale-[1.01]"
+              : "bg-slate-50 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
           >
             <div className="flex items-center justify-between">
               <span className="text-[10px] uppercase font-bold tracking-wider opacity-75">
@@ -183,10 +207,10 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
               </span>
               <span className="text-xs font-black">{itemsList.length}</span>
             </div>
-            <div className="mt-1 text-sm font-black truncate">Todos los Niveles</div>
+            <div className="mt-2 text-xs sm:text-sm font-black leading-snug">Todos los Niveles</div>
           </button>
 
-          {commitmentLevels.map((lvl) => {
+          {levelsList.filter((l) => l.active !== false).map((lvl) => {
             const Icon = iconMap[lvl.iconName] || Landmark;
             const isSelected = selectedLevel === lvl.id;
             const lvlCount = itemsList.filter((i) => i.levelId === lvl.id).length;
@@ -195,21 +219,20 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
               <button
                 key={lvl.id}
                 onClick={() => setSelectedLevel(lvl.id)}
-                className={`p-4 rounded-2xl border text-left transition-all ${
-                  isSelected
-                    ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black scale-[1.01]"
-                    : "bg-slate-50 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
-                }`}
+                className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between min-h-[88px] ${isSelected
+                  ? "bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-md font-black scale-[1.01]"
+                  : "bg-slate-50 dark:bg-slate-900/60 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800"
+                  }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase font-bold tracking-wider opacity-75 truncate max-w-[80px]">
+                  <span className="text-[10px] uppercase font-bold tracking-wider opacity-75 truncate max-w-[95px]">
                     {lvl.badge}
                   </span>
                   <span className="text-xs font-black">{lvlCount}</span>
                 </div>
-                <div className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm font-black truncate">
-                  <Icon size={14} className="shrink-0" />
-                  <span className="truncate">{lvl.shortName}</span>
+                <div className="mt-2 flex items-start gap-1.5 text-xs sm:text-sm font-black leading-snug">
+                  <Icon size={14} className="shrink-0 mt-0.5" />
+                  <span className="line-clamp-2 leading-tight break-words">{lvl.shortName}</span>
                 </div>
               </button>
             );
@@ -259,8 +282,8 @@ export function LevelCommitments({ commitments: propCommitments }: LevelCommitme
               <thead className="sticky top-0 z-20 bg-slate-50/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-xs">
                 <tr className="text-[11px] font-black uppercase text-slate-500 dark:text-slate-400">
                   <th className="py-4 px-5 w-52 bg-slate-50/95 dark:bg-slate-800/95">Compromiso</th>
-                  <th className="py-4 px-5 bg-slate-50/95 dark:bg-slate-800/95">¿Qué debe entregar realmente?</th>
-                  <th className="py-4 px-5 w-48 bg-slate-50/95 dark:bg-slate-800/95">Quién</th>
+                  <th className="py-4 px-5 bg-slate-50/95 dark:bg-slate-800/95">¿Qué debe entregar?</th>
+                  <th className="py-4 px-5 w-48 bg-slate-50/95 dark:bg-slate-800/95">¿Quién?</th>
                   <th className="py-4 px-5 text-center w-36 bg-slate-50/95 dark:bg-slate-800/95">Estado</th>
                 </tr>
               </thead>

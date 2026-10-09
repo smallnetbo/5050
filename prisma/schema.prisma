@@ -209,7 +209,17 @@ model LevelCommitment {
   updatedAt    DateTime @updatedAt
 }
 
-
-
-
-
+// 14. Niveles de Gobierno / Categorías de Compromiso (LevelCommitments.tsx Pestañas)
+model CommitmentLevel {
+  id          String   @id // "nce", "gad", "gam", "conjunto", etc.
+  name        String   // "Presidente / Gobierno Nacional (NCE)"
+  shortName   String   // "Nivel Central (NCE)"
+  badge       String   // "Ejecutivo Nacional"
+  description String   // "Compromisos normativos, fiscales..."
+  iconName    String   @default("Landmark")
+  colorScheme String   @default("blue")
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

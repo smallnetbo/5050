@@ -4,19 +4,23 @@ import { useState, useEffect } from "react";
 import { CommitmentInput } from "@/lib/actions/commitments.actions";
 import { X, Save, Loader2, Landmark, Building2, Building, Layers } from "lucide-react";
 
+import { CommitmentLevel } from "@/lib/commitments-data";
+import { LEVEL_ICONS_MAP } from "./CommitmentLevelsModal";
+
 interface CommitmentModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (data: CommitmentInput) => Promise<void>;
   initialData?: CommitmentInput | null;
-  defaultLevelId?: "nce" | "gad" | "gam" | "conjunto";
+  defaultLevelId?: string;
+  levels?: CommitmentLevel[];
 }
 
-const LEVEL_OPTIONS = [
-  { id: "nce", name: "Presidente / Gobierno Nacional (NCE)", icon: Landmark },
-  { id: "gad", name: "Gobiernos Autónomos Departamentales (GAD)", icon: Building2 },
-  { id: "gam", name: "GAM (9 capitales + El Alto) — AMB", icon: Building },
-  { id: "conjunto", name: "Compromisos conjuntos", icon: Layers },
+const DEFAULT_LEVEL_OPTIONS = [
+  { id: "nce", name: "Presidente / Gobierno Nacional (NCE)", iconName: "Landmark" },
+  { id: "gad", name: "Gobiernos Autónomos Departamentales (GAD)", iconName: "Building2" },
+  { id: "gam", name: "GAM (9 capitales + El Alto) — AMB", iconName: "Building" },
+  { id: "conjunto", name: "Compromisos conjuntos", iconName: "Layers" },
 ];
 
 const QUICK_STATUSES = [
@@ -36,7 +40,9 @@ export function CommitmentModal({
   onSave,
   initialData,
   defaultLevelId = "nce",
+  levels,
 }: CommitmentModalProps) {
+  const activeLevels = levels && levels.length > 0 ? levels.filter((l) => l.active !== false) : DEFAULT_LEVEL_OPTIONS;
   const [formData, setFormData] = useState<CommitmentInput>({
     levelId: defaultLevelId,
     commitment: "",
@@ -145,9 +151,11 @@ export function CommitmentModal({
               Nivel de Gobierno *
             </label>
             <div className="grid sm:grid-cols-2 gap-2">
-              {LEVEL_OPTIONS.map((lvl) => {
-                const Icon = lvl.icon;
+              {activeLevels.map((lvl) => {
+                const iconName = (lvl as any).iconName || "Landmark";
+                const Icon = LEVEL_ICONS_MAP[iconName] || Landmark;
                 const isSelected = formData.levelId === lvl.id;
+                const displayName = lvl.name || (lvl as any).shortName;
                 return (
                   <button
                     key={lvl.id}
@@ -156,7 +164,7 @@ export function CommitmentModal({
                       setFormData({
                         ...formData,
                         levelId: lvl.id as any,
-                        levelName: lvl.name,
+                        levelName: displayName,
                       })
                     }
                     className={`flex items-center gap-2.5 p-3 rounded-2xl border text-left text-xs font-bold transition ${
@@ -166,7 +174,7 @@ export function CommitmentModal({
                     }`}
                   >
                     <Icon size={16} className="shrink-0 text-emerald-500" />
-                    <span className="truncate">{lvl.name}</span>
+                    <span className="truncate">{displayName}</span>
                   </button>
                 );
               })}

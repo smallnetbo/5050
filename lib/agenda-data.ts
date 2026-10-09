@@ -420,17 +420,6 @@ export const milestones: Milestone[] = [
     ]
   },
   {
-    "id": 6,
-    "title": "Plenario del Consejo Nacional de Autonomías",
-    "date": "Noviembre 2026",
-    "status": "Programado",
-    "detail": "Aprobación del paquete normativo consolidado y presentación formal ante la Asamblea Legislativa Plurinacional.",
-    "order": 7,
-    "participants": [
-      "Consejo Nacional de Autonomías"
-    ]
-  },
-  {
     "id": 7,
     "title": "Aplicación de la Gestión Fiscal 50/50",
     "date": "1 de Enero de 2027",
@@ -714,8 +703,30 @@ export const mediaItemsList: MediaItem[] = [
     "title": "Portales para conocer y acompañar la Agenda 5050",
     "type": "videos",
     "mediaUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441.mp4",
-    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958264452.jpg",
+    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-mp4-snapshot-00-36-422-1791575512378.jpg",
     "description": "¡La información sobre el proceso autonómico está al alcance de todas y todos!   Conoce los avances, acuerdos y el Centro de Datos Autonómicos construidos de manera conjunta para transparentar la gestión.   \r\n🔗 Explora toda la información disponible en:\r\n▪️ Portal Agenda 50/50: agenda50-50.sea.gob.bo\r\n▪️ Centro de Datos Autonómicos (CEDIA): cedia.sea.gob.bo\r\n▪️ Presupuesto Abierto: abierto.economiayfinanzas.gob.bo   \r\nMás información, más datos y mayor acceso para conocer y acompañar el proceso autonómico.",
+    "order": 0
+  },
+  {
+    "id": "cmv1b6emy0000gesrkrkmce79",
+    "title": "Presidente Paz promulga ley que modifica el pago de prediarios y libera de esta obligación a las gobernaciones",
+    "type": "videos",
+    "mediaUrl": "/uploads/multimedia/rodrigo-paz-promulga-ley-que-modifica-el-pago-de-prediarios-1791571100170.mp4",
+    "coverUrl": "/uploads/multimedia/rodrigo-paz-promulga-ley-que-modifica-el-pago-de-prediarios-mp4-snapshot-27-34-286-1791571102755.jpg",
+    "description": "La norma traslada al nivel central del Estado el financiamiento de los prediarios para las personas privadas de libertad, por lo que las gobernaciones dejarán de destinar recursos de sus presupuestos a esta obligación",
+    "order": 0
+  },
+  {
+    "id": "cmv1e17ms0001gesr918vk9xk",
+    "title": "Paz anuncia que el título de bachiller será gratuito, digital y tendrá un código QR",
+    "type": "videos",
+    "category": "Comunicación Digital",
+    "duration": "YouTube Short",
+    "platform": "YouTube",
+    "coverUrl": "https://img.youtube.com/vi/IjaFB-aPOVw/hqdefault.jpg",
+    "embedUrl": "https://www.youtube.com/embed/IjaFB-aPOVw",
+    "url": "https://www.youtube.com/shorts/IjaFB-aPOVw",
+    "description": "Gobierno publicó en la Gaceta el Decreto  Supremo 5738 con el que se hace oficial el titulo de bachiller digital y gratuito para más de 221.000 personas que culminen sus estudios este año.",
     "order": 0
   },
   {

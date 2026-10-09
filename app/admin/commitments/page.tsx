@@ -20,7 +20,10 @@ export default async function AdminCommitmentsPage() {
         </p>
       </div>
 
-      <CommitmentsManager initialCommitments={data.commitments} />
+      <CommitmentsManager
+        initialCommitments={data.commitments}
+        initialLevels={data.commitmentLevels}
+      />
     </div>
   );
 }

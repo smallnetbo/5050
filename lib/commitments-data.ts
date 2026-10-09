@@ -1,6 +1,6 @@
 export interface CommitmentItem {
   id: string;
-  levelId: "nce" | "gad" | "gam" | "conjunto";
+  levelId: "nce" | "gad" | "gam" | "conjunto" | string;
   levelName: string;
   commitment: string;
   deliverable: string;
@@ -11,14 +11,16 @@ export interface CommitmentItem {
 }
 
 export interface CommitmentLevel {
-  id: "nce" | "gad" | "gam" | "conjunto";
+  id: string;
   name: string;
   shortName: string;
   badge: string;
   description: string;
   iconName: string;
-  colorScheme: "blue" | "emerald" | "amber" | "purple";
-  count: number;
+  colorScheme: "blue" | "emerald" | "amber" | "purple" | "indigo" | "rose" | "teal" | "cyan" | "slate" | string;
+  count?: number;
+  order?: number;
+  active?: boolean;
 }
 
 export const commitmentLevels: CommitmentLevel[] = [

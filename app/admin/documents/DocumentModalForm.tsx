@@ -5,16 +5,24 @@ import { DocumentItem } from "@/lib/agenda-data";
 import { upsertDocumentAction } from "@/lib/actions/documents.actions";
 import { uploadFileWithProgress, formatBytes } from "@/lib/client-upload";
 import { X, Upload, FileText, Loader2, CheckCircle2, AlertCircle, Trash2 } from "lucide-react";
+import { DocumentCategory, DEFAULT_DOCUMENT_CATEGORIES } from "@/components/DocumentHub";
 
 interface Props {
   document?: DocumentItem | null;
   onClose: () => void;
   onSaved: () => void;
+  availableCategories?: DocumentCategory[];
 }
 
-export function DocumentModalForm({ document, onClose, onSaved }: Props) {
+export function DocumentModalForm({ document, onClose, onSaved, availableCategories }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Categorías activas para el select
+  const categoriesListToUse = (availableCategories && availableCategories.length > 0
+    ? availableCategories
+    : DEFAULT_DOCUMENT_CATEGORIES
+  ).filter((c) => c.id !== "all");
 
   // Estados de progreso de subida
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -139,15 +147,21 @@ export function DocumentModalForm({ document, onClose, onSaved }: Props) {
               </label>
               <select
                 value={category}
-                onChange={(e) => setCategory(e.target.value as any)}
+                onChange={(e) => setCategory(e.target.value)}
                 className="w-full px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#0B111A] text-slate-900 dark:text-white text-xs font-medium focus:ring-2 focus:ring-emerald-500 focus:outline-none"
               >
-                <option value="Acuerdo">Acuerdo</option>
-                <option value="Acta">Acta</option>
-                <option value="Presentación">Presentación</option>
-                <option value="Anexo">Anexo</option>
-                <option value="Proyecto de Ley">Proyecto de Ley</option>
-                <option value="Decreto">Decreto</option>
+                {categoriesListToUse.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.label}
+                  </option>
+                ))}
+                {/* Si el documento actual tiene una categoría fuera de la lista estándar, conservarla visible */}
+                {category &&
+                  !categoriesListToUse.some(
+                    (c) =>
+                      c.id.toLowerCase() === category.toLowerCase() ||
+                      c.label.toLowerCase() === category.toLowerCase()
+                  ) && <option value={category}>{category}</option>}
               </select>
             </div>
 
