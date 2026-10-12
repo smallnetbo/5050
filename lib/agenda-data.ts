@@ -659,6 +659,18 @@ export const departmentsData: DepartmentData[] = [
 
 export const documentsList: DocumentItem[] = [
   {
+    "id": "cmv5qsmn900019rjpk9ung5dm",
+    "title": "CONCLUSIONES – REUNIÓN DE COBIJA, PANDO",
+    "category": "Acta",
+    "department": "Cobija",
+    "date": "12/10/2026",
+    "fileSize": "2.4 MB",
+    "fileUrl": "/uploads/documents/conclusiones---reuni-n-de-cobija--pando-1791839198715.pdf",
+    "description": "En el marco del Acuerdo 001/2026, de 05 de agosto de 2026, firmado entre el\r\nPresidente del Estado Plurinacional de Bolivia, Rodrigo Paz Pereira, y las\r\nGobernadoras y los Gobernadores de los Gobiernos Autónomos\r\nDepartamentales, se reunieron en la ciudad de Cobija autoridades de los\r\ncitados gobiernos subnacionales y de ministerios del nivel central del Estado.",
+    "downloadsCount": 0,
+    "featured": false
+  },
+  {
     "id": "cmv5pp52u00009rjp1di5qodv",
     "title": "Acta de reunión entre el Viceministerio de Autonomías y Tierras con la Coordinadora Nacional de Autonomías Indígena Originaria Campesinas CONAIOC",
     "category": "Acta",
