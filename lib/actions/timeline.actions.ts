@@ -9,6 +9,7 @@ import { syncDatabaseToAgendaData } from "@/lib/sync-seeds";
 export interface MilestoneDocument {
   name: string;
   size: string;
+  url?: string;
 }
 
 export interface MilestoneInput {

@@ -20,4 +20,4 @@ npm-debug.log
 
 # Archivos de pruebas
 coverage/
-public/uploads/
+public/uploads/multimedia/*.mp4

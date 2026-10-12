@@ -285,8 +285,8 @@ export function TimelineManager({ initialMilestones }: TimelineManagerProps) {
 
                         {m.documents && m.documents.length > 0 && (
                           <div className="flex items-center gap-1.5">
-                            <FileText size={13} className="text-blue-500" />
-                            <span>{m.documents.length} Archivo(s) PDF adjunto(s)</span>
+                            <FileText size={13} className="text-emerald-500" />
+                            <span>{m.documents.length} Documento(s) / Enlace(s) adjunto(s)</span>
                           </div>
                         )}
                       </div>

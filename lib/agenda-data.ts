@@ -394,15 +394,47 @@ export const milestones: Milestone[] = [
     ]
   },
   {
+    "id": 11,
+    "title": "Ley N° 1755 Modificaciones al Presupuesto General del Estado - Gestión 2026, promulgada el 30 de julio de 2026",
+    "date": "30 de Julio de 2026",
+    "status": "Cumplido",
+    "detail": "La Ley está enfocada en otorgarles mayor flexibilidad financiera e inyección de recursos a las Entidades Territoriales Autónomas.",
+    "image": "/uploads/timeline/paz--promulg--ley-del-presupuesto-general-del-estado--pge--reformulado-2026-1791813442976.jpeg",
+    "order": 5,
+    "documents": [
+      {
+        "name": "L17552078NCPP.pdf",
+        "size": "988 KB",
+        "url": "/uploads/timeline/l17552078ncpp-1791820399991.pdf"
+      }
+    ]
+  },
+  {
     "id": 5,
     "title": "Encuentros con Municipios",
-    "date": "Septiembre - Octubre 2026",
+    "date": "27 de agosto de 2026",
     "status": "Cumplido",
     "detail": "La Paz, 27 de agosto de 2026 (ABI). – Acompañado de ministros y viceministros, el presidente del Estado, Rodrigo Paz, y la Federación de Asociaciones de Municipios (FAM) de Bolivia iniciaron este jueves la reunión en la ciudad de La Paz para tratar una agenda de seis puntos, en la que se prioriza la propuesta gubernamental del 50/50.\n\n“Me siento bendecido de estar con ustedes para poder realmente transformar este Estado. Debe ser la primera vez en la historia de Bolivia que un presidente quiere acabar con el Estado centralista y eso creo que nos suma en el mismo esfuerzo”, expresó el mandatario al inaugurar el encuentro.\n\nEl jefe de Estado exhortó a los alcaldes a acabar con el Estado centralista de “forma ordenada y consistente para no tener retornos, ni coletazos”, sino que se vaya conformando y consolidando el proceso.\n\n“Yo agradecido por este encuentro, no solo como uno más de ustedes en su momento, he sido concejal, he sido alcalde y me siento parte de la familia con la cual tendremos que llevar adelante las grandes transformaciones”, remarcó.\n\nResaltó que en la reunión uno de los temas a tratar es el 50/50, una propuesta del Gobierno nacional que “no es el final, es el principio de lo que realmente se quiere construir para el futuro de la patria”.\n\nEn tanto, el presidente de la FAM-Bolivia, Johnny Torres, indicó que con los representantes ediles analizaron el miércoles una agenda a tratar en el encuentro de esta jornada con las autoridades del Gobierno nacional.\n\n“Hemos estado ayer (miércoles) reunidos todo el día analizando los temas de la agenda. Nosotros tenemos una agenda de seis puntos que la hemos propuesto al Gobierno, primero el 50/50 el cual nosotros esperamos”, puntualizó.\n\nSubrayó que en esta agenda se pide que el 50/50 se consolide en lo posible en el Presupuesto 2027.\n\n“Si se viabiliza el 50/50 como estamos proponiendo, el Gobierno podría disponer del IDH (Impuesto Directo a los Hidrocarburos) para recursos con gobernaciones y otros y por lo tanto los municipios podríamos tener coparticipación, recursos propios y probablemente recursos de crédito”, comentó.\n\nEn la reunión también están presentes los ministros de la Presidencia, Fernando Aramayo; y de Economía y Finanzas Públicas, Christian Morales, además de viceministros de diferentes carteras de Estado.",
     "image": "/uploads/timeline/presidente-paz-resalta-reuni-n-con-alcaldes-1791317367709.jpg",
-    "order": 5,
+    "order": 6,
     "participants": [
       "FAM-Bolivia"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "D.S. N° 5686 Crea el Programa de Readecuación Financiera Territorial (PRFT), aprobado el 31 de agosto de 2026",
+    "date": "31 de Agosto de 2026",
+    "status": "Cumplido",
+    "detail": "El DS establece mecanismos de apoyo para las ETA con desequilibrios financieros o falta de liquidez.",
+    "image": "/uploads/timeline/gobierno-cre--el-programa-de-readecuaci-n-financiera-territorial--prft--mediante-el-decreto-supremo-5686-1791815328330.webp",
+    "order": 7,
+    "documents": [
+      {
+        "name": "DS56862091NCPP.pdf",
+        "size": "806 KB",
+        "url": "/uploads/timeline/ds56862091ncpp-1791820824168.pdf"
+      }
     ]
   },
   {
@@ -412,11 +444,59 @@ export const milestones: Milestone[] = [
     "status": "Cumplido",
     "detail": "Avanzamos en la co-construcción de la Agenda 50/50.\nDesde el Servicio Estatal de Autonomías, acompañamos la reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras - Bolivia para estructurar la hoja de ruta de la Agenda 50/50. \nEl encuentro contó con la participación de los equipos técnicos de todos los Gobiernos Autónomos Indígena Originario Campesinos (GAIOC). Durante las mesas de trabajo, se analizaron aspectos críticos desde la tramitación burocrática para el acceso a la autonomía, hasta los cuellos de botella administrativos que limitan una gestión pública territorial plenamente eficiente.\nLa sistematización de estos desafíos técnicos permitirá estructurar soluciones viables dentro de la Agenda 50/50. Valoramos la visión de los GAIOC para transformar estas dificultades administrativas en propuestas concretas para las autonomías",
     "image": "/uploads/timeline/reuni-n-t-cnica-conaioc---viceministerio-de-autonom-as-y-tierras-1791317777001.jpg",
-    "order": 6,
+    "order": 8,
     "participants": [
       "CONAIOC",
       "Viceministerio de Autonomías",
       "SEA"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Ley N° 1763 de modificaciones de a la Ley N° 492, promulgada el 17 de septiembre de 2026",
+    "date": "17 de septiembre de 2026",
+    "status": "Cumplido",
+    "detail": "La Ley introduce reformas clave orientadas a destrabar, ordenar y optimizar la gestión de proyectos concurrentes entre el NCE y las ETA.",
+    "image": "/uploads/timeline/paz-promulga-ley-492-1791809330392.jpeg",
+    "order": 9,
+    "documents": [
+      {
+        "name": "L17632099NCPP.pdf",
+        "size": "1.0 MB",
+        "url": "/uploads/timeline/l17632099ncpp-1791820165032.pdf"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "Ley N° 1771 de Adecuación del Financiamiento de Obligaciones Públicas, promulgada el 30 de septiembre de 2026",
+    "date": "30 de Septiembre de 2026",
+    "status": "Cumplido",
+    "detail": "La Ley libera a las Gobernaciones del pago de Bs. 228 millones por prediarios y bonos de vacunación, siendo asumida la responsabilidad por el NCE.",
+    "image": "/uploads/timeline/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1791808999039.jpg",
+    "order": 10,
+    "documents": [
+      {
+        "name": "L17712108NCPP.pdf",
+        "size": "764 KB",
+        "url": "/uploads/timeline/l17712108ncpp-1791818186397.pdf"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "D.S. 5738 Norma la emisión y otorgación del Diploma de Bachiller en formato digital, garantizando su validez jurídica, autenticidad, integridad, seguridad y confiabilidad, aprobada el 5 de octubre de 2026",
+    "date": "5 de Octubre de 2026",
+    "status": "Cumplido",
+    "detail": "Descripción: El D.S. libera a las Gobernaciones del pago de títulos de bachiller por Bs. 48 millones, siendo asumida la responsabilidad por el NCE.",
+    "image": "/uploads/timeline/el-presidente-rodrigo-paz-promulg--el-decreto-5738-1791814858326.webp",
+    "order": 11,
+    "documents": [
+      {
+        "name": "DS57382111NCPP.pdf",
+        "size": "811 KB",
+        "url": "/uploads/timeline/ds57382111ncpp-1791820635763.pdf"
+      }
     ]
   },
   {
@@ -425,7 +505,7 @@ export const milestones: Milestone[] = [
     "date": "1 de Enero de 2027",
     "status": "Meta",
     "detail": "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
-    "order": 8,
+    "order": 12,
     "participants": [
       "Estado Plurinacional de Bolivia"
     ]
@@ -691,7 +771,7 @@ export interface MediaItem {
 export const mediaItemsList: MediaItem[] = [
   {
     "id": "cmur5o8w10000od50ghe1s37j",
-    "title": "Primer resultado concreto del proceso de co-construcción de la Agenda 5050",
+    "title": "Ley N° 1771 - Primer resultado concreto del proceso de co-construcción de la Agenda 5050",
     "type": "videos",
     "mediaUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957195205.mp4",
     "coverUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957196267.jpg",
@@ -703,7 +783,7 @@ export const mediaItemsList: MediaItem[] = [
     "title": "Portales para conocer y acompañar la Agenda 5050",
     "type": "videos",
     "mediaUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441.mp4",
-    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-mp4-snapshot-00-36-422-1791575512378.jpg",
+    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050--2--1791827282996.jpg",
     "description": "¡La información sobre el proceso autonómico está al alcance de todas y todos!   Conoce los avances, acuerdos y el Centro de Datos Autonómicos construidos de manera conjunta para transparentar la gestión.   \r\n🔗 Explora toda la información disponible en:\r\n▪️ Portal Agenda 50/50: agenda50-50.sea.gob.bo\r\n▪️ Centro de Datos Autonómicos (CEDIA): cedia.sea.gob.bo\r\n▪️ Presupuesto Abierto: abierto.economiayfinanzas.gob.bo   \r\nMás información, más datos y mayor acceso para conocer y acompañar el proceso autonómico.",
     "order": 0
   },
@@ -718,15 +798,26 @@ export const mediaItemsList: MediaItem[] = [
   },
   {
     "id": "cmv1e17ms0001gesr918vk9xk",
-    "title": "Paz anuncia que el título de bachiller será gratuito, digital y tendrá un código QR",
+    "title": "D.S. 5738 - Paz anuncia que el título de bachiller será gratuito, digital y tendrá un código QR",
     "type": "videos",
     "category": "Comunicación Digital",
-    "duration": "YouTube Short",
-    "platform": "YouTube",
-    "coverUrl": "https://img.youtube.com/vi/IjaFB-aPOVw/hqdefault.jpg",
     "embedUrl": "https://www.youtube.com/embed/IjaFB-aPOVw",
     "url": "https://www.youtube.com/shorts/IjaFB-aPOVw",
+    "platform": "YouTube",
+    "coverUrl": "https://img.youtube.com/vi/IjaFB-aPOVw/hqdefault.jpg",
+    "duration": "YouTube Short",
     "description": "Gobierno publicó en la Gaceta el Decreto  Supremo 5738 con el que se hace oficial el titulo de bachiller digital y gratuito para más de 221.000 personas que culminen sus estudios este año.",
+    "order": 0
+  },
+  {
+    "id": "cmv1i2de00002gesr71dt22ug",
+    "title": "D.S. 5686 - ¿Cómo el PRFT ayuda a municipios y gobernaciones a cuidar sus servicios y proyectos?",
+    "type": "videos",
+    "embedUrl": "https://www.youtube.com/embed/QxvMs-wlSgM",
+    "url": "https://www.youtube.com/watch?v=QxvMs-wlSgM",
+    "platform": "YouTube",
+    "coverUrl": "https://img.youtube.com/vi/QxvMs-wlSgM/hqdefault.jpg",
+    "duration": "YouTube",
     "order": 0
   },
   {
@@ -854,7 +945,7 @@ export const mediaItemsList: MediaItem[] = [
 
 export const defaultMonitorConfig: MonitorConfig = {
   sectionBadge: "Monitoreo en Tiempo Real",
-  sectionTitle: "Indicadores & Plazos",
+  sectionTitle: "Indicadores y Plazos",
   sectionSubtitle: "Seguimiento técnico del avance de los compromisos del Acuerdo N° 001/2026.",
   showCountdown: true,
   countdownBadge: "Hito Prioritario en Curso",

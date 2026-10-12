@@ -130,7 +130,7 @@ export function Monitor({
             {config.sectionBadge || "Monitoreo en Tiempo Real"}
           </span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
-            {config.sectionTitle || "Indicadores & Plazos"}
+            {config.sectionTitle || "Indicadores y Plazos"}
           </h2>
           <p className="mt-2 text-base text-slate-600 dark:text-slate-300 font-medium">
             {config.sectionSubtitle ||
@@ -278,8 +278,8 @@ export function Monitor({
                             <div className="inline-flex flex-col items-center">
                               <span
                                 className={`text-base font-black px-3 py-1 rounded-xl whitespace-nowrap ${isUrgent
-                                    ? "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20"
-                                    : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20"
+                                  ? "bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20"
+                                  : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20"
                                   }`}
                               >
                                 {daysCount}
@@ -323,8 +323,8 @@ export function Monitor({
                         </span>
                         <span
                           className={`inline-block font-black text-sm px-2.5 py-0.5 rounded-lg ${isUrgent
-                              ? "bg-amber-500/10 text-amber-700 dark:text-amber-400"
-                              : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                            ? "bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                            : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
                             }`}
                         >
                           {daysCount} Días

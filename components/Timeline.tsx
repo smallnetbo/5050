@@ -22,6 +22,7 @@ import {
   Check,
   ArrowDownToLine,
   Eye,
+  ExternalLink,
 } from "lucide-react";
 import { milestones as defaultMilestones, Milestone } from "@/lib/agenda-data";
 
@@ -384,28 +385,43 @@ export function Timeline({ milestones: propMilestones }: TimelineProps) {
               {selectedMilestone.documents && selectedMilestone.documents.length > 0 && (
                 <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <h4 className="text-[11px] font-black uppercase text-slate-500 dark:text-slate-400 tracking-wider flex items-center gap-1.5">
-                    <FileText size={13} className="text-emerald-600 dark:text-emerald-500" /> DOCUMENTOS DISPONIBLES
+                    <FileText size={13} className="text-emerald-600 dark:text-emerald-500" /> DOCUMENTOS & ENLACES DISPONIBLES
                   </h4>
                   <div className="space-y-2">
-                    {selectedMilestone.documents.map((doc, dIdx) => (
-                      <a
-                        key={dIdx}
-                        href={doc.url || "#descargas"}
-                        target={doc.url?.startsWith("http") ? "_blank" : undefined}
-                        rel={doc.url?.startsWith("http") ? "noopener noreferrer" : undefined}
-                        className="flex items-center justify-between rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/60 transition group/doc"
-                      >
-                        <div className="flex items-center gap-2.5 min-w-0 pr-2">
-                          <FileText size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
-                          <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate group-hover/doc:text-emerald-600">
-                            {doc.name}
+                    {selectedMilestone.documents.map((doc, dIdx) => {
+                      const hasValidUrl = !!doc.url && doc.url !== "#descargas";
+                      const isExternal = doc.url?.startsWith("http");
+
+                      return (
+                        <a
+                          key={dIdx}
+                          href={hasValidUrl ? doc.url : "#descargas"}
+                          target={hasValidUrl ? "_blank" : undefined}
+                          rel={hasValidUrl ? "noopener noreferrer" : undefined}
+                          className="flex items-center justify-between rounded-xl bg-slate-50 dark:bg-slate-800/80 p-3 border border-slate-200 dark:border-slate-700 hover:border-emerald-500/60 transition group/doc"
+                        >
+                          <div className="flex items-center gap-2.5 min-w-0 pr-2">
+                            <FileText size={16} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+                            <span className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate group-hover/doc:text-emerald-600">
+                              {doc.name}
+                            </span>
+                          </div>
+                          <span className="text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5 shrink-0 bg-emerald-500/10 px-2.5 py-1 rounded-md">
+                            {isExternal ? (
+                              <>
+                                <span>{doc.size || "Enlace"}</span>
+                                <ExternalLink size={12} />
+                              </>
+                            ) : (
+                              <>
+                                <Download size={12} />
+                                <span>{doc.size || "Descargar"}</span>
+                              </>
+                            )}
                           </span>
-                        </div>
-                        <span className="text-[11px] font-extrabold text-emerald-600 dark:text-emerald-400 flex items-center gap-1 shrink-0 bg-emerald-500/10 px-2 py-0.5 rounded-md">
-                          <Download size={12} /> {doc.size}
-                        </span>
-                      </a>
-                    ))}
+                        </a>
+                      );
+                    })}
                   </div>
                 </div>
               )}
