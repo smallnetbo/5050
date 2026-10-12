@@ -468,13 +468,29 @@ export const milestones: Milestone[] = [
     ]
   },
   {
+    "id": 14,
+    "title": "Firma del Acuerdo N° 002/2026 Presidente y alcaldes de capitales llegan a un acuerdo de tres ejes para consolidar la Agenda 50/50",
+    "date": "29 de Septiembre de 2026",
+    "status": "Cumplido",
+    "detail": "El presidente de Bolivia, Rodrigo Paz Pereira, se reunió con alcaldes de ciudades capitales del país y El Alto para abordar la Agenda 50/50, propuesta de reforma fiscal y estructural que busca una mejor redistribución de los recursos, reordenar el Estado y eliminar la burocracia centralista. Tras el encuentro, se firmó el Acuerdo 002/2026 que articula tres ejes estratégicos: libertades y eficiencia autonómica; reformas normativas; y acuerdos fiscales y financiamiento.\n“Agradecer su presencia. Esto es una señal muy importante de que el 50/50 avanza con fuerza, avanza con la fe de que vamos a cambiar y vamos a terminar con el Estado centralista. (...) El 50/50 es una realidad, ha nacido y ahora tiene que empezar a caminar”, señaló el primer mandatario.\nEntre las acciones previstas están la priorización de la sostenibilidad del sistema de salud municipal, la revisión de competencias y cargas financieras, la simplificación de procedimientos administrativos, el fortalecimiento de la transparencia y la gestión de datos, además de la revisión de normativa que restrinja el ejercicio competencial de los gobiernos autónomos municipales.\nEn materia fiscal, el documento contempla evaluar la estructura integral de ingresos municipales, estudiar criterios de transferencia fiscal que consideren factores como la población, capacidad fiscal, esfuerzo recaudatorio, dinamismo económico local y necesidades básicas insatisfechas; y diseñar instrumentos de financiamiento para cada municipio.\nEn el evento estuvieron presentes los alcaldes de Santa Cruz, Manuel Saavedra; de Cochabamba, Manfred Reyes Villa; de El Alto, Eliser Roca; de Sucre, Fátima Tardío; de Oruro, Iván Quispe; de Trinidad, Mauricio Barba; de Potosí, Willians Cervantes; y de Cobija, Diego Suárez.\nPor su parte, el ministro de la Presidencia, Fernando Aramayo Carrasco, apuntó que, a pesar de que el país cuenta con un modelo autonómico, éste fue absorbido por el centralismo y se debe reformular para beneficiar a los ciudadanos.\n“Al final del día, cualquier modelo autonómico, más allá de las normas o de la ruptura del monopolio legislativo para lograr una acción en jurisdicción territorial, debería traducirse en bienestar para la gente”, comentó el ministro.\nPaz destacó las reuniones que sostuvo el Estado boliviano con organismos internacionales como el Banco Mundial, la CAF, el BID y el Fondo Monetario, tras su participación en el 81° periodo de sesiones de la Asamblea General de las Naciones Unidas (ONU). El presidente recordó que se consolidó el compromiso de $us 10.000 millones que beneficiarán a los municipios.\nAdemás, el mandatario informó que el Banco Mundial comprometió especialistas para aportar en la consolidación de la agenda 50/50. “Nos van a ayudar a generar un camino común de lo que debe ser, no solo un acuerdo o un pacto fiscal, sino cómo vamos a reordenar nuestra educación, salud”, sumó.",
+    "image": "/uploads/timeline/firma-del-acuerdo-002-2026-agenda5050-1791832627199.jpg",
+    "order": 10,
+    "documents": [
+      {
+        "name": "ACUERDO N°002-2026 AGENDA 50-50.pdf",
+        "size": "600 KB",
+        "url": "/uploads/timeline/acuerdo-n-002-2026-agenda-50-50-1791832601769.pdf"
+      }
+    ]
+  },
+  {
     "id": 9,
     "title": "Ley N° 1771 de Adecuación del Financiamiento de Obligaciones Públicas, promulgada el 30 de septiembre de 2026",
     "date": "30 de Septiembre de 2026",
     "status": "Cumplido",
     "detail": "La Ley libera a las Gobernaciones del pago de Bs. 228 millones por prediarios y bonos de vacunación, siendo asumida la responsabilidad por el NCE.",
     "image": "/uploads/timeline/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1791808999039.jpg",
-    "order": 10,
+    "order": 11,
     "documents": [
       {
         "name": "L17712108NCPP.pdf",
@@ -490,7 +506,7 @@ export const milestones: Milestone[] = [
     "status": "Cumplido",
     "detail": "Descripción: El D.S. libera a las Gobernaciones del pago de títulos de bachiller por Bs. 48 millones, siendo asumida la responsabilidad por el NCE.",
     "image": "/uploads/timeline/el-presidente-rodrigo-paz-promulg--el-decreto-5738-1791814858326.webp",
-    "order": 11,
+    "order": 12,
     "documents": [
       {
         "name": "DS57382111NCPP.pdf",
@@ -505,7 +521,7 @@ export const milestones: Milestone[] = [
     "date": "1 de Enero de 2027",
     "status": "Meta",
     "detail": "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
-    "order": 12,
+    "order": 13,
     "participants": [
       "Estado Plurinacional de Bolivia"
     ]
@@ -642,6 +658,17 @@ export const departmentsData: DepartmentData[] = [
 ];
 
 export const documentsList: DocumentItem[] = [
+  {
+    "id": "cmv5pp52u00009rjp1di5qodv",
+    "title": "Acta de reunión entre el Viceministerio de Autonomías y Tierras con la Coordinadora Nacional de Autonomías Indígena Originaria Campesinas CONAIOC",
+    "category": "Acta",
+    "date": "12/09/2026",
+    "fileSize": "1.8 MB",
+    "fileUrl": "/uploads/documents/acta-de-reuni-n-entre-el-viceministerio-de-autonom-as-y-tierras-con-la-conaioc-1791837355925.pdf",
+    "description": "La Coordinadora Nacional de Autonomías Indígenas Originarias Campesinas (CONAIOC), junto con representantes de los nueve Gobiernos Autónomos Indígenas Originarios Campesinos (GAIOC) consolidados y de organizaciones que se encuentran en proceso de acceso y consolidación de la autonomía, avanzó en la construcción de una posición conjunta frente a los principales desafíos institucionales, normativos y financieros que enfrentan las autonomías indígenas en Bolivia.\r\n\r\nEl proceso desarrollado durante la reunión técnica del 11 de septiembre en Cochabamba y el encuentro con autoridades nacionales realizado el 12 de septiembre en Vinto permitió consolidar propuestas en torno a la denominada Agenda 50-50, la modificación de la Ley N.º 031, Ley Marco de Autonomías y Descentralización “Andrés Ibáñez”, la gestión pública de los GAIOC, el financiamiento de las autonomías y el ejercicio efectivo de derechos colectivos, entre ellos la consulta previa, libre e informada.\r\n\r\nLa reunión contó con la participación de representantes de Charagua Iyambae, Uru Chipaya, Kereimba Iyambae, Salinas, Raqaypampa, Jatun Ayllu Yura, Territorio Indígena Multiétnico (TIM), Challa y Lomerío, además de instituciones de apoyo.\r\n\r\nUno de los principales resultados del proceso fue la identificación y priorización de cambios normativos y mecanismos institucionales que, desde la perspectiva de las autonomías indígenas, permitirían superar obstáculos que actualmente dificultan su acceso, consolidación y funcionamiento efectivo.",
+    "downloadsCount": 0,
+    "featured": false
+  },
   {
     "id": "cmuzjj5mu0000dpvbiyb6hjhh",
     "title": "ACTA DE REUNIÓN INFORMATIVA, EVALUACIÓN Y DETERMINACIÓN DE LA FAM-BOLIVIA, LAS AMDEs y GOBIERNO NACIONAL - MESA TÉCNICA sobre el Acuerdo 50/50",

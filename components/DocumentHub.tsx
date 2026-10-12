@@ -228,7 +228,7 @@ export function DocumentHub({
             )}
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="max-h-[620px] overflow-y-auto space-y-3 pr-1.5 sm:pr-2 p-1 custom-scrollbar">
             {filteredDocs.map((doc) => {
               const IconComponent = getCategoryIcon(doc.category);
               const badgeStyle = getCategoryBadgeStyle(doc.category);

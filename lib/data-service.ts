@@ -51,10 +51,10 @@ export async function getLandingData() {
       prisma.conceptStep.findMany({ orderBy: { num: "asc" } }),
       prisma.mediaItem.findMany({ orderBy: { order: "asc" } }),
       prisma.siteConfig.findUnique({ where: { id: "global" } }),
-      (prisma as any).monitorConfig.findUnique({ where: { id: "global" } }),
-      (prisma as any).monitorMetric.findMany({ orderBy: { order: "asc" } }),
-      (prisma as any).levelCommitment.findMany({ orderBy: { order: "asc" } }),
-      (prisma as any).commitmentLevel.findMany({ orderBy: { order: "asc" } }),
+      prisma.monitorConfig.findUnique({ where: { id: "global" } }),
+      prisma.monitorMetric.findMany({ orderBy: { order: "asc" } }),
+      prisma.levelCommitment.findMany({ orderBy: { order: "asc" } }),
+      prisma.commitmentLevel.findMany({ orderBy: { order: "asc" } }),
     ]);
 
     const mappedPillars: Pillar[] = dbPillars.length > 0

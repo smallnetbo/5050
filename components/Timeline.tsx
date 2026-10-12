@@ -153,7 +153,7 @@ export function Timeline({ milestones: propMilestones }: TimelineProps) {
           <div className="max-w-2xl space-y-3">
             <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-500/40 px-3.5 py-1 text-xs font-black uppercase text-emerald-700 dark:text-emerald-400 tracking-widest shadow-2xs">
               <Sparkles size={13} className="text-emerald-600 dark:text-emerald-400" />
-              HOJA DE RUTA INTERACTIVA
+              LOGROS DE LA AGENDA 50/50
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
               Del punto de partida hacia un objetivo común
@@ -275,71 +275,71 @@ export function Timeline({ milestones: propMilestones }: TimelineProps) {
       {selectedMilestone && (
         <div
           role="dialog"
-            aria-modal="true"
-            aria-labelledby="modal-title"
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
-            onClick={() => setSelectedMilestone(null)}
+          aria-modal="true"
+          aria-labelledby="modal-title"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+          onClick={() => setSelectedMilestone(null)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar rounded-3xl bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 shadow-2xl text-slate-900 dark:text-white animate-in zoom-in-95 duration-200"
           >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-xl w-full max-h-[90vh] overflow-y-auto custom-scrollbar rounded-3xl bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 shadow-2xl text-slate-900 dark:text-white animate-in zoom-in-95 duration-200"
+            {/* BOTÓN CERRAR (X) */}
+            <button
+              onClick={() => setSelectedMilestone(null)}
+              aria-label="Cerrar detalle"
+              className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md transition shadow-md"
             >
-              {/* BOTÓN CERRAR (X) */}
-              <button
-                onClick={() => setSelectedMilestone(null)}
-                aria-label="Cerrar detalle"
-                className="absolute top-4 right-4 z-20 p-2 rounded-full bg-black/50 hover:bg-black/80 text-white backdrop-blur-md transition shadow-md"
-              >
-                <X size={20} />
-              </button>
+              <X size={20} />
+            </button>
 
-              {/* CABECERA VISUAL DEL POPUP (IMAGEN O BANNER INSTITUCIONAL) */}
-              {selectedMilestone.image ? (
-                <div className="relative overflow-hidden h-52 sm:h-64 bg-slate-900 rounded-t-3xl">
-                  <img
-                    src={selectedMilestone.image}
-                    alt={selectedMilestone.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+            {/* CABECERA VISUAL DEL POPUP (IMAGEN O BANNER INSTITUCIONAL) */}
+            {selectedMilestone.image ? (
+              <div className="relative overflow-hidden h-52 sm:h-64 bg-slate-900 rounded-t-3xl">
+                <img
+                  src={selectedMilestone.image}
+                  alt={selectedMilestone.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-                  <div className="absolute top-4 left-5">
-                    <span className="font-mono text-xs font-black uppercase tracking-wider bg-black/60 backdrop-blur-md text-emerald-300 px-3 py-1 rounded-full border border-emerald-400/30">
+                <div className="absolute top-4 left-5">
+                  <span className="font-mono text-xs font-black uppercase tracking-wider bg-black/60 backdrop-blur-md text-emerald-300 px-3 py-1 rounded-full border border-emerald-400/30">
+                    HITO {formattedSelectedNum}
+                  </span>
+                </div>
+
+                <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between text-white text-xs">
+                  <span className="font-semibold flex items-center gap-1.5 text-xs opacity-90">
+                    <Calendar size={13} className="text-emerald-400" /> {selectedMilestone.date}
+                  </span>
+                  <span className="rounded-full bg-emerald-500/80 backdrop-blur-xs px-3 py-1 text-xs font-black text-white">
+                    {selectedMilestone.status}
+                  </span>
+                </div>
+              </div>
+            ) : (
+              <div className="relative overflow-hidden p-6 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 dark:from-[#0F2942] dark:via-[#142C44] dark:to-[#0A1A2B] border-b border-emerald-500/20 text-white rounded-t-3xl">
+                <div className="relative z-10 flex items-start justify-between gap-3">
+                  <div>
+                    <span className="inline-block text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-500/40 px-2.5 py-0.5 rounded-full mb-2">
                       HITO {formattedSelectedNum}
                     </span>
-                  </div>
-
-                  <div className="absolute bottom-4 left-5 right-5 flex items-center justify-between text-white text-xs">
-                    <span className="font-semibold flex items-center gap-1.5 text-xs opacity-90">
+                    <div className="text-xs font-bold text-slate-200 flex items-center gap-1.5 opacity-90">
                       <Calendar size={13} className="text-emerald-400" /> {selectedMilestone.date}
-                    </span>
-                    <span className="rounded-full bg-emerald-500/80 backdrop-blur-xs px-3 py-1 text-xs font-black text-white">
-                      {selectedMilestone.status}
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative overflow-hidden p-6 bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900 dark:from-[#0F2942] dark:via-[#142C44] dark:to-[#0A1A2B] border-b border-emerald-500/20 text-white rounded-t-3xl">
-                  <div className="relative z-10 flex items-start justify-between gap-3">
-                    <div>
-                      <span className="inline-block text-[10px] font-black uppercase tracking-widest text-emerald-400 bg-emerald-950/70 border border-emerald-500/40 px-2.5 py-0.5 rounded-full mb-2">
-                        HITO {formattedSelectedNum}
-                      </span>
-                      <div className="text-xs font-bold text-slate-200 flex items-center gap-1.5 opacity-90">
-                        <Calendar size={13} className="text-emerald-400" /> {selectedMilestone.date}
-                      </div>
-                    </div>
-                    <div className="text-4xl sm:text-5xl font-black font-mono text-white/20 select-none">
-                      {formattedSelectedNum}
                     </div>
                   </div>
-                  <div className="mt-3">
-                    <span className="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-xs font-black text-emerald-300">
-                      {selectedMilestone.status}
-                    </span>
+                  <div className="text-4xl sm:text-5xl font-black font-mono text-white/20 select-none">
+                    {formattedSelectedNum}
                   </div>
                 </div>
-              )}
+                <div className="mt-3">
+                  <span className="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-xs font-black text-emerald-300">
+                    {selectedMilestone.status}
+                  </span>
+                </div>
+              </div>
+            )}
 
             {/* CUERPO PRINCIPAL DEL MODAL */}
             <div className="p-6 sm:p-8 space-y-5">

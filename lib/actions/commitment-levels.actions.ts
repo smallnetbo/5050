@@ -43,7 +43,7 @@ export async function upsertCommitmentLevelAction(data: CommitmentLevelInput) {
 
     // Si se editó el ID de un nivel existente, verificar conflicto y migrar compromisos
     if (data.oldId && data.oldId !== cleanId) {
-      const existingWithNewId = await (prisma as any).commitmentLevel.findUnique({
+      const existingWithNewId = await prisma.commitmentLevel.findUnique({
         where: { id: cleanId },
       });
       if (existingWithNewId) {
@@ -51,11 +51,11 @@ export async function upsertCommitmentLevelAction(data: CommitmentLevelInput) {
       }
 
       // Crear nuevo y migrar compromisos
-      const current = await (prisma as any).commitmentLevel.findUnique({
+      const current = await prisma.commitmentLevel.findUnique({
         where: { id: data.oldId },
       });
 
-      await (prisma as any).commitmentLevel.create({
+      await prisma.commitmentLevel.create({
         data: {
           id: cleanId,
           name,
@@ -70,7 +70,7 @@ export async function upsertCommitmentLevelAction(data: CommitmentLevelInput) {
       });
 
       // Actualizar compromisos huérfanos con el nuevo ID y levelName
-      await (prisma as any).levelCommitment.updateMany({
+      await prisma.levelCommitment.updateMany({
         where: { levelId: data.oldId },
         data: {
           levelId: cleanId,
@@ -79,17 +79,17 @@ export async function upsertCommitmentLevelAction(data: CommitmentLevelInput) {
       });
 
       // Eliminar el ID anterior
-      await (prisma as any).commitmentLevel.delete({
+      await prisma.commitmentLevel.delete({
         where: { id: data.oldId },
       });
     } else {
       // Upsert estándar
-      const existing = await (prisma as any).commitmentLevel.findUnique({
+      const existing = await prisma.commitmentLevel.findUnique({
         where: { id: cleanId },
       });
 
       if (existing) {
-        await (prisma as any).commitmentLevel.update({
+        await prisma.commitmentLevel.update({
           where: { id: cleanId },
           data: {
             name,
@@ -104,13 +104,13 @@ export async function upsertCommitmentLevelAction(data: CommitmentLevelInput) {
         });
 
         // Actualizar levelName en compromisos asociados para coherencia
-        await (prisma as any).levelCommitment.updateMany({
+        await prisma.levelCommitment.updateMany({
           where: { levelId: cleanId },
           data: { levelName: name },
         });
       } else {
-        const count = await (prisma as any).commitmentLevel.count();
-        await (prisma as any).commitmentLevel.create({
+        const count = await prisma.commitmentLevel.count();
+        await prisma.commitmentLevel.create({
           data: {
             id: cleanId,
             name,
@@ -141,7 +141,7 @@ export async function deleteCommitmentLevelAction(id: string, forceDelete: boole
   if (!isAuth) return { success: false, error: "No autorizado." };
 
   try {
-    const commitmentsCount = await (prisma as any).levelCommitment.count({
+    const commitmentsCount = await prisma.levelCommitment.count({
       where: { levelId: id },
     });
 
@@ -156,12 +156,12 @@ export async function deleteCommitmentLevelAction(id: string, forceDelete: boole
 
     // Si se fuerza la eliminación, eliminar compromisos asociados o reasignar
     if (commitmentsCount > 0 && forceDelete) {
-      await (prisma as any).levelCommitment.deleteMany({
+      await prisma.levelCommitment.deleteMany({
         where: { levelId: id },
       });
     }
 
-    await (prisma as any).commitmentLevel.delete({
+    await prisma.commitmentLevel.delete({
       where: { id },
     });
 
@@ -182,7 +182,7 @@ export async function reorderCommitmentLevelsAction(orderedIds: string[]) {
   try {
     await Promise.all(
       orderedIds.map((id, index) =>
-        (prisma as any).commitmentLevel.update({
+        prisma.commitmentLevel.update({
           where: { id },
           data: { order: index + 1 },
         })
@@ -204,7 +204,7 @@ export async function toggleCommitmentLevelAction(id: string, active: boolean) {
   if (!isAuth) return { success: false, error: "No autorizado." };
 
   try {
-    await (prisma as any).commitmentLevel.update({
+    await prisma.commitmentLevel.update({
       where: { id },
       data: { active },
     });
@@ -224,11 +224,11 @@ export async function seedCommitmentLevelsAction() {
   if (!isAuth) return { success: false, error: "No autorizado." };
 
   try {
-    await (prisma as any).commitmentLevel.deleteMany();
+    await prisma.commitmentLevel.deleteMany();
 
     for (let i = 0; i < defaultLevels.length; i++) {
       const lvl = defaultLevels[i];
-      await (prisma as any).commitmentLevel.create({
+      await prisma.commitmentLevel.create({
         data: {
           id: lvl.id,
           name: lvl.name,
