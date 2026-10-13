@@ -68,6 +68,14 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
       if (!duration && type === "videos") {
         setDuration(newUrl.includes("/shorts/") ? "YouTube Short" : "YouTube");
       }
+    } else if (newUrl.includes("facebook.com") || newUrl.includes("fb.watch")) {
+      if (!embedUrl || embedUrl.includes("facebook.com")) {
+        setEmbedUrl(`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(newUrl)}&show_text=false`);
+      }
+      if (!platform) setPlatform("Facebook");
+      if (!duration && type === "videos") {
+        setDuration("Video Facebook");
+      }
     }
   };
 
@@ -78,6 +86,9 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
       if (!coverUrl) setCoverUrl(`https://img.youtube.com/vi/${ytId}/hqdefault.jpg`);
       if (!platform) setPlatform("YouTube");
       if (!duration && type === "videos") setDuration("YouTube");
+    } else if (newEmbed.includes("facebook.com")) {
+      if (!platform) setPlatform("Facebook");
+      if (!duration && type === "videos") setDuration("Video Facebook");
     }
   };
 
@@ -112,6 +123,14 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
           finalCoverUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
         }
         if (!finalPlatform) finalPlatform = "YouTube";
+      } else {
+        const rawTargetUrl = finalEmbedUrl || url || finalMediaUrl || "";
+        if (rawTargetUrl.includes("facebook.com") || rawTargetUrl.includes("fb.watch")) {
+          if (!finalPlatform) finalPlatform = "Facebook";
+          if (!finalEmbedUrl && (url || finalMediaUrl)) {
+            finalEmbedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url || finalMediaUrl || "")}&show_text=false`;
+          }
+        }
       }
 
       // 1. Subida con indicador de progreso real del archivo de video

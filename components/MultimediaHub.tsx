@@ -55,18 +55,36 @@ export function MultimediaHub({ mediaItems }: Props) {
       .filter((item) => item.type === "videos")
       .map((item) => {
         const ytId = extractYouTubeId(item.embedUrl || item.url || item.mediaUrl);
-        const computedEmbedUrl = item.embedUrl || (ytId ? `https://www.youtube.com/embed/${ytId}` : undefined);
+        const isFacebook = Boolean(
+          item.platform?.toLowerCase().includes("facebook") ||
+          item.url?.includes("facebook.com") ||
+          item.mediaUrl?.includes("facebook.com") ||
+          item.embedUrl?.includes("facebook.com")
+        );
+
+        let computedEmbedUrl = item.embedUrl;
+        if (!computedEmbedUrl) {
+          if (ytId) {
+            computedEmbedUrl = `https://www.youtube.com/embed/${ytId}`;
+          } else if (isFacebook) {
+            const fbUrl = item.url || item.mediaUrl;
+            if (fbUrl) {
+              computedEmbedUrl = `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(fbUrl)}&show_text=false`;
+            }
+          }
+        }
+
         const computedThumbnail = item.coverUrl || (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : "/assets/video_que_es_5050_cover.jpg");
 
         return {
           title: item.title,
-          duration: item.duration || (ytId ? "YouTube Short" : "Cápsula Informativa"),
+          duration: item.duration || (ytId ? "YouTube Short" : isFacebook ? "Video Facebook" : "Cápsula Informativa"),
           thumbnail: computedThumbnail,
-          category: item.category || (ytId ? "Comunicación Digital" : "Explicador Oficial"),
+          category: item.category || (ytId ? "Comunicación Digital" : isFacebook ? "Cobertura Oficial" : "Explicador Oficial"),
           videoUrl: item.mediaUrl || "",
           embedUrl: computedEmbedUrl,
-          url: item.url || (ytId ? `https://www.youtube.com/shorts/${ytId}` : undefined),
-          platform: item.platform || (ytId ? "YouTube" : undefined),
+          url: item.url || (ytId ? `https://www.youtube.com/shorts/${ytId}` : isFacebook ? (item.url || item.mediaUrl) : undefined),
+          platform: item.platform || (ytId ? "YouTube" : isFacebook ? "Facebook" : undefined),
           description: item.description,
         };
       })
@@ -299,7 +317,11 @@ export function MultimediaHub({ mediaItems }: Props) {
                     </div>
                   </div>
                   {vid.platform && (
-                    <span className="absolute top-3 left-3 rounded-lg bg-red-600/90 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-white border border-red-400/30 flex items-center gap-1 shadow-sm">
+                    <span className={`absolute top-3 left-3 rounded-lg ${
+                      vid.platform.toLowerCase().includes("facebook")
+                        ? "bg-blue-600/90 border-blue-400/30"
+                        : "bg-red-600/90 border-red-400/30"
+                    } backdrop-blur-md px-2.5 py-0.5 text-[10px] font-bold text-white border flex items-center gap-1 shadow-sm`}>
                       {vid.platform}
                     </span>
                   )}
@@ -607,7 +629,11 @@ export function MultimediaHub({ mediaItems }: Props) {
                     href={selectedVideo.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 rounded-xl bg-red-600 hover:bg-red-700 px-3.5 py-2 text-xs font-bold text-white transition shadow-md"
+                    className={`flex items-center gap-1.5 rounded-xl ${
+                      selectedVideo.platform?.toLowerCase().includes("facebook")
+                        ? "bg-blue-600 hover:bg-blue-700"
+                        : "bg-red-600 hover:bg-red-700"
+                    } px-3.5 py-2 text-xs font-bold text-white transition shadow-md`}
                   >
                     <ExternalLink size={14} /> Abrir en {selectedVideo.platform || "YouTube"}
                   </a>
