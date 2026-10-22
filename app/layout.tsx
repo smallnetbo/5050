@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Agenda 50/50 | Nuevo pacto fiscal y autonómico",
+  title: "Agenda 50/50",
   description: "Portal oficial de socialización, transparencia y monitoreo de la Agenda 50/50.",
 };
 

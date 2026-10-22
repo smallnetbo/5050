@@ -6,23 +6,27 @@ import { documentsList, departmentsData } from "@/lib/agenda-data";
 import { commitmentsData } from "@/lib/commitments-data";
 import { useTheme } from "./ThemeProvider";
 
-export function Header() {
+import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
+
+interface HeaderProps {
+  sections?: PageSectionItem[];
+}
+
+export function Header({ sections }: HeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
-  const navLinks = [
-    { label: "Inicio", href: "#acuerdo" },
-    { label: "Conceptos", href: "#conceptos" },
-    { label: "Monitor 50/50", href: "#monitor" },
-    { label: "Compromisos", href: "#compromisos" },
-    { label: "Prensa", href: "#prensa" },
-    { label: "Ruta", href: "#ruta" },
-    { label: "Multimedia", href: "#multimedia" },
-    { label: "Documentos", href: "#descargas" },
-    { label: "Co-construcción Ciudadana", href: "#co-construccion", isMail: true },
-  ];
+  const activeSections = (sections && sections.length > 0 ? sections : DEFAULT_PAGE_SECTIONS).filter(
+    (s) => s.enabled
+  );
+
+  const navLinks = activeSections.map((s) => ({
+    label: s.navLabel,
+    href: s.href,
+    isMail: s.isMail,
+  }));
 
 
   // Search auto-complete items
@@ -103,14 +107,6 @@ export function Header() {
                 <Moon size={16} className="text-slate-700" />
               )}
             </button>
-
-            <a
-              href="#descargas"
-              className="hidden sm:flex items-center gap-1.5 rounded-xl bg-[#3ac167] hover:bg-[#2ea354] text-white px-3.5 py-2 text-xs font-extrabold transition shadow-sm hover:shadow"
-            >
-              <Download size={14} />
-              <span>Ver Acuerdo</span>
-            </a>
 
             <button
               onClick={() => setOpen(!open)}

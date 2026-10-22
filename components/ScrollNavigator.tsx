@@ -3,29 +3,34 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
+
 interface SectionItem {
   id: string;
   label: string;
 }
 
-const SECTIONS: SectionItem[] = [
-  { id: "acuerdo", label: "Inicio / Acuerdo" },
-  { id: "conceptos", label: "Conceptos Clave" },
-  { id: "monitor", label: "Monitor 50/50" },
-  { id: "descargas", label: "Documentos Oficiales" },
-  { id: "compromisos", label: "Compromisos" },
-  { id: "ruta", label: "Ruta de Implementación" },
-  { id: "multimedia", label: "Multimedia" },
-  { id: "prensa", label: "Prensa y Noticias" },
-  { id: "co-construccion", label: "Buzón Ciudadano" },
-];
+interface ScrollNavigatorProps {
+  sections?: PageSectionItem[];
+}
 
 /**
  * ScrollNavigator: Indicador flotante y minimalista de secciones activas en desktop.
  * Resalta en tiempo real la sección en lectura y permite salto suave entre ellas.
  */
-export function ScrollNavigator() {
-  const [activeId, setActiveId] = useState<string>("acuerdo");
+export function ScrollNavigator({ sections }: ScrollNavigatorProps = {}) {
+  const activeSections = (sections && sections.length > 0 ? sections : DEFAULT_PAGE_SECTIONS).filter(
+    (s) => s.enabled
+  );
+
+  const dynamicSections: SectionItem[] = activeSections.map((s) => ({
+    id: s.href.replace("#", ""),
+    label: s.name,
+  }));
+
+  const [activeId, setActiveId] = useState<string>(
+    dynamicSections[0]?.id || "acuerdo"
+  );
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -42,13 +47,13 @@ export function ScrollNavigator() {
       }
     );
 
-    SECTIONS.forEach((s) => {
+    dynamicSections.forEach((s) => {
       const el = document.getElementById(s.id);
       if (el) observer.observe(el);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [dynamicSections]);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -63,7 +68,7 @@ export function ScrollNavigator() {
       className="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 pointer-events-auto"
     >
       <div className="flex flex-col items-center gap-2.5 p-2 rounded-full bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-slate-200/80 dark:border-white/10 shadow-lg transition-colors">
-        {SECTIONS.map((section) => {
+        {dynamicSections.map((section) => {
           const isActive = activeId === section.id;
           const isHovered = hoveredId === section.id;
 

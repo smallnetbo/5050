@@ -1,8 +1,16 @@
 "use client";
 
 import { ShieldCheck, Mail } from "lucide-react";
+import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
 
-export function Footer() {
+interface FooterProps {
+  sections?: PageSectionItem[];
+}
+
+export function Footer({ sections }: FooterProps = {}) {
+  const activeSections = (sections && sections.length > 0 ? sections : DEFAULT_PAGE_SECTIONS).filter(
+    (s) => s.enabled
+  );
   return (
     <footer className="bg-[#1B2533] text-white pt-16 pb-8 border-t border-[#c79d47]/30">
       <div className="container-page">
@@ -31,15 +39,17 @@ export function Footer() {
           <div className="md:col-span-3 space-y-3">
             <h4 className="text-xs font-black uppercase tracking-wider text-amber-200/80">Navegación del Portal</h4>
             <ul className="space-y-2 text-xs font-bold text-slate-300">
-              <li><a href="#acuerdo" className="hover:text-[#c79d47] transition">Inicio</a></li>
-              <li><a href="#conceptos" className="hover:text-[#c79d47] transition">Conceptos</a></li>
-              <li><a href="#monitor" className="hover:text-[#c79d47] transition">Monitor 50/50</a></li>
-              <li><a href="#prensa" className="hover:text-[#c79d47] transition">Prensa</a></li>
-              <li><a href="#compromisos" className="hover:text-[#c79d47] transition">Compromisos</a></li>
-              <li><a href="#ruta" className="hover:text-[#c79d47] transition">Ruta</a></li>
-              <li><a href="#multimedia" className="hover:text-[#c79d47] transition">Multimedia</a></li>
-              <li><a href="#descargas" className="hover:text-[#c79d47] transition">Documentos</a></li>
-              <li><a href="#co-construccion" className="hover:text-[#c79d47] transition flex items-center gap-1.5"><Mail size={12} className="text-emerald-400" /> Co-construcción</a></li>
+              {activeSections.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={s.href}
+                    className="hover:text-[#c79d47] transition flex items-center gap-1.5"
+                  >
+                    {s.isMail && <Mail size={12} className="text-emerald-400" />}
+                    <span>{s.footerLabel}</span>
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

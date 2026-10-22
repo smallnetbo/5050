@@ -19,6 +19,8 @@ import {
 } from "@/lib/agenda-data";
 
 import { commitmentsData, CommitmentItem, commitmentLevels as defaultCommitmentLevels, CommitmentLevel } from "@/lib/commitments-data";
+import { getPageSections } from "@/lib/sections-service";
+import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
 
 export interface SiteConfigData {
   heroTitle: string;
@@ -235,6 +237,7 @@ export async function getLandingData() {
       monitorMetrics,
       commitments: mappedCommitments,
       commitmentLevels: mappedLevels,
+      sections: await getPageSections(),
     };
   } catch (error) {
     console.warn("DB offline o sin inicializar. Usando datos estáticos por defecto.");
@@ -249,6 +252,7 @@ export async function getLandingData() {
       monitorMetrics: defaultMonitorMetrics,
       commitments: commitmentsData,
       commitmentLevels: defaultCommitmentLevels,
+      sections: DEFAULT_PAGE_SECTIONS,
       siteConfig: {
         heroTitle: "Hacia una distribución justa 50/50",
         heroSubtitle: "Transformando la descentralización tributaria en Bolivia mediante el Acuerdo N° 001/2026 de Sucre.",
