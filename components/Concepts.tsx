@@ -80,19 +80,6 @@ export function Concepts({ conceptSteps: propConceptSteps }: ConceptsProps = {})
             })}
           </div>
 
-          {/* CTA Footer Block */}
-          <div className="pt-6 border-t border-amber-900/10 dark:border-slate-700 text-center">
-            <p className="font-extrabold text-lg text-[#dd3146] dark:text-white mb-4">
-              El desarrollo empieza en las regiones.
-            </p>
-            <a
-              href="#descargas"
-              className="inline-flex items-center gap-2 rounded-full bg-[#3ac167] hover:bg-[#2ea354] text-white px-7 py-3 text-sm font-extrabold shadow-lg hover:shadow-xl transition-all duration-300 group"
-            >
-              <span>Conoce el Acuerdo de Sucre</span>
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
         </div>
       </div>
     </section>
