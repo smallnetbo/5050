@@ -61,8 +61,13 @@ export function DocumentHub({
     initialCategories && initialCategories.length > 0 ? initialCategories : DEFAULT_DOCUMENT_CATEGORIES
   );
 
-  // Cargar categorías configuradas desde el panel de administración vía localStorage
+  // Sincronización con las categorías de la base de datos (y localStorage como fallback)
   useEffect(() => {
+    if (initialCategories && initialCategories.length > 0) {
+      setCategoriesList(initialCategories);
+      return;
+    }
+
     if (typeof window !== "undefined") {
       try {
         const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -76,6 +81,27 @@ export function DocumentHub({
         console.error("Error al cargar categorías en DocumentHub:", err);
       }
     }
+  }, [initialCategories]);
+
+  // Escuchar cambios de categorías en tiempo real entre pestañas
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === LOCAL_STORAGE_KEY && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setCategoriesList(parsed);
+          }
+        } catch {
+          // Ignore parse errors
+        }
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   // Filtro dinámico por búsqueda y categoría

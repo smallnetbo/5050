@@ -21,6 +21,7 @@ import {
 import { commitmentsData, CommitmentItem, commitmentLevels as defaultCommitmentLevels, CommitmentLevel } from "@/lib/commitments-data";
 import { getPageSections } from "@/lib/sections-service";
 import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
+import { DocumentCategory, DEFAULT_DOCUMENT_CATEGORIES } from "@/components/DocumentHub";
 
 export interface SiteConfigData {
   heroTitle: string;
@@ -45,6 +46,7 @@ export async function getLandingData() {
       dbMonitorMetrics,
       dbCommitments,
       dbCommitmentLevels,
+      dbDocCategories,
     ] = await Promise.all([
       prisma.pillar.findMany({ orderBy: { order: "asc" } }),
       prisma.milestone.findMany({ orderBy: { order: "asc" } }),
@@ -57,6 +59,7 @@ export async function getLandingData() {
       prisma.monitorMetric.findMany({ orderBy: { order: "asc" } }),
       prisma.levelCommitment.findMany({ orderBy: { order: "asc" } }),
       prisma.commitmentLevel.findMany({ orderBy: { order: "asc" } }),
+      (prisma as any).docCategory.findMany({ orderBy: { order: "asc" } }),
     ]);
 
     const mappedPillars: Pillar[] = dbPillars.length > 0
@@ -225,11 +228,21 @@ export async function getLandingData() {
         }))
       : defaultCommitmentLevels;
 
+    const mappedCategories: DocumentCategory[] =
+      dbDocCategories && dbDocCategories.length > 0
+        ? dbDocCategories.map((c: any) => ({
+            id: c.id,
+            label: c.label,
+            isSystem: Boolean(c.isSystem),
+          }))
+        : DEFAULT_DOCUMENT_CATEGORIES;
+
     return {
       pillars: mappedPillars,
       milestones: mappedMilestones,
       departments: mappedDepartments,
       documents: mappedDocuments,
+      documentCategories: mappedCategories,
       conceptSteps: mappedConcepts,
       mediaItems: mappedMediaItems,
       siteConfig,
@@ -246,6 +259,7 @@ export async function getLandingData() {
       milestones: defaultMilestones,
       departments: defaultDepartments,
       documents: defaultDocuments,
+      documentCategories: DEFAULT_DOCUMENT_CATEGORIES,
       conceptSteps: defaultConceptSteps,
       mediaItems: defaultMediaItems,
       monitorConfig: defaultMonitorConfig,

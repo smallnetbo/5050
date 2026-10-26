@@ -23,7 +23,10 @@ export default async function AdminDocumentsPage() {
         </p>
       </div>
 
-      <DocumentsClientManager initialDocuments={data.documents} />
+      <DocumentsClientManager
+        initialDocuments={data.documents}
+        initialCategories={data.documentCategories}
+      />
     </div>
   );
 }

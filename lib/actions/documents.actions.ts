@@ -100,3 +100,70 @@ export async function deleteDocumentAction(id: string) {
     return { success: false, error: error?.message || "Error al eliminar documento." };
   }
 }
+
+export async function saveCategoriesAction(categories: { id: string; label: string; isSystem?: boolean }[]) {
+  const isAuthenticated = await verifyAdminSession();
+  if (!isAuthenticated) return { success: false, error: "No autorizado." };
+
+  try {
+    if (!Array.isArray(categories) || categories.length === 0) {
+      return { success: false, error: "La lista de categorías no es válida." };
+    }
+
+    await prisma.$transaction(async (tx: any) => {
+      await tx.docCategory.deleteMany({});
+      for (let i = 0; i < categories.length; i++) {
+        const cat = categories[i];
+        await tx.docCategory.create({
+          data: {
+            id: cat.id,
+            label: cat.label,
+            order: i,
+            isSystem: Boolean(cat.isSystem),
+          },
+        });
+      }
+    });
+
+    revalidatePath("/");
+    revalidatePath("/admin/documents");
+
+    return { success: true, message: "Categorías actualizadas correctamente en la base de datos." };
+  } catch (error: any) {
+    console.error("Error al guardar categorías:", error);
+    return { success: false, error: error?.message || "Error al guardar las categorías." };
+  }
+}
+
+export async function resetCategoriesAction() {
+  const isAuthenticated = await verifyAdminSession();
+  if (!isAuthenticated) return { success: false, error: "No autorizado." };
+
+  try {
+    const defaultCats = [
+      { id: "all", label: "Todos los Documentos", isSystem: true, order: 0 },
+      { id: "Acuerdo", label: "Acuerdos", isSystem: false, order: 1 },
+      { id: "Acta", label: "Actas", isSystem: false, order: 2 },
+      { id: "Presentación", label: "Presentaciones", isSystem: false, order: 3 },
+      { id: "Anexo", label: "Anexos", isSystem: false, order: 4 },
+      { id: "Proyecto de Ley", label: "Proyectos de Ley", isSystem: false, order: 5 },
+      { id: "Decreto", label: "Decretos", isSystem: false, order: 6 },
+    ];
+
+    await prisma.$transaction(async (tx: any) => {
+      await tx.docCategory.deleteMany({});
+      for (const cat of defaultCats) {
+        await tx.docCategory.create({ data: cat });
+      }
+    });
+
+    revalidatePath("/");
+    revalidatePath("/admin/documents");
+
+    return { success: true, message: "Categorías restauradas a los valores por defecto." };
+  } catch (error: any) {
+    console.error("Error al restaurar categorías:", error);
+    return { success: false, error: error?.message || "Error al restaurar las categorías." };
+  }
+}
+

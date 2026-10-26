@@ -231,3 +231,14 @@ model PageSection {
   enabled   Boolean  @default(true)
   updatedAt DateTime @updatedAt
 }
+
+// 16. Categorías del Repositorio Documental (DocumentHub)
+model DocCategory {
+  id        String   @id
+  label     String
+  order     Int      @default(0)
+  isSystem  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

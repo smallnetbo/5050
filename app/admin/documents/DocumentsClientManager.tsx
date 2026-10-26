@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { DocumentItem } from "@/lib/agenda-data";
 import { DocumentModalForm } from "./DocumentModalForm";
-import { deleteDocumentAction } from "@/lib/actions/documents.actions";
+import { deleteDocumentAction, saveCategoriesAction, resetCategoriesAction } from "@/lib/actions/documents.actions";
 import { DocumentCategory, DEFAULT_DOCUMENT_CATEGORIES } from "@/components/DocumentHub";
 import {
   FileText,
@@ -37,9 +37,10 @@ const LOCAL_STORAGE_KEY = "agenda5050_document_categories";
 
 interface Props {
   initialDocuments: DocumentItem[];
+  initialCategories?: DocumentCategory[];
 }
 
-export function DocumentsClientManager({ initialDocuments }: Props) {
+export function DocumentsClientManager({ initialDocuments, initialCategories }: Props) {
   const router = useRouter();
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -49,9 +50,12 @@ export function DocumentsClientManager({ initialDocuments }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [readingDoc, setReadingDoc] = useState<DocumentItem | null>(null);
 
-  // Estado dinámico para el CRUD de categoriesList
-  const [categoriesList, setCategoriesList] = useState<DocumentCategory[]>(DEFAULT_DOCUMENT_CATEGORIES);
+  // Estado dinámico para el CRUD de categoriesList (inicializado con BD o fallback)
+  const [categoriesList, setCategoriesList] = useState<DocumentCategory[]>(
+    initialCategories && initialCategories.length > 0 ? initialCategories : DEFAULT_DOCUMENT_CATEGORIES
+  );
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isSavingCategory, setIsSavingCategory] = useState(false);
   const [editingCategory, setEditingCategory] = useState<DocumentCategory | null>(null);
   const [categoryFormLabel, setCategoryFormLabel] = useState("");
   const [categoryFormId, setCategoryFormId] = useState("");
@@ -59,32 +63,39 @@ export function DocumentsClientManager({ initialDocuments }: Props) {
   const [categoryFormSuccess, setCategoryFormSuccess] = useState<string | null>(null);
   const [categoryToDelete, setCategoryToDelete] = useState<DocumentCategory | null>(null);
 
-  // Cargar categorías guardadas en localStorage
+  // Sincronizar categorías si se actualizan desde el servidor
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      try {
-        const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (stored) {
-          const parsed = JSON.parse(stored);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            setCategoriesList(parsed);
-          }
-        }
-      } catch (err) {
-        console.error("Error al cargar categorías en admin:", err);
-      }
+    if (initialCategories && initialCategories.length > 0) {
+      setCategoriesList(initialCategories);
     }
-  }, []);
+  }, [initialCategories]);
 
-  // Persistir cambios en localStorage
-  const persistCategories = (newList: DocumentCategory[]) => {
+  // Persistir cambios en BD y localStorage
+  const persistCategories = async (newList: DocumentCategory[]) => {
     setCategoriesList(newList);
+    setIsSavingCategory(true);
+    setCategoryFormError(null);
+
     if (typeof window !== "undefined") {
       try {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newList));
       } catch (err) {
-        console.error("Error al guardar categorías en admin:", err);
+        console.error("Error al guardar categorías en localStorage:", err);
       }
+    }
+
+    try {
+      const res = await saveCategoriesAction(newList);
+      if (res.success) {
+        router.refresh();
+      } else {
+        setCategoryFormError(res.error || "Error al persistir categorías en la base de datos.");
+      }
+    } catch (err: any) {
+      console.error("Error al guardar categorías en DB:", err);
+      setCategoryFormError(err.message || "Error al guardar en el servidor.");
+    } finally {
+      setIsSavingCategory(false);
     }
   };
 
@@ -193,12 +204,31 @@ export function DocumentsClientManager({ initialDocuments }: Props) {
     setCategoryFormSuccess(`Categoría "${cat.label}" eliminada con éxito.`);
   };
 
-  const handleResetDefaults = () => {
-    persistCategories(DEFAULT_DOCUMENT_CATEGORIES);
-    setActiveCategory("all");
-    handleCancelEdit();
-    setCategoryToDelete(null);
-    setCategoryFormSuccess("Categorías restauradas a los valores por defecto.");
+  const handleResetDefaults = async () => {
+    setIsSavingCategory(true);
+    setCategoryFormError(null);
+    setCategoryFormSuccess(null);
+    try {
+      const res = await resetCategoriesAction();
+      if (res.success) {
+        setCategoriesList(DEFAULT_DOCUMENT_CATEGORIES);
+        if (typeof window !== "undefined") {
+          localStorage.removeItem(LOCAL_STORAGE_KEY);
+        }
+        setActiveCategory("all");
+        handleCancelEdit();
+        setCategoryToDelete(null);
+        setCategoryFormSuccess("Categorías restauradas a los valores por defecto en la base de datos.");
+        router.refresh();
+      } else {
+        setCategoryFormError(res.error || "Error al restaurar categorías en la base de datos.");
+      }
+    } catch (err: any) {
+      console.error("Error al restaurar categorías:", err);
+      setCategoryFormError(err.message || "Error al conectar con el servidor.");
+    } finally {
+      setIsSavingCategory(false);
+    }
   };
 
   const getCategoryDocCount = (catId: string) => {

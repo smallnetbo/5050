@@ -38,7 +38,12 @@ export default async function Home() {
       case "Monitor":
         return <Monitor config={landingData.monitorConfig} metrics={landingData.monitorMetrics} />;
       case "DocumentHub":
-        return <DocumentHub documents={landingData.documents} />;
+        return (
+          <DocumentHub
+            documents={landingData.documents}
+            initialCategories={landingData.documentCategories}
+          />
+        );
       case "LevelCommitments":
         return (
           <LevelCommitments
