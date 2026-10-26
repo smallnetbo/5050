@@ -59,7 +59,18 @@ export async function getLandingData() {
       prisma.monitorMetric.findMany({ orderBy: { order: "asc" } }),
       prisma.levelCommitment.findMany({ orderBy: { order: "asc" } }),
       prisma.commitmentLevel.findMany({ orderBy: { order: "asc" } }),
-      (prisma as any).docCategory.findMany({ orderBy: { order: "asc" } }),
+      (async () => {
+        try {
+          if ((prisma as any).docCategory) {
+            return await (prisma as any).docCategory.findMany({ orderBy: { order: "asc" } });
+          }
+          return await prisma.$queryRawUnsafe<any[]>(
+            `SELECT "id", "label", "order", "isSystem" FROM "DocCategory" ORDER BY "order" ASC;`
+          );
+        } catch {
+          return [];
+        }
+      })(),
     ]);
 
     const mappedPillars: Pillar[] = dbPillars.length > 0

@@ -101,6 +101,62 @@ export async function deleteDocumentAction(id: string) {
   }
 }
 
+async function persistCategoriesToDb(categories: { id: string; label: string; isSystem?: boolean }[]) {
+  // 1. Asegurar tabla creada en SQLite si no existiera
+  await prisma.$executeRawUnsafe(`
+    CREATE TABLE IF NOT EXISTS "DocCategory" (
+      "id" TEXT PRIMARY KEY,
+      "label" TEXT NOT NULL,
+      "order" INTEGER NOT NULL DEFAULT 0,
+      "isSystem" BOOLEAN NOT NULL DEFAULT 0,
+      "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+    );
+  `);
+
+  // 2. Si el modelo de Prisma está disponible en memoria y en tx, usarlo
+  if ((prisma as any).docCategory) {
+    try {
+      let succeeded = false;
+      await prisma.$transaction(async (tx: any) => {
+        if (tx && tx.docCategory && typeof tx.docCategory.deleteMany === "function") {
+          await tx.docCategory.deleteMany({});
+          for (let i = 0; i < categories.length; i++) {
+            const cat = categories[i];
+            await tx.docCategory.create({
+              data: {
+                id: cat.id,
+                label: cat.label,
+                order: i,
+                isSystem: Boolean(cat.isSystem),
+              },
+            });
+          }
+          succeeded = true;
+          return;
+        }
+      });
+      if (succeeded) return;
+    } catch (txErr) {
+      console.warn("Fallo o ausencia de tx.docCategory, aplicando fallback SQL:", txErr);
+    }
+  }
+
+  // 3. Fallback SQL universal: funciona siempre, sin depender de prisma generate o reinicio de proceso
+  await prisma.$executeRawUnsafe(`DELETE FROM "DocCategory";`);
+  for (let i = 0; i < categories.length; i++) {
+    const cat = categories[i];
+    const isSys = cat.isSystem ? 1 : 0;
+    await prisma.$executeRawUnsafe(
+      `INSERT INTO "DocCategory" ("id", "label", "order", "isSystem", "createdAt", "updatedAt") VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);`,
+      cat.id,
+      cat.label,
+      i,
+      isSys
+    );
+  }
+}
+
 export async function saveCategoriesAction(categories: { id: string; label: string; isSystem?: boolean }[]) {
   const isAuthenticated = await verifyAdminSession();
   if (!isAuthenticated) return { success: false, error: "No autorizado." };
@@ -110,20 +166,7 @@ export async function saveCategoriesAction(categories: { id: string; label: stri
       return { success: false, error: "La lista de categorías no es válida." };
     }
 
-    await prisma.$transaction(async (tx: any) => {
-      await tx.docCategory.deleteMany({});
-      for (let i = 0; i < categories.length; i++) {
-        const cat = categories[i];
-        await tx.docCategory.create({
-          data: {
-            id: cat.id,
-            label: cat.label,
-            order: i,
-            isSystem: Boolean(cat.isSystem),
-          },
-        });
-      }
-    });
+    await persistCategoriesToDb(categories);
 
     revalidatePath("/");
     revalidatePath("/admin/documents");
@@ -141,21 +184,16 @@ export async function resetCategoriesAction() {
 
   try {
     const defaultCats = [
-      { id: "all", label: "Todos los Documentos", isSystem: true, order: 0 },
-      { id: "Acuerdo", label: "Acuerdos", isSystem: false, order: 1 },
-      { id: "Acta", label: "Actas", isSystem: false, order: 2 },
-      { id: "Presentación", label: "Presentaciones", isSystem: false, order: 3 },
-      { id: "Anexo", label: "Anexos", isSystem: false, order: 4 },
-      { id: "Proyecto de Ley", label: "Proyectos de Ley", isSystem: false, order: 5 },
-      { id: "Decreto", label: "Decretos", isSystem: false, order: 6 },
+      { id: "all", label: "Todos los Documentos", isSystem: true },
+      { id: "Acuerdo", label: "Acuerdos", isSystem: false },
+      { id: "Acta", label: "Actas", isSystem: false },
+      { id: "Presentación", label: "Presentaciones", isSystem: false },
+      { id: "Anexo", label: "Anexos", isSystem: false },
+      { id: "Proyecto de Ley", label: "Proyectos de Ley", isSystem: false },
+      { id: "Decreto", label: "Decretos", isSystem: false },
     ];
 
-    await prisma.$transaction(async (tx: any) => {
-      await tx.docCategory.deleteMany({});
-      for (const cat of defaultCats) {
-        await tx.docCategory.create({ data: cat });
-      }
-    });
+    await persistCategoriesToDb(defaultCats);
 
     revalidatePath("/");
     revalidatePath("/admin/documents");
