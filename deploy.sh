@@ -47,4 +47,7 @@ npm run build
 echo "5/5: Reiniciando el servicio PM2..."
 pm2 restart agenda-5050
 
-echo "=== Actualización completada con éxito (respaldo en $BACKUP_DIR) ==="
+# Limpiar respaldo temporal si todo salió bien para no llenar /tmp
+rm -rf "$BACKUP_DIR"
+
+echo "=== Actualización completada con éxito ==="

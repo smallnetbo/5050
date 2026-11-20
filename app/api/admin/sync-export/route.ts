@@ -3,7 +3,7 @@ import crypto from "crypto";
 import fs from "fs";
 import os from "os";
 import path from "path";
-import { execFileSync } from "child_process";
+import { execFileSync, spawn } from "child_process";
 
 export const dynamic = "force-dynamic";
 
@@ -15,8 +15,8 @@ function isValidToken(provided: string, expected: string): boolean {
 }
 
 /**
- * Exporta un paquete .tar.gz con una copia consistente de prisma/dev.db y public/uploads/
- * para sincronizar datos de Producción hacia Desarrollo por HTTPS (sin requerir SSH).
+ * Exporta en streaming un .tar.gz con una copia consistente de prisma/dev.db y public/uploads/
+ * sin escribir el archivo comprimido en /tmp (evita errores de espacio en /tmp).
  */
 export async function GET(request: NextRequest) {
   const expectedToken = process.env.SYNC_TOKEN;
@@ -46,6 +46,14 @@ export async function GET(request: NextRequest) {
   }
 
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), "agenda5050-sync-"));
+  const cleanup = () => {
+    try {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    } catch {
+      // ignorar errores de limpieza
+    }
+  };
+
   try {
     const stagingPrismaDir = path.join(tmpDir, "prisma");
     fs.mkdirSync(stagingPrismaDir, { recursive: true });
@@ -59,18 +67,44 @@ export async function GET(request: NextRequest) {
       fs.copyFileSync(dbPath, snapshotDbPath);
     }
 
-    const archivePath = path.join(tmpDir, "sync-bundle.tar.gz");
-    const tarArgs = ["-czf", archivePath, "-C", tmpDir, "prisma"];
-
+    const tarArgs = ["-czf", "-", "-C", tmpDir, "prisma"];
     const uploadsDir = path.join(cwd, "public", "uploads");
     if (fs.existsSync(uploadsDir)) {
       tarArgs.push("-C", cwd, "public/uploads");
     }
 
-    execFileSync("tar", tarArgs);
-    const buffer = fs.readFileSync(archivePath);
+    const tar = spawn("tar", tarArgs, { stdio: ["ignore", "pipe", "pipe"] });
+    let stderr = "";
 
-    return new NextResponse(buffer, {
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) {
+        tar.stdout.on("data", (chunk: Buffer) => {
+          controller.enqueue(new Uint8Array(chunk));
+        });
+        tar.stderr.on("data", (chunk: Buffer) => {
+          stderr += chunk.toString();
+        });
+        tar.on("error", (err) => {
+          cleanup();
+          controller.error(err);
+        });
+        tar.on("close", (code) => {
+          cleanup();
+          if (code === 0) {
+            controller.close();
+          } else {
+            console.error("Error en tar:", stderr);
+            controller.error(new Error(`tar exited with code ${code}: ${stderr}`));
+          }
+        });
+      },
+      cancel() {
+        tar.kill("SIGTERM");
+        cleanup();
+      },
+    });
+
+    return new NextResponse(stream, {
       status: 200,
       headers: {
         "Content-Type": "application/gzip",
@@ -79,12 +113,12 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("Error al generar respaldo de sincronización:", error);
+    cleanup();
+    const detail = error instanceof Error ? error.message : String(error);
+    console.error("Error al generar respaldo de sincronización:", detail);
     return NextResponse.json(
-      { error: "Error interno al generar el paquete de sincronización." },
+      { error: "Error interno al generar el paquete de sincronización.", detail },
       { status: 500 }
     );
-  } finally {
-    fs.rmSync(tmpDir, { recursive: true, force: true });
   }
 }
