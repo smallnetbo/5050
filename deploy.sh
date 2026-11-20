@@ -5,18 +5,42 @@ set -e
 
 echo "=== Iniciando actualización de Agenda 50/50 ==="
 
-echo "1/4: Descargando últimos cambios de GitHub..."
-#git pull github nueva_estructura
-git fetch github
-git reset --hard github/nueva_estructura
+BACKUP_DIR="/tmp/agenda5050-backup-$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$BACKUP_DIR"
 
-echo "2/4: Instalando dependencias (si hay nuevas)..."
+echo "0/5: Respaldando base de datos y archivos subidos..."
+if [ -f "prisma/dev.db" ]; then
+  cp prisma/dev.db* "$BACKUP_DIR/" 2>/dev/null || true
+fi
+if [ -d "public/uploads" ]; then
+  cp -r public/uploads "$BACKUP_DIR/uploads"
+fi
+
+echo "1/5: Descargando últimos cambios de GitHub..."
+git fetch origin
+git reset --hard origin/nueva_estructura
+
+# Restaurar datos si fueron eliminados durante una transición de Git
+if [ ! -f "prisma/dev.db" ] && [ -f "$BACKUP_DIR/dev.db" ]; then
+  echo "Restaurando prisma/dev.db desde respaldo..."
+  cp "$BACKUP_DIR"/dev.db* prisma/ 2>/dev/null || true
+fi
+if [ ! -d "public/uploads" ] && [ -d "$BACKUP_DIR/uploads" ]; then
+  echo "Restaurando public/uploads desde respaldo..."
+  cp -r "$BACKUP_DIR/uploads" public/uploads
+fi
+
+echo "2/5: Instalando dependencias (si hay nuevas)..."
 npm install
 
-echo "3/4: Compilando la versión de producción..."
+echo "3/5: Aplicando esquema de Prisma (sin borrar datos)..."
+npx prisma generate
+npx prisma db push
+
+echo "4/5: Compilando la versión de producción..."
 npm run build
 
-echo "4/4: Reiniciando el servicio PM2..."
+echo "5/5: Reiniciando el servicio PM2..."
 pm2 restart agenda-5050
 
-echo "=== Actualización completada con éxito ==="
+echo "=== Actualización completada con éxito (respaldo en $BACKUP_DIR) ==="

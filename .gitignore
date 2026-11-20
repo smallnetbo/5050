@@ -20,4 +20,12 @@ npm-debug.log
 
 # Archivos de pruebas
 coverage/
-public/uploads/multimedia/*.mp4
+# Base de datos SQLite local (no versionar datos)
+prisma/dev.db
+prisma/dev.db-journal
+prisma/dev.db-wal
+prisma/dev.db-shm
+prisma/dev.db.bak.*
+
+# Archivos subidos desde el panel admin (no versionar datos)
+public/uploads/
