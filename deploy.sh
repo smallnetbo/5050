@@ -17,8 +17,12 @@ if [ -d "public/uploads" ]; then
 fi
 
 echo "1/5: Descargando últimos cambios de GitHub..."
-git fetch origin
-git reset --hard origin/nueva_estructura
+REMOTE_NAME="origin"
+if git remote | grep -q "^github$"; then
+  REMOTE_NAME="github"
+fi
+git fetch "$REMOTE_NAME"
+git reset --hard "$REMOTE_NAME/nueva_estructura"
 
 # Restaurar datos si fueron eliminados durante una transición de Git
 if [ ! -f "prisma/dev.db" ] && [ -f "$BACKUP_DIR/dev.db" ]; then
