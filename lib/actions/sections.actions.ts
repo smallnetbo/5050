@@ -22,48 +22,19 @@ export async function saveSectionsConfigAction(items: UpdateSectionPayload[]) {
   }
 
   try {
-    const prismaAny = prisma as any;
-
-    if (prismaAny.pageSection && typeof prismaAny.pageSection.upsert === "function") {
-      await prisma.$transaction(
-        items.map((item) =>
-          prismaAny.pageSection.upsert({
-            where: { id: item.id },
-            update: {
-              order: item.order,
-              enabled: item.enabled,
-              name: item.name?.trim() || null,
-              navLabel: item.navLabel?.trim() || null,
-              footerLabel: item.footerLabel?.trim() || null,
-              adminLabel: item.adminLabel?.trim() || null,
-            },
-            create: {
-              id: item.id,
-              order: item.order,
-              enabled: item.enabled,
-              name: item.name?.trim() || null,
-              navLabel: item.navLabel?.trim() || null,
-              footerLabel: item.footerLabel?.trim() || null,
-              adminLabel: item.adminLabel?.trim() || null,
-            },
-          })
-        )
+    // Usar SQL directo para compatibilidad inmediata incluso si el cliente Prisma en memoria está en caché
+    for (const item of items) {
+      await prisma.$executeRawUnsafe(
+        `INSERT INTO PageSection (id, "order", enabled, name, navLabel, footerLabel, adminLabel, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+         ON CONFLICT(id) DO UPDATE SET "order"=excluded."order", enabled=excluded.enabled, name=excluded.name, navLabel=excluded.navLabel, footerLabel=excluded.footerLabel, adminLabel=excluded.adminLabel, updatedAt=CURRENT_TIMESTAMP;`,
+        item.id,
+        item.order,
+        item.enabled ? 1 : 0,
+        item.name?.trim() || null,
+        item.navLabel?.trim() || null,
+        item.footerLabel?.trim() || null,
+        item.adminLabel?.trim() || null
       );
-    } else {
-      // Fallback robusto con SQL directo para SQLite en caso de cliente desincronizado
-      for (const item of items) {
-        await prisma.$executeRawUnsafe(
-          `INSERT INTO PageSection (id, "order", enabled, name, navLabel, footerLabel, adminLabel, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-           ON CONFLICT(id) DO UPDATE SET "order"=excluded."order", enabled=excluded.enabled, name=excluded.name, navLabel=excluded.navLabel, footerLabel=excluded.footerLabel, adminLabel=excluded.adminLabel, updatedAt=CURRENT_TIMESTAMP;`,
-          item.id,
-          item.order,
-          item.enabled ? 1 : 0,
-          item.name?.trim() || null,
-          item.navLabel?.trim() || null,
-          item.footerLabel?.trim() || null,
-          item.adminLabel?.trim() || null
-        );
-      }
     }
 
     revalidatePath("/");
@@ -90,42 +61,13 @@ export async function resetSectionsConfigAction() {
   }
 
   try {
-    const prismaAny = prisma as any;
-
-    if (prismaAny.pageSection && typeof prismaAny.pageSection.upsert === "function") {
-      await prisma.$transaction(
-        DEFAULT_PAGE_SECTIONS.map((sec) =>
-          prismaAny.pageSection.upsert({
-            where: { id: sec.id },
-            update: {
-              order: sec.order,
-              enabled: true,
-              name: null,
-              navLabel: null,
-              footerLabel: null,
-              adminLabel: null,
-            },
-            create: {
-              id: sec.id,
-              order: sec.order,
-              enabled: true,
-              name: null,
-              navLabel: null,
-              footerLabel: null,
-              adminLabel: null,
-            },
-          })
-        )
+    for (const sec of DEFAULT_PAGE_SECTIONS) {
+      await prisma.$executeRawUnsafe(
+        `INSERT INTO PageSection (id, "order", enabled, name, navLabel, footerLabel, adminLabel, updatedAt) VALUES (?, ?, 1, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP)
+         ON CONFLICT(id) DO UPDATE SET "order"=excluded."order", enabled=1, name=NULL, navLabel=NULL, footerLabel=NULL, adminLabel=NULL, updatedAt=CURRENT_TIMESTAMP;`,
+        sec.id,
+        sec.order
       );
-    } else {
-      for (const sec of DEFAULT_PAGE_SECTIONS) {
-        await prisma.$executeRawUnsafe(
-          `INSERT INTO PageSection (id, "order", enabled, name, navLabel, footerLabel, adminLabel, updatedAt) VALUES (?, ?, 1, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP)
-           ON CONFLICT(id) DO UPDATE SET "order"=excluded."order", enabled=1, name=NULL, navLabel=NULL, footerLabel=NULL, adminLabel=NULL, updatedAt=CURRENT_TIMESTAMP;`,
-          sec.id,
-          sec.order
-        );
-      }
     }
 
     revalidatePath("/");

@@ -3,18 +3,9 @@ import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
 
 export async function getPageSections(): Promise<PageSectionItem[]> {
   try {
-    const prismaAny = prisma as any;
-    let dbSections: any[] = [];
-
-    if (prismaAny.pageSection && typeof prismaAny.pageSection.findMany === "function") {
-      dbSections = await prismaAny.pageSection.findMany({
-        orderBy: { order: "asc" },
-      });
-    } else {
-      dbSections = await prisma.$queryRawUnsafe<any[]>(
-        `SELECT id, "order", enabled, name, navLabel, footerLabel, adminLabel FROM PageSection ORDER BY "order" ASC`
-      );
-    }
+    const dbSections = await prisma.$queryRawUnsafe<any[]>(
+      `SELECT id, "order", enabled, name, navLabel, footerLabel, adminLabel FROM PageSection ORDER BY "order" ASC`
+    );
 
     if (!dbSections || dbSections.length === 0) {
       return [...DEFAULT_PAGE_SECTIONS];
