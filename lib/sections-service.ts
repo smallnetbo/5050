@@ -12,7 +12,7 @@ export async function getPageSections(): Promise<PageSectionItem[]> {
       });
     } else {
       dbSections = await prisma.$queryRawUnsafe<any[]>(
-        `SELECT id, "order", enabled FROM PageSection ORDER BY "order" ASC`
+        `SELECT id, "order", enabled, name, navLabel, footerLabel, adminLabel FROM PageSection ORDER BY "order" ASC`
       );
     }
 
@@ -32,6 +32,10 @@ export async function getPageSections(): Promise<PageSectionItem[]> {
           ...def,
           order: found.order,
           enabled: Boolean(found.enabled),
+          name: found.name || def.name,
+          navLabel: found.navLabel || def.navLabel,
+          footerLabel: found.footerLabel || def.footerLabel,
+          adminLabel: found.adminLabel || def.adminLabel,
         };
       }
       return def;

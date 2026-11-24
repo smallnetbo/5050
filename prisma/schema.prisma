@@ -226,10 +226,14 @@ model CommitmentLevel {
 
 // 15. Orden y Visibilidad de Secciones del Portal (CMS)
 model PageSection {
-  id        String   @id // "Hero", "Concepts", "Monitor", "DocumentHub", "LevelCommitments", "Timeline", "MultimediaHub", "InteractiveNewsGallery3", "CitizenFeedback"
-  order     Int      @default(0)
-  enabled   Boolean  @default(true)
-  updatedAt DateTime @updatedAt
+  id          String   @id // "Hero", "Concepts", "Monitor", "DocumentHub", "LevelCommitments", "CommitmentsBoard", "Timeline", "MultimediaHub", "InteractiveNewsGallery3", "CitizenFeedback"
+  order       Int      @default(0)
+  enabled     Boolean  @default(true)
+  name        String?
+  navLabel    String?
+  footerLabel String?
+  adminLabel  String?
+  updatedAt   DateTime @updatedAt
 }
 
 // 16. Categorías del Repositorio Documental (DocumentHub)

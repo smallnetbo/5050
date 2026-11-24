@@ -24,11 +24,15 @@ import {
   CheckCircle2,
   AlertCircle,
   Layers,
+  LayoutGrid,
+  Pencil,
+  X,
   ArrowRight,
   Info,
 } from "lucide-react";
 import { PageSectionItem, SectionId } from "@/lib/sections-config";
 import { saveSectionsConfigAction, resetSectionsConfigAction } from "@/lib/actions/sections.actions";
+import { ModalPortal } from "@/components/ModalPortal";
 
 interface SectionsManagerProps {
   initialSections: PageSectionItem[];
@@ -42,6 +46,7 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
   const [dragOverIndex, setDragOverIndex] = useState<number | null>(null);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [hasChanges, setHasChanges] = useState<boolean>(false);
+  const [editingSection, setEditingSection] = useState<PageSectionItem | null>(null);
 
   // Mapeo de iconos
   const getIcon = (name: string, size = 18) => {
@@ -64,6 +69,8 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
         return <Newspaper size={size} />;
       case "MessageSquare":
         return <MessageSquare size={size} />;
+      case "LayoutGrid":
+        return <LayoutGrid size={size} />;
       default:
         return <Layers size={size} />;
     }
@@ -138,6 +145,10 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
         id: s.id,
         order: index,
         enabled: s.enabled,
+        name: s.name,
+        navLabel: s.navLabel,
+        footerLabel: s.footerLabel,
+        adminLabel: s.adminLabel,
       }));
 
       const res = await saveSectionsConfigAction(payload);
@@ -153,7 +164,7 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
 
   // Restablecer al orden por defecto
   const handleReset = () => {
-    if (!confirm("¿Desea restablecer el orden y visibilidad original de las 9 secciones?")) {
+    if (!confirm("¿Desea restablecer el orden, nombres y visibilidad original de todas las secciones?")) {
       return;
     }
 
@@ -361,6 +372,17 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
                   </span>
                 </button>
 
+                {/* Edit Labels Button */}
+                <button
+                  type="button"
+                  onClick={() => setEditingSection({ ...section })}
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-950/40 dark:hover:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800 text-xs font-bold transition cursor-pointer"
+                  title="Personalizar nombre y etiquetas del menú"
+                >
+                  <Pencil size={14} />
+                  <span className="hidden md:inline">Renombrar</span>
+                </button>
+
                 {/* CMS Link */}
                 <Link
                   href={section.adminHref}
@@ -439,6 +461,134 @@ export function SectionsManager({ initialSections }: SectionsManagerProps) {
           </div>
         </div>
       </div>
+
+      {/* Modal para personalizar nombre y etiquetas de la sección */}
+      {editingSection && (
+        <ModalPortal>
+          <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 animate-in fade-in duration-150">
+            <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
+              <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50">
+                <div>
+                  <h3 className="text-base font-black text-slate-900 dark:text-white">
+                    Personalizar Nombres de Sección
+                  </h3>
+                  <p className="text-xs text-slate-500 font-medium">
+                    Sección <code className="text-emerald-600 dark:text-emerald-400">{editingSection.id}</code>
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setEditingSection(null)}
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition"
+                >
+                  <X size={18} />
+                </button>
+              </div>
+
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setSections((prev) =>
+                    prev.map((item) =>
+                      item.id === editingSection.id
+                        ? {
+                            ...item,
+                            name: editingSection.name.trim() || item.name,
+                            navLabel: editingSection.navLabel.trim() || item.navLabel,
+                            footerLabel: editingSection.footerLabel.trim() || item.footerLabel,
+                            adminLabel: editingSection.adminLabel.trim() || item.adminLabel,
+                          }
+                        : item
+                    )
+                  );
+                  setHasChanges(true);
+                  setMessage(null);
+                  setEditingSection(null);
+                }}
+                className="p-6 space-y-4"
+              >
+                <div>
+                  <label className="block text-xs font-black uppercase text-slate-600 dark:text-slate-300 mb-1.5">
+                    Nombre en Menú Superior (Header)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingSection.navLabel}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, navLabel: e.target.value })
+                    }
+                    placeholder="Ej. Compromisos"
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black uppercase text-slate-600 dark:text-slate-300 mb-1.5">
+                    Nombre en Pie de Página (Footer)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingSection.footerLabel}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, footerLabel: e.target.value })
+                    }
+                    placeholder="Ej. Compromisos"
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black uppercase text-slate-600 dark:text-slate-300 mb-1.5">
+                    Nombre Descriptivo (Navegador lateral y CMS)
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingSection.name}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, name: e.target.value })
+                    }
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-black uppercase text-slate-600 dark:text-slate-300 mb-1.5">
+                    Etiqueta en Menú del Admin
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={editingSection.adminLabel}
+                    onChange={(e) =>
+                      setEditingSection({ ...editingSection, adminLabel: e.target.value })
+                    }
+                    className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3.5 py-2.5 text-sm font-bold text-slate-900 dark:text-white focus:outline-none focus:border-emerald-500"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100 dark:border-slate-800">
+                  <button
+                    type="button"
+                    onClick={() => setEditingSection(null)}
+                    className="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-[#0F2942] text-xs font-black transition shadow-sm"
+                  >
+                    Aplicar (luego Guardar Cambios)
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
     </div>
   );
 }
