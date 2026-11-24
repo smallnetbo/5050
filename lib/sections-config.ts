@@ -4,6 +4,7 @@ export type SectionId =
   | "Monitor"
   | "DocumentHub"
   | "LevelCommitments"
+  | "CommitmentsBoard"
   | "Timeline"
   | "MultimediaHub"
   | "InteractiveNewsGallery3"
@@ -161,6 +162,21 @@ export const DEFAULT_PAGE_SECTIONS: PageSectionItem[] = [
     color: "bg-emerald-700",
     isMail: true,
     order: 8,
+    enabled: true,
+  },
+  {
+    id: "CommitmentsBoard",
+    name: "Tablero de Compromisos por Nivel (50/50)",
+    shortTitle: "Tablero 50/50",
+    description: "Tablero interactivo con vistas Lista, Kanban y Matriz de los compromisos por nivel (2.1 a 2.7).",
+    navLabel: "Tablero 50/50",
+    footerLabel: "Tablero 50/50",
+    href: "#tablero-compromisos",
+    adminHref: "/admin/board-commitments",
+    adminLabel: "Tablero Compromisos",
+    iconName: "LayoutGrid",
+    color: "bg-zinc-800",
+    order: 9,
     enabled: true,
   },
 ];

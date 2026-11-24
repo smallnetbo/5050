@@ -19,6 +19,7 @@ import {
 } from "@/lib/agenda-data";
 
 import { commitmentsData, CommitmentItem, commitmentLevels as defaultCommitmentLevels, CommitmentLevel } from "@/lib/commitments-data";
+import { DEFAULT_BOARD_COMMITMENTS, BoardCommitmentItem } from "@/lib/board-commitments-data";
 import { getPageSections } from "@/lib/sections-service";
 import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
 import { DocumentCategory, DEFAULT_DOCUMENT_CATEGORIES } from "@/components/DocumentHub";
@@ -47,6 +48,7 @@ export async function getLandingData() {
       dbCommitments,
       dbCommitmentLevels,
       dbDocCategories,
+      dbBoardCommitments,
     ] = await Promise.all([
       prisma.pillar.findMany({ orderBy: { order: "asc" } }),
       prisma.milestone.findMany({ orderBy: { order: "asc" } }),
@@ -67,6 +69,19 @@ export async function getLandingData() {
           return await prisma.$queryRawUnsafe<any[]>(
             `SELECT "id", "label", "order", "isSystem" FROM "DocCategory" ORDER BY "order" ASC;`
           );
+        } catch {
+          return [];
+        }
+      })(),
+      (async () => {
+        try {
+          if ((prisma as any).boardCommitment) {
+            return await (prisma as any).boardCommitment.findMany({
+              where: { active: true },
+              orderBy: [{ order: "asc" }, { id: "asc" }],
+            });
+          }
+          return [];
         } catch {
           return [];
         }
@@ -248,6 +263,22 @@ export async function getLandingData() {
           }))
         : DEFAULT_DOCUMENT_CATEGORIES;
 
+    const mappedBoardCommitments: BoardCommitmentItem[] =
+      dbBoardCommitments && dbBoardCommitments.length > 0
+        ? dbBoardCommitments.map((b: any) => ({
+            id: b.id,
+            nivel: b.nivel,
+            rubro: b.rubro,
+            tematica: b.tematica,
+            entregable: b.entregable,
+            responsable: b.responsable,
+            estado: b.estado,
+            cat: b.cat,
+            order: b.order,
+            active: Boolean(b.active),
+          }))
+        : DEFAULT_BOARD_COMMITMENTS;
+
     return {
       pillars: mappedPillars,
       milestones: mappedMilestones,
@@ -261,6 +292,7 @@ export async function getLandingData() {
       monitorMetrics,
       commitments: mappedCommitments,
       commitmentLevels: mappedLevels,
+      boardCommitments: mappedBoardCommitments,
       sections: await getPageSections(),
     };
   } catch (error) {
@@ -277,6 +309,7 @@ export async function getLandingData() {
       monitorMetrics: defaultMonitorMetrics,
       commitments: commitmentsData,
       commitmentLevels: defaultCommitmentLevels,
+      boardCommitments: DEFAULT_BOARD_COMMITMENTS,
       sections: DEFAULT_PAGE_SECTIONS,
       siteConfig: {
         heroTitle: "Hacia una distribución justa 50/50",

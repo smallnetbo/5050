@@ -4,6 +4,7 @@ import { Hero } from "@/components/Hero";
 import { Concepts } from "@/components/Concepts";
 import { Monitor } from "@/components/Monitor";
 import { LevelCommitments } from "@/components/LevelCommitments";
+import { CommitmentsBoard } from "@/components/CommitmentsBoard";
 import { Timeline } from "@/components/Timeline";
 import { MultimediaHub } from "@/components/MultimediaHub";
 import { InteractiveNewsGallery3 } from "@/components/InteractiveNewsGallery3";
@@ -51,6 +52,8 @@ export default async function Home() {
             levels={landingData.commitmentLevels}
           />
         );
+      case "CommitmentsBoard":
+        return <CommitmentsBoard commitments={landingData.boardCommitments} />;
       case "Timeline":
         return <Timeline milestones={landingData.milestones} />;
       case "MultimediaHub":

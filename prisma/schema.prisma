@@ -242,3 +242,19 @@ model DocCategory {
   updatedAt DateTime @updatedAt
 }
 
+// 17. Tablero de Compromisos por Nivel (CommitmentsBoard.tsx)
+model BoardCommitment {
+  id          Int      @id @default(autoincrement())
+  nivel       String   // "2.1" | "2.2" | "2.3" | "2.4" | "2.6" | "2.7"
+  rubro       String   // "fiscal" | "energia" | "salud" | "seguridad" | "ley" | "institucional" | "acuerdos" | "datos"
+  tematica    String
+  entregable  String
+  responsable String
+  estado      String   // "Cumplido", "En proceso", "Noviembre 2026", "Continuo", "Sin plazo", etc.
+  cat         String   // "cumplido" | "proceso" | "programado" | "sin_plazo"
+  order       Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

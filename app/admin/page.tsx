@@ -12,6 +12,7 @@ import {
   Video,
   Activity,
   ClipboardList,
+  LayoutGrid,
   Layers,
   HelpCircle,
   Newspaper,
@@ -78,6 +79,15 @@ export default async function AdminDashboardPage() {
           icon: ClipboardList,
           color: "bg-indigo-600",
           actionText: "Compromisos",
+        };
+      case "CommitmentsBoard":
+        return {
+          title: "Tablero Compromisos 50/50",
+          count: (data.boardCommitments || []).length,
+          href: "/admin/board-commitments",
+          icon: LayoutGrid,
+          color: "bg-zinc-800",
+          actionText: "Tablero",
         };
       case "Timeline":
         return {

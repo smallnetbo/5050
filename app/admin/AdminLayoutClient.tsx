@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { logoutAction } from "@/lib/actions/auth.actions";
 import {
   LayoutDashboard,
+  LayoutGrid,
   Layers,
   Sparkles,
   HelpCircle,
@@ -59,6 +60,8 @@ export function AdminLayoutClient({ sections, children }: AdminLayoutClientProps
         return FileText;
       case "ClipboardList":
         return ClipboardList;
+      case "LayoutGrid":
+        return LayoutGrid;
       case "Clock":
         return Clock;
       case "Video":
@@ -124,7 +127,7 @@ export function AdminLayoutClient({ sections, children }: AdminLayoutClientProps
                   <span>Orden de Secciones</span>
                 </div>
                 <span className="text-[10px] px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-200 font-mono">
-                  {sections.filter((s) => s.enabled).length}/9
+                  {sections.filter((s) => s.enabled).length}/{sections.length}
                 </span>
               </Link>
             </div>
