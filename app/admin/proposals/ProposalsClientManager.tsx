@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import {
   getProposalsAction,
   updateProposalStatusAction,
@@ -561,7 +562,8 @@ export function ProposalsClientManager() {
 
       {/* ---------------- MODAL DETAIL & NOTES ---------------- */}
       {activeProposal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
           <div className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-[28px] p-6 sm:p-7 shadow-2xl border border-slate-200 dark:border-slate-800 space-y-5 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
               <div>
@@ -651,11 +653,13 @@ export function ProposalsClientManager() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
 
       {/* ---------------- CONFIRM DELETE MODAL ---------------- */}
       {deleteId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in">
           <div className="w-full max-w-sm bg-white dark:bg-slate-900 rounded-[28px] p-6 shadow-2xl border border-slate-200 dark:border-slate-800 text-center space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-500 flex items-center justify-center mx-auto">
               <AlertTriangle size={24} />
@@ -682,6 +686,7 @@ export function ProposalsClientManager() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </div>
   );

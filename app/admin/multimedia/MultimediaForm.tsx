@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { MediaItem } from "@/lib/agenda-data";
 import { upsertMediaItemAction } from "@/lib/actions/multimedia.actions";
 import { uploadFileWithProgress, formatBytes } from "@/lib/client-upload";
@@ -188,7 +189,8 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+    <ModalPortal>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
       <div className="bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl my-8">
         {/* Header Modal */}
         <div className="px-6 py-4 bg-slate-50 dark:bg-[#101620] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -600,5 +602,6 @@ export function MultimediaForm({ item, onClose, onSaved }: Props) {
         </form>
       </div>
     </div>
+    </ModalPortal>
   );
 }

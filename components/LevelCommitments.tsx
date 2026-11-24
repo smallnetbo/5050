@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { ModalPortal } from "./ModalPortal";
 import {
   commitmentLevels,
   commitmentsData,
@@ -452,7 +453,8 @@ export function LevelCommitments({
 
         {/* Modal Detalle de Compromiso */}
         {selectedItem && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
+          <ModalPortal>
+          <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in">
             <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 sm:p-8 max-w-lg w-full space-y-5 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
               <button
                 onClick={() => setSelectedItem(null)}
@@ -509,6 +511,7 @@ export function LevelCommitments({
               </div>
             </div>
           </div>
+          </ModalPortal>
         )}
       </div>
     </section>

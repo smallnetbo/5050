@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { useRouter } from "next/navigation";
 import { DocumentItem } from "@/lib/agenda-data";
 import { DocumentModalForm } from "./DocumentModalForm";
@@ -514,7 +515,8 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
 
       {/* Modal Confirm Delete */}
       {deletingId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
           <div className="bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
             <div className="flex items-center gap-3 text-rose-500">
               <div className="p-3 rounded-2xl bg-rose-500/10">
@@ -548,11 +550,13 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
 
       {/* Preview PDF Modal in Admin */}
       {readingDoc && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-black/80 backdrop-blur-md p-3 sm:p-6 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex flex-col bg-black/80 backdrop-blur-md p-3 sm:p-6 animate-in fade-in">
           <div className="w-full h-full flex flex-col rounded-3xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             <div className="flex justify-between items-center px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shrink-0">
               <div className="flex items-center gap-2">
@@ -590,10 +594,12 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
       {/* Modal de Gestión CRUD para categoriesList */}
       {isCategoryModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 sm:p-6 animate-in fade-in duration-200">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-xs p-4 sm:p-6 animate-in fade-in duration-200">
           <div className="w-full max-w-2xl max-h-[90vh] flex flex-col rounded-3xl bg-white dark:bg-[#0B111A] shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             {/* Header del Modal */}
             <div className="flex justify-between items-center px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/60 shrink-0">
@@ -850,6 +856,7 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </div>
   );

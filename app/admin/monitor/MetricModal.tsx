@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { MonitorMetricInput } from "@/lib/actions/monitor.actions";
 import {
   Clock,
@@ -162,7 +163,8 @@ export function MetricModal({ isOpen, onClose, onSave, initialData }: MetricModa
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <ModalPortal>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800 shrink-0">
@@ -352,5 +354,6 @@ export function MetricModal({ isOpen, onClose, onSave, initialData }: MetricModa
         </form>
       </div>
     </div>
+    </ModalPortal>
   );
 }

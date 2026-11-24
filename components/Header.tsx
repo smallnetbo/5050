@@ -5,6 +5,7 @@ import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, New
 import { documentsList, departmentsData } from "@/lib/agenda-data";
 import { commitmentsData } from "@/lib/commitments-data";
 import { useTheme } from "./ThemeProvider";
+import { ModalPortal } from "./ModalPortal";
 
 import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
 
@@ -158,7 +159,8 @@ export function Header({ sections }: HeaderProps = {}) {
 
       {/* Global Intelligent Search Modal */}
       {searchOpen && (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-[#0F2942]/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] grid place-items-center bg-[#0F2942]/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
           <div className="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl border border-slate-100">
             <div className="flex items-center justify-between border-b border-slate-100 px-6 py-4 bg-slate-50">
               <div className="flex items-center gap-3 flex-1">
@@ -280,6 +282,7 @@ export function Header({ sections }: HeaderProps = {}) {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </>
   );

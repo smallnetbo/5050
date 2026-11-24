@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { useRouter } from "next/navigation";
 import { MediaItem } from "@/lib/agenda-data";
 import { MultimediaForm } from "./MultimediaForm";
@@ -259,7 +260,8 @@ export function MultimediaClientManager({ initialItems }: Props) {
 
       {/* Modal Confirm Delete */}
       {deletingId && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
           <div className="bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl p-6 max-w-sm w-full space-y-4 shadow-2xl">
             <div className="flex items-center gap-3 text-rose-500">
               <div className="p-3 rounded-2xl bg-rose-500/10">
@@ -293,6 +295,7 @@ export function MultimediaClientManager({ initialItems }: Props) {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </div>
   );

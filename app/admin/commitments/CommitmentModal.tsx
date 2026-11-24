@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { CommitmentInput } from "@/lib/actions/commitments.actions";
 import { X, Save, Loader2, Landmark, Building2, Building, Layers } from "lucide-react";
 
@@ -117,7 +118,8 @@ export function CommitmentModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+    <ModalPortal>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl flex flex-col">
         {/* Header Modal */}
         <div className="flex items-center justify-between p-6 border-b border-slate-100 dark:border-slate-800 shrink-0">
@@ -322,5 +324,6 @@ export function CommitmentModal({
         </form>
       </div>
     </div>
+    </ModalPortal>
   );
 }

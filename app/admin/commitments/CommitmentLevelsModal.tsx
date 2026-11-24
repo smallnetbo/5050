@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { CommitmentLevel, CommitmentItem } from "@/lib/commitments-data";
 import {
   CommitmentLevelInput,
@@ -280,7 +281,8 @@ export function CommitmentLevelsModal({
   const currentPreviewScheme = COLOR_SCHEMES.find((s) => s.id === formColorScheme) || COLOR_SCHEMES[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
+    <ModalPortal>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-4xl max-h-[92vh] flex flex-col bg-white dark:bg-[#101620] rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden">
         {/* Modal Header */}
         <div className="p-6 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50">
@@ -709,5 +711,6 @@ export function CommitmentLevelsModal({
         </div>
       </div>
     </div>
+    </ModalPortal>
   );
 }

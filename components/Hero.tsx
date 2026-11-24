@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Map, ShieldCheck, CheckCircle2, Building, X, ArrowRight } from "lucide-react";
 import { AnimatedIsologo } from "./AnimatedIsologo";
+import { ModalPortal } from "./ModalPortal";
 
 export function Hero() {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
@@ -51,7 +52,8 @@ export function Hero() {
 
       {/* Video Modal Player */}
       {videoModalOpen && (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-3xl bg-[#1B2533] p-4 border border-[#c79d47]/40 shadow-2xl relative flex flex-col items-center">
             <button
               onClick={() => setVideoModalOpen(false)}
@@ -88,6 +90,7 @@ export function Hero() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </section>
   );

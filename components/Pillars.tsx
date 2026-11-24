@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ModalPortal } from "./ModalPortal";
 import {
   ArrowRight,
   X,
@@ -753,8 +754,9 @@ export function Pillars({
 
         {/* Modal Detallado de Eje / Acciones Acordadas */}
         {selectedPillar && (
+          <ModalPortal>
           <div
-            className="fixed inset-0 z-[100] grid place-items-center bg-[#0F2942]/70 dark:bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
+            className="fixed inset-0 z-[200] grid place-items-center bg-[#0F2942]/70 dark:bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
             onClick={() => setSelectedPillar(null)}
           >
             <div
@@ -859,6 +861,7 @@ export function Pillars({
               </div>
             </div>
           </div>
+          </ModalPortal>
         )}
       </div>
     </section>

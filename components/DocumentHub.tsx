@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
+import { ModalPortal } from "./ModalPortal";
 import {
   FileText,
   Download,
@@ -342,7 +343,8 @@ export function DocumentHub({
 
       {/* Visor Modal de PDF Interactivo (Previsualización) */}
       {readingDoc && (
-        <div className="fixed inset-0 z-50 flex flex-col bg-black/80 backdrop-blur-md p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] flex flex-col bg-black/80 backdrop-blur-md p-2 sm:p-4 md:p-6 animate-in fade-in duration-200">
           <div className="w-full h-full flex flex-col rounded-3xl bg-white dark:bg-slate-900 shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden">
             {/* Modal Header */}
             <div className="flex justify-between items-center px-4 sm:px-6 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 shrink-0">
@@ -398,6 +400,7 @@ export function DocumentHub({
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
 
     </section>

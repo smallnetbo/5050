@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ModalPortal } from "@/components/ModalPortal";
 import { DocumentItem } from "@/lib/agenda-data";
 import { upsertDocumentAction } from "@/lib/actions/documents.actions";
 import { uploadFileWithProgress, formatBytes } from "@/lib/client-upload";
@@ -90,7 +91,8 @@ export function DocumentModalForm({ document, onClose, onSaved, availableCategor
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
+    <ModalPortal>
+    <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
       <div className="bg-white dark:bg-[#151D2A] border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl my-8">
         {/* Header Modal */}
         <div className="px-6 py-4 bg-slate-50 dark:bg-[#101620] border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
@@ -407,5 +409,6 @@ export function DocumentModalForm({ document, onClose, onSaved, availableCategor
         </form>
       </div>
     </div>
+    </ModalPortal>
   );
 }

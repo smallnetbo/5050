@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { ModalPortal } from "./ModalPortal";
 import { Video, Play, X, Tv, ExternalLink, Users, Newspaper } from "lucide-react";
 import { MediaItem as MediaItemType } from "@/lib/agenda-data";
 
@@ -582,7 +583,8 @@ export function MultimediaHub({ mediaItems }: Props) {
 
       {/* Video Modal Player Dinámico */}
       {selectedVideo && (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-3xl rounded-3xl bg-[#1B2533] p-4 border border-[#3ac167]/40 shadow-2xl relative flex flex-col items-center">
             <button
               onClick={() => setSelectedVideo(null)}
@@ -648,11 +650,13 @@ export function MultimediaHub({ mediaItems }: Props) {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
 
       {/* Webinar Modal Player (Facebook / Dailymotion Embed) */}
       {selectedWebinar && (
-        <div className="fixed inset-0 z-[100] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
+        <ModalPortal>
+        <div className="fixed inset-0 z-[200] grid place-items-center bg-black/85 backdrop-blur-md p-4 animate-in fade-in">
           <div className="w-full max-w-sm sm:max-w-md lg:max-w-3xl rounded-3xl bg-[#1B2533] p-4 border border-[#3ac167]/40 shadow-2xl relative flex flex-col items-center">
             <button
               onClick={() => setSelectedWebinar(null)}
@@ -701,6 +705,7 @@ export function MultimediaHub({ mediaItems }: Props) {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </section>
   );

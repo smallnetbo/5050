@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
+import { ModalPortal } from "./ModalPortal";
 import * as THREE from "three";
 import { getAllAgenda5050News, AgendaNewsArticle } from "@/lib/news-service";
 import {
@@ -907,8 +908,9 @@ export function InteractiveNewsGallery2() {
 
       {/* Modal de la noticia seleccionada */}
       {selectedArticle && (
+        <ModalPortal>
         <div
-          className="fixed inset-0 z-[100] grid place-items-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
+          className="fixed inset-0 z-[200] grid place-items-center bg-black/80 backdrop-blur-md p-4 animate-in fade-in"
           onClick={() => setSelectedArticle(null)}
           role="dialog"
           aria-modal="true"
@@ -974,6 +976,7 @@ export function InteractiveNewsGallery2() {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </section>
   );

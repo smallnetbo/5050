@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { ModalPortal } from "./ModalPortal";
 import {
   Calendar,
   CheckCircle2,
@@ -273,11 +274,12 @@ export function Timeline({ milestones: propMilestones }: TimelineProps) {
 
       {/* POPUP / MODAL FLOTANTE DE LA TARJETA DEL HITO */}
       {selectedMilestone && (
+        <ModalPortal>
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setSelectedMilestone(null)}
         >
           <div
@@ -453,6 +455,7 @@ export function Timeline({ milestones: propMilestones }: TimelineProps) {
             </div>
           </div>
         </div>
+        </ModalPortal>
       )}
     </section>
   );
