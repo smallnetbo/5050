@@ -15,6 +15,21 @@ export interface UpdateSectionPayload {
   adminLabel?: string;
 }
 
+async function ensurePageSectionColumns() {
+  const cols = await prisma.$queryRawUnsafe<{ name: string }[]>(
+    `PRAGMA table_info(PageSection);`
+  );
+  const existing = new Set(cols.map((c) => c.name));
+  const needed = ["name", "navLabel", "footerLabel", "adminLabel"];
+  for (const col of needed) {
+    if (!existing.has(col)) {
+      await prisma.$executeRawUnsafe(
+        `ALTER TABLE PageSection ADD COLUMN ${col} TEXT;`
+      );
+    }
+  }
+}
+
 export async function saveSectionsConfigAction(items: UpdateSectionPayload[]) {
   const isAuthenticated = await verifyAdminSession();
   if (!isAuthenticated) {
@@ -22,6 +37,7 @@ export async function saveSectionsConfigAction(items: UpdateSectionPayload[]) {
   }
 
   try {
+    await ensurePageSectionColumns();
     // Usar SQL directo para compatibilidad inmediata incluso si el cliente Prisma en memoria está en caché
     for (const item of items) {
       await prisma.$executeRawUnsafe(
@@ -61,6 +77,7 @@ export async function resetSectionsConfigAction() {
   }
 
   try {
+    await ensurePageSectionColumns();
     for (const sec of DEFAULT_PAGE_SECTIONS) {
       await prisma.$executeRawUnsafe(
         `INSERT INTO PageSection (id, "order", enabled, name, navLabel, footerLabel, adminLabel, updatedAt) VALUES (?, ?, 1, NULL, NULL, NULL, NULL, CURRENT_TIMESTAMP)
