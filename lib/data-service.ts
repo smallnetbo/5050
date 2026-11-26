@@ -143,6 +143,9 @@ export async function getLandingData() {
           description: doc.description,
           downloadsCount: doc.downloadsCount,
           featured: doc.featured,
+          indexStatus: doc.indexStatus || "PENDING",
+          pageCount: doc.pageCount || 0,
+          indexError: doc.indexError || null,
         }))
       : defaultDocuments;
 

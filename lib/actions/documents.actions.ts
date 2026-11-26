@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { verifyAdminSession } from "@/lib/auth";
 import { saveUploadedFile } from "@/lib/uploads";
 import { syncDatabaseToAgendaData } from "@/lib/sync-seeds";
+import { enqueueDocumentIndex } from "@/lib/pdf-indexer";
 
 export async function upsertDocumentAction(formData: FormData) {
   const isAuthenticated = await verifyAdminSession();
@@ -29,13 +30,15 @@ export async function upsertDocumentAction(formData: FormData) {
 
     let fileSize = (formData.get("existingFileSize") as string) || "1.0 MB";
 
-    if (file && file.size > 0) {
+    const hasNewFile = Boolean(file && file.size > 0);
+    if (hasNewFile && file) {
       fileUrl = await saveUploadedFile(file, "documents");
       fileSize = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
     }
 
+    let savedId = id;
     if (id) {
-      await prisma.documentItem.update({
+      const updated = await prisma.documentItem.update({
         where: { id },
         data: {
           title,
@@ -45,11 +48,13 @@ export async function upsertDocumentAction(formData: FormData) {
           description,
           featured,
           ...(fileUrl !== undefined ? { fileUrl } : {}),
+          ...(hasNewFile ? { indexStatus: "INDEXING", indexError: null } : {}),
           fileSize,
         },
       });
+      savedId = updated.id;
     } else {
-      await prisma.documentItem.create({
+      const created = await prisma.documentItem.create({
         data: {
           title,
           category,
@@ -59,8 +64,14 @@ export async function upsertDocumentAction(formData: FormData) {
           featured,
           fileUrl: fileUrl || null,
           fileSize,
+          indexStatus: fileUrl ? "INDEXING" : "PENDING",
         },
       });
+      savedId = created.id;
+    }
+
+    if (savedId && (hasNewFile || (!id && fileUrl))) {
+      enqueueDocumentIndex(savedId, { force: true });
     }
 
     try {
@@ -76,6 +87,24 @@ export async function upsertDocumentAction(formData: FormData) {
   } catch (error: any) {
     console.error("Error guardando documento:", error);
     return { success: false, error: error?.message || "Error al guardar el documento." };
+  }
+}
+
+export async function reindexDocumentAction(id: string) {
+  const isAuthenticated = await verifyAdminSession();
+  if (!isAuthenticated) return { success: false, error: "No autorizado." };
+
+  try {
+    await prisma.documentItem.update({
+      where: { id },
+      data: { indexStatus: "INDEXING", indexError: null },
+    });
+    enqueueDocumentIndex(id, { force: true });
+    revalidatePath("/admin/documents");
+    return { success: true, message: "Indexación OCR encolada en segundo plano." };
+  } catch (error: any) {
+    console.error("Error al re-indexar documento:", error);
+    return { success: false, error: error?.message || "Error al iniciar la re-indexación." };
   }
 }
 

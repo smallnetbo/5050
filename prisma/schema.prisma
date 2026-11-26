@@ -75,18 +75,38 @@ model DepartmentData {
 
 // 5. Repositorio Documental (DocumentHub)
 model DocumentItem {
-  id             String   @id @default(cuid())
+  id             String              @id @default(cuid())
   title          String
-  category       String   // "Acuerdo" | "Proyecto de Ley" | "Decreto" | "Presentación" | "Acta"
+  category       String              // "Acuerdo" | "Proyecto de Ley" | "Decreto" | "Presentación" | "Acta"
   department     String?
   date           String
-  fileUrl        String?  // Ruta en /uploads/... o URL
+  fileUrl        String?             // Ruta en /uploads/... o URL
   fileSize       String
   description    String
-  downloadsCount Int      @default(0)
-  featured       Boolean  @default(false)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  downloadsCount Int                 @default(0)
+  featured       Boolean             @default(false)
+  fileHash       String?
+  indexStatus    String              @default("PENDING") // "PENDING" | "INDEXING" | "INDEXED" | "ERROR"
+  pageCount      Int                 @default(0)
+  indexError     String?
+  lastIndexedAt  DateTime?
+  pages          DocumentPageIndex[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+}
+
+// 5b. Índice de Texto / OCR por Página de PDF
+model DocumentPageIndex {
+  id                String       @id @default(cuid())
+  documentId        String
+  document          DocumentItem @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  pageNumber        Int
+  contentRaw        String
+  contentNormalized String
+  indexedAt         DateTime     @default(now())
+
+  @@unique([documentId, pageNumber])
+  @@index([documentId])
 }
 
 // 6. Hub Multimedia (MultimediaHub - Audios/Podcasts/Videos/Webinars/Reuniones/Medios)

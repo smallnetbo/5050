@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon, Mail } from "lucide-react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Search, Menu, X, FileText, MapPin, BarChart3, HelpCircle, Download, Newspaper, Video, Sparkles, Sun, Moon, Mail, BookOpen, Compass, ExternalLink, Loader2 } from "lucide-react";
 import { documentsList, departmentsData } from "@/lib/agenda-data";
 import { commitmentsData } from "@/lib/commitments-data";
 import { useTheme } from "./ThemeProvider";
@@ -13,11 +15,87 @@ interface HeaderProps {
   sections?: PageSectionItem[];
 }
 
+interface PdfSearchHit {
+  id: string;
+  documentId: string;
+  title: string;
+  category: string;
+  date: string;
+  fileUrl: string;
+  pageNumber: number;
+  snippet: string;
+  matchUrl: string;
+}
+
+function highlightQuery(text: string, query: string) {
+  const cleanQ = query.trim();
+  if (!cleanQ) return text;
+  const escaped = cleanQ.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const regex = new RegExp(`(${escaped})`, "gi");
+  const parts = text.split(regex);
+  return parts.map((part, idx) =>
+    regex.test(part) ? (
+      <mark key={idx} className="bg-amber-200 text-slate-900 rounded px-0.5 font-bold">
+        {part}
+      </mark>
+    ) : (
+      <span key={idx}>{part}</span>
+    )
+  );
+}
+
 export function Header({ sections }: HeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const [pdfHits, setPdfHits] = useState<PdfSearchHit[]>([]);
+  const [isSearchingPdfs, setIsSearchingPdfs] = useState(false);
   const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      } else if (e.key === "Escape") {
+        setSearchOpen(false);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
+
+  useEffect(() => {
+    const q = searchQuery.trim();
+    if (!searchOpen || q.length < 2) {
+      setPdfHits([]);
+      setIsSearchingPdfs(false);
+      return;
+    }
+
+    let cancelled = false;
+    setIsSearchingPdfs(true);
+    const timer = setTimeout(async () => {
+      try {
+        const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`);
+        const data = await res.json();
+        if (!cancelled && data?.ok) {
+          setPdfHits(data.pdfHits || []);
+        }
+      } catch {
+        if (!cancelled) setPdfHits([]);
+      } finally {
+        if (!cancelled) setIsSearchingPdfs(false);
+      }
+    }, 250);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [searchQuery, searchOpen]);
+  const pathname = usePathname();
+  const resolveHref = (href: string) => (pathname !== "/" && href.startsWith("#") ? `/${href}` : href);
 
   const activeSections = (sections && sections.length > 0 ? sections : DEFAULT_PAGE_SECTIONS).filter(
     (s) => s.enabled
@@ -25,7 +103,7 @@ export function Header({ sections }: HeaderProps = {}) {
 
   const navLinks = activeSections.map((s) => ({
     label: s.navLabel,
-    href: s.href,
+    href: resolveHref(s.href),
     isMail: s.isMail,
   }));
 
@@ -45,13 +123,13 @@ export function Header({ sections }: HeaderProps = {}) {
 
         <div className="container-page flex h-16 items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#" className="flex items-center group flex-shrink-0">
+          <Link href="/" className="flex items-center group flex-shrink-0">
             <img
               src="/assets/isologo.svg"
               alt="Agenda 50/50"
               className="h-10 sm:h-12 w-auto transition-transform group-hover:scale-105"
             />
-          </a>
+          </Link>
 
           {/* Desktop Navigation Links */}
           <nav className="hidden lg:flex items-center gap-5 text-xs font-extrabold text-slate-700 dark:text-slate-200">
@@ -81,6 +159,28 @@ export function Header({ sections }: HeaderProps = {}) {
                 </a>
               );
             })}
+            <Link
+              href="/revista"
+              className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
+                pathname === "/revista"
+                  ? "bg-[#1B2533] text-white border-[#1B2533] dark:bg-[#c79d47] dark:text-[#101620] dark:border-[#c79d47]"
+                  : "bg-amber-50/90 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300/60 dark:border-amber-700/50 hover:bg-amber-100 dark:hover:bg-amber-900/50"
+              }`}
+            >
+              <BookOpen size={13} />
+              <span>Revista 50/50</span>
+            </Link>
+            <Link
+              href="/ruta-viva"
+              className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
+                pathname === "/ruta-viva"
+                  ? "bg-[#3ac167] text-white border-[#3ac167]"
+                  : "bg-emerald-50/90 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 border-emerald-300/60 dark:border-emerald-700/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
+              }`}
+            >
+              <Compass size={13} />
+              <span>Ruta Viva</span>
+            </Link>
           </nav>
 
           {/* Action Buttons: Global Search, Theme Toggle & Mobile Toggle */}
@@ -144,9 +244,23 @@ export function Header({ sections }: HeaderProps = {}) {
                 <span className="text-slate-400">→</span>
               </a>
             ))}
-            <div className="pt-3 border-t border-slate-100">
+            <div className="pt-2 space-y-2 border-t border-slate-100">
+              <Link
+                href="/revista"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#1B2533] hover:bg-slate-800 text-white py-3 font-extrabold text-sm shadow-md"
+              >
+                <BookOpen size={16} className="text-[#fcc74f]" /> Revista Digital 50/50
+              </Link>
+              <Link
+                href="/ruta-viva"
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white py-3 font-extrabold text-sm shadow-md"
+              >
+                <Compass size={16} className="text-[#fcc74f]" /> Ruta Viva 50/50
+              </Link>
               <a
-                href="#descargas"
+                href={resolveHref("#descargas")}
                 onClick={() => setOpen(false)}
                 className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#3ac167] hover:bg-[#2ea354] text-white py-3 font-extrabold text-sm shadow-md"
               >
@@ -191,6 +305,42 @@ export function Header({ sections }: HeaderProps = {}) {
                 </div>
               ) : (
                 <>
+                  {/* Inside PDFs (OCR / Fulltext Search) */}
+                  {(isSearchingPdfs || pdfHits.length > 0) && (
+                    <div>
+                      <h4 className="text-xs font-black uppercase text-amber-700 tracking-wider mb-2 flex items-center gap-1.5">
+                        <FileText size={14} /> Dentro de Documentos (PDF) ({pdfHits.length})
+                        {isSearchingPdfs && <Loader2 size={12} className="animate-spin text-amber-600" />}
+                      </h4>
+                      <div className="space-y-1.5">
+                        {pdfHits.map((hit) => (
+                          <a
+                            key={hit.id}
+                            href={hit.matchUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => setSearchOpen(false)}
+                            className="block rounded-xl border border-amber-200/70 bg-amber-50/50 p-3 hover:bg-amber-50 hover:border-amber-300 transition"
+                          >
+                            <div className="flex items-center justify-between gap-2 text-xs font-bold text-slate-900">
+                              <span className="truncate">{hit.title}</span>
+                              <div className="flex items-center gap-1.5 shrink-0">
+                                <span className="rounded-md bg-[#1B2533] text-white px-2 py-0.5 text-[10px] font-black">
+                                  Pág. {hit.pageNumber}
+                                </span>
+                                <span className="text-[10px] text-slate-400">{hit.date}</span>
+                                <ExternalLink size={11} className="text-amber-700" />
+                              </div>
+                            </div>
+                            <div className="text-xs text-slate-600 mt-1 leading-relaxed">
+                              {highlightQuery(hit.snippet, searchQuery)}
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Filtered Commitments */}
                   {filteredCommitments.length > 0 && (
                     <div>
@@ -263,7 +413,7 @@ export function Header({ sections }: HeaderProps = {}) {
                     </div>
                   )}
 
-                  {filteredCommitments.length === 0 && filteredDocs.length === 0 && filteredDeps.length === 0 && (
+                  {filteredCommitments.length === 0 && filteredDocs.length === 0 && filteredDeps.length === 0 && pdfHits.length === 0 && !isSearchingPdfs && (
                     <div className="text-center py-6 text-slate-500 text-xs">
                       No se encontraron resultados para "<span className="font-bold text-slate-700">{searchQuery}</span>".
                     </div>

@@ -75,6 +75,9 @@ export interface DocumentItem {
   description: string;
   downloadsCount: number;
   featured?: boolean;
+  indexStatus?: string;
+  pageCount?: number;
+  indexError?: string | null;
 }
 
 export interface NewsArticle {

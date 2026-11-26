@@ -5,7 +5,7 @@ import { ModalPortal } from "@/components/ModalPortal";
 import { useRouter } from "next/navigation";
 import { DocumentItem } from "@/lib/agenda-data";
 import { DocumentModalForm } from "./DocumentModalForm";
-import { deleteDocumentAction, saveCategoriesAction, resetCategoriesAction } from "@/lib/actions/documents.actions";
+import { deleteDocumentAction, saveCategoriesAction, resetCategoriesAction, reindexDocumentAction } from "@/lib/actions/documents.actions";
 import { DocumentCategory, DEFAULT_DOCUMENT_CATEGORIES } from "@/components/DocumentHub";
 import {
   FileText,
@@ -32,6 +32,7 @@ import {
   Tag,
   Check,
   CheckCircle2,
+  RefreshCw,
 } from "lucide-react";
 
 const LOCAL_STORAGE_KEY = "agenda5050_document_categories";
@@ -49,7 +50,18 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [reindexingId, setReindexingId] = useState<string | null>(null);
   const [readingDoc, setReadingDoc] = useState<DocumentItem | null>(null);
+
+  const handleReindex = async (docId: string) => {
+    setReindexingId(docId);
+    try {
+      await reindexDocumentAction(docId);
+      router.refresh();
+    } finally {
+      setTimeout(() => setReindexingId(null), 1200);
+    }
+  };
 
   // Estado dinámico para el CRUD de categoriesList (inicializado con BD o fallback)
   const [categoriesList, setCategoriesList] = useState<DocumentCategory[]>(
@@ -443,6 +455,27 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
                       <span className="text-[11px] font-bold text-slate-400">
                         • {doc.fileSize}
                       </span>
+
+                      {doc.indexStatus === "INDEXED" ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200/70 dark:border-emerald-800/50 px-2 py-0.5 text-[10px] font-extrabold text-emerald-700 dark:text-emerald-300">
+                          Indexado · {doc.pageCount || 0} págs
+                        </span>
+                      ) : doc.indexStatus === "INDEXING" || reindexingId === doc.id ? (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 dark:bg-amber-950/50 border border-amber-200/70 dark:border-amber-800/50 px-2 py-0.5 text-[10px] font-extrabold text-amber-700 dark:text-amber-300">
+                          <Loader2 size={10} className="animate-spin" /> Indexando...
+                        </span>
+                      ) : doc.indexStatus === "ERROR" ? (
+                        <span
+                          className="inline-flex items-center gap-1 rounded-full bg-red-50 dark:bg-red-950/50 border border-red-200/70 dark:border-red-800/50 px-2 py-0.5 text-[10px] font-extrabold text-red-700 dark:text-red-300"
+                          title={doc.indexError || "Error de indexación"}
+                        >
+                          Error OCR
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 dark:bg-slate-800 px-2 py-0.5 text-[10px] font-bold text-slate-500 dark:text-slate-400">
+                          Pendiente
+                        </span>
+                      )}
                     </div>
 
                     <h3 className="font-black text-slate-900 dark:text-white text-base leading-snug">
@@ -477,6 +510,16 @@ export function DocumentsClientManager({ initialDocuments, initialCategories }: 
                     <Download size={14} />
                     <span>Descargar</span>
                   </a>
+
+                  <button
+                    onClick={() => handleReindex(doc.id)}
+                    disabled={reindexingId === doc.id}
+                    className="flex items-center gap-1.5 px-2.5 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-300 text-xs font-bold transition disabled:opacity-50"
+                    title="Re-indexar texto / OCR del PDF"
+                  >
+                    <RefreshCw size={13} className={reindexingId === doc.id ? "animate-spin" : ""} />
+                    <span className="hidden sm:inline">Re-indexar</span>
+                  </button>
 
                   <button
                     onClick={() => handleEdit(doc)}
