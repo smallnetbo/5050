@@ -4,12 +4,14 @@ import { useState, useMemo } from "react";
 import { Download, Copy, Check, Smartphone, Square, Share2 } from "lucide-react";
 import { Milestone, DocumentItem } from "@/lib/agenda-data";
 import { BoardCommitmentItem } from "@/lib/board-commitments-data";
+import { RutaVivaCardDTO } from "@/lib/productos-service";
 import { buildSocialPlates, SocialPlate } from "@/lib/ruta-viva-data";
 
 interface SocialKitStudioProps {
   commitments: BoardCommitmentItem[];
   milestones: Milestone[];
   documents: DocumentItem[];
+  cards?: RutaVivaCardDTO[];
 }
 
 type PlateFormat = "9:16" | "1:1";
@@ -159,14 +161,28 @@ export function SocialKitStudio({
   commitments,
   milestones,
   documents,
+  cards,
 }: SocialKitStudioProps) {
   const [format, setFormat] = useState<PlateFormat>("9:16");
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
-  const plates = useMemo(
-    () => buildSocialPlates(commitments, milestones, documents),
-    [commitments, milestones, documents]
-  );
+  const plates = useMemo(() => {
+    if (cards && cards.length > 0) {
+      return cards.map((c) => ({
+        id: c.slug,
+        category: c.category,
+        title: c.title,
+        subtitle: c.subtitle,
+        heroStat: c.heroStat,
+        heroStatLabel: c.heroStatLabel,
+        bullets: c.bullets,
+        footerNote: c.footerNote,
+        accent: c.templateType,
+        copyScript: c.copyText,
+      }));
+    }
+    return buildSocialPlates(commitments, milestones, documents);
+  }, [cards, commitments, milestones, documents]);
 
   const handleCopy = async (plate: SocialPlate) => {
     try {
@@ -196,21 +212,19 @@ export function SocialKitStudio({
         <div className="flex items-center gap-2">
           <button
             onClick={() => setFormat("9:16")}
-            className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-black transition cursor-pointer ${
-              format === "9:16"
-                ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620]"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-            }`}
+            className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-black transition cursor-pointer ${format === "9:16"
+              ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620]"
+              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+              }`}
           >
             <Smartphone size={14} /> Vertical 9:16 (TikTok / Reels / WhatsApp)
           </button>
           <button
             onClick={() => setFormat("1:1")}
-            className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-black transition cursor-pointer ${
-              format === "1:1"
-                ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620]"
-                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
-            }`}
+            className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-black transition cursor-pointer ${format === "1:1"
+              ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620]"
+              : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+              }`}
           >
             <Square size={14} /> Cuadrado 1:1 (Instagram / Prensa)
           </button>
@@ -230,9 +244,8 @@ export function SocialKitStudio({
             >
               {/* Vista previa de la placa */}
               <div
-                className={`relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#101620] to-[#1B2533] text-white p-6 flex flex-col justify-between transition-all ${
-                  format === "9:16" ? "min-h-[380px]" : "min-h-[290px]"
-                }`}
+                className={`relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#101620] to-[#1B2533] text-white p-6 flex flex-col justify-between transition-all ${format === "9:16" ? "min-h-[380px]" : "min-h-[290px]"
+                  }`}
               >
                 {/* Franja tricolor */}
                 <div className="absolute top-0 left-0 right-0 h-1.5 flex">

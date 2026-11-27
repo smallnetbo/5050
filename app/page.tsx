@@ -1,4 +1,5 @@
 import { getLandingData } from "@/lib/data-service";
+import { getModuleConfigs } from "@/lib/productos-service";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { Concepts } from "@/components/Concepts";
@@ -26,7 +27,10 @@ export const metadata = {
 };
 
 export default async function Home() {
-  const landingData = await getLandingData();
+  const [landingData, moduleConfigs] = await Promise.all([
+    getLandingData(),
+    getModuleConfigs(),
+  ]);
   const allSections: PageSectionItem[] = landingData.sections || DEFAULT_PAGE_SECTIONS;
   const activeSections = allSections.filter((s) => s.enabled);
 
@@ -72,7 +76,7 @@ export default async function Home() {
       <div className="min-h-screen bg-slate-50 dark:bg-[#101620] font-sans text-slate-900 dark:text-slate-100 antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300">
         <ScrollProgressBar />
         <ScrollNavigator sections={allSections} />
-        <Header sections={allSections} />
+        <Header sections={allSections} moduleConfigs={moduleConfigs} />
         <main>
           {activeSections.map((section, index) => {
             const isFirst = index === 0;

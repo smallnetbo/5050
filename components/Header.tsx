@@ -10,9 +10,11 @@ import { useTheme } from "./ThemeProvider";
 import { ModalPortal } from "./ModalPortal";
 
 import { DEFAULT_PAGE_SECTIONS, PageSectionItem } from "@/lib/sections-config";
+import { SiteModuleConfigDTO } from "@/lib/productos-service";
 
 interface HeaderProps {
   sections?: PageSectionItem[];
+  moduleConfigs?: SiteModuleConfigDTO[];
 }
 
 interface PdfSearchHit {
@@ -44,7 +46,7 @@ function highlightQuery(text: string, query: string) {
   );
 }
 
-export function Header({ sections }: HeaderProps = {}) {
+export function Header({ sections, moduleConfigs }: HeaderProps = {}) {
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
@@ -96,6 +98,15 @@ export function Header({ sections }: HeaderProps = {}) {
   }, [searchQuery, searchOpen]);
   const pathname = usePathname();
   const resolveHref = (href: string) => (pathname !== "/" && href.startsWith("#") ? `/${href}` : href);
+
+  const isNavModuleVisible = (key: string) => {
+    if (!moduleConfigs || moduleConfigs.length === 0) return true;
+    const found = moduleConfigs.find((m) => m.key === key);
+    if (!found) return true;
+    return found.enabled && found.showInNavbar;
+  };
+  const showRevistaNav = isNavModuleVisible("revista");
+  const showRutaVivaNav = isNavModuleVisible("ruta-viva");
 
   const activeSections = (sections && sections.length > 0 ? sections : DEFAULT_PAGE_SECTIONS).filter(
     (s) => s.enabled
@@ -159,28 +170,32 @@ export function Header({ sections }: HeaderProps = {}) {
                 </a>
               );
             })}
-            <Link
-              href="/revista"
-              className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
-                pathname === "/revista"
-                  ? "bg-[#1B2533] text-white border-[#1B2533] dark:bg-[#c79d47] dark:text-[#101620] dark:border-[#c79d47]"
-                  : "bg-amber-50/90 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300/60 dark:border-amber-700/50 hover:bg-amber-100 dark:hover:bg-amber-900/50"
-              }`}
-            >
-              <BookOpen size={13} />
-              <span>Revista 50/50</span>
-            </Link>
-            <Link
-              href="/ruta-viva"
-              className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
-                pathname === "/ruta-viva"
-                  ? "bg-[#3ac167] text-white border-[#3ac167]"
-                  : "bg-emerald-50/90 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 border-emerald-300/60 dark:border-emerald-700/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
-              }`}
-            >
-              <Compass size={13} />
-              <span>Ruta Viva</span>
-            </Link>
+            {showRevistaNav && (
+              <Link
+                href="/revista"
+                className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
+                  pathname.startsWith("/revista")
+                    ? "bg-[#1B2533] text-white border-[#1B2533] dark:bg-[#c79d47] dark:text-[#101620] dark:border-[#c79d47]"
+                    : "bg-amber-50/90 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 border-amber-300/60 dark:border-amber-700/50 hover:bg-amber-100 dark:hover:bg-amber-900/50"
+                }`}
+              >
+                <BookOpen size={13} />
+                <span>Revista 50/50</span>
+              </Link>
+            )}
+            {showRutaVivaNav && (
+              <Link
+                href="/ruta-viva"
+                className={`inline-flex items-center gap-1.5 rounded-xl px-2.5 py-1.5 transition-colors border ${
+                  pathname.startsWith("/ruta-viva")
+                    ? "bg-[#3ac167] text-white border-[#3ac167]"
+                    : "bg-emerald-50/90 dark:bg-emerald-950/40 text-emerald-900 dark:text-emerald-300 border-emerald-300/60 dark:border-emerald-700/50 hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
+                }`}
+              >
+                <Compass size={13} />
+                <span>Ruta Viva</span>
+              </Link>
+            )}
           </nav>
 
           {/* Action Buttons: Global Search, Theme Toggle & Mobile Toggle */}
@@ -245,20 +260,24 @@ export function Header({ sections }: HeaderProps = {}) {
               </a>
             ))}
             <div className="pt-2 space-y-2 border-t border-slate-100">
-              <Link
-                href="/revista"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#1B2533] hover:bg-slate-800 text-white py-3 font-extrabold text-sm shadow-md"
-              >
-                <BookOpen size={16} className="text-[#fcc74f]" /> Revista Digital 50/50
-              </Link>
-              <Link
-                href="/ruta-viva"
-                onClick={() => setOpen(false)}
-                className="flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white py-3 font-extrabold text-sm shadow-md"
-              >
-                <Compass size={16} className="text-[#fcc74f]" /> Ruta Viva 50/50
-              </Link>
+              {showRevistaNav && (
+                <Link
+                  href="/revista"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full rounded-xl bg-[#1B2533] hover:bg-slate-800 text-white py-3 font-extrabold text-sm shadow-md"
+                >
+                  <BookOpen size={16} className="text-[#fcc74f]" /> Revista Digital 50/50
+                </Link>
+              )}
+              {showRutaVivaNav && (
+                <Link
+                  href="/ruta-viva"
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-center gap-2 w-full rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white py-3 font-extrabold text-sm shadow-md"
+                >
+                  <Compass size={16} className="text-[#fcc74f]" /> Ruta Viva 50/50
+                </Link>
+              )}
               <a
                 href={resolveHref("#descargas")}
                 onClick={() => setOpen(false)}

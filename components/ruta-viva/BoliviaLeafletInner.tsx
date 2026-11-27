@@ -15,6 +15,7 @@ interface DeptFeatureProps {
 type BoliviaFeatureCollection = FeatureCollection<Geometry, DeptFeatureProps>;
 
 interface BoliviaLeafletInnerProps {
+  pins?: TerritorialPin[];
   activeDeptId: string;
   selectedPinId: string | null;
   onSelectPin: (pin: TerritorialPin) => void;
@@ -31,6 +32,7 @@ function getPinHex(accent: TerritorialPin["accent"]): string {
 }
 
 export default function BoliviaLeafletInner({
+  pins = TERRITORIAL_PINS,
   activeDeptId,
   selectedPinId,
   onSelectPin,
@@ -123,8 +125,8 @@ export default function BoliviaLeafletInner({
       })
       .catch(() => {});
 
-    // Agregar los 6 pines geolocalizados con pulso animado
-    TERRITORIAL_PINS.forEach((pin) => {
+    // Agregar los pines geolocalizados con pulso animado
+    pins.forEach((pin) => {
       const color = getPinHex(pin.accent);
       const isSelected = pin.id === selectedPinId;
 
@@ -176,7 +178,7 @@ export default function BoliviaLeafletInner({
       });
     }
 
-    TERRITORIAL_PINS.forEach((pin) => {
+    pins.forEach((pin) => {
       const marker = markersRef.current[pin.id];
       if (!marker) return;
       const color = getPinHex(pin.accent);

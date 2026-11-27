@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,7 +14,8 @@ import {
   CheckCircle2,
   Building2,
 } from "lucide-react";
-import { DepartmentData } from "@/lib/agenda-data";
+import { DepartmentData, DocumentItem } from "@/lib/agenda-data";
+import { RutaVivaSedeDTO } from "@/lib/productos-service";
 import { TERRITORIAL_PINS, TerritorialPin } from "@/lib/ruta-viva-data";
 
 const BoliviaLeafletInner = dynamic(() => import("./BoliviaLeafletInner"), {
@@ -28,11 +29,44 @@ const BoliviaLeafletInner = dynamic(() => import("./BoliviaLeafletInner"), {
 
 interface BoliviaTerritorialMapProps {
   departments: DepartmentData[];
+  sedes?: RutaVivaSedeDTO[];
+  documents?: DocumentItem[];
 }
 
-export function BoliviaTerritorialMap({ departments }: BoliviaTerritorialMapProps) {
-  const [selectedPin, setSelectedPin] = useState<TerritorialPin | null>(TERRITORIAL_PINS[0]);
-  const [selectedDeptId, setSelectedDeptId] = useState<string>("CH");
+export function BoliviaTerritorialMap({
+  departments,
+  sedes,
+  documents = [],
+}: BoliviaTerritorialMapProps) {
+  const pins: TerritorialPin[] = useMemo(() => {
+    if (!sedes || sedes.length === 0) return TERRITORIAL_PINS;
+    return sedes.map((s) => {
+      const doc = documents.find((d) => d.id === s.linkedDocumentId);
+      const dept = departments.find((d) => d.id === s.department);
+      const fallback = TERRITORIAL_PINS.find((p) => p.id === s.slug);
+      return {
+        id: s.slug,
+        city: s.city,
+        departmentId: s.department,
+        departmentName: dept?.name || fallback?.departmentName || s.department,
+        lon: s.lng,
+        lat: s.lat,
+        date: s.dateLabel,
+        title: s.title,
+        actor: s.actors,
+        summary: s.summary,
+        keyFigures: s.keyFigures,
+        pdfUrl: doc?.fileUrl || fallback?.pdfUrl || "#descargas",
+        pdfLabel: doc ? `Documento Oficial (PDF)` : fallback?.pdfLabel || "Ver Documento (PDF)",
+        revistaHref: s.linkedChapterSlug ? `/revista#${s.linkedChapterSlug}` : "/revista",
+        revistaLabel: fallback?.revistaLabel || "Ver en Revista 50/50",
+        accent: s.accent,
+      };
+    });
+  }, [sedes, documents, departments]);
+
+  const [selectedPin, setSelectedPin] = useState<TerritorialPin | null>(pins[0] || null);
+  const [selectedDeptId, setSelectedDeptId] = useState<string>(pins[0]?.departmentId || "CH");
 
   const activeDept =
     departments.find((d) => d.id === (selectedPin?.departmentId || selectedDeptId)) ||
@@ -45,7 +79,7 @@ export function BoliviaTerritorialMap({ departments }: BoliviaTerritorialMapProp
 
   const handleSelectDept = (deptId: string) => {
     setSelectedDeptId(deptId);
-    const matchingPin = TERRITORIAL_PINS.find((p) => p.departmentId === deptId);
+    const matchingPin = pins.find((p) => p.departmentId === deptId);
     setSelectedPin(matchingPin || null);
   };
 
@@ -57,9 +91,9 @@ export function BoliviaTerritorialMap({ departments }: BoliviaTerritorialMapProp
 
   return (
     <div className="space-y-6">
-      {/* Selector rápido de las 6 sedes */}
+      {/* Selector rápido de las sedes */}
       <div className="flex flex-wrap gap-2">
-        {TERRITORIAL_PINS.map((pin) => {
+        {pins.map((pin) => {
           const isSelected = selectedPin?.id === pin.id;
           return (
             <button
@@ -100,6 +134,7 @@ export function BoliviaTerritorialMap({ departments }: BoliviaTerritorialMapProp
 
           <div className="w-full h-[450px]">
             <BoliviaLeafletInner
+              pins={pins}
               activeDeptId={activeDept?.id || selectedDeptId}
               selectedPinId={selectedPin?.id || null}
               onSelectPin={handleSelectPin}

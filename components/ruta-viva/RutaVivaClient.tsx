@@ -12,6 +12,11 @@ import {
 } from "lucide-react";
 import { DepartmentData, Milestone, MediaItem, DocumentItem } from "@/lib/agenda-data";
 import { BoardCommitmentItem } from "@/lib/board-commitments-data";
+import {
+  RutaVivaSedeDTO,
+  RutaVivaCardDTO,
+  SiteModuleConfigDTO,
+} from "@/lib/productos-service";
 import { BoliviaTerritorialMap } from "./BoliviaTerritorialMap";
 import { AudiovisualTimeline } from "./AudiovisualTimeline";
 import { SocialKitStudio } from "./SocialKitStudio";
@@ -23,6 +28,10 @@ interface RutaVivaClientProps {
   mediaItems: MediaItem[];
   documents: DocumentItem[];
   boardCommitments: BoardCommitmentItem[];
+  sedes?: RutaVivaSedeDTO[];
+  cards?: RutaVivaCardDTO[];
+  moduleConfigs?: SiteModuleConfigDTO[];
+  isPreviewMode?: boolean;
 }
 
 export function RutaVivaClient({
@@ -31,9 +40,31 @@ export function RutaVivaClient({
   mediaItems,
   documents,
   boardCommitments,
+  sedes,
+  cards,
+  moduleConfigs,
+  isPreviewMode = false,
 }: RutaVivaClientProps) {
+  const isSubmoduleEnabled = (key: string) => {
+    if (!moduleConfigs || moduleConfigs.length === 0) return true;
+    const found = moduleConfigs.find((m) => m.key === key);
+    return found ? found.enabled : true;
+  };
+
+  const showMapa = isSubmoduleEnabled("ruta-viva-mapa");
+  const showTimeline = isSubmoduleEnabled("ruta-viva-timeline");
+  const showKit = isSubmoduleEnabled("ruta-viva-kit");
+  const showSemaforizacion = isSubmoduleEnabled("semaforizacion-ejecutiva");
+  const showRevistaBtn = isSubmoduleEnabled("revista");
+
   return (
     <div className="min-h-screen bg-[#FAF8F3] dark:bg-[#101620] text-[#1B2533] dark:text-slate-100 transition-colors duration-300">
+      {isPreviewMode && (
+        <div className="bg-amber-500 text-[#101620] px-4 py-2 text-center text-xs font-black tracking-wide">
+          Modo Vista Previa (oculto al público) — Solo visible para administradores con sesión activa
+        </div>
+      )}
+
       {/* Sub-barra sticky de navegación por módulos */}
       <div className="sticky top-16 z-40 border-b border-amber-900/10 dark:border-slate-800 bg-[#FAF8F3]/90 dark:bg-[#101620]/90 backdrop-blur-md">
         <div className="container-page flex items-center justify-between gap-4 py-2.5 overflow-x-auto custom-scrollbar">
@@ -45,32 +76,40 @@ export function RutaVivaClient({
           </Link>
 
           <nav className="flex items-center gap-2">
-            <a
-              href="#mapa-territorial"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
-            >
-              <MapPin size={13} className="text-[#dd3146]" /> 1. Mapa Territorial
-            </a>
-            <a
-              href="#linea-audiovisual"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
-            >
-              <Film size={13} className="text-[#3ac167]" /> 2. Línea Audiovisual
-            </a>
-            <a
-              href="#kit-redes"
-              className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
-            >
-              <Share2 size={13} className="text-[#c79d47]" /> 3. Kit Redes y Prensa
-            </a>
+            {showMapa && (
+              <a
+                href="#mapa-territorial"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
+              >
+                <MapPin size={13} className="text-[#dd3146]" /> 1. Mapa Territorial
+              </a>
+            )}
+            {showTimeline && (
+              <a
+                href="#linea-audiovisual"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
+              >
+                <Film size={13} className="text-[#3ac167]" /> 2. Línea Audiovisual
+              </a>
+            )}
+            {showKit && (
+              <a
+                href="#kit-redes"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-1.5 text-xs font-extrabold text-slate-700 dark:text-slate-300 hover:bg-amber-100/60 dark:hover:bg-slate-800"
+              >
+                <Share2 size={13} className="text-[#c79d47]" /> 3. Kit Redes y Prensa
+              </a>
+            )}
           </nav>
 
-          <Link
-            href="/revista"
-            className="inline-flex items-center gap-1.5 rounded-xl bg-[#1B2533] hover:bg-slate-800 dark:bg-[#c79d47] dark:text-[#101620] px-3 py-1.5 text-xs font-black text-white shrink-0 transition"
-          >
-            <BookOpen size={13} /> Revista 50/50
-          </Link>
+          {showRevistaBtn && (
+            <Link
+              href="/revista"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-[#1B2533] hover:bg-slate-800 dark:bg-[#c79d47] dark:text-[#101620] px-3 py-1.5 text-xs font-black text-white shrink-0 transition"
+            >
+              <BookOpen size={13} /> Revista 50/50
+            </Link>
+          )}
         </div>
       </div>
 
@@ -91,7 +130,7 @@ export function RutaVivaClient({
               <span className="green-gradient-text">Ruta Viva 50/50</span>
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-700 dark:text-slate-300 font-medium leading-relaxed">
-              Recorre las 6 sedes territoriales de los acuerdos, explora los {milestones.length} hitos
+              Recorre las sedes territoriales de los acuerdos, explora los {milestones.length} hitos
               audiovisuales sincronizados y descarga placas en alta resolución (9:16 y 1:1) listas para
               TikTok, Reels, WhatsApp y prensa.
             </p>
@@ -106,68 +145,81 @@ export function RutaVivaClient({
         <div className="w-1/3 bg-[#3ac167]" />
       </div>
 
-      {/* 3 Módulos Integrados */}
+      {/* Módulos Integrados (Controlados desde /admin) */}
       <div className="container-page py-12 space-y-20">
-        <section id="mapa-territorial" className="scroll-mt-32 space-y-6">
-          <div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#dd3146]">
-              Módulo 01 · Mapa Interactivo Territorial
-            </span>
-            <h2 className="mt-1 text-3xl font-black">
-              Las 6 sedes clave y los 9 departamentos del pacto
-            </h2>
-          </div>
-          <BoliviaTerritorialMap departments={departments} />
-        </section>
+        {showMapa && (
+          <section id="mapa-territorial" className="scroll-mt-32 space-y-6">
+            <div>
+              <span className="text-xs font-black uppercase tracking-widest text-[#dd3146]">
+                Módulo 01 · Mapa Interactivo Territorial
+              </span>
+              <h2 className="mt-1 text-3xl font-black">
+                Las sedes clave y los 9 departamentos del pacto
+              </h2>
+            </div>
+            <BoliviaTerritorialMap
+              departments={departments}
+              sedes={sedes}
+              documents={documents}
+            />
+          </section>
+        )}
 
-        <section
-          id="linea-audiovisual"
-          className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
-        >
-          <div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#3ac167]">
-              Módulo 02 · Línea de Tiempo Audiovisual Sincronizada
-            </span>
-            <h2 className="mt-1 text-3xl font-black">
-              {milestones.length} hitos conectados con video, fotografía y PDF oficial
-            </h2>
-          </div>
-          <AudiovisualTimeline
-            milestones={milestones}
-            mediaItems={mediaItems}
-            documents={documents}
-          />
-        </section>
+        {showTimeline && (
+          <section
+            id="linea-audiovisual"
+            className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
+          >
+            <div>
+              <span className="text-xs font-black uppercase tracking-widest text-[#3ac167]">
+                Módulo 02 · Línea de Tiempo Audiovisual Sincronizada
+              </span>
+              <h2 className="mt-1 text-3xl font-black">
+                {milestones.length} hitos conectados con video, fotografía y PDF oficial
+              </h2>
+            </div>
+            <AudiovisualTimeline
+              milestones={milestones}
+              mediaItems={mediaItems}
+              documents={documents}
+            />
+          </section>
+        )}
 
-        <section
-          id="semaforizacion-trazabilidad"
-          className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
-        >
-          <ExecutiveTraceability
-            commitments={boardCommitments}
-            documents={documents}
-            mode="standalone"
-          />
-        </section>
+        {showSemaforizacion && (
+          <section
+            id="semaforizacion-trazabilidad"
+            className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
+          >
+            <ExecutiveTraceability
+              commitments={boardCommitments}
+              documents={documents}
+              mode="standalone"
+            />
+          </section>
+        )}
 
-        <section
-          id="kit-redes"
-          className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
-        >
-          <div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#c79d47]">
-              Módulo 03 · Estudio / Kit de Cápsulas para Redes y Prensa
-            </span>
-            <h2 className="mt-1 text-3xl font-black">
-              Placas dinámicas listas para TikTok, Instagram, WhatsApp y prensa
-            </h2>
-          </div>
-          <SocialKitStudio
-            commitments={boardCommitments}
-            milestones={milestones}
-            documents={documents}
-          />
-        </section>
+        {showKit && (
+          <section
+            id="kit-redes"
+            className="scroll-mt-32 space-y-6 pt-10 border-t border-amber-900/10 dark:border-slate-800"
+          >
+            <div>
+              <span className="text-xs font-black uppercase tracking-widest text-[#c79d47]">
+                Módulo 03 · Estudio / Kit de Cápsulas para Redes y Prensa
+              </span>
+              <h2 className="mt-1 text-3xl font-black">
+                Placas dinámicas listas para TikTok, Instagram, WhatsApp y prensa
+              </h2>
+            </div>
+            <SocialKitStudio
+              commitments={boardCommitments}
+              milestones={milestones}
+              documents={documents}
+              cards={cards}
+            />
+          </section>
+        )}
       </div>
     </div>
   );

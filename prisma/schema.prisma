@@ -41,6 +41,98 @@ model Pillar {
   updatedAt   DateTime @updatedAt
 }
 
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 // 3. Hitos de la Agenda (Timeline)
 model Milestone {
   id           Int      @id @default(autoincrement())
@@ -128,6 +220,191 @@ model MediaItem {
   updatedAt   DateTime @updatedAt
 }
 
+
+
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 // 7. Administradores del Sistema / Seguridad CMS
 model AdminUser {
   id               String    @id @default(cuid())
@@ -212,6 +489,98 @@ model MonitorMetric {
   updatedAt   DateTime @updatedAt
 }
 
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 // 13. Compromisos por Nivel (LevelCommitments.tsx)
 model LevelCommitment {
   id           String   @id @default(cuid())
@@ -242,6 +611,98 @@ model CommitmentLevel {
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 // 15. Orden y Visibilidad de Secciones del Portal (CMS)
@@ -280,5 +741,97 @@ model BoardCommitment {
   active      Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// 18. Control de Visibilidad Global de Productos y Submódulos
+model SiteModuleConfig {
+  key          String   @id // "revista" | "ruta-viva" | "ruta-viva-mapa" | "ruta-viva-timeline" | "ruta-viva-kit" | "semaforizacion-ejecutiva"
+  label        String
+  enabled      Boolean  @default(true)
+  showInNavbar Boolean  @default(true)
+  updatedAt    DateTime @updatedAt
+}
+
+// 19. Revista Digital 50/50 — Ediciones
+model RevistaEdition {
+  id            String           @id @default(cuid())
+  slug          String           @unique
+  editionNumber Int
+  title         String
+  subtitle      String
+  periodLabel   String
+  coverImage    String?
+  isVisible     Boolean          @default(true)
+  isFeatured    Boolean          @default(false)
+  publishedAt   String?
+  order         Int              @default(0)
+  chapters      RevistaChapter[]
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+}
+
+// 20. Revista Digital 50/50 — Capítulos por Edición
+model RevistaChapter {
+  id               String         @id @default(cuid())
+  editionId        String
+  edition          RevistaEdition @relation(fields: [editionId], references: [id], onDelete: Cascade)
+  slug             String
+  order            Int            @default(0)
+  kicker           String
+  title            String
+  summary          String
+  content          String
+  quoteText        String?
+  quoteSource      String?
+  linkedActor      String?
+  linkedDocumentId String?
+  linkedMediaId    String?
+  isVisible        Boolean        @default(true)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@unique([editionId, slug])
+  @@index([editionId])
+}
+
+// 21. Ruta Viva 50/50 — Sedes Territoriales
+model RutaVivaSede {
+  id                String   @id @default(cuid())
+  slug              String   @unique
+  city              String
+  department        String
+  lat               Float
+  lng               Float
+  title             String
+  dateLabel         String
+  actors            String
+  summary           String
+  keyFiguresJson    String   // JSON array string
+  linkedDocumentId  String?
+  linkedChapterSlug String?
+  accent            String   @default("emerald") // "emerald" | "gold" | "red"
+  order             Int      @default(0)
+  isVisible         Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+// 22. Ruta Viva 50/50 — Tarjetas del Kit de Redes y Prensa
+model RutaVivaCard {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  subtitle      String
+  heroStat      String
+  heroStatLabel String
+  bulletsJson   String   // JSON array string
+  footerNote    String
+  copyText      String
+  templateType  String   @default("emerald") // "emerald" | "gold" | "red"
+  order         Int      @default(0)
+  isVisible     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
