@@ -11,6 +11,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Agenda 50/50",
   description: "Portal oficial de socialización, transparencia y monitoreo de la Agenda 50/50.",
+  icons: {
+    icon: "/assets/iso.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
