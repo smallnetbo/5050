@@ -6,6 +6,7 @@ import { verifyAdminSession } from "@/lib/auth";
 import { saveUploadedFile } from "@/lib/uploads";
 import { syncDatabaseToAgendaData } from "@/lib/sync-seeds";
 import { enqueueDocumentIndex } from "@/lib/pdf-indexer";
+import { ensureDocumentOrderColumn } from "@/lib/document-order";
 
 export async function upsertDocumentAction(formData: FormData) {
   const isAuthenticated = await verifyAdminSession();
@@ -54,6 +55,12 @@ export async function upsertDocumentAction(formData: FormData) {
       });
       savedId = updated.id;
     } else {
+      await ensureDocumentOrderColumn();
+      const minRows = await prisma.$queryRawUnsafe<Array<{ minOrder: number | bigint | null }>>(
+        `SELECT MIN("order") AS "minOrder" FROM "DocumentItem";`
+      );
+      const nextTopOrder = Number(minRows[0]?.minOrder ?? 0) - 1;
+
       const created = await prisma.documentItem.create({
         data: {
           title,
@@ -67,6 +74,11 @@ export async function upsertDocumentAction(formData: FormData) {
           indexStatus: fileUrl ? "INDEXING" : "PENDING",
         },
       });
+      await prisma.$executeRawUnsafe(
+        `UPDATE "DocumentItem" SET "order" = ? WHERE "id" = ?;`,
+        nextTopOrder,
+        created.id
+      );
       savedId = created.id;
     }
 
@@ -127,6 +139,42 @@ export async function deleteDocumentAction(id: string) {
   } catch (error: any) {
     console.error("Error al eliminar documento:", error);
     return { success: false, error: error?.message || "Error al eliminar documento." };
+  }
+}
+
+export async function reorderDocumentsAction(orderedIds: string[]) {
+  const isAuthenticated = await verifyAdminSession();
+  if (!isAuthenticated) return { success: false, error: "No autorizado." };
+
+  try {
+    if (!Array.isArray(orderedIds) || orderedIds.length === 0) {
+      return { success: false, error: "Lista de documentos inválida." };
+    }
+
+    await ensureDocumentOrderColumn();
+
+    await prisma.$transaction(
+      orderedIds.map((id, index) =>
+        prisma.$executeRawUnsafe(
+          `UPDATE "DocumentItem" SET "order" = ? WHERE "id" = ?;`,
+          index,
+          id
+        )
+      )
+    );
+
+    try {
+      await syncDatabaseToAgendaData();
+    } catch (syncErr) {
+      console.warn("Advertencia al sincronizar agenda-data.ts:", syncErr);
+    }
+
+    revalidatePath("/");
+    revalidatePath("/admin/documents");
+    return { success: true, message: "Orden de documentos actualizado con éxito." };
+  } catch (error: any) {
+    console.error("Error al reordenar documentos:", error);
+    return { success: false, error: error?.message || "Error al actualizar el orden de los documentos." };
   }
 }
 

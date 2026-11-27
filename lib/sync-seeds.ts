@@ -1,6 +1,7 @@
 import { writeFile, readFile } from "fs/promises";
 import { join } from "path";
 import { prisma } from "@/lib/db";
+import { getDocumentOrderMap, sortDocumentsByOrder } from "@/lib/document-order";
 
 export async function syncDatabaseToAgendaData() {
   try {
@@ -47,7 +48,10 @@ export async function syncDatabaseToAgendaData() {
       order: m.order || 0,
     }));
 
-    const formattedDocs = dbDocs.map((d) => ({
+    const docOrderMap = await getDocumentOrderMap();
+    const orderedDocs = sortDocumentsByOrder(dbDocs, docOrderMap);
+
+    const formattedDocs = orderedDocs.map((d) => ({
       id: d.id,
       title: d.title,
       category: d.category,
@@ -58,6 +62,7 @@ export async function syncDatabaseToAgendaData() {
       description: d.description,
       downloadsCount: d.downloadsCount,
       featured: d.featured,
+      order: docOrderMap.get(d.id) ?? 0,
     }));
 
     const formattedMilestones = dbMilestones.map((m) => ({

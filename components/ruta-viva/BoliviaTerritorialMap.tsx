@@ -99,11 +99,10 @@ export function BoliviaTerritorialMap({
             <button
               key={pin.id}
               onClick={() => handleSelectPin(pin)}
-              className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-extrabold transition cursor-pointer ${
-                isSelected
-                  ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620] shadow-md"
-                  : "bg-white dark:bg-[#17202C] text-slate-700 dark:text-slate-300 border border-amber-900/10 dark:border-slate-800 hover:bg-amber-50 dark:hover:bg-slate-800"
-              }`}
+              className={`inline-flex items-center gap-1.5 rounded-xl px-3.5 py-2 text-xs font-extrabold transition cursor-pointer ${isSelected
+                ? "bg-[#1B2533] text-white dark:bg-[#c79d47] dark:text-[#101620] shadow-md"
+                : "bg-white dark:bg-[#17202C] text-slate-700 dark:text-slate-300 border border-amber-900/10 dark:border-slate-800 hover:bg-amber-50 dark:hover:bg-slate-800"
+                }`}
             >
               <MapPin
                 size={13}

@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/db";
+import { getDocumentOrderMap, sortDocumentsByOrder } from "@/lib/document-order";
 import {
   pillars as defaultPillars,
   milestones as defaultMilestones,
@@ -131,8 +132,11 @@ export async function getLandingData() {
         }))
       : defaultDepartments;
 
-    const mappedDocuments: DocumentItem[] = dbDocuments.length > 0
-      ? dbDocuments.map((doc: any) => ({
+    const docOrderMap = await getDocumentOrderMap();
+    const sortedDbDocuments = sortDocumentsByOrder(dbDocuments, docOrderMap);
+
+    const mappedDocuments: DocumentItem[] = sortedDbDocuments.length > 0
+      ? sortedDbDocuments.map((doc: any) => ({
           id: doc.id,
           title: doc.title,
           category: doc.category as any,
@@ -143,6 +147,7 @@ export async function getLandingData() {
           description: doc.description,
           downloadsCount: doc.downloadsCount,
           featured: doc.featured,
+          order: docOrderMap.get(doc.id) ?? 0,
           indexStatus: doc.indexStatus || "PENDING",
           pageCount: doc.pageCount || 0,
           indexError: doc.indexError || null,

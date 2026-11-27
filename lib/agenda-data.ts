@@ -75,6 +75,7 @@ export interface DocumentItem {
   description: string;
   downloadsCount: number;
   featured?: boolean;
+  order?: number;
   indexStatus?: string;
   pageCount?: number;
   indexError?: string | null;
@@ -339,7 +340,7 @@ export const milestones: Milestone[] = [
     "date": "Enero - Julio 2026",
     "status": "Cumplido",
     "detail": "Consolidación de la base de datos demográficos y financieros departamentales compartidos entre el MEFP y los 9 GAD.",
-    "image": "/uploads/timeline/rodrigo-paz-en-conferencia-de-prensa-en-santa-cruz-1791316426945.webp",
+    "image": "/uploads/timeline/rodrigo-paz-en-conferencia-de-prensa-en-santa-cruz-1791316426945-1795449906255.webp",
     "order": 1,
     "participants": [
       "Ministerio de Economía",
@@ -380,17 +381,11 @@ export const milestones: Milestone[] = [
   },
   {
     "id": 4,
-    "title": "Redacción de Ley Especial de Coparticipación",
+    "title": "Redacción de Ley Especial de Coparticipación y Distribución de Recursos Fiscales",
     "date": "Gestión Legislativa 2026",
     "status": "En proceso",
     "detail": "Diseño de las fórmulas de reparto del pacto 50/50 y criterios de ecualización para la ley que regirá desde 2027.",
     "order": 4,
-    "documents": [
-      {
-        "name": "Matriz_Criterios_Distribucion.pdf",
-        "size": "2.1 MB"
-      }
-    ],
     "participants": [
       "Comisión de Hacienda de la ALP",
       "Representantes GAD"
@@ -402,7 +397,7 @@ export const milestones: Milestone[] = [
     "date": "30 de Julio de 2026",
     "status": "Cumplido",
     "detail": "La Ley está enfocada en otorgarles mayor flexibilidad financiera e inyección de recursos a las Entidades Territoriales Autónomas.",
-    "image": "/uploads/timeline/paz--promulg--ley-del-presupuesto-general-del-estado--pge--reformulado-2026-1791813442976.jpeg",
+    "image": "/uploads/timeline/paz--promulg--ley-del-presupuesto-general-del-estado--pge--reformulado-2026-1791813442976-1795450076256.jpeg",
     "order": 5,
     "documents": [
       {
@@ -418,7 +413,7 @@ export const milestones: Milestone[] = [
     "date": "27 de agosto de 2026",
     "status": "Cumplido",
     "detail": "La Paz, 27 de agosto de 2026 (ABI). – Acompañado de ministros y viceministros, el presidente del Estado, Rodrigo Paz, y la Federación de Asociaciones de Municipios (FAM) de Bolivia iniciaron este jueves la reunión en la ciudad de La Paz para tratar una agenda de seis puntos, en la que se prioriza la propuesta gubernamental del 50/50.\n\n“Me siento bendecido de estar con ustedes para poder realmente transformar este Estado. Debe ser la primera vez en la historia de Bolivia que un presidente quiere acabar con el Estado centralista y eso creo que nos suma en el mismo esfuerzo”, expresó el mandatario al inaugurar el encuentro.\n\nEl jefe de Estado exhortó a los alcaldes a acabar con el Estado centralista de “forma ordenada y consistente para no tener retornos, ni coletazos”, sino que se vaya conformando y consolidando el proceso.\n\n“Yo agradecido por este encuentro, no solo como uno más de ustedes en su momento, he sido concejal, he sido alcalde y me siento parte de la familia con la cual tendremos que llevar adelante las grandes transformaciones”, remarcó.\n\nResaltó que en la reunión uno de los temas a tratar es el 50/50, una propuesta del Gobierno nacional que “no es el final, es el principio de lo que realmente se quiere construir para el futuro de la patria”.\n\nEn tanto, el presidente de la FAM-Bolivia, Johnny Torres, indicó que con los representantes ediles analizaron el miércoles una agenda a tratar en el encuentro de esta jornada con las autoridades del Gobierno nacional.\n\n“Hemos estado ayer (miércoles) reunidos todo el día analizando los temas de la agenda. Nosotros tenemos una agenda de seis puntos que la hemos propuesto al Gobierno, primero el 50/50 el cual nosotros esperamos”, puntualizó.\n\nSubrayó que en esta agenda se pide que el 50/50 se consolide en lo posible en el Presupuesto 2027.\n\n“Si se viabiliza el 50/50 como estamos proponiendo, el Gobierno podría disponer del IDH (Impuesto Directo a los Hidrocarburos) para recursos con gobernaciones y otros y por lo tanto los municipios podríamos tener coparticipación, recursos propios y probablemente recursos de crédito”, comentó.\n\nEn la reunión también están presentes los ministros de la Presidencia, Fernando Aramayo; y de Economía y Finanzas Públicas, Christian Morales, además de viceministros de diferentes carteras de Estado.",
-    "image": "/uploads/timeline/presidente-paz-resalta-reuni-n-con-alcaldes-1791317367709.jpg",
+    "image": "/uploads/timeline/presidente-paz-resalta-reuni-n-con-alcaldes-1791317367709-1795450383087.jpg",
     "order": 6,
     "participants": [
       "FAM-Bolivia"
@@ -430,7 +425,7 @@ export const milestones: Milestone[] = [
     "date": "31 de Agosto de 2026",
     "status": "Cumplido",
     "detail": "El DS establece mecanismos de apoyo para las ETA con desequilibrios financieros o falta de liquidez.",
-    "image": "/uploads/timeline/gobierno-cre--el-programa-de-readecuaci-n-financiera-territorial--prft--mediante-el-decreto-supremo-5686-1791815328330.webp",
+    "image": "/uploads/timeline/gobierno-cre--el-programa-de-readecuaci-n-financiera-territorial--prft--mediante-el-decreto-supremo-5686-1791815328330-1795450478664.webp",
     "order": 7,
     "documents": [
       {
@@ -441,13 +436,27 @@ export const milestones: Milestone[] = [
     ]
   },
   {
+    "id": 15,
+    "title": "Gobierno y asociaciones municipales instalan mesas técnicas para avanzar propuestas del 50/50",
+    "date": "9 de septiembre de 2026",
+    "status": "Cumplido",
+    "detail": "El Gobierno nacional y la Federación de Asociaciones Municipales de Bolivia (FAM-Bolivia) instalaron mesas técnicas en la Casa Grande del Pueblo para avanzar en las propuestas de la Agenda 50/50\n\nLa reunión contó con la participación del viceministro de Autonomías y Tierras, Adrián Oliva; el director del Servicio Estatal de Autonomías, Alfonso “Pica” Lema; el director ejecutivo de la FAM-Bolivia, Erlan Cordero Vera; entre otros representantes.\n\n“Inician las mesas técnicas con el sistema asociativo municipal para abordar las temáticas previamente acordadas en los ejes autonómico, económico e hidrocarburífero”, indicó el viceministro Oliva a través de sus redes sociales.\n\nRemarcó que este es un espacio de coordinación y trabajo conjunto orientado a la construcción de propuestas.\n\nDurante el encuentro, se expusieron las propuestas de la Agenda 50/50 y se instalaron las mesas técnicas para el análisis y la concertación de los planteamientos municipales. La segunda jornada continuará este jueves, con el objetivo de avanzar hacia conclusiones concretas, según el reporte de la FAM-Bolivia.\n\nLa representación de los municipios busca consolidar una base sólida y consensuada del sistema asociativo municipal que permita presentar una propuesta integral orientada a fortalecer la autonomía municipal, mejorar las condiciones de gestión y responder a las necesidades de los municipios de Bolivia.",
+    "image": "/uploads/timeline/gobierno-y-asociaciones-municipales-instalan-mesas-t-cnicas-para-avanzar-propuestas-del-5050-1795462414663.jpg",
+    "order": 8,
+    "participants": [
+      "FAM",
+      "Viceministerio de Autonomías",
+      "SEA"
+    ]
+  },
+  {
     "id": 8,
     "title": "Reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras",
     "date": "12 de Septiembre",
     "status": "Cumplido",
     "detail": "Avanzamos en la co-construcción de la Agenda 50/50.\nDesde el Servicio Estatal de Autonomías, acompañamos la reunión técnica convocada por la Conaioc Bolivia  junto al Viceministerio de Autonomías y Tierras - Bolivia para estructurar la hoja de ruta de la Agenda 50/50. \nEl encuentro contó con la participación de los equipos técnicos de todos los Gobiernos Autónomos Indígena Originario Campesinos (GAIOC). Durante las mesas de trabajo, se analizaron aspectos críticos desde la tramitación burocrática para el acceso a la autonomía, hasta los cuellos de botella administrativos que limitan una gestión pública territorial plenamente eficiente.\nLa sistematización de estos desafíos técnicos permitirá estructurar soluciones viables dentro de la Agenda 50/50. Valoramos la visión de los GAIOC para transformar estas dificultades administrativas en propuestas concretas para las autonomías",
-    "image": "/uploads/timeline/reuni-n-t-cnica-conaioc---viceministerio-de-autonom-as-y-tierras-1791317777001.jpg",
-    "order": 8,
+    "image": "/uploads/timeline/reuni-n-t-cnica-conaioc---viceministerio-de-autonom-as-y-tierras-1791317777001-1795450661147.jpg",
+    "order": 9,
     "participants": [
       "CONAIOC",
       "Viceministerio de Autonomías",
@@ -460,15 +469,8 @@ export const milestones: Milestone[] = [
     "date": "17 de septiembre de 2026",
     "status": "Cumplido",
     "detail": "La Ley introduce reformas clave orientadas a destrabar, ordenar y optimizar la gestión de proyectos concurrentes entre el NCE y las ETA.",
-    "image": "/uploads/timeline/paz-promulga-ley-492-1791809330392.jpeg",
-    "order": 9,
-    "documents": [
-      {
-        "name": "L17632099NCPP.pdf",
-        "size": "1.0 MB",
-        "url": "/uploads/timeline/l17632099ncpp-1791820165032.pdf"
-      }
-    ]
+    "image": "/uploads/timeline/paz-promulga-ley-492-1791809330392-1795456427548.jpeg",
+    "order": 10
   },
   {
     "id": 14,
@@ -476,14 +478,10 @@ export const milestones: Milestone[] = [
     "date": "29 de Septiembre de 2026",
     "status": "Cumplido",
     "detail": "El presidente de Bolivia, Rodrigo Paz Pereira, se reunió con alcaldes de ciudades capitales del país y El Alto para abordar la Agenda 50/50, propuesta de reforma fiscal y estructural que busca una mejor redistribución de los recursos, reordenar el Estado y eliminar la burocracia centralista. Tras el encuentro, se firmó el Acuerdo 002/2026 que articula tres ejes estratégicos: libertades y eficiencia autonómica; reformas normativas; y acuerdos fiscales y financiamiento.\n“Agradecer su presencia. Esto es una señal muy importante de que el 50/50 avanza con fuerza, avanza con la fe de que vamos a cambiar y vamos a terminar con el Estado centralista. (...) El 50/50 es una realidad, ha nacido y ahora tiene que empezar a caminar”, señaló el primer mandatario.\nEntre las acciones previstas están la priorización de la sostenibilidad del sistema de salud municipal, la revisión de competencias y cargas financieras, la simplificación de procedimientos administrativos, el fortalecimiento de la transparencia y la gestión de datos, además de la revisión de normativa que restrinja el ejercicio competencial de los gobiernos autónomos municipales.\nEn materia fiscal, el documento contempla evaluar la estructura integral de ingresos municipales, estudiar criterios de transferencia fiscal que consideren factores como la población, capacidad fiscal, esfuerzo recaudatorio, dinamismo económico local y necesidades básicas insatisfechas; y diseñar instrumentos de financiamiento para cada municipio.\nEn el evento estuvieron presentes los alcaldes de Santa Cruz, Manuel Saavedra; de Cochabamba, Manfred Reyes Villa; de El Alto, Eliser Roca; de Sucre, Fátima Tardío; de Oruro, Iván Quispe; de Trinidad, Mauricio Barba; de Potosí, Willians Cervantes; y de Cobija, Diego Suárez.\nPor su parte, el ministro de la Presidencia, Fernando Aramayo Carrasco, apuntó que, a pesar de que el país cuenta con un modelo autonómico, éste fue absorbido por el centralismo y se debe reformular para beneficiar a los ciudadanos.\n“Al final del día, cualquier modelo autonómico, más allá de las normas o de la ruptura del monopolio legislativo para lograr una acción en jurisdicción territorial, debería traducirse en bienestar para la gente”, comentó el ministro.\nPaz destacó las reuniones que sostuvo el Estado boliviano con organismos internacionales como el Banco Mundial, la CAF, el BID y el Fondo Monetario, tras su participación en el 81° periodo de sesiones de la Asamblea General de las Naciones Unidas (ONU). El presidente recordó que se consolidó el compromiso de $us 10.000 millones que beneficiarán a los municipios.\nAdemás, el mandatario informó que el Banco Mundial comprometió especialistas para aportar en la consolidación de la agenda 50/50. “Nos van a ayudar a generar un camino común de lo que debe ser, no solo un acuerdo o un pacto fiscal, sino cómo vamos a reordenar nuestra educación, salud”, sumó.",
-    "image": "/uploads/timeline/firma-del-acuerdo-002-2026-agenda5050-1791832627199.jpg",
-    "order": 10,
-    "documents": [
-      {
-        "name": "ACUERDO N°002-2026 AGENDA 50-50.pdf",
-        "size": "600 KB",
-        "url": "/uploads/timeline/acuerdo-n-002-2026-agenda-50-50-1791832601769.pdf"
-      }
+    "image": "/uploads/timeline/firma-del-acuerdo-n--002-2026-presidente-y-alcaldes-de-capitales-llegan-a-un-acuerdo-de-tres-ejes-para-consolidar-la-agenda-5050-1795462656547.jpeg",
+    "order": 11,
+    "participants": [
+      "https://presidencia.gob.bo/index.php/nota_prensa/presidente-y-alcaldes-de-capitales-llegan-a-un-acuerdo-de-tres-ejes-para-consolidar-la-agenda-50-50/"
     ]
   },
   {
@@ -492,13 +490,13 @@ export const milestones: Milestone[] = [
     "date": "30 de Septiembre de 2026",
     "status": "Cumplido",
     "detail": "La Ley libera a las Gobernaciones del pago de Bs. 228 millones por prediarios y bonos de vacunación, siendo asumida la responsabilidad por el NCE.",
-    "image": "/uploads/timeline/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1791808999039.jpg",
-    "order": 11,
+    "image": "/uploads/timeline/ley-n--1771-de-adecuaci-n-del-financiamiento-de-obligaciones-p-blicas--promulgada-el-30-de-septiembre-de-2026-1795463148457.jpg",
+    "order": 12,
     "documents": [
       {
-        "name": "L17712108NCPP.pdf",
+        "name": "l17712108ncpp-1791818186397.pdf",
         "size": "764 KB",
-        "url": "/uploads/timeline/l17712108ncpp-1791818186397.pdf"
+        "url": "/uploads/timeline/l17712108ncpp-1791818186397-1795463201854.pdf"
       }
     ]
   },
@@ -508,14 +506,42 @@ export const milestones: Milestone[] = [
     "date": "5 de Octubre de 2026",
     "status": "Cumplido",
     "detail": "Descripción: El D.S. libera a las Gobernaciones del pago de títulos de bachiller por Bs. 48 millones, siendo asumida la responsabilidad por el NCE.",
-    "image": "/uploads/timeline/el-presidente-rodrigo-paz-promulg--el-decreto-5738-1791814858326.webp",
-    "order": 12,
+    "image": "/uploads/timeline/el-presidente-rodrigo-paz-promulg--el-decreto-5738-1791814858326-1795463546751.webp",
+    "order": 13,
     "documents": [
       {
-        "name": "DS57382111NCPP.pdf",
+        "name": "ds57382111ncpp-1791820635763.pdf",
         "size": "811 KB",
-        "url": "/uploads/timeline/ds57382111ncpp-1791820635763.pdf"
+        "url": "/uploads/timeline/ds57382111ncpp-1791820635763-1795463519728.pdf"
       }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Autoridades nacionales llegan a Yacuiba para instalar mesa técnica sobre el pacto fiscal 50/50",
+    "date": "6/11/2026",
+    "status": "Cumplido",
+    "detail": "Autoridades del Gobierno nacional llegaron este viernes a Yacuiba para participar en una reunión técnica con autoridades de la Región Autónoma del Gran Chaco y departamentales, con el objetivo de analizar la propuesta de redistribución de recursos económicos en el marco de la Agenda 50/50.\n\nEn el encuentro participa el Viceministerio de Autonomías, la Dirección Nacional de Autonomía y el Gobierno Autónomo Regional del Gran Chaco, con la participación del viceministro de Autonomías, Adrián Oliva; el ejecutivo regional del Chaco, David Rojas; los ejecutivos de desarrollo de Villa Montes y Caraparí; el presidente de la Asamblea Regional, Prudencio Barrientos y el presidente de la Asamblea Legislativa Departamental de Tarija, Álvaro Ojeda.\n\nDurante la primera parte de la reunión, los representantes del Gobierno nacional expusieron las características de la Agenda 50/50 y los avances alcanzados hasta la fecha. Posteriormente, la mesa técnica ingresará al análisis de la propuesta presentada por la Región Autónoma del Gran Chaco, con miras a alcanzar consensos sobre el nuevo esquema de distribución de recursos.\n\nLa reunión representa un espacio de discusión entre el Gobierno nacional y las autoridades regionales y departamentales para abordar la propuesta del pacto fiscal 50/50 y sus implicaciones para las autonomías y la distribución de recursos públicos.",
+    "image": "/uploads/timeline/autoridades-nacionales-llegan-a-yacuiba-para-instalar-mesa-t-cnica-sobre-el-pacto-fiscal-5050-1795463753894.jpeg",
+    "order": 14,
+    "participants": [
+      "GAR",
+      "Viceministerio de Autonomías"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Gobierno y alcaldes de ciudades capitales instalan reunión sobre la Agenda 50-50 con cuatro pilares",
+    "date": "16/11/2026",
+    "status": "Cumplido",
+    "detail": "El Gobierno nacional y los alcaldes de las ciudades capitales y de El Alto instalaron este lunes una reunión para avanzar en la construcción de la Agenda 50-50, con base en cuatro pilares: transparencia de las cifras, eficiencia en la gestión pública, fortalecimiento de los ingresos propios y diálogo sin presiones ni bloqueos.\n\nEl ministro de la Presidencia, Fernando Aramayo, quien lidera el encuentro, señaló que el objetivo es establecer una metodología de trabajo conjunta que permita abordar la redistribución de recursos y mejorar la gestión de las entidades territoriales autónomas, según un boletín oficial. \n\n“Aquí están los viceministros para poder explicar cuál es la situación que tenemos y, como nunca antes en los últimos más de veinte años, estamos transparentando todas las cifras para que veamos realmente cuál es la situación”, afirmó Aramayo al referirse al primer pilar.\n\nComo segundo punto, planteó mejorar la eficiencia de la gestión municipal y sectorial para obtener resultados concretos en beneficio de la población. En ese contexto, mencionó que algunos municipios, con la asignación actual de ítems, deberían alcanzar cerca de siete millones de atenciones en salud; sin embargo, estas se limitan a dos millones.\n\nEl tercer pilar apunta a construir una metodología conjunta para abordar la Agenda 50-50, que contemple la coparticipación, la eficiencia sectorial, la evaluación de competencias, los dominios tributarios y mejores mecanismos de control social.\n\nAramayo también destacó la necesidad de fortalecer los ingresos propios de las Entidades Territoriales Autónomas (ETA) y revisar alternativas que permitan mejorar su capacidad de recaudación, como parte de una estrategia para fortalecer su autonomía financiera.\n\nPor último, el ministro sostuvo que el diálogo, como cuarto pilar, debe agotar todas las posibilidades de entendimiento antes de recurrir a medidas de presión o bloqueos.\n\nLee también: Derecho propietario de vehículos e inspección técnica, dos fuentes de ingresos que perfila el Gobierno para las alcaldías\n\n“Tenemos que agotar todo el espacio de diálogo y no salir al escenario de la presión y los ultimátums. Porque creemos que el país ya no está para esto”, manifestó.\n\nEl ministro explicó que la propuesta del Gobierno tiene una perspectiva multisectorial y busca mejorar la atención en salud, educación, servicios básicos y desarrollo productivo.\n\nEn el encuentro participan representantes del Sistema Asociativo Municipal, integrado por la Federación de Asociaciones Municipales de Bolivia (FAM), la Asociación de Municipalidades de Bolivia (AMB), la Asociación de Municipalidades de Mujeres (AMM), la Asociación de Gobiernos Autónomos Municipales de Bolivia (AGAMDEPAZ) y la Asociación de Concejalas y Alcaldesas de Bolivia (Acobol); además de los ministros de Hidrocarburos y Economía, y los viceministros de Gestión Legislativa y de Autonomías.",
+    "image": "/uploads/timeline/gobierno-y-alcaldes-de-ciudades-capitales-instalan-reuni-n-sobre-la-agenda-50-50-con-cuatro-pilares-1795464058190.jpg",
+    "order": 15,
+    "participants": [
+      "FAM",
+      "AMB",
+      "Viceministerio de Autonomías",
+      "SEA"
     ]
   },
   {
@@ -524,7 +550,7 @@ export const milestones: Milestone[] = [
     "date": "1 de Enero de 2027",
     "status": "Meta",
     "detail": "Entrada en vigencia del nuevo régimen de coparticipación fiscal, alivio financiero y autonomía presupuestaria.",
-    "order": 13,
+    "order": 16,
     "participants": [
       "Estado Plurinacional de Bolivia"
     ]
@@ -662,16 +688,43 @@ export const departmentsData: DepartmentData[] = [
 
 export const documentsList: DocumentItem[] = [
   {
+    "id": "cmwl6ipxf0001itilg3ifuqw0",
+    "title": "AGENDA 50/50 ACTA REUNIÓN CON EL SISTEMA ASOCIATIVO MUNICIPAL",
+    "category": "Acta",
+    "department": "La Paz",
+    "date": "16/11/2026",
+    "fileSize": "1.1 MB",
+    "fileUrl": "/uploads/documents/agenda-50-50---acta-1795209598866.PDF",
+    "description": "Acuerdos pactados el 16 de noviembre de 2026 entre varios ministerios del Estado y el Sistema Asociativo Municipal. El acta establece compromisos clave para analizar una nueva distribución equitativa de recursos públicos, gestionar ítems y deudas de salud, y conformar mesas técnicas de trabajo para abordar reformas normativas, financieras y de seguridad ciudadana en el marco de la implementación y respaldo jurídico de la Agenda 50/50",
+    "downloadsCount": 0,
+    "featured": false,
+    "order": 1
+  },
+  {
+    "id": "cmwl6bpfd0000itil4vh9awka",
+    "title": "ACTA DE REUNIÓN TÉCNICA - AGENDA 50/50 GOBIERNO AUTÓNOMO REGIONAL DEL GRAN CHACO – NIVEL CENTRAL DEL ESTADO",
+    "category": "Acta",
+    "department": "Yacuiba",
+    "date": "06/11/2026",
+    "fileSize": "1.6 MB",
+    "fileUrl": "/uploads/documents/acta-te-cnica-gar-gran-chaco-1795209586476.pdf",
+    "description": "En el marco del proceso de co-construcción de la Agenda 50/50, el Gobierno Autónomo Regional del Gran Chaco presentó un diagnóstico y propuestas orlentadas al fortalecimiento de su autonomía financiera, la asignación directa de recursos, la gestión de servicios públicos y la adecuación del marco\r\nnormativo vigente.\r\nLas propuestas se organizan en cuatro ejes temáticos, conforme al diagnóstico técnico remitido por el Gobierno Autónomo Regional del Gran Chaco al Servicio Estatal de Autonomías (SEA) y a los\r\nplanteamientos expuestos durante la reunión técnica desarrollada en el municipio de Yacuiba.",
+    "downloadsCount": 0,
+    "featured": false,
+    "order": 2
+  },
+  {
     "id": "cmv5qsmn900019rjpk9ung5dm",
     "title": "CONCLUSIONES – REUNIÓN DE COBIJA, PANDO",
     "category": "Acta",
     "department": "Cobija",
     "date": "12/10/2026",
     "fileSize": "2.4 MB",
-    "fileUrl": "/uploads/documents/conclusiones---reuni-n-de-cobija--pando-1791839198715.pdf",
+    "fileUrl": "/uploads/documents/conclusiones---reuni-n-de-cobija--pando-1791839198715-2-1795209524955.pdf",
     "description": "En el marco del Acuerdo 001/2026, de 05 de agosto de 2026, firmado entre el\r\nPresidente del Estado Plurinacional de Bolivia, Rodrigo Paz Pereira, y las\r\nGobernadoras y los Gobernadores de los Gobiernos Autónomos\r\nDepartamentales, se reunieron en la ciudad de Cobija autoridades de los\r\ncitados gobiernos subnacionales y de ministerios del nivel central del Estado.",
     "downloadsCount": 0,
-    "featured": false
+    "featured": false,
+    "order": 3
   },
   {
     "id": "cmv5pp52u00009rjp1di5qodv",
@@ -679,10 +732,11 @@ export const documentsList: DocumentItem[] = [
     "category": "Acta",
     "date": "12/09/2026",
     "fileSize": "1.8 MB",
-    "fileUrl": "/uploads/documents/acta-de-reuni-n-entre-el-viceministerio-de-autonom-as-y-tierras-con-la-conaioc-1791837355925.pdf",
+    "fileUrl": "/uploads/documents/acta-de-reuni-n-entre-el-viceministerio-de-autonom-as-y-tierras-con-la-conaioc-1791837355925-1795209480938.pdf",
     "description": "La Coordinadora Nacional de Autonomías Indígenas Originarias Campesinas (CONAIOC), junto con representantes de los nueve Gobiernos Autónomos Indígenas Originarios Campesinos (GAIOC) consolidados y de organizaciones que se encuentran en proceso de acceso y consolidación de la autonomía, avanzó en la construcción de una posición conjunta frente a los principales desafíos institucionales, normativos y financieros que enfrentan las autonomías indígenas en Bolivia.\r\n\r\nEl proceso desarrollado durante la reunión técnica del 11 de septiembre en Cochabamba y el encuentro con autoridades nacionales realizado el 12 de septiembre en Vinto permitió consolidar propuestas en torno a la denominada Agenda 50-50, la modificación de la Ley N.º 031, Ley Marco de Autonomías y Descentralización “Andrés Ibáñez”, la gestión pública de los GAIOC, el financiamiento de las autonomías y el ejercicio efectivo de derechos colectivos, entre ellos la consulta previa, libre e informada.\r\n\r\nLa reunión contó con la participación de representantes de Charagua Iyambae, Uru Chipaya, Kereimba Iyambae, Salinas, Raqaypampa, Jatun Ayllu Yura, Territorio Indígena Multiétnico (TIM), Challa y Lomerío, además de instituciones de apoyo.\r\n\r\nUno de los principales resultados del proceso fue la identificación y priorización de cambios normativos y mecanismos institucionales que, desde la perspectiva de las autonomías indígenas, permitirían superar obstáculos que actualmente dificultan su acceso, consolidación y funcionamiento efectivo.",
     "downloadsCount": 0,
-    "featured": false
+    "featured": false,
+    "order": 4
   },
   {
     "id": "cmuzjj5mu0000dpvbiyb6hjhh",
@@ -690,21 +744,23 @@ export const documentsList: DocumentItem[] = [
     "category": "Acta",
     "date": "23/09/2026",
     "fileSize": "1.5 MB",
-    "fileUrl": "/uploads/documents/acta---reunio-n-sam-gob-23-09-26-1791464202091.pdf",
+    "fileUrl": "/uploads/documents/acta---reunio-n-sam-gob-23-09-26-1791464202091-1795209428355.pdf",
     "description": "El acta de la reunión del 23 de septiembre de 2026 entre la FAM-Bolivia y el Gobierno Nacional detalla acuerdos clave para aliviar la situación financiera de los municipios, incluyendo la reprogramación de deudas mediante el D.S. 5686 y la solicitud de condonación de multas con las Cajas de Salud. Asimismo, se establece el compromiso de gestionar la suspensión del débito y posterior devolución del 12% del fondo FPIEEH a partir de 2027, junto con la ratificación de avanzar hacia una distribución equitativa de recursos estructurales bajo la Agenda 50/50. Finalmente, frente al incremento del precio de los hidrocarburos (D.S. 5716), el Gobierno acordó implementar medidas de mitigación que incluyen la asignación de presupuestos adicionales, fideicomisos de operaciones, 100 millones de dólares para obras de inversión municipal y programas de protección social, mientras que los municipios se comprometieron a controlar los precios de la canasta familiar para evitar la especulación.",
     "downloadsCount": 0,
-    "featured": false
+    "featured": false,
+    "order": 5
   },
   {
     "id": "doc-2",
     "title": "Acuerdo N° 002/2026 - GAM de Capitales y El Alto",
     "category": "Acuerdo",
-    "date": "2026",
+    "date": "29/09/2026",
     "fileSize": "600.4 KB",
-    "fileUrl": "/uploads/documents/acuerdo-n-002-2026-agenda-50-50-1791410091154.pdf",
+    "fileUrl": "/uploads/documents/acuerdo-n-002-2026-agenda-50-50-1791410091154-1795209355642.pdf",
     "description": "Acuerdo técnico suscrito entre el Gobierno Nacional y los Gobiernos Autónomos Municipales de Ciudades Capitales y El Alto en torno a libertades autonómicas, reformas normativas y sostenibilidad fiscal municipal.",
     "downloadsCount": 860,
-    "featured": true
+    "featured": true,
+    "order": 6
   },
   {
     "id": "doc-1",
@@ -715,7 +771,8 @@ export const documentsList: DocumentItem[] = [
     "fileUrl": "/Acuerdo-001-2026-Agenda-50-50.pdf",
     "description": "Acuerdo firmado en Sucre que establece la ruta técnica para avanzar en autonomía fiscal, alivio financiero, distribución equitativa de recursos y competencias para los 9 Gobiernos Autónomos Departamentales.",
     "downloadsCount": 1420,
-    "featured": true
+    "featured": true,
+    "order": 7
   }
 ];
 
@@ -813,34 +870,20 @@ export interface MediaItem {
 export const mediaItemsList: MediaItem[] = [
   {
     "id": "cmur5o8w10000od50ghe1s37j",
-    "title": "Ley N° 1771 - Primer resultado concreto del proceso de co-construcción de la Agenda 5050",
+    "title": "Ley N° 1771 - Primer resultado concreto del proceso de co-construcción de la Agenda 50/50",
     "type": "videos",
-    "mediaUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957195205.mp4",
-    "coverUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957196267.jpg",
+    "mediaUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957195205-1795447355415.mp4",
+    "coverUrl": "/uploads/multimedia/primer-resultado-concreto-del-proceso-de-co-construcci-n-de-la-agenda-5050-1790957195205-mp4-snapshot-00-23-399-1795447356507.jpg",
     "description": "La Agenda 50/50 muestra resultados\r\nEl presidente Rodrigo Paz Pereira promulgó la Ley N° 1771, que materializa el Acuerdo 001 firmado con los nueve gobernadores de Bolivia.\r\nCon esta norma, el nivel central del Estado asume el financiamiento del régimen penitenciario, el bono de vacunación y otras obligaciones que hasta ahora recaían en los gobiernos departamentales. Además, se rompe la condicionalidad vigente desde 2005 y se liberan más de 200 millones de bolivianos para que los gobiernos autónomos departamentales decidan sobre sus propios recursos.\r\nEs un resultado concreto del proceso de co-construcción de la Agenda 50/50",
     "order": 0
   },
   {
     "id": "cmur6b5h7000043p7tqz6k9z0",
-    "title": "Portales para conocer y acompañar la Agenda 5050",
+    "title": "Portales para conocer y acompañar la Agenda 50/50",
     "type": "videos",
-    "mediaUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441.mp4",
-    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050--2--1791827282996.jpg",
+    "mediaUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441-1795447496248.mp4",
+    "coverUrl": "/uploads/multimedia/portales-para-conocer-y-acompa-ar-la-agenda-5050-1790958262441-mp4-snapshot-00-43-584-1795447496586.jpg",
     "description": "¡La información sobre el proceso autonómico está al alcance de todas y todos!   Conoce los avances, acuerdos y el Centro de Datos Autonómicos construidos de manera conjunta para transparentar la gestión.   \r\n🔗 Explora toda la información disponible en:\r\n▪️ Portal Agenda 50/50: agenda50-50.sea.gob.bo\r\n▪️ Centro de Datos Autonómicos (CEDIA): cedia.sea.gob.bo\r\n▪️ Presupuesto Abierto: abierto.economiayfinanzas.gob.bo   \r\nMás información, más datos y mayor acceso para conocer y acompañar el proceso autonómico.",
-    "order": 0
-  },
-  {
-    "id": "cmv1b6emy0000gesrkrkmce79",
-    "title": "Presidente Paz promulga ley que modifica el pago de prediarios y libera de esta obligación a las gobernaciones",
-    "type": "videos",
-    "category": "Promulgación de Ley",
-    "mediaUrl": "https://www.facebook.com/pazpereirarodrigo/videos/2434347507351615",
-    "embedUrl": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fpazpereirarodrigo%2Fvideos%2F2434347507351615&show_text=false",
-    "url": "https://www.facebook.com/pazpereirarodrigo/videos/2434347507351615",
-    "platform": "Facebook",
-    "coverUrl": "/uploads/multimedia/rodrigo-paz-promulga-ley-que-modifica-el-pago-de-prediarios-mp4-snapshot-27-34-286-1791571102755.jpg",
-    "duration": "Video Facebook",
-    "description": "La norma traslada al nivel central del Estado el financiamiento de los prediarios para las personas privadas de libertad, por lo que las gobernaciones dejarán de destinar recursos de sus presupuestos a esta obligación",
     "order": 0
   },
   {
@@ -866,16 +909,6 @@ export const mediaItemsList: MediaItem[] = [
     "coverUrl": "https://img.youtube.com/vi/QxvMs-wlSgM/hqdefault.jpg",
     "duration": "YouTube",
     "order": 0
-  },
-  {
-    "id": "v-1",
-    "title": "¿Qué es la Agenda 50/50?",
-    "type": "videos",
-    "category": "Explicador Oficial",
-    "mediaUrl": "/videos/Agenda5050.mp4",
-    "coverUrl": "/assets/video_que_es_5050_cover.jpg",
-    "duration": "Cápsula Informativa",
-    "order": 1
   },
   {
     "id": "w-1",
@@ -950,6 +983,16 @@ export const mediaItemsList: MediaItem[] = [
     "coverUrl": "/assets/cobertura_jp_velasco.jpg",
     "date": "El Deber Noticias",
     "description": "Declaraciones del Gobernador de Santa Cruz sobre proyectos clave y coordinación entre Gobernación, Gobierno Nacional y municipios.",
+    "order": 3
+  },
+  {
+    "id": "cmwtfm0np0000gfxb17825cg0",
+    "title": "Presidente Paz promulga ley que modifica el pago de prediarios y libera de esta obligación a las gobernaciones",
+    "type": "videos",
+    "category": "Video",
+    "mediaUrl": "/uploads/multimedia/presidente-paz-promulga-ley-que-modifica-el-pago-de-prediarios-y-libera-de-esta-obligaci-n-a-las-gobernaciones-1795448385228.mp4",
+    "coverUrl": "/uploads/multimedia/presidente-paz-promulga-ley-que-modifica-el-pago-de-prediarios-y-libera-de-esta-obligaci-n-a-las-gobernaciones-mp4-snapshot-12-43-192-1795448385412.jpg",
+    "description": "La norma traslada al nivel central del Estado el financiamiento de los prediarios para las personas privadas de libertad, por lo que las gobernaciones dejarán de destinar recursos de sus presupuestos a esta obligación",
     "order": 3
   },
   {
